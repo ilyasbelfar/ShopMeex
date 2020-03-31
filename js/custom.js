@@ -189,5 +189,22 @@ function cartRemoveIconAnimation(){
         }
     });
 
+    $('.inphidden').css('display', 'none');
+    $('#cbox').click(function() {
+        if ($(this).is(':checked')) {
+            $('.inphidden').slideDown(200);
+        } else {
+            $('.inphidden').slideUp(200);
+        }
+    });
+
+    $(document).on('click', 'label.checkbox-inline', function() {
+        if ($(this).hasClass('checked')) {
+            $(this).removeClass('checked');
+        } else {
+           $(this).addClass('checked');
+        }
+    });
+
     $('.img-big-wrap').zoom();
     $('a[data-rel^=lightcase]').lightcase();
