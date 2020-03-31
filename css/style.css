@@ -3323,40 +3323,13 @@ tbody .product-name a:hover {
     margin-bottom: 15px;
     cursor: pointer;
 }
-.checkout .single-widget .checkbox label::before {
-    position: absolute;
-    content: "";
-    left: 0;
-    top: 5px;
-    width: 12px;
-    height: 12px;
-    line-height: 16px;
-    border: 1px solid #666;
-    border-radius: 100%;
+.checkout .custom-control-label::after {
+    left: -1.45rem;
+    top: 0.25rem;
 }
-.checkout .single-widget .checkbox label input {
-    display: none;
-}
-.checkout .single-widget .checkbox label.checked::after {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1.2);
-}
-.checkout .single-widget .checkbox label::after {
-    position: absolute;
-    content: "";
-    left: 1px;
-    top: 6px;
-    width: 12px;
-    height: 12px;
-    line-height: 16px;
-    border-radius: 100%;
-    display: block;
-    background: #666;
-    transform: scale(0);
-    -webkit-transition: all 0.4s ease;
-    -moz-transition: all 0.4s ease;
-    transition: all 0.4s ease;
+.checkout .custom-checkbox .custom-control-label::before {
+    border-radius: 50%;
+    top: .2rem;
 }
 .checkout .single-widget.payement {
     padding: 0px 38px;
