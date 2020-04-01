@@ -99,7 +99,7 @@ CREATE TABLE `users` (
 -- Table structure for table `password-reset`
 --
 
-CREATE TABLE `password-reset` ( 
+CREATE TABLE `password_reset` ( 
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `email` VARCHAR(200) NOT NULL ,
   `token` VARCHAR(255) NOT NULL , 
