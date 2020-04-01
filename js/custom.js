@@ -156,6 +156,17 @@ function cartRemoveIconAnimation(){
         }
     });
 
+    $('#icone-carte').click(function(event) {
+        event.preventDefault();
+        if ($('.sub-menu').hasClass('actived')) {
+            $('.sub-menu').animate({opacity: 0, top: '100%'}, 'fast').css('visibility', 'hidden');
+            $('.sub-menu').removeClass('actived');
+        } else {
+            $('.sub-menu').addClass('actived');
+            $('.sub-menu').animate({opacity: 1, top: '130%'}, 'fast').css('visibility', 'visible');
+        }
+    });
+
     $('p.stars a').click(function(e) {
         e.preventDefault();
         var currentStar = $(this);
@@ -195,14 +206,6 @@ function cartRemoveIconAnimation(){
             $('.inphidden').slideDown(200);
         } else {
             $('.inphidden').slideUp(200);
-        }
-    });
-
-    $(document).on('click', 'label.checkbox-inline', function() {
-        if ($(this).hasClass('checked')) {
-            $(this).removeClass('checked');
-        } else {
-           $(this).addClass('checked');
         }
     });
 
