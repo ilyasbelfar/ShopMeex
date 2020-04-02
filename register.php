@@ -7,11 +7,9 @@
     	header("location: index.php");
     	exit;
 	}
+
 	include 'connect.php';
-	/*if(isset($_POST['email']))
-		$email=$_POST['email'];
-	else 
-		$email='';*/
+	
 
 	//define variables and set to empty values
 
@@ -19,18 +17,18 @@
 
 	$repassErr=$emailInsErr="";
 
-		function test_input($data) {
-			$data = trim($data);
-  			$data = stripslashes($data);
-  			$data = htmlspecialchars($data);
-  			return $data;
+		
+	function test_input($data) {
+		$data = trim($data);
+		$data = stripslashes($data);
+  		$data = htmlspecialchars($data);
+  		return $data;
 		}
 
 	//Check if user coming from HTTP Post REQUEST
 
 	if ($_SERVER['REQUEST_METHOD']=='POST'){
-		
-		
+	
 		$gender=$_POST['gender'];
 		$fname=test_input($_POST['firstname']);
 		$lname=test_input($_POST['lastname']);
@@ -39,12 +37,10 @@
 		$pass=$_POST['password'];
 		$repass=$_POST['repassword'];
 		
-		
-		
 		// Validate email
     
-        // Prepare a select statement
-        $stmt=$db->prepare('SELECT email from users where email=?');
+        	// Prepare a select statement
+        	$stmt=$db->prepare('SELECT email from users where email=?');
 		$stmt->execute(array($email));
 		$count=$stmt->rowCount();
 
@@ -52,20 +48,19 @@
 
 		if ($count>0){	
 			$emailInsErr="Email Already Taken";
-			//echo 'Click here to Identify <a href="my-account.php">LOGIN</a>';
 		}
 
-        // Close statement
-        unset($stmt);
+		// Close statement
+        	unset($stmt);
    
-    	// Validate confirm password
+    		// Validate confirm password
 
-        if($pass != $repass){
-            $repassErr = "Password didn't match.";
-        }
+        	if($pass != $repass){
+            	$repassErr = "Password didn't match.";
+       		 }
 	
    
-    	//Insert into DataBase
+    		//Insert into DataBase
 		
 		if (empty($emailInsErr) && empty($repassErr)){
 	
@@ -76,18 +71,19 @@
 			
 		
 		 // Close statement
-            unset($stmt);
-			unset($pdo);
-			session_start();
-                            
-         // Store data in session variables
-							
-             $_SESSION["loggedin"] = true;
-			 $_SESSION["id"] = $id;
-			 $_SESSION["email"] = $email;
 			
-		//Redirect to user Dashborad
-			header('location:dashboarduser.php');
+            	 unset($stmt);
+	       	 unset($pdo);
+	       	 session_start();
+                            
+         	 // Store data in session variables
+							
+	          $_SESSION["loggedin"] = true;
+	  	  $_SESSION["id"] = $id;
+	          $_SESSION["email"] = $email;
+			
+		  //Redirect to user Dashborad
+	          header('location:dashboarduser.php');
 		}
 	}
 	
