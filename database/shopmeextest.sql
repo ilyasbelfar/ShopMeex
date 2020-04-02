@@ -90,21 +90,14 @@ CREATE TABLE `users` (
   `lastname` varchar(50) NOT NULL,
   `address` text NOT NULL,
   `contact_info` varchar(100) NOT NULL,
-  `photo` varchar(200) NOT NULL
+  `photo` varchar(200) NOT NULL,
+  `token` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `password-reset`
---
 
-CREATE TABLE `password_reset` ( 
-  `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `email` VARCHAR(200) NOT NULL ,
-  `token` VARCHAR(255) NOT NULL , 
-   PRIMARY KEY (`id`)
-  ) ENGINE = InnoDB; 
+
 
 --
 -- Indexes for dumped tables
