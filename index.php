@@ -100,7 +100,7 @@
                 <div class="container">
                     <div class="wrapper">
                         <div class="logo-container">
-                            <a href="#">
+                            <a href="index.php">
                                 <img src="images/Logo-header.png" class="logo">
                             </a>
                         </div>
