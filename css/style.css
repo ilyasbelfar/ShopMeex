@@ -2069,10 +2069,10 @@ form .col-401 {
 }
 .form-group label span {
     color: #ff2c18;
-    display: inline-block;
+    display: contents;
     position: absolute;
     right: -12px;
-    font-size: 16px;
+    font-size: 15px;
 }
 .form-group > input {
     height: 48px;
