@@ -1,4 +1,4 @@
-if you commmit to change to database please explain here to your partners and include the date //
+if you commmit to change the main  database, please explain here to your partners and include the date //
 -----------------------*********************************--------------------------------------------
 
 02/04/2020 16:55:
