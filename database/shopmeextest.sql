@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2020 at 04:08 PM
+-- Generation Time: Apr 04, 2020 at 09:48 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -88,16 +88,22 @@ CREATE TABLE `users` (
   `type` int(1) NOT NULL,
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
+  `gender` int(1) NOT NULL,
   `address` text NOT NULL,
   `contact_info` varchar(100) NOT NULL,
-  `photo` varchar(200) NOT NULL,
-  `token` varchar(255) NOT NULL
+  `photo` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `users`
+--
 
-
-
+INSERT INTO `users` (`id`, `email`, `password`, `type`, `firstname`, `lastname`, `gender`, `address`, `contact_info`, `photo`) VALUES
+(1, 'th@gm.com', 'd400f8961d72a2119375586f6cc40034fc1524ca', 7, 'sohaib', 'thi', 0, 'heo', '', ''),
+(2, 'byer@b.dz', 'd400f8961d72a2119375586f6cc40034fc1524ca', 2, 'soh', 'buyer', 0, 'oiud', '', ''),
+(3, 'buy@g.com', 'd400f8961d72a2119375586f6cc40034fc1524ca', 3, 'buy', 'buy', 0, 'buy', '', ''),
+(4, 'sell@gmai.com', 'd400f8961d72a2119375586f6cc40034fc1524ca', 2, 'seller', 'sell', 0, 'chle', '', ''),
+(5, 'both@both.dz', 'edea3ef9f5438b6ba7124d90891cf864ed53e68c', 4, 'both', 'both', 0, 'both', '', '');
 
 --
 -- Indexes for dumped tables
@@ -165,7 +171,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
