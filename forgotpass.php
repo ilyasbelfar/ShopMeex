@@ -4,7 +4,7 @@
 	if(isset($_POST['submit'])){
 		$email=trim($_POST['email']);
 		$sql = "SELECT id, email, password FROM users WHERE email = :email";
-        
+        //why you met a condition here Mohcene
         if($stmt = $db->prepare($sql)){
 			
             // Bind variables to the prepared statement as parameters

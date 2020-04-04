@@ -29,7 +29,7 @@
 
 	if ($_SERVER['REQUEST_METHOD']=='POST'){
 	
-		$gender=$_POST['gender'];
+		$typeidString=$_POST['typeid'];
 		$fname=test_input($_POST['firstname']);
 		$lname=test_input($_POST['lastname']);
 		$email=test_input($_POST['email']);
@@ -63,10 +63,22 @@
     		//Insert into DataBase
 		
 		if (empty($emailInsErr) && empty($repassErr)){
-	
+
+			$salt="^%r8yuyg";//create our salt; salt is String added to password // way of encrption on database;
+			$pass = sha1(filter_var($pass.$salt, FILTER_SANITIZE_STRING));// sha1 function to transform the password into long String; known as hashing method;
 			$sql="insert into users (type,firstname,lastname,email,address,password) values(?,?,?,?,?,?)";
 -			$stmt=$db->prepare($sql);
-			$stmt->execute(array($gender,$fname,$lname,$email,$address,$pass));
+			if ($typeidString=="Seller") {
+				$typeid=2;
+			}
+			else if ($typeidString=="Buyer"){
+				$typeid=3;
+			}
+			else {
+				$typeid=4;
+			}
+
+			$stmt->execute(array($typeid,$fname,$lname,$email,$address,$pass));
 			
 			
 		
@@ -79,8 +91,9 @@
          	 // Store data in session variables
 							
 	          $_SESSION["loggedin"] = true;
-	  	  $_SESSION["id"] = $id;
+	  	  		$_SESSION["id"] = $id;
 	          $_SESSION["email"] = $email;
+	          $_SESSION["fname"]=fname;
 			
 		  //Redirect to user Dashborad
 	          header('location:dashboarduser.php');
@@ -282,15 +295,15 @@
 									<div class="form-group" style="display: flex;align-items: center;">
 										<label style="margin-right: 1.5rem;">I am a:</label>
 										<label class="custom-control custom-radio custom-control-inline">
-											<input class="custom-control-input" checked="" type="radio" name="gender" value="Buyer">
+											<input class="custom-control-input" checked type="radio" name="typeid" value="Buyer">
 											<i class="custom-control-label"> Buyer </i>
 										</label>
 										<label class="custom-control custom-radio custom-control-inline">
-											<input class="custom-control-input" checked="" type="radio" name="gender" value="Seller">
+											<input class="custom-control-input"  type="radio" name="typeid" value="Seller">
 											<i class="custom-control-label"> Seller </i>
 										</label>
 										<label class="custom-control custom-radio custom-control-inline">
-											<input class="custom-control-input" type="radio" name="gender" value="Both">
+											<input class="custom-control-input" type="radio" name="typeid" value="Both">
 											<i class="custom-control-label"> Both </i>
 										</label>
 									</div>
@@ -341,7 +354,7 @@
 									</div>
 									<div class="clearfix"></div>
 									<div class="form-group">
-										<button type="submit" class="btn">Register</button>
+										<button type="submit" class="btn" >Register</button>
 									</div>
 									
 								</form>

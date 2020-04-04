@@ -1,8 +1,29 @@
-if you commmit to change the main  database, please explain here to your partners and include the date //
+if you commmit to change the main  database, please explain here to your partners and don't forget to include your name 
+and the current date //
 -----------------------*********************************--------------------------------------------
 
 02/04/2020 16:55:
 
 --mohcene25100-- :I have add new colonn in users table because we need it in forgotpassword operation.
+
+-----------------------**********************************------------------------------------------
+-----------------------*********************************--------------------------------------------
+
+04/04/2020 18:55: 
+Sohaib
+
+so for id type of the different users we have :
+	for webmaster : 0;
+	for admin  :1;
+	for seller : 2;
+	for buyer :3;
+	for both seller and buyer:4;
+-------------------------
+and for gender id we have :
+	for male :0;
+	for female:1;
+-------------------------
+*I have encrypted the password stocked in database by two methode : hashing and salting; contact me 
+for more information about them;
 
 -----------------------**********************************------------------------------------------

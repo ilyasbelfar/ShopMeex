@@ -21,7 +21,9 @@
 		
 
         $email= trim($_POST["email"]);
-        $pass= $_POST["password"];
+        $salt="^%r8yuyg";//create our salt; salt is String added to password // way of encrption on database;
+        $pass = sha1(filter_var($_POST["password"].$salt, FILTER_SANITIZE_STRING));// sha1 function to transform the password into long String; known as hashing method;
+        //$pass= $_POST["password"];
 		
     	//Check if user exist in DataBase
 		
