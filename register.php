@@ -64,7 +64,7 @@
 		
 		if (empty($emailInsErr) && empty($repassErr)){
 
-			$salt="^%r8yuyg";//create our salt; salt is String added to password // way of encrption on database;
+			$salt="^%r8yuyg";//create our salt; salt is special String added to password // way of encrption on database;
 			$pass = sha1(filter_var($pass.$salt, FILTER_SANITIZE_STRING));// sha1 function to transform the password into long String; known as hashing method;
 			$sql="insert into users (type,firstname,lastname,email,address,password) values(?,?,?,?,?,?)";
 -			$stmt=$db->prepare($sql);
@@ -311,24 +311,26 @@
 										<div class="col-401">
 											<div class="form-group">
 												<label for="fname">First Name<span>*</span></label>
-												<input id="fname" name="firstname" type="text" placeholder="First Name" required pattern="[a-zA-Z\s]+">
+												<input id="fname" name="firstname" type="text" placeholder="First Name" value="<?php echo (isset($_POST['firstname'])) ? $_POST['firstname']: ''?>" required pattern="[a-zA-Z\s]+">
 											</div>
 										</div>
 										<div class="col-401">
 											<div class="form-group">
 												<label for="lname">Last Name<span>*</span></label>
-												<input name="lastname" type="text" placeholder="Last Name" id="lname" required pattern="[a-zA-Z\s]+">
+												<input name="lastname" type="text" placeholder="Last Name" id="lname" value="<?php echo (isset($_POST['lastname'])) ? $_POST['lastname']: ''?>" required pattern="[a-zA-Z\s]+">
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="email">E-mail<span>*<?php echo $emailInsErr; ?></span></label>
-										<input name="email" type="email" placeholder="ex. name@mail.com"  id="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+										<input name="email" type="email" placeholder="ex. name@mail.com"  id="email" 
+										value="<?php echo (isset($_POST['email'])) ? $_POST['email']: ''?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
 										
 									</div>
 									<div class="form-group">
 										<label for="addresss">Address<span>*</span></label>
-										<input name="address" type="text" placeholder="Address" id="addresss" required>
+										<input name="address" type="text" placeholder="Address" id="addresss"
+										value="<?php echo (isset($_POST['address'])) ? $_POST['address']: ''?>" required>
 									</div>
 									<div class="row">
 										<div class="col-401">
@@ -347,7 +349,7 @@
 									</div>
 									<div class="form-group">
 										<label for="check2" class="float-left custom-control custom-checkbox">
-											<input id="check2" type="checkbox" class="custom-control-input" checked="" value="agree" required>
+											<input id="check2" type="checkbox" class="custom-control-input"  value="agree" required>
 											<div class="custom-control-label"> I agree with <a target="_blank" href="conditions.php" >Terms & Conditions</a></div>
 										</label>
 										
