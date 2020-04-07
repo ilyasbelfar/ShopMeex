@@ -3120,7 +3120,7 @@ p.stars.selected a.active {
     max-width: 100%;
     font-size: 14px;
 }
-.cart-form .shopping-cart {
+.shopping-cart {
     background: #fff;
     display: table;
     width: 100%;
@@ -3131,7 +3131,7 @@ p.stars.selected a.active {
     border-collapse: collapse;
     border-spacing: 0;
 }
-.cart-form .shopping-cart thead {
+.shopping-cart thead {
     background-color: #3167eb;
     color: #fff;
 }
@@ -3152,16 +3152,23 @@ thead .main-heading {
 .text-center {
     text-align: center!important;
 }
-.cart-form .shopping-cart tbody tr {
+.shopping-cart tbody tr {
     border-bottom: 1px solid #3167eb;
     margin-top: 20px;
 }
-.cart-form .shopping-cart tbody tr td {
+.shopping-cart tbody tr td {
     vertical-align: middle;
     border-top: 1px solid #eee;
     padding: 25px;
 }
-.cart-form .shopping-cart tbody tr img {
+.user-dashboard .shopping-cart tbody tr td {
+    border: 1px solid #e6e6e6;
+    text-align: center;
+}
+.user-dashboard .shopping-cart tbody tr td.stock-status {
+    color: #297e29;
+}
+.shopping-cart tbody tr img {
     border-radius: 0;
     width: 80px;
     height: 80px;
@@ -3766,15 +3773,94 @@ tbody .product-name a:hover {
     align-items: center;
     flex-wrap: wrap;
 }
-.user-dashboard .single-product .product-img .product-action-2 {
-    text-align: center;
-    width: 100%;
+.user-dashboard .shopping-cart tbody tr td.add-card {
+    padding: 8px;
 }
-.user-dashboard .single-product .product-img .product-action-2 a {
-    line-height: 1.8;
-    width: 100%;
+.user-dashboard .add-cart {
+    font-size: 16px;
 }
 /* End Dashbaord */
+
+
+/* Start FAQ */
+
+.faq {
+    position: relative;
+    z-index: 43;
+    padding: 100px 0;
+}
+.faq .container {
+    max-width: 1090px;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.faq .container .wrapper {
+    margin-right: -15px;
+    margin-left: -15px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px 8px rgba(118, 119, 121, 0.21);
+}
+.faq .section-title {
+    margin-top: 50px;
+}
+.accordion-container {
+  position: relative;
+  max-width: 600px;
+  height: auto;
+  margin: 4rem auto;
+}
+.set {
+  position: relative;
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+}
+.set > a {
+  display: block;
+  padding: 20px 25px;
+  text-decoration: none;
+  font-weight: 400;
+  color: #495057;
+  border-bottom: 1px solid #ddd;
+  -webkit-transition:all 0.2s linear;
+  -moz-transition:all 0.2s linear;
+  transition:all 0.2s linear;
+}
+.set > a i {
+    float: left;
+    margin-top: 4px;
+    margin-right: 15px;
+}
+.set > a.active {
+  background-color: #f4f4f4;
+}
+.content {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  display:none;
+}
+.content p {
+    padding: 15px;
+    color: #8d8d8d;
+    font-size: 14px;
+    margin: 0;
+    padding-left: 3rem;
+}
+
+/* End FAQ */
+
+
+
+/* Start 404 Page */
+
+
+
+/* End 404 Page */
+
 
 
 /* Start Footer */
