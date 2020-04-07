@@ -1,6 +1,6 @@
 <?php
 
-	SESSION_start();
+	include 'includes/session.php';
 	
 	
 	// Check if the user is already logged in, if yes then redirect him to Accueil page
@@ -10,7 +10,6 @@
     	exit;
 	}
 
-	include "connect.php";	//To connect with DataBase
 	
 	//Initialising variables
 

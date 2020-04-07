@@ -43,8 +43,7 @@
     <!-- End Loader -->
 
     <?php
-    session_start();
-    include 'connect.php';
+   include 'includes/session.php';
     ?>
 
     <!-- Start Header -->

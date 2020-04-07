@@ -1,5 +1,5 @@
 <?php
-	include "connect.php";
+	include 'includes/session.php';
 	$email=$passErr='';
 	if(isset($_GET['token'])){
 		$token=$_GET['token'];

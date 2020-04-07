@@ -1,5 +1,5 @@
 <?php
-	include 'connect.php';
+	include 'includes/session.php';
 	$msg='';
 	if(isset($_POST['submit'])){
 		$email=trim($_POST['email']);
