@@ -43,7 +43,7 @@
     <!-- End Loader -->
 
     <?php
-   include 'includes/session.php';
+        include 'includes/session.php';
     ?>
 
     <!-- Start Header -->
@@ -694,240 +694,36 @@
                     </div>
 
                     <div class="paneltbs panel-5" id="wishlist" style="display: none;">
-                        <div class="tab-col">
-                            <div class="single-product">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="images/items/item1.jpg">
-                                        <img class="hover-default" src="images/items/item1.jpg">
-                                    </a>
-                                    <div class="button-head">
-                                        <div class="product-action-2">
-                                            <a href="#" title="Add To Cart">Add To Cart<i class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3>
-                                                                        <a href="#">Man Hot Collection</a>
-                                                                    </h3>
-                                    <div class="product-price-rating">
-                                        <span title="Price">$29.00</span>
-                                        <ul title="Rating">
-                                            <li class="stars-active">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-col">
-                            <div class="single-product">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="images/items/item1.jpg">
-                                        <img class="hover-default" src="images/items/item1.jpg">
-                                    </a>
-                                    <div class="button-head">
-                                        <div class="product-action-2">
-                                            <a href="#" title="Add To Cart">Add To Cart<i class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3>
-                                                                        <a href="#">Man Hot Collection</a>
-                                                                    </h3>
-                                    <div class="product-price-rating">
-                                        <span title="Price">$29.00</span>
-                                        <ul title="Rating">
-                                            <li class="stars-active">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-col">
-                            <div class="single-product">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="images/items/item1.jpg">
-                                        <img class="hover-default" src="images/items/item1.jpg">
-                                    </a>
-                                    <div class="button-head">
-                                        <div class="product-action-2">
-                                            <a href="#" title="Add To Cart">Add To Cart<i class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3>
-                                                                        <a href="#">Man Hot Collection</a>
-                                                                    </h3>
-                                    <div class="product-price-rating">
-                                        <span title="Price">$29.00</span>
-                                        <ul title="Rating">
-                                            <li class="stars-active">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-col">
-                            <div class="single-product">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="images/items/item1.jpg">
-                                        <img class="hover-default" src="images/items/item1.jpg">
-                                    </a>
-                                    <div class="button-head">
-                                        <div class="product-action-2">
-                                            <a href="#" title="Add To Cart">Add To Cart<i class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3>
-                                                                        <a href="#">Man Hot Collection</a>
-                                                                    </h3>
-                                    <div class="product-price-rating">
-                                        <span title="Price">$29.00</span>
-                                        <ul title="Rating">
-                                            <li class="stars-active">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-col">
-                            <div class="single-product">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="images/items/item1.jpg">
-                                        <img class="hover-default" src="images/items/item1.jpg">
-                                    </a>
-                                    <div class="button-head">
-                                        <div class="product-action-2">
-                                            <a href="#" title="Add To Cart">Add To Cart<i class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3>
-                                                                        <a href="#">Man Hot Collection</a>
-                                                                    </h3>
-                                    <div class="product-price-rating">
-                                        <span title="Price">$29.00</span>
-                                        <ul title="Rating">
-                                            <li class="stars-active">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-col">
-                            <div class="single-product">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="images/items/item1.jpg">
-                                        <img class="hover-default" src="images/items/item1.jpg">
-                                    </a>
-                                    <div class="button-head">
-                                        <div class="product-action-2">
-                                            <a href="#" title="Add To Cart">Add To Cart<i class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3>
-                                                                        <a href="#">Man Hot Collection</a>
-                                                                    </h3>
-                                    <div class="product-price-rating">
-                                        <span title="Price">$29.00</span>
-                                        <ul title="Rating">
-                                            <li class="stars-active">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <table class="shopping-cart">
+                            <thead>
+                                <tr class="main-heading">
+                                    <th class="text-center" style="padding-left: 1.5rem;padding-right: 1.5rem"><i class="ti-trash remove-icon"></i></th>
+                                    <th>PRODUCT</th>
+                                    <th>NAME</th>
+                                    <th class="text-center">UNIT PRICE</th>
+                                    <th class="text-center">STOCK STATUS</th>
+                                    <th class="text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="action" data-title="Remove"><a href="#" id="remove-product"><i class="ti-trash remove-icon"></i></a></td>
+                                    <td class="image" data-title="No"><img src="images/items/item1.jpg" alt="#"></td>
+                                    <td class="product-des" data-title="Description">
+                                        <p class="product-name"><a href="#">Women Dress</a></p>
+                                        <p class="product-des">Maboriosam in a tonto nesciung eget distingy magndapibus.</p>
+                                    </td>
+                                    <td class="prix" data-title="Price"><span>$<span class="unit-price">110</span></span>
+                                    </td>
+                                    <td class="stock-status" data-title="Status">
+                                        <span>In Stock</span>
+                                    </td>
+                                    <td class="add-card" data-title="Add To Card">
+                                        <a href="#" title="Add To Cart" class="add-cart">Add To Cart<i class="fa fa-shopping-cart"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="paneltbs panel-6" id="logout" style="display: none;">
