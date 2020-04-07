@@ -27,3 +27,12 @@ and for gender id we have :
 for more information about them;
 
 -----------------------**********************************------------------------------------------
+-----------------------*********************************--------------------------------------------
+
+06/04/2020 23:55: 
+Sohaib
+
+I added a row "date_view" in users table for (counter(most viewed product));
+I have created a new table for wishlist which contain these rows(id,user_id,product_id);
+
+-----------------------**********************************------------------------------------------

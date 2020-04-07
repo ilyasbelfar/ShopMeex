@@ -18,7 +18,7 @@
 
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		
-
+       
         $email= trim($_POST["email"]);//trim function removes whitespaces;
         $salt="^%r8yuyg";//create our salt; salt is String added to password // way of encrption on database;
         $pass = sha1(filter_var($_POST["password"].$salt, FILTER_SANITIZE_STRING));// sha1 function to transform the password into long String; known as hashing method;
@@ -41,7 +41,7 @@
             
             // Attempt to execute the prepared statement
 			
-            if($stmt->execute()){
+            $stmt->execute();
 				
                 // Check if email exists, if yes then verify password
 				
@@ -57,14 +57,14 @@
 									$hour = time()+3600 ;	//3600=1hour
 
 									setcookie('email', $email, $hour);
-									setcookie('password', $pass, $hour);
+									setcookie('password', $_POST["password"], $hour);
 							}
 							else {
 								setcookie("email","");
 								setcookie("password","");	
 							}
 							
-                            session_start();
+                           
                             
                             // Store data in session variables
 							
@@ -96,7 +96,7 @@
 
     // Close connection
     unset($pdo);
-}
+
 
 
 ?>
@@ -344,11 +344,11 @@
 								<form action="login.php" method="post">
 									<div class="form-group">
 										<label for="email">E-mail<span>*<?php echo $emailErr; ?></span></label>
-										<input name="email" type="text" placeholder="E-mail" value="<?php if(isset($_COOKIE["email"])) { echo $_COOKIE["email"]; } ?>" id="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+										<input name="email" type="text" placeholder="E-mail" value="<?php echo (isset($_COOKIE['email'])) ? $_COOKIE['email']: ''?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
 									</div>
 									<div class="form-group">
 										<label for="password">Password<span>*<?php echo $passErr; ?></span></label>
-										<input name="password" type="password" placeholder="Password" value="<?php if(isset($_COOKIE["password"])) { echo $_COOKIE["password"]; } ?>" id="password"  required>
+										<input name="password" type="password" placeholder="Password"  id="password" value="<?php echo (isset($_COOKIE['password'])) ? $_COOKIE['password']: ''?>" required>
 									</div>
 									<div class="form-group">
 										<a href="forgotpass.php" class="float-right">Forgot password?</a> 

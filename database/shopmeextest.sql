@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2020 at 09:48 PM
+-- Generation Time: Apr 08, 2020 at 12:33 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -72,6 +72,7 @@ CREATE TABLE `products` (
   `description` text NOT NULL,
   `price` double NOT NULL,
   `photo` varchar(200) NOT NULL,
+  `date_view` date NOT NULL,
   `counter` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -99,11 +100,19 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `type`, `firstname`, `lastname`, `gender`, `address`, `contact_info`, `photo`) VALUES
-(1, 'th@gm.com', 'd400f8961d72a2119375586f6cc40034fc1524ca', 7, 'sohaib', 'thi', 0, 'heo', '', ''),
-(2, 'byer@b.dz', 'd400f8961d72a2119375586f6cc40034fc1524ca', 2, 'soh', 'buyer', 0, 'oiud', '', ''),
-(3, 'buy@g.com', 'd400f8961d72a2119375586f6cc40034fc1524ca', 3, 'buy', 'buy', 0, 'buy', '', ''),
-(4, 'sell@gmai.com', 'd400f8961d72a2119375586f6cc40034fc1524ca', 2, 'seller', 'sell', 0, 'chle', '', ''),
-(5, 'both@both.dz', 'edea3ef9f5438b6ba7124d90891cf864ed53e68c', 4, 'both', 'both', 0, 'both', '', '');
+(1, 'red@red.com', '11e0bb710744b9bd55a358fc6263f1eb77cdbe40', 4, 'thered', 'man', 0, 'red', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlist`
+--
+
+CREATE TABLE `wishlist` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -140,6 +149,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -171,7 +186,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
