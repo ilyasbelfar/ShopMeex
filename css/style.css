@@ -2664,6 +2664,9 @@ dl.row {
     display: flex;
     margin-top: .5rem;
 }
+.product-details .custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+    left: -1.4rem;
+}
 .tabs-wrapper {
     margin: 0 auto;
     padding: .8rem 2.3rem;
