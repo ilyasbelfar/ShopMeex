@@ -36,3 +36,12 @@ I added a row "date_view" in users table for (counter(most viewed product));
 I have created a new table for wishlist which contain these rows(id,user_id,product_id);
 
 -----------------------**********************************------------------------------------------
+-----------------------*********************************--------------------------------------------
+
+07/04/2020 23:55: 
+Sohaib
+
+I have added new row "slug" to the product table which make a part of the URL;
+I have created a new table for review  which contain these rows(id,user_id,product_id,comment,date,rating(5/5));
+
+-----------------------**********************************------------------------------------------
