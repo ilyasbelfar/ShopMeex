@@ -3139,7 +3139,7 @@ thead .main-heading {
     padding: 0px 60px;
 }
 .shopping-cart thead tr th {
-    border: none;
+    border: 1px solid #c3c5e0;
     font-weight: 600;
     color: #fff;
     text-align: center;
