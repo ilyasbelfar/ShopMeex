@@ -3088,7 +3088,6 @@ p.stars.selected a.active {
 .related-wrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
 }
 
