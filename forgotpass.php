@@ -1,22 +1,22 @@
 <?php
-	include 'includes/session.php';
-	$msg='';
-	if(isset($_POST['submit'])){
-		$email=trim($_POST['email']);
-		$sql = "SELECT id, email, password FROM users WHERE email = :email";
+    include 'includes/session.php';
+    $msg='';
+    if(isset($_POST['submit'])){
+        $email=trim($_POST['email']);
+        $sql = "SELECT id, email, password FROM users WHERE email = :email";
         //why you met a condition here Mohcene
         if($stmt = $db->prepare($sql)){
-			
+            
             // Bind variables to the prepared statement as parameters
-			
+            
             $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
             
             // Set parameters
-			
+            
             $param_email = trim($_POST["email"]);
             
             // Attempt to execute the prepared statement
-			
+            
             if($stmt->execute()){
                 // Check if email exists,we send the reset link
                 if($stmt->rowCount() >0 ){
@@ -24,32 +24,31 @@
                         $db_id = $row["id"];
                         $db_email = $row["email"];
                         $token=uniqid(md5(time())); //This a random token
-						$stmt=$db->prepare('UPDATE users set token=? where email=?');
-						if($stmt->execute(array($token,$email))){
-							
-							$to=$db_email;
-							$subject="Password reset link";
-							$body="Click here 'http://localhost/shopmeex-master/reset.php?token=$token' to reset your password.";
-							$headers="MIME-Version:1.0"."\r\n";
-							$headers .="Contents-type:text/html;CHARSET=UTF-8"."\r\n";
-							$headers .='From: <shopmeex22@gmail.com>'."\r\n";
-							if(mail($to,$subject,$body,$headers))
-								$msg="Password reset link has sent to your email";
-							else 
-								$msg='email sending failed';
-							
-						
-						}
-						}
-					}
-				else
-					$msg = "No account found with that username.";
-			}
-			
-		}
-	}
+                        $stmt=$db->prepare('UPDATE users set token=? where email=?');
+                        if($stmt->execute(array($token,$email))){
+                            
+                            $to=$db_email;
+                            $subject="Password reset link";
+                            $body="Click here 'http://localhost/shopmeex-master/reset.php?token=$token' to reset your password.";
+                            $headers="MIME-Version:1.0"."\r\n";
+                            $headers .="Contents-type:text/html;CHARSET=UTF-8"."\r\n";
+                            $headers .='From: <shopmeex22@gmail.com>'."\r\n";
+                            if(mail($to,$subject,$body,$headers))
+                                $msg="Password reset link has sent to your email";
+                            else 
+                                $msg='email sending failed';
+                            
+                        
+                        }
+                        }
+                    }
+                else
+                    $msg = "No account found with that username.";
+            }
+            
+        }
+    }
 ?>
-
 
 <!DOCTYPE html>
 	<html>
@@ -68,6 +67,7 @@
 			<link rel="stylesheet" type="text/css" href="css/themify-icons.css">
 			<link rel="stylesheet" type="text/css" href="css/nice-select.css">
 			<link rel="stylesheet" type="text/css" href="css/style.css">
+            <link rel="stylesheet" type="text/css" href="css/responsive.css">
 		</head>
 		
 		<body>
@@ -84,126 +84,193 @@
 			</div>
 			<!-- End Loader -->
 
-			<!-- Start Header -->
-				<header id="main-header">
-					<!-- Start Top Section -->
-					<section class="top-sec">
-						<div class="container">
-							<nav>
-								<ul class="social-media">
-									<li><a href="#"><i class="fab fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fab fa-instagram"></i></a></li>
-									<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-								</ul>
-								<ul class="nav-items">
-									<li><a href="#">Help</a></li>
-									<li class="dropdown-menu1">
-										<a href="#">DZD<i class="fas fa-angle-down"></i></a>
-										<ul class="dropdown-list">
-											<li><a href="#">USD</a></li>
-											<li><a href="#">EUR</a></li>
-										</ul>
-										<div class="clearfix"></div>
-									</li>
-									<li class="dropdown-menu2">
-										<a href="#">English</a>
-									</li>
-								</ul>
-							</nav>
-						</div>
-					</section>
-					<!-- End Top Section -->
+			    <!-- Start Header -->
+    <header id="main-header">
+        <!-- Start Top Section -->
+        <section class="top-sec">
+            <div class="container">
+                <nav>
+                    <ul class="social-media">
+                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    </ul>
+                    <ul class="nav-items">
+                        <li><a href="#">Help</a></li>
+                        <li class="dropdown-menu1">
+                            <a href="#">DZD<i class="fas fa-angle-down"></i></a>
+                            <ul class="dropdown-list">
+                                <li><a href="#">USD</a></li>
+                                <li><a href="#">EUR</a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </li>
+                        <li class="dropdown-menu2">
+                            <a href="#">English</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </section>
+        <!-- End Top Section -->
 
-					<!-- Start Bottom Section -->
-					<section class="bottom-sec">
-						<div class="container">
-							<div class="wrapper">
-								<div class="logo-container">
-									<a href="#">
-										<img src="images/Logo-header.png" class="logo">
-									</a>
-								</div>
+        <div class="sticky-container">
+            <!-- Start Bottom Section -->
+            <section class="bottom-sec">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="logo-container">
+                            <a href="#">
+                                <img src="images/Logo-header.png" class="logo">
+                            </a>
+                        </div>
 
-								<div class="search-bar">
-									<form method="post">
-										<div class="search-bar-container">
-											<select class="custom-select" name="category_name">
-												<option value="all categories" data-display="All Categories">All Categories</option>
-												<option value="special">Special</option>
-												<option value="best">Best</option>
-												<option value="recent">Latest</option>
-											</select>
-											<input type="text" class="form-control" placeholder="Search Here...">
-											<div class="search-icon-container">
-												<button class="search-icon" type="submit">
-													<i class="fa fa-search"></i>
-												</button>
-											</div>
-										</div>
-									</form>
-								</div>
+                        <div class="search-bar">
+                            <form method="post">
+                                <div class="search-bar-container">
+                                    <select class="custom-select" name="category_name">
+                                        <option value="all categories" data-display="All Categories">All Categories</option>
+                                        <option value="special">Special</option>
+                                        <option value="best">Best</option>
+                                        <option value="recent">Latest</option>
+                                    </select>
+                                    <input type="text" class="form-control" placeholder="Search Here...">
+                                    <div class="search-icon-container">
+                                        <button class="search-icon" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
 
-								<div class="user-details">
-									<div class="user-details-container">
-										<a href="#" class="widget-header1">
-											<div class="icon">
-												<div class="cart-icon-container">
-													<svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 251.6" id="cart-icon">
-													<g id="Grid_Layer"><g id="Artboard-3"><g id="Group-2" transform="translate(1 1)">
-													<polyline id="Path-17" class="st2" points="65.7,13.6 95.6,13.6 142.6,133.9 286.2,122 306.2,42.1 108.8,42.1"></polyline><circle id="Oval-7" class="st2" cx="251.5" cy="210.4" r="21.9"></circle><circle id="Oval-7-Copy" class="st2" cx="164.1" cy="210.4" r="21.9"></circle>
-													<polyline id="Path-18" class="st2" points="146,133.9 131.3,155.8 284.3,155.8"></polyline>
-													</g>
-													</g>
-													</g>
-													<g id="Layer_2"><line class="st2 st1" x1="15.7" y1="85.7" x2="76.6" y2="85.7" data-svg-origin="15.699999809265137 85.69999694824219" transform="matrix(0,0,0,1,15.699999809265137,0)" style="opacity: 0;"></line><line class="st2 st1" x1="35.4" y1="123" x2="81.5" y2="123" data-svg-origin="35.400001525878906 123" transform="matrix(0,0,0,1,35.400001525878906,0)" style="opacity: 0;"></line><line class="st2 st1" x1="57.6" y1="160.4" x2="85.2" y2="160.4" data-svg-origin="57.599998474121094 160.39999389648438" transform="matrix(0,0,0,1,57.599998474121094,0)" style="opacity: 0;"></line></g>
-													</svg>
-												</div>
-												<span class="notify">0</span>
-											</div>
-										</a>
-										<a href="#" class="widget-header1">
-											<div class="icon">
-												<i class="fa fa-heart"></i>
-											</div>
-										</a>
+                        <div class="user-details">
+                            <div class="user-details-container">
+                                <span class="card-container">
+                                    <a href="cart.html" class="widget-header1" id="icone-carte">
+                                    <div class="icon">
+                                        <div class="cart-icon-container">
+                                            <svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 251.6" id="cart-icon">
+                                                <g id="Grid_Layer">
+                                                    <g id="Artboard-3">
+                                                        <g id="Group-2" transform="translate(1 1)">
+                                                            <polyline id="Path-17" class="st2" points="65.7,13.6 95.6,13.6 142.6,133.9 286.2,122 306.2,42.1 108.8,42.1"></polyline>
+                                                            <circle id="Oval-7" class="st2" cx="251.5" cy="210.4" r="21.9"></circle>
+                                                            <circle id="Oval-7-Copy" class="st2" cx="164.1" cy="210.4" r="21.9"></circle>
+                                                            <polyline id="Path-18" class="st2" points="146,133.9 131.3,155.8 284.3,155.8"></polyline>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                                <g id="Layer_2">
+                                                    <line class="st2 st1" x1="15.7" y1="85.7" x2="76.6" y2="85.7" data-svg-origin="15.699999809265137 85.69999694824219" transform="matrix(0,0,0,1,15.699999809265137,0)" style="opacity: 0;"></line>
+                                                    <line class="st2 st1" x1="35.4" y1="123" x2="81.5" y2="123" data-svg-origin="35.400001525878906 123" transform="matrix(0,0,0,1,35.400001525878906,0)" style="opacity: 0;"></line>
+                                                    <line class="st2 st1" x1="57.6" y1="160.4" x2="85.2" y2="160.4" data-svg-origin="57.599998474121094 160.39999389648438" transform="matrix(0,0,0,1,57.599998474121094,0)" style="opacity: 0;"></line>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <span class="notify">0</span>
+                                    </div>
+                                </a>
+                                <div class="sub-menu">
+                                        <div class="shopping-cart-content">
+                                            <div class="no-item">
+                                                <p class="empty-msg">No products in the cart.</p>
+                                            </div>
+                                            <div class="mini-menu">
+                                                <div class="shopping-cart-widget">
+                                                    <ul class="products-list">
+                                                        <li class="product-item">
+                                                            <a href="#" class="remove-item-button">×</a>
+                                                            <a href="#" class="item-details">
+                                                                <img width="300" height="300" src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg 800w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-150x150.jpg 150w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-300x300.jpg 300w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-768x768.jpg 768w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-660x660.jpg 660w" sizes="(max-width: 300px) 100vw, 300px">Basic t-shirt
+                                                            </a>
+                                                            <div class="clearfix"></div>    
+                                                            <span class="quantitys">1 × <span>$<span class="total-amount">7.99</span></span></span>    
+                                                        </li>
+                                                        <li class="product-item">
+                                                            <a href="#" class="remove-item-button">×</a>
+                                                            <a href="#" class="item-details">
+                                                                <img width="300" height="300" src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg 800w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-150x150.jpg 150w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-300x300.jpg 300w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-768x768.jpg 768w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-660x660.jpg 660w" sizes="(max-width: 300px) 100vw, 300px">Basic t-shirt
+                                                            </a>
+                                                            <div class="clearfix"></div>    
+                                                            <span class="quantitys">1 × <span>$<span class="total-amount">7.99</span></span></span>    
+                                                        </li>
+                                                        <li class="product-item">
+                                                            <a href="#" class="remove-item-button">×</a>
+                                                            <a href="#" class="item-details">
+                                                                <img width="300" height="300" src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg 800w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-150x150.jpg 150w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-300x300.jpg 300w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-768x768.jpg 768w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-660x660.jpg 660w" sizes="(max-width: 300px) 100vw, 300px">Basic t-shirt
+                                                            </a>
+                                                            <div class="clearfix"></div>    
+                                                            <span class="quantitys">1 × <span>$<span class="total-amount">7.99</span></span></span>    
+                                                        </li>
+                                                    </ul>
+                                                    <p class="total">
+                                                        <strong>Subtotal:</strong>
+                                                        <span>$<span class="amount">16.98</span></span>
+                                                    </p>
+                                                    <p class="sub-buttons">
+                                                        <a href="cart.html" class="forward-cart">View cart</a>
+                                                        <a href="checkout.html" class="forward-checkout">Checkout</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                </span>
+                                <a href="#" class="widget-header1">
+                                    <div class="icon">
+                                        <i class="fa fa-heart"></i>
+                                    </div>
+                                </a>
 
-										<div class="widget-header1 dropdown">
-											<div class="icon">
-												<i class="fa fa-user"></i>
-												<div class="user-text">
-													<small class="text-muted"><a href="login.php">Sign in</a> | 
-														<a href="register.php">Sign Up</a> </small>
-													<div>My Account<i class="fa fa-angle-down"></i></div>
-												</div>
-											</div>
+                                <div class="widget-header1 dropdown">
+                                            <div class="icon">
+                                                <i class="fa fa-user"></i>
+                                                <div class="user-text">
+                                                    <small class="text-muted"><a href="login.php">Sign in</a> | 
+                                                        <a href="register.php">Sign Up</a> </small>
+                                                    <div>My Account<i class="fa fa-angle-down"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Bottom Section -->
 
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-					</section>
-					<!-- End Bottom Section -->
+            <!-- Start Categories Links -->
+            <nav class="categories-list forhide">
+                <div class="container">
+                    <ul>
+                        <li><a href="#" class="active-home"><strong>All Categories</strong></a></li>
+                        <li><a href="#"><strong>Machines</strong></a></li>
+                        <li><a href="#"><strong>Electronics</strong></a></li>
+                        <li><a href="#"><strong>Services</strong></a></li>
+                        <li><a href="#"><strong>Health</strong></a></li>
+                        <li><a href="#"><strong>Home Textiles</strong></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <nav class="categories-list mobile">
+                <div class="container">
+                    <a href="#" class="mobile-drop"><i class="fa fa-bars"></i></a>
+                    <ul class="category">
+                        <li><a href="#" class="active-home"><strong>All Categories</strong></a></li>
+                        <li><a href="#"><strong>Machines</strong></a></li>
+                        <li><a href="#"><strong>Electronics</strong></a></li>
+                        <li><a href="#"><strong>Services</strong></a></li>
+                        <li><a href="#"><strong>Health</strong></a></li>
+                        <li><a href="#"><strong>Home Textiles</strong></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-					<!-- Start Categories Links -->
-					<nav class="categories-list">
-						<div class="container">
-							<ul>
-								<li><a href="#" class="active-home"><strong>Toutes Les Catégories</strong></a></li>
-								<li><a href="#"><strong>Machines</strong></a></li>
-								<li><a href="#"><strong>Electronique</strong></a></li>
-								<li><a href="#"><strong>Electroménagie</strong></a></li>
-								<li><a href="#"><strong>Services & Equipements</strong></a></li>
-								<li><a href="#"><strong>Santé</strong></a></li>
-								<li><a href="#"><strong>Toys & Hobbies</strong></a></li>
-								<li><a href="#"><strong>Home Textiles</strong></a></li>
-							</ul>
-						</div>
-					</nav>
-				</header>
-
-			<!-- End Header -->
+    <!-- End Header -->
 
 			<!-- Start Account -->
 
@@ -213,8 +280,8 @@
 						<div class="col-35">
 							<div class="bread-inner">
 							    <ul class="bread-list">
-							        <li><a href="index.php">Home<i class="ti-arrow-right"></i></a></li>
-							        <li class="active"><a href="login.php">Sign In<i class="ti-arrow-right"></i></a></li>
+							        <li><a href="index.html">Home<i class="ti-arrow-right"></i></a></li>
+							        <li class="active"><a href="login.php">My Account<i class="ti-arrow-right"></i></a></li>
 							        <li class="active"><a href="forgotpass.php">Forget Password</a></li>
 							    </ul>
 							</div>
@@ -238,17 +305,17 @@
 								<form action="forgotpass.php" method="post">
 									<p>Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.</p>
 									<div class="form-group">
-										<label for="user-reset"><span>*</span>E-mail or Username:</label>
-										<input name="email" type="text" placeholder="E-mail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="user-reset">
+										<label for="user-reset">E-mail or Username:</label>
+										<input type="text" name="user-reset" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="user-reset">
 									</div>
-									<div class='alert alert-success'>
-										<?php 
-											if(isset($msg))
-												echo $msg;
-										?>
-									</div>
+                                    <div class='alert alert-success'>
+                                        <?php 
+                                            if(isset($msg))
+                                                echo $msg;
+                                        ?>
+                                    </div>
 									<div class="form-group">
-										<button type="submit" name="submit" class="btn">Send</button>
+										<button type="submit" class="btn">Send</button>
 									</div>									
 								</form>
 							</div>
