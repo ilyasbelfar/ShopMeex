@@ -881,6 +881,7 @@ main .section-main .container .wrapper {
     align-items: center;
     margin-right: -10px;
     margin-left: -10px;
+    padding: 1rem 4rem;
     overflow-x: hidden;
 }
 main .section-main .container .wrapper .side-cat {
