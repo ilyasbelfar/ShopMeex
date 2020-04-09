@@ -52,9 +52,13 @@
     webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
-*:not([class^="fa"]) {
-  font-family: 'Poppins', sans-serif;
+i[class^="fa"] {
+    font-family: 'Font Awesome 5 Free';
+}
+i[class^="ti"] {
+    font-family: 'themify';
 }
 ::selection{
     background-color: #3167eb;
