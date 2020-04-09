@@ -49,6 +49,8 @@
 * {
     margin: 0;
     padding: 0;
+    webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
@@ -60,12 +62,30 @@
     background-color: #3167eb;
     color: #fff;
 }
-body {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow-x: hidden;
-}
+html,
+    #main-header .top-sec {
+        overflow-x: hidden;
+    }
+    #main-header .bottom-sec,
+    #main-header {
+        overflow-x: visible;
+    }
+    #main-header .top-sec .container,
+    #main-header .bottom-sec .container,
+    .newsletter-area .container,
+    #main-footer .container,
+    #main-footer .copyrights-payments .container,
+    .checkout .container,
+    #contact .container,
+    .faq .container,
+    main .container,
+    .my-account .container,
+    .user-dashboard .container,
+    .product-details .container {
+        width: 100%!important;
+        max-width: 100%!important;
+        overflow: hidden!important;
+    }
 ul {
     list-style-type: none;
     padding: 0;
@@ -408,11 +428,16 @@ svg#cart-icon {
 #main-header .bottom-sec .container .wrapper {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 #main-header .bottom-sec .container .wrapper .logo-container {
     padding-left: 10px;
     padding-right: 10px;
     margin-right: 3em;
+}
+#main-header .bottom-sec .container .wrapper .logo-container a {
+    position: relative;
+    display: block;
 }
 #main-header .bottom-sec .container .wrapper .logo-container a .logo {
     margin-right: 7px;
@@ -432,7 +457,7 @@ svg#cart-icon {
     flex-wrap: nowrap;
     align-items: stretch;
 }
-#main-header .bottom-sec .container .wrapper .search-bar form .search-bar-container .form-control {
+form .search-bar-container .form-control {
     display: block;
     flex: 1 1 auto;
     width: 70%;
@@ -464,7 +489,7 @@ svg#cart-icon {
 #main-header .bottom-sec .container .wrapper .search-bar form .search-bar-container .search-icon-container {
     margin-left: -1px;
 }
-#main-header .bottom-sec .container .wrapper .search-bar form .search-bar-container .search-icon-container button {
+form .search-bar-container .search-icon-container button {
     display: inline-block;
     position: relative;
     z-index: 2;
@@ -730,7 +755,6 @@ p.sub-buttons a {
 }
 #main-header .categories-list {
     border-bottom: 1px solid #e4e4e4;
-    display: flex;
     position: relative;
     line-height: 4;
     text-align: center;
@@ -738,12 +762,14 @@ p.sub-buttons a {
     box-shadow: 0px 5px 6px 0px rgba(153, 153, 153, 0.3);
     overflow: hidden;
 }
+.categories-list.mobile {
+    display: none;
+}
 #main-header .categories-list .container {
     width: 100%;
     padding-right: 10px;
     padding-left: 10px;
     margin: auto;
-    flex-wrap: nowrap;
     font-size: .88em;
 }
 #main-header .categories-list .container ul {
@@ -755,7 +781,8 @@ p.sub-buttons a {
     display: inline-block;
     margin-right: 1.5em;
 }
-#main-header .categories-list .container ul li a {
+#main-header .categories-list .container ul li a,
+#main-header .categories-list .container > a {
     color: #495057;
     transition: all .3s;
     display: block;
@@ -763,7 +790,10 @@ p.sub-buttons a {
     position: relative;
     transition: all 0.4s ease;
 }
-#main-header .categories-list .container ul li a:before {
+#main-header .categories-list .container > a {
+    display: none!important;
+}
+#main-header .categories-list .container ul li:not(:nth-child(1)) a:before {
     content: "";
     position: absolute;
     z-index: -1;
@@ -781,6 +811,9 @@ p.sub-buttons a {
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
 }
+#main-header .categories-list .container ul li:nth-child(1) a {
+    text-align: left;
+}
 #main-header .categories-list .container ul li:hover a:not(.active-home):before {
     transform: translateY(2px);
 }
@@ -790,6 +823,13 @@ p.sub-buttons a {
 }
 #main-header .categories-list .container ul li:hover a:not(.active-home) {
     color: #3167eb;
+}
+#main-header .categories-list .container > a i {
+    font-size: 1.8rem;
+    display: none;
+    border: 1px solid #e2e2e2;
+    padding: 8px;
+    border-radius: 5px;
 }
 header.sticky,
 .sticky-container {
@@ -2014,6 +2054,7 @@ main .day-deal .container {
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
+    padding: 0 4rem;
 }
 #contact .container .wrapper .col-40 {
     flex: 0 0 66.666667%;
@@ -2218,6 +2259,7 @@ form .form-group button.btn:hover {
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
+    padding: 0 4rem;
 }
 .my-account .container .wrapper > .row {
     background: 0 0;
@@ -2376,6 +2418,7 @@ input[type="checkbox"] {
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
+    padding: 0 4rem;
 }
 .product-details .container .wrapper > .row {
     background: 0 0;
@@ -3121,6 +3164,7 @@ p.stars.selected a.active {
     flex: 0 0 100%;
     max-width: 100%;
     font-size: 14px;
+    overflow-x: hidden;
 }
 .shopping-cart {
     background: #fff;
@@ -3141,7 +3185,7 @@ thead .main-heading {
     padding: 0px 60px;
 }
 .shopping-cart thead tr th {
-    border: 1px solid #c3c5e0;
+    border: none;
     font-weight: 600;
     color: #fff;
     text-align: center;
@@ -3207,7 +3251,7 @@ tbody .product-name a:hover {
 .shopping .total-amount {
     margin-top: 50px;
 }
-.shopping .total-amount .row {
+.shopping .col-7 > .total-amount .row {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
@@ -3218,18 +3262,18 @@ tbody .product-name a:hover {
     padding-left: 15px;
 }
 
-.total-amount .row .col-6 {
+.shopping .col-7 > .total-amount .row .col-6 {
     -ms-flex: 0 0 33.333333%;
     flex: 0 0 33.333333%;
     max-width: 33.333333%;
     position: relative;
     width: 100%;
 }
-.total-amount .row .col-6.big {
+.col-7 > .total-amount .row .col-6.big {
     flex: 0 0 66.666667%;
     max-width: 66.666667%;
 }
-.shopping .total-amount .left .coupon form input {
+.shopping .col-7 > .total-amount .left .coupon form input {
     width: 220px;
     display: inline-block;
     height: 48px;
@@ -3241,7 +3285,7 @@ tbody .product-name a:hover {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
-.shopping .total-amount .left .coupon form input:focus {
+.shopping .col-7 > .total-amount .left .coupon form input:focus {
     z-index: 3;
     background-color: #fff;
     border-color: #a5bdf6;
@@ -3249,7 +3293,7 @@ tbody .product-name a:hover {
     -webkit-box-shadow: 0 0 0 0.2rem rgba(49, 103, 235, 0.25);
     box-shadow: 0 0 0 0.2rem rgba(49, 103, 235, 0.25);
 }
-.shopping .total-amount .left .coupon form .btn {
+.shopping .col-7 > .total-amount .left .coupon form .btn {
     display: inline-block;
     height: 48px;
     border: #3167eb;
@@ -3269,29 +3313,29 @@ tbody .product-name a:hover {
     border-radius: 0px;
     text-transform: uppercase;
 }
-.shopping .total-amount .left .coupon form .btn:hover {
+.shopping .col-7 > .total-amount .left .coupon form .btn:hover {
     color: #3167eb;
 }
-.shopping .total-amount .right {
+.shopping .col-7 > .total-amount .right {
     padding-left: 100px;
 }
-.shopping .total-amount .right ul li {
+.shopping .col-7 > .total-amount .right ul li {
     font-size: 15px;
     font-weight: 400;
     color: #495057;
     margin-bottom: 12px;
 }
-.shopping .total-amount .right ul li span {
+.shopping .col-7 > .total-amount .right ul li span {
     float: right;
     display: inline-block;
 }
-.shopping .total-amount .right ul li.last {
+.shopping .col-7 > .total-amount .right ul li.last {
     padding-top: 12px;
     border-top: 1px solid #c8c8c8;
     font-size: 15px;
     font-weight: 400;
 }
-.shopping .total-amount .right .button5 .btn {
+.shopping .col-7 > .total-amount .right .button5 .btn {
     text-align: center;
     border-radius: 0;
     width: 100%;
@@ -3311,7 +3355,7 @@ tbody .product-name a:hover {
     padding: 13px 32px;
     text-transform: uppercase;
 }
-.shopping .total-amount .right .button5 .btn:hover {
+.shopping .col-7 > .total-amount .right .button5 .btn:hover {
     background: #3167eb;
 }
 .col-9 .nothing-found {
@@ -3373,6 +3417,7 @@ tbody .product-name a:hover {
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
+    padding: 0 4rem;
 }
 .checkout .section-title {
     width: 100%;
@@ -3579,6 +3624,7 @@ tbody .product-name a:hover {
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
+    padding: 0 4rem;
 }
 .user-dashboard .tabs-wrapper ul.tabs {
     display: flex!important;
@@ -3803,6 +3849,7 @@ tbody .product-name a:hover {
     margin-right: -15px;
     margin-left: -15px;
     position: relative;
+    padding: 0 4rem;
     overflow: hidden;
     box-shadow: 0 5px 15px 8px rgba(118, 119, 121, 0.21);
 }
@@ -3897,6 +3944,9 @@ tbody .product-name a:hover {
 }
 .about-shopmx .row .logo {
     margin-bottom: 20px;
+}
+.about-shopmx .row .logo > a {
+    display: block;
 }
 .about-shopmx .row .text {
     font-weight: 400;
