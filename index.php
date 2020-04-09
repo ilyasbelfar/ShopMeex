@@ -1,5 +1,5 @@
 <?php
-	include 'includes/session.php';
+    include 'includes/session.php';
 ?>
 <!DOCTYPE html>
 	<html>
@@ -17,7 +17,8 @@
 			<link rel="stylesheet" type="text/css" href="css/fontawesome.css">
 			<link rel="stylesheet" type="text/css" href="css/themify-icons.css">
 			<link rel="stylesheet" type="text/css" href="css/nice-select.css">
-			<link rel="stylesheet" type="text/css" href="css/style.css">
+            <link rel="stylesheet" type="text/css" href="css/style.css">
+			<link rel="stylesheet" type="text/css" href="css/responsive.css">
 		</head>
 		
 		<body>
@@ -230,16 +231,27 @@
             <!-- End Bottom Section -->
 
             <!-- Start Categories Links -->
-            <nav class="categories-list">
+            <nav class="categories-list forhide">
                 <div class="container">
                     <ul>
-                        <li><a href="#" class="active-home"><strong>Toutes Les Catégories</strong></a></li>
+                        <li><a href="#" class="active-home"><strong>All Categories</strong></a></li>
                         <li><a href="#"><strong>Machines</strong></a></li>
-                        <li><a href="#"><strong>Electronique</strong></a></li>
-                        <li><a href="#"><strong>Electroménagie</strong></a></li>
-                        <li><a href="#"><strong>Services & Equipements</strong></a></li>
-                        <li><a href="#"><strong>Santé</strong></a></li>
-                        <li><a href="#"><strong>Toys & Hobbies</strong></a></li>
+                        <li><a href="#"><strong>Electronics</strong></a></li>
+                        <li><a href="#"><strong>Services</strong></a></li>
+                        <li><a href="#"><strong>Health</strong></a></li>
+                        <li><a href="#"><strong>Home Textiles</strong></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <nav class="categories-list mobile">
+                <div class="container">
+                    <a href="#" class="mobile-drop"><i class="fa fa-bars"></i></a>
+                    <ul class="category">
+                        <li><a href="#" class="active-home"><strong>All Categories</strong></a></li>
+                        <li><a href="#"><strong>Machines</strong></a></li>
+                        <li><a href="#"><strong>Electronics</strong></a></li>
+                        <li><a href="#"><strong>Services</strong></a></li>
+                        <li><a href="#"><strong>Health</strong></a></li>
                         <li><a href="#"><strong>Home Textiles</strong></a></li>
                     </ul>
                 </div>
