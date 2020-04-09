@@ -2664,6 +2664,9 @@ dl.row {
     display: flex;
     margin-top: .5rem;
 }
+.product-details .custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+    left: -1.4rem;
+}
 .tabs-wrapper {
     margin: 0 auto;
     padding: .8rem 2.3rem;
@@ -3085,7 +3088,6 @@ p.stars.selected a.active {
 .related-wrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
 }
 
@@ -3139,7 +3141,7 @@ thead .main-heading {
     padding: 0px 60px;
 }
 .shopping-cart thead tr th {
-    border: none;
+    border: 1px solid #c3c5e0;
     font-weight: 600;
     color: #fff;
     text-align: center;
@@ -3813,13 +3815,13 @@ tbody .product-name a:hover {
   height: auto;
   margin: 4rem auto;
 }
-.set {
+.accordion-container .set {
   position: relative;
   width: 100%;
   height: auto;
   background-color: #fff;
 }
-.set > a {
+.accordion-container .set > a {
   display: block;
   padding: 20px 25px;
   text-decoration: none;
@@ -3830,20 +3832,20 @@ tbody .product-name a:hover {
   -moz-transition:all 0.2s linear;
   transition:all 0.2s linear;
 }
-.set > a i {
+.accordion-container .set > a i {
     float: left;
     margin-top: 4px;
     margin-right: 15px;
 }
-.set > a.active {
+.accordion-container .set > a.active {
   background-color: #f4f4f4;
 }
-.content {
+.accordion-container .content {
   background-color: #fff;
   border-bottom: 1px solid #ddd;
   display:none;
 }
-.content p {
+.accordion-container .content p {
     padding: 15px;
     color: #8d8d8d;
     font-size: 14px;
