@@ -2,7 +2,7 @@
     include "includes/session.php";
     //$slug=$_GET['products'];
     $slug='large-dell-inspiron-15-5000-15-6';
-
+//hello
     try{          
         $stmt = $db->prepare("SELECT *, products.name AS prodname, category.name AS catname, products.id AS prodid FROM products LEFT JOIN category ON category.id=products.category_id WHERE products.slug = :slug");
         $stmt->execute(['slug' => $slug]);//id product;
