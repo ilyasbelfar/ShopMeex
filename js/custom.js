@@ -230,5 +230,19 @@ $('#icone-carte').click(function(event) {
     }
 });
 
+$('.commentlist li:gt(2)').css('display', 'none');
+$('#collapseBtn').click(function(event) {
+    event.preventDefault();
+    if ($(this).hasClass('open')) {
+        $('.commentlist li:gt(2)').slideUp(500);
+        $(this).removeClass('open');
+        $(this).html('See More Reviews');
+    } else {
+        $('.commentlist li:gt(2)').slideDown(500);
+        $(this).addClass('open');
+        $(this).html('See Less Reviews');
+    }
+});
+
 $('.img-big-wrap').zoom();
 $('a[data-rel^=lightcase]').lightcase();
