@@ -1,89 +1,89 @@
 <?php
 
-	include 'includes/session.php';
-	
-	
-	// Check if the user is already logged in, if yes then redirect him to Accueil page
+    include 'includes/session.php';
+    
+    
+    // Check if the user is already logged in, if yes then redirect him to Accueil page
 
-	if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    	header("location: index.php");
-    	exit;
-	}
+    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+        header("location: index.php");
+        exit;
+    }
 
-	
-	//Initialising variables
+    
+    //Initialising variables
 
-	$email=$pass='';
-	$emailErr=$passErr='';
+    $email=$pass='';
+    $emailErr=$passErr='';
 
-	if($_SERVER["REQUEST_METHOD"] == "POST"){
-		
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        
        
         $email= trim($_POST["email"]);//trim function removes whitespaces;
         $salt="^%r8yuyg";//create our salt; salt is String added to password // way of encrption on database;
         $pass = sha1(filter_var($_POST["password"].$salt, FILTER_SANITIZE_STRING));// sha1 function to transform the password into long String; known as hashing method;
         //$pass= $_POST["password"];
-		
-    	//Check if user exist in DataBase
-		
-		
-		$sql = "SELECT id, email, password FROM users WHERE email = :email";
+        
+        //Check if user exist in DataBase
+        
+        
+        $sql = "SELECT id, email, password FROM users WHERE email = :email";
         
         if($stmt = $db->prepare($sql)){
-			
+            
             // Bind variables to the prepared statement as parameters
-			
+            
             $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
             
             // Set parameters
-			
+            
             $param_email = $email;
             
             // Attempt to execute the prepared statement
-			
+            
             $stmt->execute();
-				
+                
                 // Check if email exists, if yes then verify password
-				
+                
                 if($stmt->rowCount() == 1){
                     if($row = $stmt->fetch()){
                         $id = $row["id"];
                         $email = $row["email"];
                         $password = $row["password"];
                         if($pass==$password){
-							
+                            
                             // Password is correct, so start a new session
-							if(!empty($_POST["remember"])) {
-									$hour = time()+3600 ;	//3600=1hour
+                            if(!empty($_POST["remember"])) {
+                                    $hour = time()+3600 ;   //3600=1hour
 
-									setcookie('email', $email, $hour);
-									setcookie('password', $_POST["password"], $hour);
-							}
-							else {
-								setcookie("email","");
-								setcookie("password","");	
-							}
-							
+                                    setcookie('email', $email, $hour);
+                                    setcookie('password', $_POST["password"], $hour);
+                            }
+                            else {
+                                setcookie("email","");
+                                setcookie("password","");   
+                            }
+                            
                            
                             
                             // Store data in session variables
-							
+                            
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["email"] = $email;
-						
+                        
                             // Redirect user to welcome page
-							
+                            
                             header("location: index.php");
                         } else
                             // Display an error message if password is not valid
-							
+                            
                             $passErr = "The password you entered was not valid.";
                         
                     }
                 } else
                     // Display an error message if username doesn't exist
-					
+                    
                     $emailErr = "No account found with that username.";
                 
             } else
@@ -117,6 +117,7 @@
 			<link rel="stylesheet" type="text/css" href="css/themify-icons.css">
 			<link rel="stylesheet" type="text/css" href="css/nice-select.css">
 			<link rel="stylesheet" type="text/css" href="css/style.css">
+            <link rel="stylesheet" type="text/css" href="css/responsive.css">
 		</head>
 		
 		<body>
@@ -277,9 +278,9 @@
                                         <i class="fa fa-user"></i>
                                         <div class="user-text">
                                             <small class="text-muted"><a href="login.php">Sign in</a> | 
-														<a href="register.php">Sign Up</a> </small>
+                                                        <a href="register.php">Sign Up</a> </small>
 
-													<div>My Account<i class="fa fa-angle-down"></i></div>
+                                                    <div>My Account<i class="fa fa-angle-down"></i></div>
                                         </div>
                                     </div>
 
@@ -293,16 +294,27 @@
             <!-- End Bottom Section -->
 
             <!-- Start Categories Links -->
-            <nav class="categories-list">
+            <nav class="categories-list forhide">
                 <div class="container">
                     <ul>
-                        <li><a href="#" class="active-home"><strong>Toutes Les Catégories</strong></a></li>
+                        <li><a href="#" class="active-home"><strong>All Categories</strong></a></li>
                         <li><a href="#"><strong>Machines</strong></a></li>
-                        <li><a href="#"><strong>Electronique</strong></a></li>
-                        <li><a href="#"><strong>Electroménagie</strong></a></li>
-                        <li><a href="#"><strong>Services & Equipements</strong></a></li>
-                        <li><a href="#"><strong>Santé</strong></a></li>
-                        <li><a href="#"><strong>Toys & Hobbies</strong></a></li>
+                        <li><a href="#"><strong>Electronics</strong></a></li>
+                        <li><a href="#"><strong>Services</strong></a></li>
+                        <li><a href="#"><strong>Health</strong></a></li>
+                        <li><a href="#"><strong>Home Textiles</strong></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <nav class="categories-list mobile">
+                <div class="container">
+                    <a href="#" class="mobile-drop"><i class="fa fa-bars"></i></a>
+                    <ul class="category">
+                        <li><a href="#" class="active-home"><strong>All Categories</strong></a></li>
+                        <li><a href="#"><strong>Machines</strong></a></li>
+                        <li><a href="#"><strong>Electronics</strong></a></li>
+                        <li><a href="#"><strong>Services</strong></a></li>
+                        <li><a href="#"><strong>Health</strong></a></li>
                         <li><a href="#"><strong>Home Textiles</strong></a></li>
                     </ul>
                 </div>
@@ -342,26 +354,26 @@
 									<h2>Log In</h2>
 								</div>
 								<form action="login.php" method="post">
-									<div class="form-group">
-										<label for="email">E-mail<span>*<?php echo $emailErr; ?></span></label>
-										<input name="email" type="text" placeholder="E-mail" value="<?php echo (isset($_COOKIE['email'])) ? $_COOKIE['email']: ''?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
-									</div>
-									<div class="form-group">
-										<label for="password">Password<span>*<?php echo $passErr; ?></span></label>
-										<input name="password" type="password" placeholder="Password"  id="password" value="<?php echo (isset($_COOKIE['password'])) ? $_COOKIE['password']: ''?>" required>
-									</div>
-									<div class="form-group">
-										<a href="forgotpass.php" class="float-right">Forgot password?</a> 
-										<label for="check" class="float-left custom-control custom-checkbox">
-											<input id="check" type="checkbox" class="custom-control-input"  name="remember">
-											<div class="custom-control-label"> Remember Me </div>
-										</label>
-									</div>
-									<div class="clearfix"></div>
-									<div class="form-group">
-										<button type="submit" class="btn">Login</button>
-									</div>
-								</form>
+                                    <div class="form-group">
+                                        <label for="email">E-mail<span>*<?php echo $emailErr; ?></span></label>
+                                        <input name="email" type="text" placeholder="E-mail" value="<?php echo (isset($_COOKIE['email'])) ? $_COOKIE['email']: ''?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password<span>*<?php echo $passErr; ?></span></label>
+                                        <input name="password" type="password" placeholder="Password"  id="password" value="<?php echo (isset($_COOKIE['password'])) ? $_COOKIE['password']: ''?>" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <a href="forgotpass.php" class="float-right">Forgot password?</a> 
+                                        <label for="check" class="float-left custom-control custom-checkbox">
+                                            <input id="check" type="checkbox" class="custom-control-input"  name="remember">
+                                            <div class="custom-control-label"> Remember Me </div>
+                                        </label>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn">Login</button>
+                                    </div>
+                                </form>
 							</div>
 						</div>
 					</div>
