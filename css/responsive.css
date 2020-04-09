@@ -688,6 +688,23 @@
 	#main-header .bottom-sec .container .wrapper {
 		flex-direction: column;
 	}
+	#main-header .bottom-sec .container .wrapper .search-bar {
+		order: 3;
+	}
+	#main-header .bottom-sec .container .wrapper .user-details {
+		order: 2;
+	}
+	#main-header .bottom-sec .container .wrapper {
+		flex-wrap: wrap !important;
+		justify-content: center;
+	}
+	#main-header .bottom-sec .container .wrapper .logo-container {
+		margin: 0;
+	}
+	#main-header .bottom-sec .container .wrapper .user-details {
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
 }
 
 
