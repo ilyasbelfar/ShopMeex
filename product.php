@@ -11,9 +11,16 @@
             exit();
         }
         $product = $stmt->fetch();
-        
-        $stmt=$db->prepare("SELECT * from review LEFT JOIN users on review.user_id=users.id WHERE product_id=:prodid");
+
+        $stmt=$db->prepare("SELECT product_id from orders  WHERE product_id=:prodid");
         $stmt->execute(['prodid'=>$product['prodid']]);
+        $nborders=$stmt->rowCount();
+
+        
+       	$stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid");
+        $stmt->execute(['prodid'=>$product['prodid']]);
+		$reviews = $stmt->fetchAll();
+
         $nbreview= $stmt->rowCount();// return the number of ligne in table resulted;
 
 
@@ -278,9 +285,9 @@
                 <div class="col-35">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="index.html">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="#">Products<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="product-details.html">Product Details</a></li>
+                            <li><a href="index.php">Home<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="#"><?php echo $product['catname'] ?><i class="ti-arrow-right"></i></a></li>
+                            <li class="active"> <?php echo $product['prodname'];?></li>
                         </ul>
                     </div>
                 </div>
@@ -327,8 +334,9 @@
                                         <i class="fa fa-star"></i>
                                     </li>
                                 </ul>
-                                <small class="label-rating text-muted"><?php echo $nbreview ?></small>
-                                <small class="label-rating text-success"> <i class="fa fa-clipboard-check"></i> 154 orders </small>
+                                <small class="label-rating text-muted"><?php echo $nbreview ?> REVIEWS </small>
+                                <small class="label-rating text-success"> <i class="fa fa-clipboard-check"></i> <?php 
+                                        echo $nborders?> ORDERS </small>
                             </div>
 
                             <div class="mb-3">
@@ -398,12 +406,12 @@
                                     <a href="#tab-additional_information">Additional information</a>
                                 </li>
                                 <li class="reviews_tab">
-                                    <a href="#tab-reviews">Reviews (1)</a>
+                                    <a href="#tab-reviews">Reviews (<?php echo $nbreview;  ?>)</a>
                                 </li>
                             </ul>
                             <div class="paneltbs panel-1" id="tab-description">
                                 <h2>Product Description</h2>
-                                <p>Sed a lorem sed dui dictum sodales non et nisl.</p>
+                                <p><?php echo $product['description']; ?></p>
                             </div>
 
                             <div class="paneltbs panel-2" id="tab-additional_information" style="display: none;">
@@ -425,30 +433,35 @@
                             <div class="paneltbs panel-3" id="tab-reviews" style="display: none;">
                                 <div id="reviews" class="product-reviews">
                                     <div id="comments">
-                                        <h2 class="reviews-title">1 review for <span>Fantasy t-shirt</span></h2>
+                                        <h2 class="reviews-title"><?php echo $nbreview ?> review for <span>Fantasy t-shirt</span></h2>
+                                         <ol class="commentlist">
+                                         	<?php  
+                                         		foreach ($reviews as $row) {	
+                                         			echo 
+		                                            "<li id='li-comment-11'>
+		                                                <div id='comment-11' class='comment_container'>
+		                                                    <img alt='' src='images/users/".$row['photo']."' srcset='
+		                                                    images/users/".$row['photo']."' class='avatar avatar-60 photo' height='60' width='60'>
+		                                                    <div class='clearfix'></div>
+		                                                    <div class='comment-text'>
+		                                                        <div class='star-rating' aria-label='Rated 4 out of 5'>
+		                                                            <span style='width:".$row['ratper']."%'>Rated <strong class='rating'>4</strong> out of 5</span>
+		                                                            <div class='clearfix'></div>
+		                                                        </div>
+		                                                        <p class='meta'>
+		                                                            <strong class='review__author'>".$row['firstname']." ".$row['lastname']." </strong>
+		                                                            <span class='review__dash'>–</span>
+		                                                            <time class='review__published-date' datetime='2020-05-10T14:02:51+01:00'>".$row['date']."</time>
+		                                                        </p>
 
-                                        <ol class="commentlist">
-                                            <li id="li-comment-11">
-                                                <div id="comment-11" class="comment_container">
-                                                    <img alt="" src="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60">
-                                                    <div class="clearfix"></div>
-                                                    <div class="comment-text">
-                                                        <div class="star-rating" aria-label="Rated 4 out of 5">
-                                                            <span style="width:80%">Rated <strong class="rating">4</strong> out of 5</span>
-                                                            <div class="clearfix"></div>
-                                                        </div>
-                                                        <p class="meta">
-                                                            <strong class="review__author">Shufflehound </strong>
-                                                            <span class="review__dash">–</span>
-                                                            <time class="review__published-date" datetime="2020-05-10T14:02:51+01:00">May 10, 2020</time>
-                                                        </p>
-
-                                                        <div class="description">
-                                                            <p>Nice one, love it!</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
+		                                                        <div class='description'>
+		                                                            <p>".$row['comment']."</p>
+		                                                        </div>
+		                                                    </div>
+		                                                </div>
+		                                            </li>  " ;
+		                                        }
+                                            ?>
                                         </ol>
                                     </div>
 
@@ -652,7 +665,7 @@
                     <div class="about-shopmx">
                         <div class="row">
                             <div class="logo">
-                                <a href="index.html">
+                                <a href="index.php">
                                     <img src="images/Logo-header.png">
                                 </a>
                             </div>
