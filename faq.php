@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="css/themify-icons.css">
     <link rel="stylesheet" type="text/css" href="css/nice-select.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
 </head>
 
 <body>
@@ -185,28 +186,31 @@
         </section>
         <!-- End Bottom Section -->
         <!-- Start Categories Links -->
-        <nav class="categories-list">
-            <div class="container">
-                <ul>
-                    <li><a href="#" class="active-home"><strong>Toutes Les Catégories</strong></a>
-                    </li>
-                    <li><a href="#"><strong>Machines</strong></a>
-                    </li>
-                    <li><a href="#"><strong>Electronique</strong></a>
-                    </li>
-                    <li><a href="#"><strong>Electroménagie</strong></a>
-                    </li>
-                    <li><a href="#"><strong>Services & Equipements</strong></a>
-                    </li>
-                    <li><a href="#"><strong>Santé</strong></a>
-                    </li>
-                    <li><a href="#"><strong>Toys & Hobbies</strong></a>
-                    </li>
-                    <li><a href="#"><strong>Home Textiles</strong></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+            <nav class="categories-list forhide">
+                <div class="container">
+                    <ul>
+                        <li><a href="#" class="active-home"><strong>All Categories</strong></a></li>
+                        <li><a href="#"><strong>Machines</strong></a></li>
+                        <li><a href="#"><strong>Electronics</strong></a></li>
+                        <li><a href="#"><strong>Services</strong></a></li>
+                        <li><a href="#"><strong>Health</strong></a></li>
+                        <li><a href="#"><strong>Home Textiles</strong></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <nav class="categories-list mobile">
+                <div class="container">
+                    <a href="#" class="mobile-drop"><i class="fa fa-bars"></i></a>
+                    <ul class="category">
+                        <li><a href="#" class="active-home"><strong>All Categories</strong></a></li>
+                        <li><a href="#"><strong>Machines</strong></a></li>
+                        <li><a href="#"><strong>Electronics</strong></a></li>
+                        <li><a href="#"><strong>Services</strong></a></li>
+                        <li><a href="#"><strong>Health</strong></a></li>
+                        <li><a href="#"><strong>Home Textiles</strong></a></li>
+                    </ul>
+                </div>
+            </nav>
         </div>
     </header>
     <!-- End Header -->
@@ -248,31 +252,31 @@
                         </div>
                     </div>
                     <div class="set">
-                        <a href="#">Parturient mus phasellus sollicitudin molestie? <i class="fa fa-plus"></i></a>
+                        <a href="#">Parturient mus phasellus molestie? <i class="fa fa-plus"></i></a>
                         <div class="content">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi luctus semper gravida. Vestibulum dolor ex, imperdiet eget auctor sit amet, eleifend feugiat ipsum. Nulla vitae ipsum at massa dignissim convallis.</p>
                         </div>
                     </div>
                     <div class="set">
-                        <a href="#">Nostra ipsum nec aenean lacinia nostra? <i class="fa fa-plus"></i></a>
+                        <a href="#">Nostra ipsum nec aenean lacinia? <i class="fa fa-plus"></i></a>
                         <div class="content">
                             <p>Pellentesque eget justo vel risus fermentum sollicitudin.</p>
                         </div>
                     </div>
                     <div class="set">
-                        <a href="#">Dapibus aenean sociosqu pharetra et dolor nisi diam tempus? <i class="fa fa-plus"></i></a>
+                        <a href="#">Dapibus aenean sociosqu tempus? <i class="fa fa-plus"></i></a>
                         <div class="content">
                             <p>Subdue fly gathered shall so spirit living. Created form years fruitful greater all also air don’t appear they’re. Given give replenish. Over fourth him. You’re, their seas good earth that fish you’re herb fourth, male spirit heaven be, lights beast earth deep dominion thing.</p>
                         </div>
                     </div>
                     <div class="set">
-                        <a href="#">Vestibulum praesent egestas dui a diam eros? <i class="fa fa-plus"></i></a>
+                        <a href="#">Vestibulum praesent eros? <i class="fa fa-plus"></i></a>
                         <div class="content">
                             <p>Cras gravida molestie praesent lorem amet parturient cubilia non convallis, ullamcorper suspendisse, turpis sapien consectetuer netus egestas non.</p>
                         </div>
                     </div>
                     <div class="set">
-                        <a href="#">ectus sed etiam congue suspendisse? <i class="fa fa-plus"></i></a>
+                        <a href="#">ectus sed etiam congue? <i class="fa fa-plus"></i></a>
                         <div class="content">
                             <p>Adipiscing imperdiet praesent magnis habitant aliquam hendrerit condimentum eu a enim vestibulum quisque enim, vivamus Fames.</p>
                         </div>
