@@ -7,6 +7,9 @@
 		width: 100%;
 		height: auto;
 	}
+	#main-header .top-sec {
+		overflow: hidden;
+	}
 	#main-header .bottom-sec,
 	#main-header {
 		overflow-x: visible;
@@ -25,7 +28,6 @@
 	.product-details .container {
 		width: 100%!important;
 		max-width: 100%!important;
-		overflow: hidden!important;
 	}
 	#main-header .bottom-sec .containe r{
 		overflow: visible!important;
@@ -298,7 +300,7 @@
 	}
 	.nice-select {
 		padding-left: 10px;
-		font-size: 15.5px;
+		font-size: 16px;
 	}
 	form .search-bar-container .form-control {
 		max-width: 100%;
@@ -656,6 +658,23 @@
 	.user-dashboard form fieldset legend {
 		font-size: 4.5vw;
 	}
+	#main-header .bottom-sec .container .wrapper .search-bar {
+		order: 3;
+	}
+	#main-header .bottom-sec .container .wrapper .user-details {
+		order: 2;
+	}
+	#main-header .bottom-sec .container .wrapper {
+		flex-wrap: wrap !important;
+		justify-content: center;
+	}
+	#main-header .bottom-sec .container .wrapper .logo-container {
+		margin: 0;
+	}
+	#main-header .bottom-sec .container .wrapper .user-details {
+		flex: 0 0 50%;
+		max-width: 50%;
+	}
 }
 /* Small devices (Large Phones Screen)  */
 @media only screen and (max-width: 768px) {
@@ -670,6 +689,8 @@
 		flex-direction: column;
 	}
 }
+
+
 /* Extra Small devices (landscape phones) */
 @media (max-width: 480px) {
 	#main-header .bottom-sec,
