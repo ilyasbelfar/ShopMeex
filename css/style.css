@@ -1803,7 +1803,8 @@ main .day-deal .container {
     margin: 8px;
     border-bottom: 1px solid #ddd;
 }
-.posts-row .col-25 .single-shop-blog .content-post .more-btn {
+.posts-row .col-25 .single-shop-blog .content-post .more-btn,
+.product-details #tab-reviews .more-btn {
     font-size: 14px;
     font-weight: 450;
     border: 1px solid #3167eb;
@@ -1826,10 +1827,16 @@ main .day-deal .container {
     transition-duration: .2s;
     overflow: hidden;
 }
-.posts-row .col-25 .single-shop-blog .content-post .more-btn:hover {
+.product-details #tab-reviews .more-btn {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+.posts-row .col-25 .single-shop-blog .content-post .more-btn:hover,
+.product-details #tab-reviews .more-btn:hover {
     color: #fff;
 }
-.posts-row .col-25 .single-shop-blog .content-post .more-btn:before {
+.posts-row .col-25 .single-shop-blog .content-post .more-btn:before,
+.product-details #tab-reviews .more-btn:before {
     background: #3167eb;
     content: "";
     position: absolute;
@@ -1844,7 +1851,8 @@ main .day-deal .container {
     transition-duration: .2s;
     transition-timing-function: ease-out;
 }
-.posts-row .col-25 .single-shop-blog .content-post .more-btn:hover:before {
+.posts-row .col-25 .single-shop-blog .content-post .more-btn:hover:before,
+.product-details #tab-reviews .more-btn:hover:before {
     transform: scaleY(1);
 }
 .posts-row .col-25 .single-shop-blog .content-post div {
@@ -2451,7 +2459,7 @@ input[type="checkbox"] {
     display: block;
 }
 .gallery-wrap .img-big-wrap img {
-    width: auto;
+    width: 100%;
     max-width: 100%;
     display: block;
     cursor: -webkit-zoom-in;
@@ -2855,8 +2863,8 @@ table.product-attributes td {
     z-index: 50!important;
     position: relative!important;
     margin: 0!important;
-    border-bottom: 1px solid #eeeeee!important;
     margin-bottom: 15px!important;
+    border-bottom: 1px solid #eeeeee!important;
 }
 #reviews #comments ol.commentlist li.comment {
     margin: 15px!important;
