@@ -15,6 +15,7 @@
         $stmt=$db->prepare("SELECT product_id from orders  WHERE product_id=:prodid");
         $stmt->execute(['prodid'=>$product['prodid']]);
         $nborders=$stmt->rowCount();
+        //HELLO
 
         
        	$stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid");
