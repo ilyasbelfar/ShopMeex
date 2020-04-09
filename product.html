@@ -2,10 +2,6 @@
     include "includes/session.php"
 ?>
 
-
-
-
-
 <!DOCTYPE html>
 <html>
 
@@ -25,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="css/nice-select.css">
     <link rel="stylesheet" type="text/css" href="css/lightcase.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
 </head>
 
 <body>
@@ -209,16 +206,27 @@
             <!-- End Bottom Section -->
 
             <!-- Start Categories Links -->
-            <nav class="categories-list">
+            <nav class="categories-list forhide">
                 <div class="container">
                     <ul>
-                        <li><a href="#" class="active-home"><strong>Toutes Les Catégories</strong></a></li>
+                        <li><a href="#" class="active-home"><strong>All Categories</strong></a></li>
                         <li><a href="#"><strong>Machines</strong></a></li>
-                        <li><a href="#"><strong>Electronique</strong></a></li>
-                        <li><a href="#"><strong>Electroménagie</strong></a></li>
-                        <li><a href="#"><strong>Services & Equipements</strong></a></li>
-                        <li><a href="#"><strong>Santé</strong></a></li>
-                        <li><a href="#"><strong>Toys & Hobbies</strong></a></li>
+                        <li><a href="#"><strong>Electronics</strong></a></li>
+                        <li><a href="#"><strong>Services</strong></a></li>
+                        <li><a href="#"><strong>Health</strong></a></li>
+                        <li><a href="#"><strong>Home Textiles</strong></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <nav class="categories-list mobile">
+                <div class="container">
+                    <a href="#" class="mobile-drop"><i class="fa fa-bars"></i></a>
+                    <ul class="category">
+                        <li><a href="#" class="active-home"><strong>All Categories</strong></a></li>
+                        <li><a href="#"><strong>Machines</strong></a></li>
+                        <li><a href="#"><strong>Electronics</strong></a></li>
+                        <li><a href="#"><strong>Services</strong></a></li>
+                        <li><a href="#"><strong>Health</strong></a></li>
                         <li><a href="#"><strong>Home Textiles</strong></a></li>
                     </ul>
                 </div>
@@ -356,7 +364,7 @@
                                     <a href="#tab-additional_information">Additional information</a>
                                 </li>
                                 <li class="reviews_tab">
-                                    <a href="#tab-reviews">Reviews (1)</a>
+                                    <a href="#tab-reviews">Reviews (10)</a>
                                 </li>
                             </ul>
                             <div class="paneltbs panel-1" id="tab-description">
@@ -383,7 +391,7 @@
                             <div class="paneltbs panel-3" id="tab-reviews" style="display: none;">
                                 <div id="reviews" class="product-reviews">
                                     <div id="comments">
-                                        <h2 class="reviews-title">1 review for <span>Fantasy t-shirt</span></h2>
+                                        <h2 class="reviews-title">10 review for <span>Fantasy t-shirt</span></h2>
 
                                         <ol class="commentlist">
                                             <li id="li-comment-11">
@@ -407,8 +415,199 @@
                                                     </div>
                                                 </div>
                                             </li>
+                                            <li id="li-comment-11">
+                                                <div id="comment-11" class="comment_container">
+                                                    <img alt="" src="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60">
+                                                    <div class="clearfix"></div>
+                                                    <div class="comment-text">
+                                                        <div class="star-rating" aria-label="Rated 4 out of 5">
+                                                            <span style="width:80%">Rated <strong class="rating">4</strong> out of 5</span>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <p class="meta">
+                                                            <strong class="review__author">Shufflehound </strong>
+                                                            <span class="review__dash">–</span>
+                                                            <time class="review__published-date" datetime="2020-05-10T14:02:51+01:00">May 10, 2020</time>
+                                                        </p>
+
+                                                        <div class="description">
+                                                            <p>Magna ac placerat vestibulum lectus mauris ultrices eros in cursus!</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="li-comment-11">
+                                                <div id="comment-11" class="comment_container">
+                                                    <img alt="" src="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60">
+                                                    <div class="clearfix"></div>
+                                                    <div class="comment-text">
+                                                        <div class="star-rating" aria-label="Rated 4 out of 5">
+                                                            <span style="width:80%">Rated <strong class="rating">4</strong> out of 5</span>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <p class="meta">
+                                                            <strong class="review__author">Shufflehound </strong>
+                                                            <span class="review__dash">–</span>
+                                                            <time class="review__published-date" datetime="2020-05-10T14:02:51+01:00">May 10, 2020</time>
+                                                        </p>
+
+                                                        <div class="description">
+                                                            <p>Hac habitasse platea dictumst vestibulum rhoncus.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="li-comment-11">
+                                                <div id="comment-11" class="comment_container">
+                                                    <img alt="" src="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60">
+                                                    <div class="clearfix"></div>
+                                                    <div class="comment-text">
+                                                        <div class="star-rating" aria-label="Rated 4 out of 5">
+                                                            <span style="width:80%">Rated <strong class="rating">4</strong> out of 5</span>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <p class="meta">
+                                                            <strong class="review__author">Shufflehound </strong>
+                                                            <span class="review__dash">–</span>
+                                                            <time class="review__published-date" datetime="2020-05-10T14:02:51+01:00">May 10, 2020</time>
+                                                        </p>
+
+                                                        <div class="description">
+                                                            <p>Velit ut tortor pretium viverra suspendisse potenti nullam ac.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="li-comment-11">
+                                                <div id="comment-11" class="comment_container">
+                                                    <img alt="" src="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60">
+                                                    <div class="clearfix"></div>
+                                                    <div class="comment-text">
+                                                        <div class="star-rating" aria-label="Rated 4 out of 5">
+                                                            <span style="width:80%">Rated <strong class="rating">4</strong> out of 5</span>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <p class="meta">
+                                                            <strong class="review__author">Shufflehound </strong>
+                                                            <span class="review__dash">–</span>
+                                                            <time class="review__published-date" datetime="2020-05-10T14:02:51+01:00">May 10, 2020</time>
+                                                        </p>
+
+                                                        <div class="description">
+                                                            <p>Velit ut tortor pretium viverra suspendisse potenti nullam ac.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="li-comment-11">
+                                                <div id="comment-11" class="comment_container">
+                                                    <img alt="" src="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60">
+                                                    <div class="clearfix"></div>
+                                                    <div class="comment-text">
+                                                        <div class="star-rating" aria-label="Rated 4 out of 5">
+                                                            <span style="width:80%">Rated <strong class="rating">4</strong> out of 5</span>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <p class="meta">
+                                                            <strong class="review__author">Shufflehound </strong>
+                                                            <span class="review__dash">–</span>
+                                                            <time class="review__published-date" datetime="2020-05-10T14:02:51+01:00">May 10, 2020</time>
+                                                        </p>
+
+                                                        <div class="description">
+                                                            <p>Velit ut tortor pretium viverra suspendisse potenti nullam ac.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="li-comment-11">
+                                                <div id="comment-11" class="comment_container">
+                                                    <img alt="" src="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60">
+                                                    <div class="clearfix"></div>
+                                                    <div class="comment-text">
+                                                        <div class="star-rating" aria-label="Rated 4 out of 5">
+                                                            <span style="width:80%">Rated <strong class="rating">4</strong> out of 5</span>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <p class="meta">
+                                                            <strong class="review__author">Shufflehound </strong>
+                                                            <span class="review__dash">–</span>
+                                                            <time class="review__published-date" datetime="2020-05-10T14:02:51+01:00">May 10, 2020</time>
+                                                        </p>
+
+                                                        <div class="description">
+                                                            <p>Velit ut tortor pretium viverra suspendisse potenti nullam ac.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="li-comment-11">
+                                                <div id="comment-11" class="comment_container">
+                                                    <img alt="" src="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60">
+                                                    <div class="clearfix"></div>
+                                                    <div class="comment-text">
+                                                        <div class="star-rating" aria-label="Rated 4 out of 5">
+                                                            <span style="width:80%">Rated <strong class="rating">4</strong> out of 5</span>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <p class="meta">
+                                                            <strong class="review__author">Shufflehound </strong>
+                                                            <span class="review__dash">–</span>
+                                                            <time class="review__published-date" datetime="2020-05-10T14:02:51+01:00">May 10, 2020</time>
+                                                        </p>
+
+                                                        <div class="description">
+                                                            <p>Velit ut tortor pretium viverra suspendisse potenti nullam ac.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="li-comment-11">
+                                                <div id="comment-11" class="comment_container">
+                                                    <img alt="" src="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60">
+                                                    <div class="clearfix"></div>
+                                                    <div class="comment-text">
+                                                        <div class="star-rating" aria-label="Rated 4 out of 5">
+                                                            <span style="width:80%">Rated <strong class="rating">4</strong> out of 5</span>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <p class="meta">
+                                                            <strong class="review__author">Shufflehound </strong>
+                                                            <span class="review__dash">–</span>
+                                                            <time class="review__published-date" datetime="2020-05-10T14:02:51+01:00">May 10, 2020</time>
+                                                        </p>
+
+                                                        <div class="description">
+                                                            <p>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li id="li-comment-11">
+                                                <div id="comment-11" class="comment_container">
+                                                    <img alt="" src="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/8ca3fe8440883023010924dd86cb3218?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60">
+                                                    <div class="clearfix"></div>
+                                                    <div class="comment-text">
+                                                        <div class="star-rating" aria-label="Rated 4 out of 5">
+                                                            <span style="width:80%">Rated <strong class="rating">4</strong> out of 5</span>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <p class="meta">
+                                                            <strong class="review__author">Shufflehound </strong>
+                                                            <span class="review__dash">–</span>
+                                                            <time class="review__published-date" datetime="2020-05-10T14:02:51+01:00">May 10, 2020</time>
+                                                        </p>
+
+                                                        <div class="description">
+                                                            <p>Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
                                         </ol>
                                     </div>
+
+                                    <a href="#" id="collapseBtn" class="more-btn">See More Reviews</a>
 
                                     <div id="review_form_wrapper">
                                         <div id="review_form">
