@@ -62,9 +62,13 @@
     background-color: #3167eb;
     color: #fff;
 }
-html,
-    #main-header .top-sec {
+html, body {
         overflow-x: hidden;
+        width: 100%;
+        height: auto;
+    }
+    #main-header .top-sec  {
+        overflow: hidden;
     }
     #main-header .bottom-sec,
     #main-header {
