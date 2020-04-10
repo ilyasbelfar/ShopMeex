@@ -3,7 +3,18 @@
     //$slug=$_GET['products'];
     $slug='large-dell-inspiron-15-5000-15-6';
 
+
+
+
+
+
+    
+
     try{          
+
+	  
+	    
+    	//getting product from database
         $stmt = $db->prepare("SELECT *, products.name AS prodname, category.name AS catname, products.id AS prodid FROM products LEFT JOIN category ON category.id=products.category_id WHERE products.slug = :slug");
         $stmt->execute(['slug' => $slug]);//id product;
         if ($stmt->rowCount()==0) {
@@ -12,20 +23,47 @@
         }
         $product = $stmt->fetch();
 
+        //getting the number of orders for this porudct
         $stmt=$db->prepare("SELECT product_id from orders  WHERE product_id=:prodid");
         $stmt->execute(['prodid'=>$product['prodid']]);
         $nborders=$stmt->rowCount();
         
 
-        
-       	$stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid limit 4 ");
+        // getting the review and the number of review from databse 
+       	$stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid limit 10 ");
         $stmt->execute(['prodid'=>$product['prodid']]);
 		$reviews = $stmt->fetchAll();
 		$nbreview= $stmt->rowCount();// return the number of ligne in table resulted;
 
+		//getting the owner of the prodct from the data base
 		$stmt=$db->prepare("SELECT * FROM users Where id=:owner");
 		$stmt->execute(['owner'=>$product['owner_id']]);
 		$owner=$stmt->fetch();
+
+		//upadating the counter 
+		$now = date('Y-m-d');
+	    if($product['date_view'] == $now){
+	        $stmt = $db->prepare("UPDATE products SET counter=counter+1 WHERE id=:id");
+	        $stmt->execute(['id'=>$product['prodid']]);
+	    }
+	    else{
+	        $stmt = $db->prepare("UPDATE products SET counter=1, date_view=:now WHERE id=:id");
+	        $stmt->execute(['id'=>$product['prodid'], 'now'=>$now]);
+	    }
+
+
+	    // creating the review in database
+		if ($_SERVER['REQUEST_METHOD']=='POST'){
+	    	$rating=$_POST['rating'];
+	    	$comment=$_POST['comment'];
+	    	$userid=$_SESSION['id'];
+	    	$productid=$product['prodid'];
+
+	    	$sql="insert into review (rating,comment,user_id,date,product_id) values(?,?,?,?,?)";
+	    	$stmt=$db->prepare($sql);
+	    	$stmt->execute(array($rating,$comment,$userid,$now,$productid));
+	    }
+
 
 
     }
@@ -34,15 +72,7 @@
     }
 
     //page_view; most view page in the current day.
-    $now = date('Y-m-d');
-    if($product['date_view'] == $now){
-        $stmt = $db->prepare("UPDATE products SET counter=counter+1 WHERE id=:id");
-        $stmt->execute(['id'=>$product['prodid']]);
-    }
-    else{
-        $stmt = $db->prepare("UPDATE products SET counter=1, date_view=:now WHERE id=:id");
-        $stmt->execute(['id'=>$product['prodid'], 'now'=>$now]);
-    }
+   
 ?>
 
 
@@ -362,7 +392,7 @@
                                 <dd class="col-dt"><?php echo $product['model'] ?></dd>
 
                                 <dt class="col-dd">Color</dt>
-                                <dd class="col-dt">Brown</dd>
+                                <dd class="col-dt"><?php echo $product['colors'] ?></dd>
 
                               <?php if (!$owner['firstname']=="") echo "<dt class='col-dd'>by</dt>
                                 <dd class='col-dt'>".$owner['firstname']." ".$owner['lastname']." </dd>";?>
@@ -436,11 +466,11 @@
                                     <tbody>
                                         <tr class="product-attributes-item-weight">
                                             <th class="product-attributes-item__label">Weight</th>
-                                            <td class="product-attributes-item__value">0.3 kg</td>
+                                            <td class="product-attributes-item__value"><?php echo $product['weight'] ?> kg</td>
                                         </tr>
                                         <tr class="product-attributes-item-dimensions">
                                             <th class="product-attributes-item__label">Dimensions</th>
-                                            <td class="product-attributes-item__value">50 × 60 cm</td>
+                                            <td class="product-attributes-item__value"><?php echo $product['dimensions'] ?> cm</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -482,49 +512,48 @@
                                     </div>
 
                                     <div id="review_form_wrapper">
-                                        <div id="review_form">
-                                            <div id="respond" class="comment-respond">
-                                                <span id="reply-title" class="comment-reply-title">Add a review</span>
-                                                <form action="#" method="post" id="commentform" class="comment-form" novalidate="">
-                                                    <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>
-                                                    <div class="comment-form-rating">
-                                                        <label for="rating">Your rating</label>
-                                                        <p class="stars">
+                                    	<?php
+                                    	if (isset($_SESSION['id'])) {
+                                    	 echo "
+                                        <div id='review_form'>
+                                            <div id='respond' class='comment-respond'>
+                                                <span id='reply-title' class='comment-reply-title'>Add a review</span>
+                                                <form action=".htmlspecialchars($_SERVER["PHP_SELF"])." method='post' id='commentform' class='comment-form' novalidate=''>
+                                                    <p class='comment-notes'><span id='email-notes'>Your email address will not be published.</span> Required fields are marked <span class='required'>*</span></p>
+                                                    <div class='comment-form-rating'>
+                                                        <label for='rating'>Your rating</label>
+                                                        <p class='stars'>
                                                             <span>
-                                                            		<a class="star-1" href="#">1</a>
-                                                            		<a class="star-2" href="#">2</a>
-                                                            		<a class="star-3" href="#">3</a>
-                                                            		<a class="star-4" href="#">4</a>
-                                                            		<a class="star-5" href="#">5</a>
+                                                            		<a class='star-1' href='#'>1</a>
+                                                            		<a class='star-2' href='#''>2</a>
+                                                            		<a class='star-3' href='#''>3</a>
+                                                            		<a class='star-4' href='#'>4</a>
+                                                            		<a class='star-5' href='#'>5</a>
                                                             </span>
                                                         </p>
-                                                        <select name="rating" id="rating" required="" style="display: none;">
-                                                            <option value="">Rate…</option>
-                                                            <option value="5">Perfect</option>
-                                                            <option value="4">Good</option>
-                                                            <option value="3">Average</option>
-                                                            <option value="2">Not that bad</option>
-                                                            <option value="1">Very poor</option>
+                                                        <select name='rating' id='rating' required='' style='display: none;''>
+                                                            <option value=''>Rate…</option>
+                                                            <option value='5'>Perfect</option>
+                                                            <option value='4'>Good</option>
+                                                            <option value='3'>Average</option>
+                                                            <option value='2'>Not that bad</option>
+                                                            <option value='1'>Very poor</option>
                                                         </select>
                                                     </div>
-                                                    <p class="comment-form-comment">
-                                                        <label for="comment">Your review&nbsp;<span class="required">*</span></label>
-                                                        <textarea id="comment" name="comment" cols="45" rows="8" required=""></textarea>
+                                                    <p class='comment-form-comment'>
+                                                        <label for='comment'>Your review&nbsp;<span class='required'>*</span></label>
+                                                        <textarea id='comment' name='comment' cols='45' rows='8' required=''></textarea>
                                                     </p>
-                                                    <p class="comment-form-author">
-                                                        <label for="author">Name&nbsp;<span class="required">*</span></label>
-                                                        <input id="author" name="author" type="text" value="" size="30" required="">
-                                                    </p>
-                                                    <p class="comment-form-email">
-                                                        <label for="email">Email&nbsp;<span class="required">*</span></label>
-                                                        <input id="email" name="email" type="email" value="" size="30" required="">
-                                                    </p>
-                                                    <p class="form-submit">
-                                                        <input name="submit" type="submit" id="submit" class="submit" value="Submit">
+                                                    
+                                                   
+                                                    <p class='form-submit'>
+                                                        <input name='submit' type='submit' id='submit' class='submit' value='Submit'>
                                                     </p>
                                                 </form>
                                             </div>
-                                        </div>
+                                        </div>"; }
+                                        else { echo "login or sign up to write review"; }
+                                        ?>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
