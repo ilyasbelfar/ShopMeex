@@ -15,7 +15,8 @@
 	  
 	    
     	//getting product from database
-        $stmt = $db->prepare("SELECT *, products.name AS prodname, category.name AS catname, products.id AS prodid FROM products LEFT JOIN category ON category.id=products.category_id WHERE products.slug = :slug");
+        $stmt = $db->prepare("SELECT *, products.name AS prodname, category.name AS catname, products.id AS prodid,
+        category.id as catid FROM products LEFT JOIN category ON category.id=products.category_id WHERE products.slug = :slug");
         $stmt->execute(['slug' => $slug]);//id product;
         if ($stmt->rowCount()==0) {
             echo '404';
@@ -29,11 +30,29 @@
         $nborders=$stmt->rowCount();
         
 
-        // getting the review and the number of review from databse 
-       	$stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid limit 10 ");
+        // getting the reviews
+       	$stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid limit 4 ");
         $stmt->execute(['prodid'=>$product['prodid']]);
 		$reviews = $stmt->fetchAll();
+
+        //getting total number of reviews
+        $stmt=$db->prepare("SELECT * from review WHERE product_id=:prodid  ");
+        $stmt->execute(['prodid'=>$product['prodid']]);
 		$nbreview= $stmt->rowCount();// return the number of ligne in table resulted;
+
+        //getting the total review for the product ;
+        $sum=0;
+        foreach ($stmt as $row){
+            $sum+=$row['rating'];
+        }
+        if ($nbreview!=0) {
+            $total_rating =intval($sum/$nbreview);
+        }
+        else {
+            $total_rating=0;
+        }
+        $stmt=$db->prepare("UPDATE products SET total_rating=:totalra WHERE id=:id");
+        $stmt->execute(['totalra'=>$total_rating,'id'=>$product['prodid']]);
 
 		//getting the owner of the prodct from the data base
 		$stmt=$db->prepare("SELECT * FROM users Where id=:owner");
@@ -59,10 +78,13 @@
 	    	$userid=$_SESSION['id'];
 	    	$productid=$product['prodid'];
 
-	    	$sql="insert into review (rating,comment,user_id,date,product_id) values(?,?,?,?,?)";
-	    	$stmt=$db->prepare($sql);
-	    	$stmt->execute(array($rating,$comment,$userid,$now,$productid));
+	    	$stmt=$db->prepare("insert into review (rating,comment,user_id,date,product_id) values(?,?,?,?,?)");
+	    	$stmt->execute([$rating,$comment,$userid,$now,$productid]);
 	    }
+        // getting related product 
+        $stmt=$db->prepare("SELECT * from products where category_id=:catid  EXCEPT SELECT * FROM products where id=:prodid");
+        $stmt->execute(['catid'=>$product['catid'],'prodid'=>$product['prodid']]);
+        $relatedproducts= $stmt->fetchAll();
 
 
 
@@ -71,7 +93,7 @@
         echo "There is some problem in connection: " . $e->getMessage();
     }
 
-    //page_view; most view page in the current day.
+    
    
 ?>
 
@@ -364,10 +386,11 @@
                             <div class="seperator-line"></div>
                             <div class="rating-wrap">
                                 <ul class="rating-stars">
-                                    <li style="width:80%" class="stars-active">
-                                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
+                                    <li style="width:80%" class="stars-active"><?php
+                                        for ($i=1;$i<=$product['total_rating'];$i++){
+                                                echo "<i class='fa fa-star'></i>\n";
+                                            }
+                                            ?>
                                     </li>
                                     <li>
                                         <i class="fa fa-star"></i> <i class="fa fa-star"></i>
@@ -563,113 +586,66 @@
                 </div>
                 <section class="related-products">
                     <h2>Related products</h2>
+                    
                     <div class="related-wrapper">
-                        <div class="tab-col">
-                            <div class="single-product">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="images/items/item1.jpg">
-                                        <img class="hover-default" src="images/items/item1.jpg">
+                    <?php 
+                    foreach($relatedproducts as $row) {
+                      echo "<div class='tab-col'>
+                            <div class='single-product'>
+                                <div class='product-img'>
+                                    <a href='#'>
+                                        <img src='images/items/".$row['photo']."'>
+                                        <img class='hover-default' src='images/items/".$row['photo']."'>
                                     </a>
-                                    <div class="button-head">
-                                        <div class="product-action">
-                                            <a href="#">
-                                                <i class="ti-eye"></i>
+                                    <div class='button-head'>
+                                        <div class='product-action'>
+                                            <a href='#'>
+                                                <i class='ti-eye'></i>
                                                 <span>Quick View</span>
                                             </a>
-                                            <a href="#">
-                                                <i class="ti-heart "></i>
+                                            <a href='#'>
+                                                <i class='ti-heart '></i>
                                                 <span>Add To Wishlist</span>
                                             </a>
-                                            <a href="#">
-                                                <i class="ti-bar-chart-alt"></i>
+                                            <a href='#'>
+                                                <i class='ti-bar-chart-alt'></i>
                                                 <span>Add To Compare</span>
                                             </a>
                                         </div>
-                                        <div class="product-action-2">
-                                            <a href="#" title="Add To Cart">Add To Cart<i class="fa fa-shopping-cart"></i></a>
+                                        <div class='product-action-2'>
+                                            <a href='#' title='Add To Cart'>Add To Cart<i class='fa fa-shopping-cart'></i></a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="product-content">
+                                <div class='product-content'>
                                     <h3>
-																		<a href="#">Man Hot Collection</a>
+									<a href='#'>".$row['name']."</a>
 																	</h3>
-                                    <div class="product-price-rating">
-                                        <span title="Price">$29.00</span>
-                                        <ul title="Rating">
-                                            <li class="stars-active">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
+                                    <div class='product-price-rating'>
+                                        <span title='Price'>$".$row['price']."</span>
+                                        <ul title='Rating'>
+                                            <li class='stars-active'>";
+
+                                            for ($i=1;$i<=$row['total_rating'];$i++){
+                                                echo "<i class='fa fa-star'></i>\n";
+                                            }
+                                                
+
+                                            echo "</li>
                                             <li>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-col">
-                            <div class="single-product">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="images/items/item1.jpg">
-                                        <img class="hover-default" src="images/items/item1.jpg">
-                                    </a>
-                                    <div class="button-head">
-                                        <div class="product-action">
-                                            <a href="#">
-                                                <i class="ti-eye"></i>
-                                                <span>Quick View</span>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-heart "></i>
-                                                <span>Add To Wishlist</span>
-                                            </a>
-                                            <a href="#">
-                                                <i class="ti-bar-chart-alt"></i>
-                                                <span>Add To Compare</span>
-                                            </a>
-                                        </div>
-                                        <div class="product-action-2">
-                                            <a href="#" title="Add To Cart">Add To Cart<i class="fa fa-shopping-cart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3>
-																		<a href="#">Man Hot Collection</a>
-																	</h3>
-                                    <div class="product-price-rating">
-                                        <span title="Price">$29.00</span>
-                                        <ul title="Rating">
-                                            <li class="stars-active">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </div>" ;  }
+                        ?>
+                      
                     </div>
                 </section>
             </div>
