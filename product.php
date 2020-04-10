@@ -31,7 +31,7 @@
         
 
         // getting the reviews
-       	$stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid limit 4 ");
+       	$stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid limit 10 ");
         $stmt->execute(['prodid'=>$product['prodid']]);
 		$reviews = $stmt->fetchAll();
 
@@ -82,7 +82,7 @@
 	    	$stmt->execute([$rating,$comment,$userid,$now,$productid]);
 	    }
         // getting related product 
-        $stmt=$db->prepare("SELECT * from products where category_id=:catid  EXCEPT SELECT * FROM products where id=:prodid");
+        $stmt=$db->prepare("SELECT * from products where category_id=:catid  EXCEPT SELECT * FROM products where id=:prodid limit 8 ");
         $stmt->execute(['catid'=>$product['catid'],'prodid'=>$product['prodid']]);
         $relatedproducts= $stmt->fetchAll();
 
@@ -407,7 +407,7 @@
                                 <var class="price h4"><?php echo '$'.$product['price']; ?></var>
                             </div>
                             <div class="seperator-line"></div>
-
+                            <h3>Description </h3><br>
                             <p class="product-description"><?php echo $product['description']; ?></p>
 
                             <dl class="row">

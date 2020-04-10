@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2020 at 06:16 PM
+-- Generation Time: Apr 10, 2020 at 11:07 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -105,9 +105,15 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `weight`, `dimensions`, `price`, `slug`, `colors`, `owner_id`, `model`, `photo`, `photo1`, `photo2`, `date_view`, `counter`, `total_rating`) VALUES
-(1, 1, 'laptop', 'one of the best product in the world Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, fa', 0.6, '70 x 60', 200, 'large-dell-inspiron-15-5000-15-6', 'black ,red and green', 4, 'dell pavilion 15', '12.jpg', '12-1.jpg', '', '2020-04-10', 218, 3),
-(2, 1, 'mouse', 'one of the beset mouse in the world', 0.1, '20 x 30', 400, 'mouse', 'red, grey  and blue', 4, 'mouse l-120', 'Photo1.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-04-22', 0, 2),
-(3, 1, 'smart watch', 'one of the best product in teh world', 0.1, '12 x 13', 1200, 'smart-watch', 'red', 4, 'watch-120-M', '7.jpg', '', '', '2020-04-14', 0, 4);
+(1, 1, 'laptop from dell compny ', 'one of the best product in the world Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, fa', 0.6, '70 x 60', 200, 'large-dell-inspiron-15-5000-15-6', 'Black White', 4, 'dell pavilion 15', 'dell (1).jpg', 'dell (3).jpg', '12-1.jpg', '2020-04-10', 243, 3),
+(2, 1, 'mouse', 'one of the beset mouse in the world', 0.1, '20 x 30', 400, 'mouse', 'red grey', 4, 'mouse l-120', 'Photo1.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-04-22', 0, 2),
+(3, 1, 'smart watch', 'one of the best product in teh world', 0.1, '12 x 13', 1200, 'smart-watch', 'red', 4, 'watch-120-M', '7.jpg', '', '', '2020-04-14', 0, 4),
+(4, 1, 'thered', '', 0, '', 13, '', '', 0, '', 'Photo2.jpg', '', '', '0000-00-00', 0, 3),
+(5, 1, 'the blue', '', 0, '', 13, '', '', 0, '', 'Photo1.jpg', '', '', '0000-00-00', 0, 1),
+(6, 1, 'pill', 'ome', 0, '', 13, '', '', 0, '', '9.jpg', '', '', '0000-00-00', 0, 1),
+(7, 1, 'watch', '', 0, '', 13, '', '', 0, '', '8.jpg', '', '', '0000-00-00', 0, 0),
+(8, 1, 'bimo', '', 0, '', 700, '', '', 0, '', '10.jpg', '', '', '0000-00-00', 0, 5),
+(9, 1, 'Safina', '', 0, '', 1200, '', '', 0, '', '11.jpg', '', '', '0000-00-00', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -261,7 +267,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `review`
