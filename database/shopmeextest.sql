@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2020 at 08:57 PM
+-- Generation Time: Apr 10, 2020 at 02:26 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -46,6 +46,13 @@ CREATE TABLE `category` (
   `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(1, 'laptop-category');
+
 -- --------------------------------------------------------
 
 --
@@ -59,6 +66,14 @@ CREATE TABLE `orders` (
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `product_id`, `quantity`) VALUES
+(1, 1, 1, 2),
+(2, 2, 1, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -71,8 +86,13 @@ CREATE TABLE `products` (
   `name` text NOT NULL,
   `description` text NOT NULL,
   `price` double NOT NULL,
-  `photo` varchar(200) NOT NULL,
   `slug` varchar(200) NOT NULL,
+  `colors` varchar(50) NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `model` varchar(50) NOT NULL,
+  `photo` varchar(200) NOT NULL,
+  `photo1` varchar(200) NOT NULL,
+  `photo2` varchar(200) NOT NULL,
   `date_view` date NOT NULL,
   `counter` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -81,8 +101,8 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `price`, `photo`, `slug`, `date_view`, `counter`) VALUES
-(1, 2, 'laptop', 'one of the best product in the world', 200, 'large-dell-inspiron-15-5000-15-6.jpg', 'large-dell-inspiron-15-5000-15-6', '2020-04-08', 65);
+INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `price`, `slug`, `colors`, `owner_id`, `model`, `photo`, `photo1`, `photo2`, `date_view`, `counter`) VALUES
+(1, 1, 'laptop', 'one of the best product in the world Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.', 200, 'large-dell-inspiron-15-5000-15-6', 'black ,red ,green', 4, 'dell pavilion 15', '12.jpg', '12-1.jpg', '', '2020-04-10', 60);
 
 -- --------------------------------------------------------
 
@@ -104,7 +124,9 @@ CREATE TABLE `review` (
 --
 
 INSERT INTO `review` (`id`, `product_id`, `user_id`, `rating`, `date`, `comment`) VALUES
-(1, 1, 1, 3, '0000-00-00', 'I like product that shomeex provide;');
+(1, 1, 1, 3, '2020-04-13', 'I like product that shomeex provide;'),
+(2, 1, 2, 4, '2020-04-01', 'this is the best product int hte world'),
+(3, 1, 3, 1, '2020-03-24', 'my mom bought this product ');
 
 -- --------------------------------------------------------
 
@@ -130,7 +152,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `type`, `firstname`, `lastname`, `gender`, `address`, `contact_info`, `photo`) VALUES
-(1, 'red@red.com', '11e0bb710744b9bd55a358fc6263f1eb77cdbe40', 4, 'thered', 'man', 0, 'red', '', '');
+(1, 'red@red.com', '11e0bb710744b9bd55a358fc6263f1eb77cdbe40', 4, 'thered', 'man', 0, 'red', '', 'profile.jpg'),
+(2, 'batata@gmail.com', '0f2f448a98c1730fd60e80cb9a89028026d94eff', 3, 'batat', 'ba', 0, 'batat', '', 'profile.jpg'),
+(3, 'hamza@hamza.com', '5ed6d69249a73a3cfeedeffd33ee6e497c8047b5', 3, 'hamza', 'ham', 0, 'haza', '', 'profile.jpg'),
+(4, 'dell@dell.com', 'password', 2, 'dell', 'for computers', 0, 'usa ', '+213254612', '');
 
 -- --------------------------------------------------------
 
@@ -204,13 +229,13 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -222,13 +247,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
