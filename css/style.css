@@ -52,9 +52,7 @@
     webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-}
-*:not([class^="fa"]) {
-  font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 ::selection{
     background-color: #3167eb;
@@ -64,9 +62,13 @@
     background-color: #3167eb;
     color: #fff;
 }
-html,
-    #main-header .top-sec {
+html, body {
         overflow-x: hidden;
+        width: 100%;
+        height: auto;
+    }
+    #main-header .top-sec  {
+        overflow: hidden;
     }
     #main-header .bottom-sec,
     #main-header {
@@ -879,6 +881,7 @@ main .section-main .container .wrapper {
     align-items: center;
     margin-right: -10px;
     margin-left: -10px;
+    padding: 1rem 4rem;
     overflow-x: hidden;
 }
 main .section-main .container .wrapper .side-cat {
