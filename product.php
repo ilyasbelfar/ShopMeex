@@ -31,13 +31,12 @@
         
 
         // getting the reviews
-       	$stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid limit 10 ");
+       	$stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid  ");
         $stmt->execute(['prodid'=>$product['prodid']]);
 		$reviews = $stmt->fetchAll();
 
         //getting total number of reviews
-        $stmt=$db->prepare("SELECT * from review WHERE product_id=:prodid  ");
-        $stmt->execute(['prodid'=>$product['prodid']]);
+        
 		$nbreview= $stmt->rowCount();// return the number of ligne in table resulted;
 
         //getting the total review for the product ;
@@ -467,7 +466,7 @@
                         <div class="tabs-wrapper">
                             <ul class="tabs">
                                 <li class="description_tab active">
-                                    <a href="#tab-description">contact the seller</a>
+                                    <a href="#tab-description">about the vendor</a>
                                 </li>
                                 <li class="additional_information_tab">
                                     <a href="#tab-additional_information">Additional information</a>
@@ -477,7 +476,9 @@
                                 </li>
                             </ul>
                             <div class="paneltbs panel-1" id="tab-description">
-                                <h3>about the seller</h3>
+                                <h4>Brief History</h4>
+                                <p>dell for comptuer is very know for its top class product and we are proud to ber here around </p>
+                                <h4>Contact</h4>
                                 <p><strong>phone number: </strong><?php echo $owner['contact_info']; ?></p>
                                 <p><strong>email: </strong><?php echo $owner['email']; ?></p>
                                 <p><strong>website: </strong>www.wk.com</p>
@@ -533,6 +534,9 @@
                                             ?>
                                         </ol>
                                     </div>
+                                    <a href="#" id="collapseBtn" class="more-btn">See More Reviews</a>
+
+                                    
 
                                     <div id="review_form_wrapper">
                                     	<?php
