@@ -2,7 +2,7 @@
     include "includes/session.php";
     //$slug=$_GET['products'];
     $slug='large-dell-inspiron-15-5000-15-6';
-//hello
+
     try{          
         $stmt = $db->prepare("SELECT *, products.name AS prodname, category.name AS catname, products.id AS prodid FROM products LEFT JOIN category ON category.id=products.category_id WHERE products.slug = :slug");
         $stmt->execute(['slug' => $slug]);//id product;
@@ -15,14 +15,17 @@
         $stmt=$db->prepare("SELECT product_id from orders  WHERE product_id=:prodid");
         $stmt->execute(['prodid'=>$product['prodid']]);
         $nborders=$stmt->rowCount();
-        //HELLO
+        
 
         
-       	$stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid");
+       	$stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid limit 4 ");
         $stmt->execute(['prodid'=>$product['prodid']]);
 		$reviews = $stmt->fetchAll();
+		$nbreview= $stmt->rowCount();// return the number of ligne in table resulted;
 
-        $nbreview= $stmt->rowCount();// return the number of ligne in table resulted;
+		$stmt=$db->prepare("SELECT * FROM users Where id=:owner");
+		$stmt->execute(['owner'=>$product['owner_id']]);
+		$owner=$stmt->fetch();
 
 
     }
@@ -304,17 +307,24 @@
                         <article class="gallery-wrap">
                             <div class="img-big-wrap">
                                 <div>
-                                    <a href="images/items/12.jpg" data-rel="lightcase">
-                                        <img src="images/items/12.jpg">
+                                    <a  <?php echo "href='images/items/".$product['photo']."'"?> data-rel="lightcase">
+                                        <img <?php echo "src='images/items/".$product['photo']."'"?>>
                                 </div>
                             </div>
                             <div class="thumbs-wrap">
-                                <a href="images/items/12.jpg" data-lc-caption="Fantasy t-shirt Model N°1" data-rel="lightcase:myCollection" class="item-thumb">
-                                    <img src="images/items/12.jpg">
-                                </a>
-                                <a href="images/items/12-1.jpg" data-lc-caption="Fantasy t-shirt Model N°2" data-rel="lightcase:myCollection" class="item-thumb">
-                                    <img src="images/items/12-1.jpg">
-                                </a>
+                            <?php
+                               if (!($product['photo1']=="")) { echo "
+                                <a href='images/items/".$product['photo1']."' data-lc-caption='Fantasy t-shirt Model N°2' data-rel='lightcase:myCollection' class='item-thumb'>
+                                    <img src='images/items/".$product['photo1']."'>
+                                
+                                </a>";
+                            }
+                              if (!($product['photo2']=="")) { echo "
+                                <a href='images/items/".$product['photo2']."' data-lc-caption='Fantasy t-shirt Model N°2' data-rel='lightcase:myCollection' class='item-thumb'>
+                                    <img src='images/items/".$product['photo2']."'>
+                                
+                                </a>";
+                            }?>
                             </div>
                         </article>
                     </div>
@@ -348,14 +358,14 @@
                             <p class="product-description"><?php echo $product['description']; ?></p>
 
                             <dl class="row">
-                                <dt class="col-dd">Model#</dt>
-                                <dd class="col-dt">Odsy-1000</dd>
+                                <dt class="col-dd">Model</dt>
+                                <dd class="col-dt"><?php echo $product['model'] ?></dd>
 
                                 <dt class="col-dd">Color</dt>
                                 <dd class="col-dt">Brown</dd>
 
-                                <dt class="col-dd">Delivery</dt>
-                                <dd class="col-dt">Russia, USA, and Europe </dd>
+                              <?php if (!$owner['firstname']=="") echo "<dt class='col-dd'>by</dt>
+                                <dd class='col-dt'>".$owner['firstname']." ".$owner['lastname']." </dd>";?>
                             </dl>
 
                             <div class="seperator-line"></div>
@@ -372,26 +382,29 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <?php 
+                                if ($product['category_id']==2)
+                                 echo "<div class='form-group'>
                                     <label>Select size</label>
-                                    <div class="mt-1">
-                                        <label class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" name="select_size" checked="" class="custom-control-input">
-                                            <div class="custom-control-label">Small</div>
+                                    <div class='mt-1'>
+                                        <label class='custom-control custom-radio custom-control-inline'>
+                                            <input type='radio' name='select_size' checked='' class='custom-control-input'>
+                                            <div class='custom-control-label'>Small</div>
                                         </label>
 
-                                        <label class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" name="select_size" class="custom-control-input">
-                                            <div class="custom-control-label">Medium</div>
+                                        <label class='custom-control custom-radio custom-control-inline'>
+                                            <input type='radio' name='select_size' class='custom-control-input'>
+                                            <div class='custom-control-label'>Medium</div>
                                         </label>
 
-                                        <label class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" name="select_size" class="custom-control-input">
-                                            <div class="custom-control-label">Large</div>
-                                        </label>
+                                        <label class='custom-control custom-radio custom-control-inline'>
+                                            <input type='radio' name='select_size' class='custom-control-input'>
+                                            <div class='custom-control-label'>Large</div>
+                                        </label> 
+                                        
 
-                                    </div>
-                                </div>
+                                    </div> 
+                                </div>";?>
                             </div>
 
                             <a href="#" class="add-cart">
@@ -401,7 +414,7 @@
                         <div class="tabs-wrapper">
                             <ul class="tabs">
                                 <li class="description_tab active">
-                                    <a href="#tab-description">Description</a>
+                                    <a href="#tab-description">contact the seller</a>
                                 </li>
                                 <li class="additional_information_tab">
                                     <a href="#tab-additional_information">Additional information</a>
@@ -411,8 +424,10 @@
                                 </li>
                             </ul>
                             <div class="paneltbs panel-1" id="tab-description">
-                                <h2>Product Description</h2>
-                                <p><?php echo $product['description']; ?></p>
+                                <h3>about the seller</h3>
+                                <p><strong>phone number: </strong><?php echo $owner['contact_info']; ?></p>
+                                <p><strong>email: </strong><?php echo $owner['email']; ?></p>
+                                <p><strong>website: </strong>www.wk.com</p>
                             </div>
 
                             <div class="paneltbs panel-2" id="tab-additional_information" style="display: none;">
@@ -434,7 +449,7 @@
                             <div class="paneltbs panel-3" id="tab-reviews" style="display: none;">
                                 <div id="reviews" class="product-reviews">
                                     <div id="comments">
-                                        <h2 class="reviews-title"><?php echo $nbreview ?> review for <span>Fantasy t-shirt</span></h2>
+                                        <h2 class="reviews-title"><?php echo $nbreview ?> <span> reviews </span></h2>
                                          <ol class="commentlist">
                                          	<?php  
                                          		foreach ($reviews as $row) {	
