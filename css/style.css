@@ -433,7 +433,7 @@ svg#cart-icon {
 }
 
 .promo-popup .popup-content .popup-subscribe .form-group button span:after {
-    content: '»';
+    content: 'Â»';
     position: relative;
     top: -4px;
     font-size: 20px;
@@ -1631,28 +1631,28 @@ main .trending-area .container .wrapper .row .col-12 .products-info .main-nav .n
     padding-left: 5px;
 }
 
-.single-product .product-img .product-action-2 a,
-.add-cart {
-    color: #3167eb;
-    border: 1px solid #3167eb;
-    font-weight: 600;
+.single-product .product-img .product-action-2 a {
+    height: auto;
+    font-size: .82rem;
     padding: 0.35rem 0.5rem;
-    font-size: 0.82rem;
-    line-height: 1.2;
-    border-radius: 0.37rem;
-    text-transform: uppercase;
-    display: inline-block;
+    line-height: 1.5;
     position: relative;
-    transition: all .18s ease-in-out;
+    font-weight: 500;
+    color: #fff;
+    background: #333;
+    display: inline-block;
+    border-radius: 4px;
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out, background 0.4s ease;
+    transition: border-color 0.15s ease-in-out, background 0.4s ease, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, background 0.4s ease, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, background 0.4s ease, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
-.add-cart {
-    padding: 0.45rem 0.85rem !important;
-    font-size: 1.05rem;
-}
-
-.single-product .product-img .product-action-2 a:hover,
-.add-cart:hover {
+.single-product .product-img .product-action-2 a:hover {
     color: #fff;
     background-color: #3167eb;
     border-color: #3167eb;
@@ -1660,7 +1660,7 @@ main .trending-area .container .wrapper .row .col-12 .products-info .main-nav .n
 
 .single-product .product-img .product-action-2 a i,
 .add-cart i {
-    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .single-product .product-content {
@@ -2626,7 +2626,8 @@ form .form-group textarea {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
-form .form-group button.btn {
+form .form-group button.btn,
+.add-cart {
     height: 50px;
     position: relative;
     font-weight: 500;
@@ -2646,7 +2647,8 @@ form .form-group button.btn {
     transition: border-color 0.15s ease-in-out, background 0.4s ease, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
-form .form-group button.btn:hover {
+form .form-group button.btn:hover,
+.add-cart:hover {
     background: #3167eb;
 }
 
