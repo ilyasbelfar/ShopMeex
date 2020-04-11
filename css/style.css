@@ -1,4 +1,4 @@
-/* poppins-regular - latin 
+/* poppins-regular - latin mi
 @font-face {
   font-family: 'Poppins';
   font-style: normal;
@@ -3186,9 +3186,14 @@ dl.row {
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
-#button-plus {
+#minus,
+#button-plus{
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
+}
+#productForm .col-sm-5 {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
 }
 
 .input-group>.form-control:not(:first-child),
@@ -3231,6 +3236,7 @@ dl.row {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
+#add,
 #button-minus {
     border-top-left-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
@@ -3261,7 +3267,55 @@ dl.row {
 .product-details .custom-radio .custom-control-input:checked~.custom-control-label::after {
     left: -1.4rem;
 }
-
+.product-details #add,
+.product-details #minus {
+    width: 36px;
+    height: calc(1.5em + 0.9rem + 2px);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    background-color: #fff;
+    color: #212529;
+    display: inline-block;
+    font-weight: 600;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid #e4e4e4;
+    padding: 0.45rem 0.85rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.37rem;
+    outline: 0;
+    webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+.product-details #add:hover,
+.product-details #minus:hover {
+    background-color: #fff;
+    border-color: #989898;
+}
+.product-details #add:focus,
+.product-details #minus:focus{
+    z-index: 3;
+    border-color: #a5bdf6;
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(49, 103, 235, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(49, 103, 235, 0.25)
+}
+#add:not(:disabled):not(.disabled):active:focus,
+#minus:not(:disabled):not(.disabled).active:focus {
+    webkit-box-shadow: 0 0 0 0.2rem rgba(199, 199, 200, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(199, 199, 200, 0.5)
+}
+#add:not(:disabled):not(.disabled):active,
+#minus:not(:disabled):not(.disabled):active{
+    color: #212529;
+    background-color: #cbcbcb;
+    border-color: #c4c4c4;
+}
 .tabs-wrapper {
     margin: 0 auto;
     padding: .8rem 2.3rem;
