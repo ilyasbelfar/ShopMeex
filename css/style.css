@@ -433,7 +433,7 @@ svg#cart-icon {
 }
 
 .promo-popup .popup-content .popup-subscribe .form-group button span:after {
-    content: 'Â»';
+    content: '»';
     position: relative;
     top: -4px;
     font-size: 20px;
@@ -1661,6 +1661,7 @@ main .trending-area .container .wrapper .row .col-12 .products-info .main-nav .n
 .single-product .product-img .product-action-2 a i,
 .add-cart i {
     margin-right: 5px;
+    margin-left: 5px;
 }
 
 .single-product .product-content {
