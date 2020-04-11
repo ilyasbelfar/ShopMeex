@@ -3316,6 +3316,10 @@ dl.row {
     background-color: #cbcbcb;
     border-color: #c4c4c4;
 }
+.product-details form .form-group button.btn i {
+    margin-right: 5px;
+}
+
 .tabs-wrapper {
     margin: 0 auto;
     padding: .8rem 2.3rem;
