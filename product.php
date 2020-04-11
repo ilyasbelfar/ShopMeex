@@ -677,7 +677,7 @@
                                             </a>
                                         </div>
                                         <div class='product-action-2'>
-                                            <a href='#' title='Add To Cart'>Add To Cart<i class='fa fa-shopping-cart'></i></a>
+                                            <a href='#' title='Add To Cart'><i class='fa fa-shopping-cart'></i>Add To Cart</a>
                                         </div>
                                     </div>
                                 </div>
