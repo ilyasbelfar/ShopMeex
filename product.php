@@ -1,7 +1,13 @@
 <?php
     include "includes/session.php";
-    //$slug=$_GET['products'];
-    $slug='large-dell-inspiron-15-5000-15-6';
+   if (isset($_GET['product'])) {
+    $slug=$_GET['product'];
+    
+    }
+    else {
+        $slug="large-dell-inspiron-15-5000-15-6";
+    }
+
 
 
 
@@ -57,7 +63,7 @@
         $stmt->execute(['prodid'=>$product['prodid']]);
 		$nbreview= $stmt->rowCount();// return the number of ligne in table resulted;
 
-        //getting the total review for the product ;
+        //getting the total_review for the product ;
         $sum=0;
         foreach ($stmt as $row){
             $sum+=$row['rating'];
@@ -373,13 +379,13 @@
                             <div class="thumbs-wrap">
                             <?php
                                if (!($product['photo1']=="")) { echo "
-                                <a href='images/items/".$product['photo1']."' data-lc-caption='Fantasy t-shirt Model N°2' data-rel='lightcase:myCollection' class='item-thumb'>
+                                <a href='images/items/".$product['photo1']."' data-lc-caption='".$product['prodname']." Model N°1' data-rel='lightcase:myCollection' class='item-thumb'>
                                     <img src='images/items/".$product['photo1']."'>
                                 
                                 </a>";
                             }
                               if (!($product['photo2']=="")) { echo "
-                                <a href='images/items/".$product['photo2']."' data-lc-caption='Fantasy t-shirt Model N°2' data-rel='lightcase:myCollection' class='item-thumb'>
+                                <a href='images/items/".$product['photo2']."' data-lc-caption='".$product['prodname']." Model N°2' data-rel='lightcase:myCollection' class='item-thumb'>
                                     <img src='images/items/".$product['photo2']."'>
                                 
                                 </a>";
@@ -411,7 +417,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <var class="price h4"><?php echo '$'.$product['price']; ?></var>
+                                <var class="price h4"><?php echo '$'. number_format($product['price'], 2); ?></var>
                             </div>
                             <div class="seperator-line"></div>
                             <h3>Description </h3><br>
@@ -542,7 +548,8 @@
                                             ?>
                                         </ol>
                                     </div>
-                                    <a href="#" id="collapseBtn" class="more-btn">See More Reviews</a>
+                                    <?php 
+                                        if ($nbreview>3) echo  "<a href='#'' id='collapseBtn' class='more-btn'>See More Reviews</a>" ?>
 
                                     
 
@@ -550,7 +557,7 @@
                                         <div id="review_form">
                                             <div id="respond" class="comment-respond">
                                                 <span id="reply-title" class="comment-reply-title">Add a review</span>
-                                                <form <?php echo "action='".htmlspecialchars($_SERVER['PHP_SELF'])."'" ?> method="post" id="commentform" class="comment-form" novalidate="">
+                                                <form <?php echo "action='product.php?product=".$slug."'" ?> method="post" id="commentform" class="comment-form" novalidate="">
                                                     <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>
                                                     <div class="comment-form-rating">
                                                         <label for="rating">Your rating</label>
@@ -599,7 +606,7 @@
                       echo "<div class='tab-col'>
                             <div class='single-product'>
                                 <div class='product-img'>
-                                    <a href='#'>
+                                    <a href='product.php?product=".$row['slug']."'>
                                         <img src='images/items/".$row['photo']."'>
                                         <img class='hover-default' src='images/items/".$row['photo']."'>
                                     </a>
@@ -628,7 +635,7 @@
 									<a href='#'>".$row['name']."</a>
 																	</h3>
                                     <div class='product-price-rating'>
-                                        <span title='Price'>$".$row['price']."</span>
+                                        <span title='Price'>$".number_format($row['price'], 2)."</span>
                                         <ul title='Rating'>
                                             <li class='stars-active'>";
 
