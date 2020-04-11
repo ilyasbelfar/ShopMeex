@@ -84,7 +84,7 @@
             
                  unset($stmt);
              unset($pdo);
-             session_start();
+             
                             
              // Store data in session variables
                             

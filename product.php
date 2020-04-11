@@ -29,6 +29,23 @@
         $stmt->execute(['prodid'=>$product['prodid']]);
         $nborders=$stmt->rowCount();
         
+        $now = date('Y-m-d');
+        // creating the review in database
+        if ($_SERVER['REQUEST_METHOD']=='POST'){
+            $rating=$_POST['rating'];
+            $comment=$_POST['comment'];
+            $userid=$_SESSION['id'];
+            $productid=$product['prodid'];
+
+            $stmt=$db->prepare("SELECT id FROM review WHERE product_id=:prodid AND user_id=:usid    ");
+            $stmt->execute(['prodid'=>$productid,'usid'=>$userid]);
+
+            if ($stmt->rowCount()==0){
+            $stmt=$db->prepare("insert into review (rating,comment,user_id,date,product_id) values(?,?,?,?,?)");
+            $stmt->execute([$rating,$comment,$userid,$now,$productid]);
+        }
+
+        }
 
         // getting the reviews
        	$stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid  ");
@@ -36,7 +53,8 @@
 		$reviews = $stmt->fetchAll();
 
         //getting total number of reviews
-        
+        $stmt=$db->prepare("SELECT * from review WHERE product_id=:prodid  ");
+        $stmt->execute(['prodid'=>$product['prodid']]);
 		$nbreview= $stmt->rowCount();// return the number of ligne in table resulted;
 
         //getting the total review for the product ;
@@ -59,7 +77,6 @@
 		$owner=$stmt->fetch();
 
 		//upadating the counter 
-		$now = date('Y-m-d');
 	    if($product['date_view'] == $now){
 	        $stmt = $db->prepare("UPDATE products SET counter=counter+1 WHERE id=:id");
 	        $stmt->execute(['id'=>$product['prodid']]);
@@ -70,16 +87,7 @@
 	    }
 
 
-	    // creating the review in database
-		if ($_SERVER['REQUEST_METHOD']=='POST'){
-	    	$rating=$_POST['rating'];
-	    	$comment=$_POST['comment'];
-	    	$userid=$_SESSION['id'];
-	    	$productid=$product['prodid'];
-
-	    	$stmt=$db->prepare("insert into review (rating,comment,user_id,date,product_id) values(?,?,?,?,?)");
-	    	$stmt->execute([$rating,$comment,$userid,$now,$productid]);
-	    }
+	    
         // getting related product 
         $stmt=$db->prepare("SELECT * from products where category_id=:catid  EXCEPT SELECT * FROM products where id=:prodid limit 8 ");
         $stmt->execute(['catid'=>$product['catid'],'prodid'=>$product['prodid']]);
@@ -480,8 +488,8 @@
                                 <p>dell for comptuer is very know for its top class product and we are proud to ber here around </p>
                                 <h4>Contact</h4>
                                 <p><strong>phone number: </strong><?php echo $owner['contact_info']; ?></p>
-                                <p><strong>email: </strong><?php echo $owner['email']; ?></p>
-                                <p><strong>website: </strong>www.wk.com</p>
+                                <p><strong>email: </strong><a href="mailto:<?php echo $owner['email']?>"><?php echo $owner['email']; ?></a></p>
+                                <p><strong>website: </strong><a target="_blank" href="https://<?php echo $owner['website']?>"><?php echo $owner['website']?></a></p>
                             </div>
 
                             <div class="paneltbs panel-2" id="tab-additional_information" style="display: none;">
@@ -539,48 +547,42 @@
                                     
 
                                     <div id="review_form_wrapper">
-                                    	<?php
-                                    	if (isset($_SESSION['id'])) {
-                                    	 echo "
-                                        <div id='review_form'>
-                                            <div id='respond' class='comment-respond'>
-                                                <span id='reply-title' class='comment-reply-title'>Add a review</span>
-                                                <form action=".htmlspecialchars($_SERVER["PHP_SELF"])." method='post' id='commentform' class='comment-form' novalidate=''>
-                                                    <p class='comment-notes'><span id='email-notes'>Your email address will not be published.</span> Required fields are marked <span class='required'>*</span></p>
-                                                    <div class='comment-form-rating'>
-                                                        <label for='rating'>Your rating</label>
-                                                        <p class='stars'>
+                                        <div id="review_form">
+                                            <div id="respond" class="comment-respond">
+                                                <span id="reply-title" class="comment-reply-title">Add a review</span>
+                                                <form <?php echo "action='".htmlspecialchars($_SERVER['PHP_SELF'])."'" ?> method="post" id="commentform" class="comment-form" novalidate="">
+                                                    <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>
+                                                    <div class="comment-form-rating">
+                                                        <label for="rating">Your rating</label>
+                                                        <p class="stars">
                                                             <span>
-                                                            		<a class='star-1' href='#'>1</a>
-                                                            		<a class='star-2' href='#''>2</a>
-                                                            		<a class='star-3' href='#''>3</a>
-                                                            		<a class='star-4' href='#'>4</a>
-                                                            		<a class='star-5' href='#'>5</a>
+                                                                    <a class="star-1" href="#">1</a>
+                                                                    <a class="star-2" href="#">2</a>
+                                                                    <a class="star-3" href="#">3</a>
+                                                                    <a class="star-4" href="#">4</a>
+                                                                    <a class="star-5" href="#">5</a>
                                                             </span>
                                                         </p>
-                                                        <select name='rating' id='rating' required='' style='display: none;''>
-                                                            <option value=''>Rate…</option>
-                                                            <option value='5'>Perfect</option>
-                                                            <option value='4'>Good</option>
-                                                            <option value='3'>Average</option>
-                                                            <option value='2'>Not that bad</option>
-                                                            <option value='1'>Very poor</option>
+                                                        <select name="rating" id="rating" required="" style="display: none;">
+                                                            <option value="">Rate…</option>
+                                                            <option value="5">Perfect</option>
+                                                            <option value="4">Good</option>
+                                                            <option value="3">Average</option>
+                                                            <option value="2">Not that bad</option>
+                                                            <option value="1">Very poor</option>
                                                         </select>
                                                     </div>
-                                                    <p class='comment-form-comment'>
-                                                        <label for='comment'>Your review&nbsp;<span class='required'>*</span></label>
-                                                        <textarea id='comment' name='comment' cols='45' rows='8' required=''></textarea>
+                                                    <p class="comment-form-comment">
+                                                        <label for="comment">Your review&nbsp;<span class="required">*</span></label>
+                                                        <textarea id="comment" name="comment" cols="45" rows="8" required=""></textarea>
                                                     </p>
                                                     
-                                                   
-                                                    <p class='form-submit'>
-                                                        <input name='submit' type='submit' id='submit' class='submit' value='Submit'>
+                                                    <p class="form-submit">
+                                                        <input name="submit" type="submit" id="submit" class="submit" value="Submit">
                                                     </p>
                                                 </form>
                                             </div>
-                                        </div>"; }
-                                        else { echo "login or sign up to write review"; }
-                                        ?>
+                                        </div>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
