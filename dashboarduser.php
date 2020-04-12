@@ -366,7 +366,7 @@
                         </li>
                     </ul>
                     <div class="paneltbs panel-1" id="dashboard" style="">
-                        <p>Hello <strong>jerzetakke</strong> (not <strong>jerzetakke</strong>? <a href="#">Log out</a>)</p>
+                        <p>Hello <strong><?php echo $_SESSION["email"]; ?></strong> (not <strong><?php echo $_SESSION["email"]; ?></strong>? <a href="logout.php">Log out</a>)</p>
                         <p>From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.</p>
                         <div class="myaccount-links">
                             <div class="dashboard-link">
