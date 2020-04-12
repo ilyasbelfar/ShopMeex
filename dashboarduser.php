@@ -68,7 +68,7 @@
         $stmt->execute(array($fname,$lname,$email,$user,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
         
         if ($stmt) 
-            header("Location: my-account.php?user=$user");
+            header("Location: dashboarduser.php?user=$user");
          else 
              echo 'loction:404.php';
      
