@@ -1,3 +1,80 @@
+<?php
+    include 'includes/session.php';
+    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+        $getUser = $db->prepare("SELECT * FROM users WHERE email = ?");
+        $getUser->execute(array($_SESSION["email"]));
+        $info = $getUser->fetch();
+        $emailid = $info['email'];
+    }
+    
+
+    if (isset($_POST['save_account_details'])) {
+        if (isset($_POST['fname']))
+            $fname=$_POST['fname'];
+        else
+            $fname=$info['firstname'];
+            
+        if (isset($_POST['lname']))
+            $lname=$_POST['lname'];
+        else
+            $lname=$info['lastname'];
+            
+        if (isset($_POST['email']))
+            $email=$_POST['email'];
+        else
+            $email=$info['email'];
+            
+        if (isset($_POST['username']))
+            $user=$_POST['username'];
+        else
+            $user=$info['username'];
+            
+        if (isset($_POST['company_name']))
+            $contact=$_POST['company_name'];
+        else
+            $contact=$info['contact_info'];
+    
+        if (isset($_POST['country_name']))
+            $country=$_POST['country_name'];
+        else
+            $country=$info['country'];
+    
+        if (isset($_POST['state-province']))
+            $state=$_POST['state-province'];
+         else
+            $state=$info['state'];
+
+        if (isset($_POST['address-1']))
+            $address1=$_POST['address-1'];
+         else
+            $address1=$info['address'];
+            
+        if (isset($_POST['address-2']))
+            $address2=$_POST['address-2'];
+         else
+            $address2=$info['address2'];
+            
+        if (isset($_POST['town']))
+            $city=$_POST['town'];
+         else
+            $city=$info['city'];
+        
+        if (isset($_POST['zip-code']))
+            $postal=$_POST['zip-code'];
+        else
+            $postal=$info['postal'];
+    
+        $stmt=$db->prepare('UPDATE users set firstname=?,lastname=?,email=?,username=?,contact_info=?,country=?,state=?,address=?,address2=?,city=?,postal=? where email=?');
+        $stmt->execute(array($fname,$lname,$email,$user,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
+        
+        if ($stmt) 
+            header("Location: my-account.php?user=$user");
+         else 
+             echo 'loction:404.php';
+     
+ }
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -193,8 +270,17 @@
                                 <div class="icon">
                                     <i class="fa fa-user"></i>
                                     <div class="user-text">
-                                        <small class="text-muted">Sign in | Sign Up</small>
-                                        <div>My Account<i class="fa fa-angle-down"></i></div>
+                                         <?php
+                                                        if(!isset($_SESSION['loggedin'])){
+                                                            
+                                                            echo '<small class="text-muted"><a href="login.php">Sign in </a> |<a href="register.php">Sign Up</a></small>';
+                                                            echo '<div>My Account<i class="fa fa-angle-down"></i></div>';
+                                                        }
+                                                        else{
+                                                            echo '<div><a href="dashboarduser.php">My Account</a><i class="fa fa-angle-down"></i></div>';
+                                                            echo '<small class="text-muted"><a                      href="logout.php">Logout</a></small>';
+                                                        }
+                                                    ?>
                                     </div>
                                 </div>
 
@@ -319,30 +405,30 @@
                     </div>
 
                     <div class="paneltbs panel-4" id="addresses" style="display: none;">
-                        <form class="form" method="post" action="#">
+                        <form class="form" method="post" action="dashboarduser.php">
                             <div class="row">
                                 <div class="col-401">
                                     <div class="form-group">
                                         <label for="fname">First Name<span>*</span></label>
-                                        <input id="fname" name="fname" type="text" placeholder="">
+                                        <input id="fname" name="fname" type="text" placeholder="" value="<?php echo $info['firstname']; ?>" required pattern="[a-zA-Z\s]+">
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
                                         <label for="lname">Last Name<span>*</span></label>
-                                        <input name="lname" type="text" placeholder="" id="lname">
+                                       <input name="lname" type="text" placeholder="" id="lname" value="<?php echo $info['lastname']; ?>" required pattern="[a-zA-Z\s]+">
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
                                         <label for="mail">Email Address<span>*</span></label>
-                                        <input id="mail" name="email" type="email" placeholder="">
+                                        <input id="mail" name="email" type="email" placeholder="" value="<?php echo $info['email']; ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
                                         <label for="phone">Phone Number<span>*</span></label>
-                                        <input id="phone" name="company_name" type="tel" placeholder="">
+                                        <input id="phone" name="company_name" type="tel" placeholder="" value="<?php echo $info['contact_info']; ?>">
                                     </div>
                                 </div>
                                 <div class="col-401">
@@ -614,25 +700,25 @@
                                 <div class="col-401">
                                     <div class="form-group">
                                         <label for="adr-1">Address Line 1<span>*</span></label>
-                                        <input id="adr-1" name="address-1" type="text" placeholder="">
+                                        <input id="adr-1" name="address-1" type="text" placeholder="" value="<?php echo $info['address']; ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
                                         <label for="adr-2">Address Line 2<span>*</span></label>
-                                        <input id="adr-2" name="address-2" type="text" placeholder="">
+                                        <input id="adr-2" name="address-2" type="text" placeholder="" value="<?php echo $info['address2']; ?>" >
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
                                         <label for="town">Town / City<span>*</span></label>
-                                        <input id="town" name="town" type="text" placeholder="">
+                                       <input id="town" name="town" type="text" placeholder="" value="<?php echo $info['city']; ?>">
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
                                         <label for="zip-code">Postal Code<span>*</span></label>
-                                        <input id="zip-code" name="zip-code" type="text" placeholder="">
+                                        <input id="zip-code" name="zip-code" type="text" placeholder="" value="<?php echo $info['postal']; ?>">
                                     </div>
                                 </div>
                                 <div class="col-401">
@@ -645,30 +731,30 @@
                     </div>
 
                     <div class="paneltbs panel-5" id="acc-details" style="display: none;">
-                        <form class="form" method="post" action="#">
+                        <form class="form" method="post" action="dashboarduser.php">
                             <div class="row">
                                 <div class="col-401">
                                     <div class="form-group">
                                         <label for="fname">First Name<span>*</span></label>
-                                        <input id="fname" name="fname" type="text" placeholder="">
+                                        <input id="fname" name="fname" type="text" placeholder="" value="<?php echo $info['firstname']; ?>" required pattern="[a-zA-Z\s]+">
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
                                         <label for="lname">Last Name<span>*</span></label>
-                                        <input name="lname" type="text" placeholder="" id="lname">
+                                         <input name="lname" type="text" placeholder="" id="lname" value="<?php echo $info['lastname']; ?>" required pattern="[a-zA-Z\s]+">
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
                                         <label for="mail">Email Address<span>*</span></label>
-                                        <input id="mail" name="email" type="email" placeholder="">
+                                         <input id="mail" name="email" type="email" placeholder="" value="<?php echo $info['email']; ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
                                         <label for="username">Username<span>*</span></label>
-                                        <input id="username" name="username" type="text" placeholder="">
+                                        <input id="username" name="username" type="text" placeholder="" value="<?php echo $info['username']; ?>">
                                     </div>
                                 </div>
                                 <div class="col-401 field">
