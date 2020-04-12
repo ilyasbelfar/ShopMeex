@@ -120,9 +120,6 @@
     </div>
     <!-- End Loader -->
 
-    <?php
-        include 'includes/session.php';
-    ?>
 
     <!-- Start Header -->
     <header id="main-header">
