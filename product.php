@@ -243,7 +243,7 @@
                                                 </g>
                                             </svg>
                                         </div>
-                                        <span class="notify">0</span>
+                                        <span  class="notify">0</span>
                                     </div>
                                 </a>
                                 <div class="sub-menu">
@@ -397,6 +397,12 @@
                         <article class="content-body">
                             <h2 class="title"><?php echo $product['prodname']; ?></h2>
                             <div class="seperator-line"></div>
+                            <div class="callout" id="callout" style="display:none">
+                             <button type="button" class="close"><span aria-hidden="true">&times;</span></button>
+                                <span class="message"></span>
+                                <div class="seperator-line"></div>
+                             </div>
+                     
                             <div class="rating-wrap">
                                 <ul class="rating-stars">
                                     <li style="width:80%" class="stars-active"><?php
@@ -435,47 +441,92 @@
                             </dl>
 
                             <div class="seperator-line"></div>
-                            <div class="form-row">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                       <form class="form-inline" id="productForm">
                                 <div class="form-group">
-                                    <label>Quantity</label>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <button class="btn btn-light" type="button" id="button-plus"> + </button>
-                                        </div>
-                                        <input id="quantity" type="text" class="form-control" value="1">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-light" type="button" id="button-minus"> − </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php 
-                                if ($product['category_id']==2)
-                                 echo "<div class='form-group'>
-                                    <label>Select size</label>
-                                    <div class='mt-1'>
-                                        <label class='custom-control custom-radio custom-control-inline'>
-                                            <input type='radio' name='select_size' checked='' class='custom-control-input'>
-                                            <div class='custom-control-label'>Small</div>
-                                        </label>
-
-                                        <label class='custom-control custom-radio custom-control-inline'>
-                                            <input type='radio' name='select_size' class='custom-control-input'>
-                                            <div class='custom-control-label'>Medium</div>
-                                        </label>
-
-                                        <label class='custom-control custom-radio custom-control-inline'>
-                                            <input type='radio' name='select_size' class='custom-control-input'>
-                                            <div class='custom-control-label'>Large</div>
-                                        </label> 
+                                    <div class="input-group col-sm-5">
                                         
+                                        <span class="input-group-btn">
+                                            <button type="button" id="minus" class="btn btn-default btn-flat btn-lg"><i class="fa fa-minus"></i></button>
+                                        </span>
+                                        <input type="text" name="quantity" id="quantity" class="form-control input-lg" value="1">
+                                        <span class="input-group-btn">
+                                            <button type="button" id="add" class="btn btn-default btn-flat btn-lg"><i class="fa fa-plus"></i>
+                                            </button>
+                                        </span>
+                                        <input type="hidden" value="<?php echo $product['prodid']; ?>" name="id">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-lg btn-flat"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                </div>
+                            </form>
 
-                                    </div> 
-                                </div>";?>
-                            </div>
 
-                            <a href="#" class="add-cart">
-                                <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>
-                            </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         </article>
                         <div class="tabs-wrapper">
                             <ul class="tabs">
@@ -766,6 +817,31 @@
         jQuery(document).ready(function($) {});
     </script>
     <script src="js/custom.js"></script>
+
+
+
+
+<script>
+$(function(){
+    $('#add').click(function(e){
+        e.preventDefault();
+        var quantity = $('#quantity').val();
+        quantity++;
+        $('#quantity').val(quantity);
+    });
+    $('#minus').click(function(e){
+        e.preventDefault();
+        var quantity = $('#quantity').val();
+        if(quantity > 1){
+            quantity--;
+        }
+        $('#quantity').val(quantity);
+    });
+
+});
+</script>
+
+    <?php include 'includes/script.php'; ?>
 </body>
 
 </html>
