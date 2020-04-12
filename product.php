@@ -133,6 +133,7 @@
     <link rel="stylesheet" type="text/css" href="css/nice-select.css">
     <link rel="stylesheet" type="text/css" href="css/lightcase.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
 </head>
 
 <body>
@@ -817,7 +818,10 @@
         jQuery(document).ready(function($) {});
     </script>
     <script src="js/custom.js"></script>
-
+    <script type="text/javascript">
+        $('.img-big-wrap').zoom();
+        $('a[data-rel^=lightcase]').lightcase();
+    </script>
 
 
 
