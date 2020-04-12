@@ -190,6 +190,7 @@ INSERT INTO `review` (`id`, `product_id`, `user_id`, `rating`, `date`, `comment`
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
+  `username` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
   `password` varchar(60) NOT NULL,
   `type` int(1) NOT NULL,
@@ -199,6 +200,11 @@ CREATE TABLE `users` (
   `address` text NOT NULL,
   `contact_info` varchar(100) NOT NULL,
   `photo` varchar(200) NOT NULL,
+  `country` varchar(200) NOT NULL,
+  `state` varchar(200) NOT NULL,
+  `address2` varchar(200) NOT NULL,
+  `city` varchar(200) NOT NULL,
+  `postal` varchar(200) NOT NULL,
   `website` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
