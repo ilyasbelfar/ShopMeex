@@ -4187,6 +4187,11 @@ tbody .product-name a:hover {
 .checkout .col-401.full .form-group {
     margin-top: 1rem;
 }
+.form-group .email-wrong {
+    color: red;
+    margin-top: 3px;
+    font-size: 14px;
+}
 
 .form-main .form-title h3 {
     font-weight: 700;
