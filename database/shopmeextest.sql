@@ -334,6 +334,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `wishlist`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  
+--
+-- Indexes for table `signups`
+--
+ALTER TABLE `signups`
+  ADD PRIMARY KEY (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
