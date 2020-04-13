@@ -45,3 +45,11 @@ I have added new row "slug" to the product table which make a part of the URL;
 I have created a new table for review  which contain these rows(id,user_id,product_id,comment,date,rating(5/5));
 
 -----------------------**********************************------------------------------------------
+-----------------------*********************************--------------------------------------------
+
+13/04/2020 23:20
+Souhil
+
+I have added new table 'signups' for newsletter, which contain these rows(id,email,date);
+
+-----------------------**********************************------------------------------------------
