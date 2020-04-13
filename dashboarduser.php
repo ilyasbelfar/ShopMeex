@@ -6,9 +6,17 @@
         $info = $getUser->fetch();
         $emailid = $info['email'];
     }
-    
+$emailInsErr="";
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+        }
 
-    if (isset($_POST['save_account_details'])) {
+
+
+    if ($_SERVER['REQUEST_METHOD']=='POST') {
         if (isset($_POST['fname']))
             $fname=$_POST['fname'];
         else
@@ -19,8 +27,19 @@
         else
             $lname=$info['lastname'];
             
-        if (isset($_POST['email']))
+        if (isset($_POST['email'])){
             $email=$_POST['email'];
+            $stmtt=$db->prepare('SELECT email from users where email=?');
+            $stmtt->execute(array($email));
+            $count=$stmtt->rowCount();
+            if ($count>0){  
+                $emailInsErr="Email Already Taken";
+                unset($stmt);
+            }
+            
+            else 
+                $_SESSION["email"] = $email;
+        }
         else
             $email=$info['email'];
             
@@ -31,49 +50,50 @@
             
         if (isset($_POST['company_name']))
             $contact=$_POST['company_name'];
-        else
+            else
             $contact=$info['contact_info'];
     
         if (isset($_POST['country_name']))
             $country=$_POST['country_name'];
-        else
+            else
             $country=$info['country'];
     
         if (isset($_POST['state-province']))
             $state=$_POST['state-province'];
-         else
+            else
             $state=$info['state'];
 
         if (isset($_POST['address-1']))
             $address1=$_POST['address-1'];
-         else
+            else
             $address1=$info['address'];
             
         if (isset($_POST['address-2']))
             $address2=$_POST['address-2'];
-         else
+            else
             $address2=$info['address2'];
             
         if (isset($_POST['town']))
             $city=$_POST['town'];
-         else
+            else
             $city=$info['city'];
         
         if (isset($_POST['zip-code']))
             $postal=$_POST['zip-code'];
-        else
+            else
             $postal=$info['postal'];
-    
+        if (empty($emailInsErr)){
         $stmt=$db->prepare('UPDATE users set firstname=?,lastname=?,email=?,username=?,contact_info=?,country=?,state=?,address=?,address2=?,city=?,postal=? where email=?');
-        $stmt->execute(array($fname,$lname,$email,$user,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
+    $stmt->execute(array($fname,$lname,$email,$user,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
         
         if ($stmt) 
-            header("Location: dashboarduser.php?user=$user");
+            header("Location: my-account.php?user=$user");
          else 
-             echo 'loction:404.php';
-     
+             echo '404';
+        }
  }
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -366,7 +386,7 @@
                         </li>
                     </ul>
                     <div class="paneltbs panel-1" id="dashboard" style="">
-                        <p>Hello <strong><?php echo $_SESSION["email"]; ?></strong> (not <strong><?php echo $_SESSION["email"]; ?></strong>? <a href="logout.php">Log out</a>)</p>
+                        <p>Hello <strong><?php echo $_SESSION["username"]; ?></strong> (not <strong><?php echo $_SESSION["username"]; ?></strong>? <a href="logout.php">Log out</a>)</p>
                         <p>From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.</p>
                         <div class="myaccount-links">
                             <div class="dashboard-link">

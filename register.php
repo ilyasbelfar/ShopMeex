@@ -11,9 +11,9 @@
 
     //define variables and set to empty values
 
-    $fname=$lname=$email=$address=$pass=$repass="";
+    $fname=$lname=$email=$address=$pass=$repass=$userr="";
 
-    $repassErr=$emailInsErr="";
+    $repassErr=$emailInsErr=$usererr="";
 
         
     function test_input($data) {
@@ -30,10 +30,27 @@
         $typeidString=$_POST['typeid'];
         $fname=test_input($_POST['firstname']);
         $lname=test_input($_POST['lastname']);
+        $userr=test_input($_POST['username']);
         $email=test_input($_POST['email']);
         $address=test_input($_POST['address']);
         $pass=$_POST['password'];
         $repass=$_POST['repassword'];
+
+        // Validate username
+    
+        // Prepare a select statement
+        $stmt=$db->prepare('SELECT username from users where username=?');
+        $stmt->execute(array($userr));
+        $count=$stmt->rowCount();
+
+        //If count>0 this mean the DataBase contain Record about this email
+
+        if ($count>0){  
+            $usererr="Username Already Taken";
+        }
+
+        // Close statement
+            unset($stmt);
         
         // Validate email
     
@@ -91,7 +108,7 @@
               $_SESSION["loggedin"] = true;
                 $_SESSION["id"] = $id;
               $_SESSION["email"] = $email;
-              $_SESSION["fname"]=fname;
+              $_SESSION["username"]=$userr;
             
           //Redirect to user Dashborad
               header('location:dashboarduser.php');
