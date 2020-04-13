@@ -77,11 +77,11 @@
    
             //Insert into DataBase
         
-        if (empty($emailInsErr) && empty($repassErr)){
+        if (empty($emailInsErr) && empty($repassErr) && empty($usererr)){
 
             $salt="^%r8yuyg";//create our salt; salt is special String added to password // way of encrption on database;
             $pass = sha1(filter_var($pass.$salt, FILTER_SANITIZE_STRING));// sha1 function to transform the password into long String; known as hashing method;
-            $sql="insert into users (type,firstname,lastname,email,address,password) values(?,?,?,?,?,?)";
+            $sql="insert into users (type,firstname,lastname,username,email,address,password) values(?,?,?,?,?,?,?)";
 -           $stmt=$db->prepare($sql);
             if ($typeidString=="Seller") {
                 $typeid=2;
@@ -93,7 +93,7 @@
                 $typeid=4;
             }
 
-            $stmt->execute(array($typeid,$fname,$lname,$email,$address,$pass));
+            $stmt->execute(array($typeid,$fname,$lname,$userr,$email,$address,$pass));
             
             
         
@@ -398,6 +398,12 @@
                                                 <input name="lastname" type="text" placeholder="Last Name" id="lname" value="<?php echo (isset($_POST['lastname'])) ? $_POST['lastname']: ''?>" required pattern="[a-zA-Z\s]+">
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Username<span>*<?php echo $usererr; ?></span></label>
+                                        <input name="username" type="text" placeholder="Username"  id="user" 
+                                        value="<?php echo (isset($_POST['username'])) ? $_POST['username']: ''?>" required pattern="[a-zA-Z0-9\s]+">
+                                        
                                     </div>
                                     <div class="form-group">
                                         <label for="email">E-mail<span>*<?php echo $emailInsErr; ?></span></label>

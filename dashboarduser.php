@@ -438,7 +438,7 @@ $emailInsErr="";
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="mail">Email Address<span>*</span></label>
+                                        <label for="mail">Email Address<span>*<?php echo $emailInsErr; ?></span></label>
                                         <input id="mail" name="email" type="email" placeholder="" value="<?php echo $info['email']; ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                     </div>
                                 </div>
@@ -764,7 +764,7 @@ $emailInsErr="";
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="mail">Email Address<span>*</span></label>
+                                        <label for="mail">Email Address<span>*<?php echo $emailInsErr; ?></span></label>
                                          <input id="mail" name="email" type="email" placeholder="" value="<?php echo $info['email']; ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                     </div>
                                 </div>
