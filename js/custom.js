@@ -271,7 +271,7 @@ $('.form-group input[type=email]').blur(function() {
             border: '1px solid #e6e2f5'
         });
         $(this).next().remove();
-        $(this).closest('.wrapper').next().find('.btn').css({
+        $(this).closest('.wrapper').find('.btn').css({
             pointerEvents: 'auto',
             opacity: 1,
             cursor: 'pointer',
