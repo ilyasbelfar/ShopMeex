@@ -27,7 +27,7 @@ $emailInsErr="";
         else
             $lname=$info['lastname'];
             
-        if (isset($_POST['email'])){
+        if (isset($_POST['email'])&&($_POST['email']!=$info['email'])){
             $email=$_POST['email'];
             $stmtt=$db->prepare('SELECT email from users where email=?');
             $stmtt->execute(array($email));
@@ -84,10 +84,10 @@ $emailInsErr="";
             $postal=$info['postal'];
         if (empty($emailInsErr)){
         $stmt=$db->prepare('UPDATE users set firstname=?,lastname=?,email=?,username=?,contact_info=?,country=?,state=?,address=?,address2=?,city=?,postal=? where email=?');
-    $stmt->execute(array($fname,$lname,$email,$user,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
+        $stmt->execute(array($fname,$lname,$email,$user,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
         
         if ($stmt) 
-            header("Location: my-account.php?user=$user");
+            header("Location: dashboarduser.php?user=$user");
          else 
              echo '404';
         }
