@@ -50,6 +50,6 @@ I have created a new table for review  which contain these rows(id,user_id,produ
 13/04/2020 23:20
 Souhil
 
-I have added new table 'signups' for newsletter, which contain these rows(id,email,date);
+I have added new table 'signups' for newsletter, which contain these rows(id,signup_email_address, signup_date);
 
 -----------------------**********************************------------------------------------------
