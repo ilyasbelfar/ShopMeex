@@ -205,20 +205,21 @@ CREATE TABLE `users` (
   `address2` varchar(200) NOT NULL,
   `city` varchar(200) NOT NULL,
   `postal` varchar(200) NOT NULL,
-  `website` varchar(20) NOT NULL
+  `website` varchar(20) NOT NULL,
+  `token` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `type`, `firstname`, `lastname`, `gender`, `address`, `contact_info`, `photo`, `website`) VALUES
-(1, 'red@red.com', '11e0bb710744b9bd55a358fc6263f1eb77cdbe40', 4, 'thered', 'man', 0, 'red', '', 'profile.jpg', ''),
-(2, 'batata@gmail.com', '0f2f448a98c1730fd60e80cb9a89028026d94eff', 3, 'batat', 'ba', 0, 'batat', '', 'profile.jpg', ''),
-(3, 'hamza@hamza.com', '5ed6d69249a73a3cfeedeffd33ee6e497c8047b5', 3, 'hamza', 'ham', 0, 'haza', '', 'profile.jpg', ''),
-(4, 'dell@dell.com', 'password', 2, 'dell', 'for computers', 0, 'usa ', '+213254612', '', 'www.dell.com'),
-(5, 'galaxy@gmail.com', '93dd52f276ff266d6170a4068a6e8885f0195563', 3, 'galaxy', 's', 0, 'chlef', '', '', 'www.dell.com'),
-(6, 'azer@gmail.com', '4dcd5d4e35e6c9648f8a4fc62dec48bbd78f337d', 3, 'azer', 'e', 0, 'azer', '', 'profile.jpg', '');
+INSERT INTO `users` (`id`,`username`, `email`, `password`, `type`, `firstname`, `lastname`, `gender`, `address`, `contact_info`, `photo`,`country`,`state`,`address2`,`city`,`postal`, `website`,`token`) VALUES
+(1,'red', 'red@red.com', '11e0bb710744b9bd55a358fc6263f1eb77cdbe40', 4, 'thered', 'man', 0, 'red', '', 'profile.jpg','algeria','','','','','www.ff.co',''),
+(2, 'batata','batata@gmail.com', '0f2f448a98c1730fd60e80cb9a89028026d94eff', 3, 'batat', 'ba', 0, 'batat', '', 'profile.jpg','Egypt','','aaaa','','1234','www.egybest.com',''),
+(3, 'hamza','hamza@hamza.com', '5ed6d69249a73a3cfeedeffd33ee6e497c8047b5', 3, 'hamza', 'ham', 0, 'haza', '', 'profile.jpg','','','','','','',''),
+(4, 'dell','dell@dell.com', 'password', 2, 'dell', 'for computers', 0, 'usa ', '+213254612','','USA','New York','Washington','','', 'www.dell.com',''),
+(5, 'galaxy','galaxy@gmail.com', '93dd52f276ff266d6170a4068a6e8885f0195563', 3, 'galaxy', 's', 0, 'chlef', '012341567', '','','','','','', 'www.dell.com',''),
+(6, 'azer','azer@gmail.com', '4dcd5d4e35e6c9648f8a4fc62dec48bbd78f337d', 3, 'azer', 'e', 0, 'azer', '', 'profile.jpg', '', '','','','','www.azz.zz','');
 
 -- --------------------------------------------------------
 
