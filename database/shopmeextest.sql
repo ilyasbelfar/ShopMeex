@@ -223,6 +223,17 @@ INSERT INTO `users` (`id`, `email`, `password`, `type`, `firstname`, `lastname`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `signups`
+--
+
+CREATE TABLE `signups` (
+  `id` int(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `date` varchar(20) NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+--
 -- Table structure for table `wishlist`
 --
 
