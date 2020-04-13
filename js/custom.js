@@ -244,5 +244,41 @@ $('#collapseBtn').click(function(event) {
     }
 });
 
+var validateEmail = function(elementValue) {
+    var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(elementValue);
+}
+$('.form-group input[type=email]').blur(function() {
+    var value = $(this).val();
+    var valid = validateEmail(value);
+    if (!valid) {
+        $(this).css({
+            color: 'red',
+            border: '1px solid red'
+        });
+        if ($(this).parent().children().length == 2) {
+            $(this).after('<p class=email-wrong>This doesn\'t look like an email</p>');
+        }
+        $(this).closest('.wrapper').find('.btn').css({
+            pointerEvents: 'none',
+            opacity: 0.5,
+            cursor: 'not-allowed',
+            userSelect: 'none'
+        });
+    } else {
+        $(this).css({
+            color: '#495057',
+            border: '1px solid #e6e2f5'
+        });
+        $(this).next().remove();
+        $(this).closest('.wrapper').next().find('.btn').css({
+            pointerEvents: 'auto',
+            opacity: 1,
+            cursor: 'pointer',
+            userSelect: 'auto'
+        });
+    }
+});
+
 $('.img-big-wrap').zoom();
 $('a[data-rel^=lightcase]').lightcase();
