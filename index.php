@@ -3500,7 +3500,7 @@
 						</div>
 
 						<div class="newsletter-form">
-							<label for="mailing">Subscribe our newsletter</label>
+							<label for="mailing" action="subscribe.php" method="post" id="newsletter" name="newsletter">Subscribe our newsletter</label>
 							<input type="email" id="mailing" name="email" placeholder="Enter Your E-mail...">
 							<button type="submit" name="subscribe">
 								<i class="fa fa-envelope"></i>

@@ -1,4 +1,4 @@
-</script>
+
 <!--Magnify -->
 
 <!-- Custom Scripts -->
@@ -16,13 +16,13 @@ $(function(){
       data: product,
       dataType: 'json',
       success: function(response){
-        $('#callout').show();
+        $('.callout').show();
         $('.message').html(response.message);
         if(response.error){
-          $('#callout').removeClass('callout-success').addClass('callout-danger');
+          $('.callout').removeClass('callout-success').addClass('callout-danger');
         }
         else{
-        $('#callout').removeClass('callout-danger').addClass('callout-success');
+        $('.callout').removeClass('callout-danger').addClass('callout-success');
         getCart();
         }
       }
@@ -30,7 +30,7 @@ $(function(){
   });
 
   $(document).on('click', '.close', function(){
-    $('#callout').hide();
+    $('.callout').hide();
   });
 
 });
@@ -47,3 +47,5 @@ function getCart(){
   });
 }
 </script>
+
+

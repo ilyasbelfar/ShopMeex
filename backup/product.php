@@ -104,6 +104,8 @@
     }
     catch(PDOException $e){
         echo "There is some problem in connection: " . $e->getMessage();
+        header("location: 404.php");
+            
     }
 
     
@@ -133,6 +135,7 @@
     <link rel="stylesheet" type="text/css" href="css/nice-select.css">
     <link rel="stylesheet" type="text/css" href="css/lightcase.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
 </head>
 
 <body>
@@ -472,16 +475,15 @@
 
                        <form class="form-inline" id="productForm">
                                 <div class="form-group">
+                                    <label>Quantity</label>
                                     <div class="input-group col-sm-5">
-                                        
-                                        <span class="input-group-btn">
-                                            <button type="button" id="minus" class="btn btn-default btn-flat btn-lg"><i class="fa fa-minus"></i></button>
-                                        </span>
+                                        <div class="input-group-btn">
+                                            <button type="button" id="minus" class="btn btn-default btn-flat btn-lg"> - </button>
+                                        </div>
                                         <input type="text" name="quantity" id="quantity" class="form-control input-lg" value="1">
-                                        <span class="input-group-btn">
-                                            <button type="button" id="add" class="btn btn-default btn-flat btn-lg"><i class="fa fa-plus"></i>
-                                            </button>
-                                        </span>
+                                        <div class="input-group-btn">
+                                            <button type="button" id="add" class="btn btn-default btn-flat btn-lg"> + </button>
+                                        </div>
                                         <input type="hidden" value="<?php echo $product['prodid']; ?>" name="id">
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-lg btn-flat"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
@@ -677,7 +679,7 @@
                                             </a>
                                         </div>
                                         <div class='product-action-2'>
-                                            <a href='#' title='Add To Cart'>Add To Cart<i class='fa fa-shopping-cart'></i></a>
+                                            <a href='#' title='Add To Cart'><i class='fa fa-shopping-cart'></i>Add To Cart</a>
                                         </div>
                                     </div>
                                 </div>
@@ -740,6 +742,7 @@
     </div>
 
     <!-- End NewsLetter -->
+    
 
     <!-- Start Footer -->
 
@@ -817,7 +820,10 @@
         jQuery(document).ready(function($) {});
     </script>
     <script src="js/custom.js"></script>
-
+    <script type="text/javascript">
+        $('.img-big-wrap').zoom();
+        $('a[data-rel^=lightcase]').lightcase();
+    </script>
 
 
 

@@ -224,6 +224,17 @@ INSERT INTO `users` (`id`,`username`, `email`, `password`, `type`, `firstname`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `signups`
+--
+
+CREATE TABLE `signups` (
+  `id` int(11) NOT NULL,
+  `signup_email_address` varchar(50) NOT NULL,
+  `signup_date` varchar(20) NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+--
 -- Table structure for table `wishlist`
 --
 
@@ -324,6 +335,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `wishlist`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  
+--
+-- Indexes for table `signups`
+--
+ALTER TABLE `signups`
+  ADD PRIMARY KEY (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

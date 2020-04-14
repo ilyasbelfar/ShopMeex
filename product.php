@@ -18,9 +18,9 @@
 
     try{          
 
-	  
-	    
-    	//getting product from database
+      
+        
+        //getting product from database
         $stmt = $db->prepare("SELECT *, products.name AS prodname, category.name AS catname, products.id AS prodid,
         category.id as catid FROM products LEFT JOIN category ON category.id=products.category_id WHERE products.slug = :slug");
         $stmt->execute(['slug' => $slug]);//id product;
@@ -54,14 +54,14 @@
         }
 
         // getting the reviews
-       	$stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid  ");
+        $stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid  ");
         $stmt->execute(['prodid'=>$product['prodid']]);
-		$reviews = $stmt->fetchAll();
+        $reviews = $stmt->fetchAll();
 
         //getting total number of reviews
         $stmt=$db->prepare("SELECT * from review WHERE product_id=:prodid  ");
         $stmt->execute(['prodid'=>$product['prodid']]);
-		$nbreview= $stmt->rowCount();// return the number of ligne in table resulted;
+        $nbreview= $stmt->rowCount();// return the number of ligne in table resulted;
 
         //getting the total_review for the product ;
         $sum=0;
@@ -77,23 +77,23 @@
         $stmt=$db->prepare("UPDATE products SET total_rating=:totalra WHERE id=:id");
         $stmt->execute(['totalra'=>$total_rating,'id'=>$product['prodid']]);
 
-		//getting the owner of the prodct from the data base
-		$stmt=$db->prepare("SELECT * FROM users Where id=:owner");
-		$stmt->execute(['owner'=>$product['owner_id']]);
-		$owner=$stmt->fetch();
+        //getting the owner of the prodct from the data base
+        $stmt=$db->prepare("SELECT * FROM users Where id=:owner");
+        $stmt->execute(['owner'=>$product['owner_id']]);
+        $owner=$stmt->fetch();
 
-		//upadating the counter 
-	    if($product['date_view'] == $now){
-	        $stmt = $db->prepare("UPDATE products SET counter=counter+1 WHERE id=:id");
-	        $stmt->execute(['id'=>$product['prodid']]);
-	    }
-	    else{
-	        $stmt = $db->prepare("UPDATE products SET counter=1, date_view=:now WHERE id=:id");
-	        $stmt->execute(['id'=>$product['prodid'], 'now'=>$now]);
-	    }
+        //upadating the counter 
+        if($product['date_view'] == $now){
+            $stmt = $db->prepare("UPDATE products SET counter=counter+1 WHERE id=:id");
+            $stmt->execute(['id'=>$product['prodid']]);
+        }
+        else{
+            $stmt = $db->prepare("UPDATE products SET counter=1, date_view=:now WHERE id=:id");
+            $stmt->execute(['id'=>$product['prodid'], 'now'=>$now]);
+        }
 
 
-	    
+        
         // getting related product 
         $stmt=$db->prepare("SELECT * from products where category_id=:catid  EXCEPT SELECT * FROM products where id=:prodid limit 8 ");
         $stmt->execute(['catid'=>$product['catid'],'prodid'=>$product['prodid']]);
@@ -104,6 +104,8 @@
     }
     catch(PDOException $e){
         echo "There is some problem in connection: " . $e->getMessage();
+        header("location: 404.php");
+            
     }
 
     
@@ -133,7 +135,7 @@
     <link rel="stylesheet" type="text/css" href="css/nice-select.css">
     <link rel="stylesheet" type="text/css" href="css/lightcase.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
 </head>
 
 <body>
@@ -570,32 +572,32 @@
                                     <div id="comments">
                                         <h2 class="reviews-title"><?php echo $nbreview ?> <span> reviews </span></h2>
                                          <ol class="commentlist">
-                                         	<?php  
-                                         		foreach ($reviews as $row) {	
-                                         			echo 
-		                                            "<li id='li-comment-11'>
-		                                                <div id='comment-11' class='comment_container'>
-		                                                    <img alt='' src='images/users/".$row['photo']."' srcset='
-		                                                    images/users/".$row['photo']."' class='avatar avatar-60 photo' height='60' width='60'>
-		                                                    <div class='clearfix'></div>
-		                                                    <div class='comment-text'>
-		                                                        <div class='star-rating' aria-label='Rated 4 out of 5'>
-		                                                            <span style='width:".$row['ratper']."%'>Rated <strong class='rating'>4</strong> out of 5</span>
-		                                                            <div class='clearfix'></div>
-		                                                        </div>
-		                                                        <p class='meta'>
-		                                                            <strong class='review__author'>".$row['firstname']." ".$row['lastname']." </strong>
-		                                                            <span class='review__dash'>–</span>
-		                                                            <time class='review__published-date' datetime='2020-05-10T14:02:51+01:00'>".$row['date']."</time>
-		                                                        </p>
+                                            <?php  
+                                                foreach ($reviews as $row) {    
+                                                    echo 
+                                                    "<li id='li-comment-11'>
+                                                        <div id='comment-11' class='comment_container'>
+                                                            <img alt='' src='images/users/".$row['photo']."' srcset='
+                                                            images/users/".$row['photo']."' class='avatar avatar-60 photo' height='60' width='60'>
+                                                            <div class='clearfix'></div>
+                                                            <div class='comment-text'>
+                                                                <div class='star-rating' aria-label='Rated 4 out of 5'>
+                                                                    <span style='width:".$row['ratper']."%'>Rated <strong class='rating'>4</strong> out of 5</span>
+                                                                    <div class='clearfix'></div>
+                                                                </div>
+                                                                <p class='meta'>
+                                                                    <strong class='review__author'>".$row['firstname']." ".$row['lastname']." </strong>
+                                                                    <span class='review__dash'>–</span>
+                                                                    <time class='review__published-date' datetime='2020-05-10T14:02:51+01:00'>".$row['date']."</time>
+                                                                </p>
 
-		                                                        <div class='description'>
-		                                                            <p>".$row['comment']."</p>
-		                                                        </div>
-		                                                    </div>
-		                                                </div>
-		                                            </li>  " ;
-		                                        }
+                                                                <div class='description'>
+                                                                    <p>".$row['comment']."</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>  " ;
+                                                }
                                             ?>
                                         </ol>
                                     </div>
@@ -650,6 +652,13 @@
                 </div>
                 <section class="related-products">
                     <h2>Related products</h2>
+
+                     <div class="callout1" id="callout1" style="display:none">
+                             <button type="button" class="close1"><span aria-hidden="true">&times;</span></button>
+                                <span class="message1"></span>
+                                
+                             </div>
+
                     
                     <div class="related-wrapper">
                     <?php 
@@ -676,15 +685,53 @@
                                                 <span>Add To Compare</span>
                                             </a>
                                         </div>
+
+
+
+
+
+
+
+
+
+
+
                                         <div class='product-action-2'>
-                                            <a href='#' title='Add To Cart'><i class='fa fa-shopping-cart'></i>Add To Cart</a>
-                                        </div>
+                                 
+
+                           
+            
+                       
+                        <form action='cart_add.php' method='post' class='myform'>
+                            <input type='hidden' name='id' value='".$row['id']."' />
+                            <input type='hidden' name='quantity' value='1' />
+
+                        <button type='submit' class='btn btn-primary btn-lg btn-flat'><i class='fa fa-shopping-cart'></i> Add to Cart</button>
+                      
+
+</form>
+           
+
+
+
+
+
+                            </div>
+
+
+
+
+
+
+
+
+
                                     </div>
                                 </div>
                                 <div class='product-content'>
                                     <h3>
-									<a href='#'>".$row['name']."</a>
-																	</h3>
+                                    <a href='#'>".$row['name']."</a>
+                                                                    </h3>
                                     <div class='product-price-rating'>
                                         <span title='Price'>$".number_format($row['price'], 2)."</span>
                                         <ul title='Rating'>
@@ -717,6 +764,7 @@
     </div>
 
     <!-- End Product Details -->
+  
 
     <!-- Start NewsLetter -->
 
@@ -740,7 +788,7 @@
     </div>
 
     <!-- End NewsLetter -->
-
+   
     <!-- Start Footer -->
 
     <footer id="main-footer">
@@ -845,6 +893,41 @@ $(function(){
 </script>
 
     <?php include 'includes/script.php'; ?>
+
+    <script>  
+$('.myform').submit(function(){
+    // `this` is the instance of myForm class the event occurred on
+
+    
+    var product = $(this).serialize();
+    $.ajax({
+      type: 'POST',
+      url: 'cart_add.php',
+      data: product,
+      dataType: 'json',
+      success: function(response){
+        $('.callout1').show();
+        $('.message1').html(response.message);
+        if(response.error){
+          $('.callout1').removeClass('callout-success').addClass('callout-danger');
+        }
+        else{
+        $('.callout1').removeClass('callout-danger').addClass('callout-success');
+        getCart();
+        }
+      }
+    });
+
+
+    getCart();
+
+    return false;
+});
+  $(document).on('click', '.close1', function(){
+    $('.callout1').hide();
+  });
+
+</script>
 </body>
 
 </html>
