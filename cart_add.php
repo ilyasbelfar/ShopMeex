@@ -7,6 +7,9 @@
 
 	$id = $_POST['id'];
 	$quantity = $_POST['quantity'];
+	
+
+
 
 	if(isset($_SESSION['id'])){
 		$stmt = $db->prepare("SELECT *, COUNT(*) AS numrows FROM cart WHERE user_id=:user_id AND product_id=:product_id");
@@ -58,7 +61,7 @@
 		}
 
 	}
-
+	
 	
 	echo json_encode($output);
 
