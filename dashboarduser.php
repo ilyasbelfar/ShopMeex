@@ -683,7 +683,11 @@ $emailInsErr="";
                                             <option value="UG">Uganda</option>
                                             <option value="UA">Ukraine</option>
                                             <option value="AE">United Arab Emirates</option>
-                                            <option value="US" selected="selected">United Kingdom</option>
+                                            <option value="<?php if(!empty($info['country']))                                             echo $info['country'];
+                                            else echo 'US';
+                                             ?>" selected="selected"><?php if(!empty($info['country']))                                             echo $info['country'];
+                                            else echo 'US';
+                                             ?></option>
                                             <option value="UY">Uruguay</option>
                                             <option value="UM">U.S. Minor Outlying Islands</option>
                                             <option value="VI">U.S. Virgin Islands</option>
@@ -704,7 +708,9 @@ $emailInsErr="";
                                     <div class="form-group">
                                         <label for="state-province">State / Divition<span>*</span></label>
                                         <select name="state-province" id="state-province">
-                                            <option value="state" selected="selected">New Yourk</option>
+                                            <option value="<?php if (!empty($info['state'] )) echo $info['state'];
+                                            else echo 'New York';?>" selected="selected"><?php if (!empty($info['state'] )) echo $info['state'];
+                                            else echo 'New York';?>                                          </option>
                                             <option>Los Angeles</option>
                                             <option>Chicago</option>
                                             <option>Houston</option>
