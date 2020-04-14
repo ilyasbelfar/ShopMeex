@@ -44,9 +44,9 @@ $emailInsErr="";
             $email=$info['email'];
             
         if (isset($_POST['username']))
-            $user=$_POST['username'];
+            $userr=$_POST['username'];
         else
-            $user=$info['username'];
+            $userr=$info['username'];
             
         if (isset($_POST['company_name']))
             $contact=$_POST['company_name'];
@@ -87,7 +87,7 @@ $emailInsErr="";
         $stmt->execute(array($fname,$lname,$email,$user,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
         
         if ($stmt) 
-            header("Location: dashboarduser.php?user=$user");
+            header("Location: dashboarduser.php?user=$userr");
          else 
              echo '404';
         }
