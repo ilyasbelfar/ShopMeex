@@ -6,7 +6,7 @@
         $info = $getUser->fetch();
         $emailid = $info['email'];
     }
-$emailInsErr="";
+$emailInsErr=$userErr="";
     function test_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -43,8 +43,19 @@ $emailInsErr="";
         else
             $email=$info['email'];
             
-        if (isset($_POST['username']))
+        if (isset($_POST['username'])&&($_POST['username']!=$info['username'])){
             $userr=$_POST['username'];
+            $st=$db->prepare('SELECT username from users where username=?');
+            $st->execute(array($userr));
+            $countt=$st->rowCount();
+            if ($countt>0){  
+                $userErr="Username Already Taken";
+                unset($st);
+            }
+            
+            else 
+                $_SESSION["username"] = $userr;
+        }
         else
             $userr=$info['username'];
             
@@ -82,7 +93,7 @@ $emailInsErr="";
             $postal=$_POST['zip-code'];
             else
             $postal=$info['postal'];
-        if (empty($emailInsErr)){
+        if (empty($emailInsErr)&&empty($userErr)){
         $stmt=$db->prepare('UPDATE users set firstname=?,lastname=?,email=?,username=?,contact_info=?,country=?,state=?,address=?,address2=?,city=?,postal=? where email=?');
         $stmt->execute(array($fname,$lname,$email,$userr,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
         
@@ -776,7 +787,7 @@ $emailInsErr="";
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="username">Username<span>*</span></label>
+                                        <label for="username">Username<span>*<?php echo $userErr; ?></span></label>
                                         <input id="username" name="username" type="text" placeholder="" value="<?php echo $info['username']; ?>">
                                     </div>
                                 </div>
