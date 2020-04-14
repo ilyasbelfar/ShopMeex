@@ -230,7 +230,7 @@ INSERT INTO `users` (`id`,`username`, `email`, `password`, `type`, `firstname`, 
 CREATE TABLE `signups` (
   `id` int(11) NOT NULL,
   `signup_email_address` varchar(50) NOT NULL,
-  `signup_date` varchar(20) NOT NULL,
+  `signup_date` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
