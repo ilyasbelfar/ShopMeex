@@ -84,7 +84,7 @@ $emailInsErr="";
             $postal=$info['postal'];
         if (empty($emailInsErr)){
         $stmt=$db->prepare('UPDATE users set firstname=?,lastname=?,email=?,username=?,contact_info=?,country=?,state=?,address=?,address2=?,city=?,postal=? where email=?');
-        $stmt->execute(array($fname,$lname,$email,$user,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
+        $stmt->execute(array($fname,$lname,$email,$userr,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
         
         if ($stmt) 
             header("Location: dashboarduser.php?user=$userr");
