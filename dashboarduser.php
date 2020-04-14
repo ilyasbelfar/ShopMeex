@@ -47,8 +47,8 @@ $emailInsErr=$userErr="";
             $userr=$_POST['username'];
             $st=$db->prepare('SELECT username from users where username=?');
             $st->execute(array($userr));
-            $countt=$st->rowCount();
-            if ($countt>0){  
+            $count=$st->rowCount();
+            if ($count>0){  
                 $userErr="Username Already Taken";
                 unset($st);
             }
