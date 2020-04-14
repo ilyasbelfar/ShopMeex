@@ -13,13 +13,13 @@
     
     //Initialising variables
 
-    $email=$pass='';
+    $email=$pass=$userr='';
     $emailErr=$passErr='';
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         
        
-        $email= trim($_POST["email"]);//trim function removes whitespaces;
+        $login= trim($_POST["login"]);//trim function removes whitespaces;
         $salt="^%r8yuyg";//create our salt; salt is String added to password // way of encrption on database;
         $pass = sha1(filter_var($_POST["password"].$salt, FILTER_SANITIZE_STRING));// sha1 function to transform the password into long String; known as hashing method;
         //$pass= $_POST["password"];
@@ -27,17 +27,17 @@
         //Check if user exist in DataBase
         
         
-        $sql = "SELECT id, email, password FROM users WHERE email = :email";
+        $sql = "SELECT * FROM users WHERE email = :login OR username= :login";
         
         if($stmt = $db->prepare($sql)){
             
             // Bind variables to the prepared statement as parameters
             
-            $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
+            $stmt->bindParam(":login", $param_login, PDO::PARAM_STR);
             
             // Set parameters
             
-            $param_email = $email;
+            $param_login = $login;
             
             // Attempt to execute the prepared statement
             
@@ -49,6 +49,7 @@
                     if($row = $stmt->fetch()){
                         $id = $row["id"];
                         $email = $row["email"];
+                        $userr=$row["username"];
                         $password = $row["password"];
                         if($pass==$password){
                             
@@ -71,6 +72,8 @@
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["email"] = $email;
+                            $_SESSION["username"]= $userr;
+                            //$_SESSION["username"]=$userr;
                         
                             // Redirect user to welcome page
                             
@@ -355,8 +358,8 @@
 								</div>
 								<form action="login.php" method="post">
                                     <div class="form-group">
-                                        <label for="email">E-mail<span>*<?php echo $emailErr; ?></span></label>
-                                        <input name="email" type="text" placeholder="E-mail" value="<?php echo (isset($_COOKIE['email'])) ? $_COOKIE['email']: ''?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                                        <label for="email">Username / E-Mail<span>*<?php echo $emailErr; ?></span></label>
+                                        <input name="login" type="text" placeholder="E-mail" value="<?php echo (isset($_COOKIE['email'])) ? $_COOKIE['email']: ''?>" required >
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Password<span>*<?php echo $passErr; ?></span></label>
