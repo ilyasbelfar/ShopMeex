@@ -53,3 +53,7 @@ Souhil
 I have added new table 'signups' for newsletter, which contain these rows(id,signup_email_address, signup_date);
 
 -----------------------**********************************------------------------------------------
+15/04/2020 06:29
+Abdou
+
+I have add new table 'subscribers' for the newsletter which contain (id,name,email,verify_code,is_verified,created,modified,statue)
