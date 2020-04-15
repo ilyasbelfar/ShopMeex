@@ -342,6 +342,19 @@ ALTER TABLE `wishlist`
 ALTER TABLE `signups`
   ADD PRIMARY KEY (`id`);
 COMMIT;
+----------------------------------
+--Table structure for table `subscribers`
+CREATE TABLE `subscribers` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+ `email` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+ `verify_code` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+ `is_verified` tinyint(1) NOT NULL DEFAULT '0',
+ `created` datetime NOT NULL,
+ `modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ `status` tinyint(1) NOT NULL DEFAULT '1',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
