@@ -1,12 +1,14 @@
 <?php
     include 'includes/session.php';
+
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
         $getUser = $db->prepare("SELECT * FROM users WHERE email = ?");
         $getUser->execute(array($_SESSION["email"]));
         $info = $getUser->fetch();
         $emailid = $info['email'];
+        
     }
-$emailInsErr=$userErr="";
+    $emailInsErr=$userErr=$msg=$msgerr="";
     function test_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -93,7 +95,36 @@ $emailInsErr=$userErr="";
             $postal=$_POST['zip-code'];
             else
             $postal=$info['postal'];
-        if (empty($emailInsErr)&&empty($userErr)){
+
+        //Password
+        if (isset($_POST['password_current'])){
+
+            $password = $info["password"];
+            $pass=$_POST['password_current'];
+            if($pass==$password){
+                
+                if(empty($_POST['password_1']) OR empty($_POST['password_2']))
+                    $msgerr="Please fill the fields";
+                else if($_POST['password_1']==$_POST['password_2']) {
+
+
+                $stm=$db->prepare('UPDATE users set password=? where email=?');
+                $stm->execute(array($_POST['password_1'],$emailid));
+                $msgerr='Password changed successefully ';
+                } 
+                else
+                    $msgerr='two Password did not match';
+
+
+
+            }
+            else 
+                 
+                $msgerr='current password incorrect';
+
+
+        }      
+        if (empty($emailInsErr)&&empty($userErr)&&empty($msgerr)){
         $stmt=$db->prepare('UPDATE users set firstname=?,lastname=?,email=?,username=?,contact_info=?,country=?,state=?,address=?,address2=?,city=?,postal=? where email=?');
         $stmt->execute(array($fname,$lname,$email,$userr,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
         
@@ -103,6 +134,7 @@ $emailInsErr=$userErr="";
              echo '404';
         }
  }
+
 ?>
 
 
@@ -433,7 +465,7 @@ $emailInsErr=$userErr="";
                     </div>
 
                     <div class="paneltbs panel-4" id="addresses" style="display: none;">
-                        <form class="form" method="post" action="dashboarduser.php">
+                        <form class="form" method="post" action="<?php echo $_server['php_self']; ?>">
                             <div class="row">
                                 <div class="col-401">
                                     <div class="form-group">
@@ -449,7 +481,7 @@ $emailInsErr=$userErr="";
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="mail">Email Address<span>*<?php echo $emailInsErr; ?></span></label>
+                                        <label for="mail">Email Address<span>*<?php if ($_SERVER['REQUEST_METHOD']=='POST') echo $emailInsErr; ?></span></label>
                                         <input id="mail" name="email" type="email" placeholder="" value="<?php echo $info['email']; ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                     </div>
                                 </div>
@@ -759,6 +791,7 @@ $emailInsErr=$userErr="";
                                     <div class="form-group">
                                         <button type="submit" class="button" name="save_account_details" value="Save changes">Save changes</button>
                                     </div>
+                                    <div><?php echo $msgerr;?></div>
                                 </div>
                             </div>
                         </form>
@@ -781,7 +814,8 @@ $emailInsErr=$userErr="";
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="mail">Email Address<span>*<?php echo $emailInsErr; ?></span></label>
+                                        <label for="mail">Email Address<span>*<?php echo $emailInsErr; 
+            ?></span></label>
                                          <input id="mail" name="email" type="email" placeholder="" value="<?php echo $info['email']; ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                     </div>
                                 </div>
@@ -819,6 +853,7 @@ $emailInsErr=$userErr="";
                                 <div class="col-401">
                                     <div class="form-group">
                                         <button type="submit" class="button" name="save_account_details" value="Save changes">Save changes</button>
+                                         <div><?php echo $msgerr;?></div>
                                     </div>
                                 </div>
                             </div>
