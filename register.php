@@ -402,27 +402,27 @@
                                     <div class="form-group">
                                         <label for="email">Username<span>*</span></label>
                                         <input name="username" type="text" placeholder="Username"  id="user" 
-                                        value="<?php echo (isset($_POST['username'])) ? $_POST['username']: ''?>" required pattern="[a-zA-Z0-9\s]+">
+                                        value="<?php if (isset($_POST['username'])) echo $_POST['username']; ?>" required pattern="[a-zA-Z0-9\s]+">
                                     <p class="error-form"><?php echo $usererr; ?></p>
                                         
                                     </div>
                                     <div class="form-group">
                                         <label for="email">E-mail<span>*</span></label>
                                         <input name="email" type="email" placeholder="ex. name@mail.com"  id="email" 
-                                        value="<?php echo (isset($_POST['email'])) ? $_POST['email']: ''?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                                        value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                     <p class="error-form"><?php echo $emailInsErr; ?></p>    
                                     </div>
                                     <div class="form-group">
                                         <label for="addresss">Address<span>*</span></label>
                                         <input name="address" type="text" placeholder="Address" id="addresss"
-                                        value="<?php echo (isset($_POST['address'])) ? $_POST['address']: ''?>" required>
+                                        value="<?php if (isset($_POST['address'])) echo $_POST['address']; ''?>" required>
                                     </div>
                                     <div class="row">
                                         <div class="col-401">
                                             <div class="form-group">
                                                 <label for="pass">Password<span>*</span></label>
                                                 <input id="pass" name="password" type="password" placeholder="Password" required >
-                                                <p class="error-form"><?php echo $repassErr; ?></p>
+                                                <p class="error-form"><?php  echo $repassErr; ?></p>
                                             </div>
                                         </div>
                                         <div class="col-401">
