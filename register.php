@@ -403,14 +403,14 @@
                                         <label for="email">Username<span>*</span></label>
                                         <input name="username" type="text" placeholder="Username"  id="user" 
                                         value="<?php echo (isset($_POST['username'])) ? $_POST['username']: ''?>" required pattern="[a-zA-Z0-9\s]+">
-                                    <div class="error-form"><?php echo $usererr; ?></div>
+                                    <p class="error-form"><?php echo $usererr; ?></p>
                                         
                                     </div>
                                     <div class="form-group">
                                         <label for="email">E-mail<span>*</span></label>
                                         <input name="email" type="email" placeholder="ex. name@mail.com"  id="email" 
                                         value="<?php echo (isset($_POST['email'])) ? $_POST['email']: ''?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
-                                    <div class="error-form"><?php echo $emailInsErr; ?></div>    
+                                    <p class="error-form"><?php echo $emailInsErr; ?></p>    
                                     </div>
                                     <div class="form-group">
                                         <label for="addresss">Address<span>*</span></label>
@@ -422,7 +422,7 @@
                                             <div class="form-group">
                                                 <label for="pass">Password<span>*</span></label>
                                                 <input id="pass" name="password" type="password" placeholder="Password" required >
-                                                <div class="error-form"><?php echo $repassErr; ?></div>
+                                                <p class="error-form"><?php echo $repassErr; ?></p>
                                             </div>
                                         </div>
                                         <div class="col-401">

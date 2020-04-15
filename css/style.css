@@ -2575,11 +2575,9 @@ form .col-401 {
     font-size: 15px;
 }
 .error-form{
-    color: #ff2c18;
-    display: contents;
-    position: absolute;
-    right: -12px;
-    font-size: 15px;
+   color:red;
+   margin-top:3px;
+   font-size:14px;
 }
 
 .form-group>input {

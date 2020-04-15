@@ -358,18 +358,20 @@
 								</div>
 								<form action="login.php" method="post">
                                     <div class="form-group">
-                                        <label for="email">Username / E-Mail<span>*<?php echo $emailErr; ?></span></label>
+                                        <label for="email">Username / E-Mail<span>*</span></label>
                                         <input name="login" type="text" placeholder="E-mail" value="<?php echo (isset($_COOKIE['email'])) ? $_COOKIE['email']: ''?>" required >
+                                    <p class="error-form"><?php echo $emailErr; ?></p>
                                     </div>
                                     <div class="form-group">
-                                        <label for="password">Password<span>*<?php echo $passErr; ?></span></label>
+                                        <label for="password">Password<span>*</span></label>
                                         <input name="password" type="password" placeholder="Password"  id="password" value="<?php echo (isset($_COOKIE['password'])) ? $_COOKIE['password']: ''?>" required>
+                                        <p class="error-form"><?php echo $passErr; ?></p>
                                     </div>
                                     <div class="form-group">
                                         <a href="forgotpass.php" class="float-right">Forgot password?</a> 
                                         <label for="check" class="float-left custom-control custom-checkbox">
                                             <input id="check" type="checkbox" class="custom-control-input"  name="remember">
-                                            <div class="custom-control-label"> Remember Me </div>
+                                            <p class="custom-control-label"> Remember Me </p>
                                         </label>
                                     </div>
                                     <div class="clearfix"></div>
