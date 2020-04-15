@@ -400,16 +400,17 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="email">Username<span>*<?php echo $usererr; ?></span></label>
+                                        <label for="email">Username<span>*</span></label>
                                         <input name="username" type="text" placeholder="Username"  id="user" 
                                         value="<?php echo (isset($_POST['username'])) ? $_POST['username']: ''?>" required pattern="[a-zA-Z0-9\s]+">
+                                    <div class="error-form"><?php echo $usererr; ?></div>
                                         
                                     </div>
                                     <div class="form-group">
-                                        <label for="email">E-mail<span>*<?php echo $emailInsErr; ?></span></label>
+                                        <label for="email">E-mail<span>*</span></label>
                                         <input name="email" type="email" placeholder="ex. name@mail.com"  id="email" 
                                         value="<?php echo (isset($_POST['email'])) ? $_POST['email']: ''?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
-                                        
+                                    <div class="error-form"><?php echo $emailInsErr; ?></div>    
                                     </div>
                                     <div class="form-group">
                                         <label for="addresss">Address<span>*</span></label>
@@ -419,8 +420,9 @@
                                     <div class="row">
                                         <div class="col-401">
                                             <div class="form-group">
-                                                <label for="pass">Password<span>*<?php echo $repassErr; ?></span></label>
+                                                <label for="pass">Password<span>*</span></label>
                                                 <input id="pass" name="password" type="password" placeholder="Password" required >
+                                                <div class="error-form"><?php echo $repassErr; ?></div>
                                             </div>
                                         </div>
                                         <div class="col-401">
