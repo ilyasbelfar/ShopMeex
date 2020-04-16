@@ -1,3 +1,47 @@
+<?php
+
+include 'includes/connect.php';
+
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
+    $name = $_POST['name'];
+    $subject = $_POST['subject'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $message = $_POST['message'];
+    
+    $sql = "INSERT INTO contact(name,subject,email,phone,message) VALUES(:name,:subject,:email,:phone,:message)";
+    $query = $db->prepare($sql);
+    
+    $query->bindParam(':name',$name,PDO::PARAM_STR);
+    $query->bindParam(':subject',$subject,PDO::PARAM_STR);
+    $query->bindParam(':email',$email,PDO::PARAM_STR);
+    $query->bindParam(':phone',$phone,PDO::PARAM_STR);
+    $query->bindParam(':message',$message,PDO::PARAM_STR);
+    
+    $query->execute();
+    
+    $to = 'gikiy98087@emailhost99.com';
+	$ms = '';
+	$headers = "From : " . $email;
+	
+    $headers .= ' From:ShopMeex Contact Form <'.$email.'>';
+    $ms.="<html></body><div>
+    <div><b>Name:</b> $name,</div>
+    <div><b>Subject:</b> $subject,</div>
+    <div><b>Phone Number:</b> $phone,</div>
+    <div><b>Email:</b> $email,</div>";
+    $ms.="<div style='padding-top:8px;'><b>Message: </b>$message</div></div></body></html>";
+	
+	if (mail($to, $subject, $ms, $headers)) {
+		echo "<script>alert('Your info submitted successfully.');</script>";
+	} else {
+	    echo "<script>alert('Something went wrong. Please try again');</script>";
+	}
+}
+
+?>
+
 <!DOCTYPE html>
 	<html>
 		<head>
@@ -250,36 +294,36 @@
 									<h4>Get in touch</h4>
 									<h3>Write us a message</h3>
 								</div>
-								<form class="form" method="post" action="mail/mail.php">
+								<form class="form" method="post">
 									<div class="row">
 										<div class="col-401">
 											<div class="form-group">
 												<label for="name">Your Name<span>*</span></label>
-												<input id="name" name="name" type="text" placeholder="">
+												<input id="name" name="name" type="text" placeholder="" required>
 											</div>
 										</div>
 										<div class="col-401">
 											<div class="form-group">
-												<label for="subject">Your Subjects<span>*</span></label>
-												<input name="subject" type="text" placeholder="" id="subject">
+												<label for="subject">Your Subject<span>*</span></label>
+												<input name="subject" type="text" placeholder="" id="subject" required>
 											</div>
 										</div>
 										<div class="col-401">
 											<div class="form-group">
 												<label for="mail">Your Email<span>*</span></label>
-												<input id="mail" name="email" type="email" placeholder="">
+												<input id="mail" name="email" type="email" placeholder="" required>
 											</div>	
 										</div>
 										<div class="col-401">
 											<div class="form-group">
 												<label for="phone">Your Phone<span>*</span></label>
-												<input id="phone" name="company_name" type="text" placeholder="">
+												<input id="phone" name="phone" type="text" placeholder="">
 											</div>	
 										</div>
 										<div class="col-15">
 											<div class="form-group message">
-												<label for="message">your message<span>*</span></label>
-												<textarea id="message" name="message" placeholder=""></textarea>
+												<label for="message">Your Message<span>*</span></label>
+												<textarea id="message" name="message" placeholder="" required></textarea>
 											</div>
 										</div>
 										<div class="col-15">
