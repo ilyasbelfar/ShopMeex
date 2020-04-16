@@ -22,7 +22,8 @@
 		</head>
 		
 		<body>
-			<a href="http://free-website-translation.com/" id="ftwtranslation_button" hreflang="en" title="" style="border:0;"><img src="http://free-website-translation.com/img/fwt_button_en.gif" id="ftwtranslation_image" alt="website translator plugin" style="border:0;"/></a> <script type="text/javascript" src="http://free-website-translation.com/scripts/fwt.js" /></script>
+			<a href="http://free-website-translation.com/" id="ftwtranslation_button" hreflang="en" title="" style="border:0;"><img src="http://free-website-translation.com/img/fwt_button_en.gif" id="ftwtranslation_image" alt="website translator plugin" style="border:0;"/></a>
+			<script type="text/javascript" src="http://free-website-translation.com/scripts/fwt.js" /></script>
 			<!-- Start Loader -->
 			<div class="loader_container">
 				<div class="loader__cart">
