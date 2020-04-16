@@ -212,7 +212,7 @@ CREATE TABLE `users` (
   `type` int(1) NOT NULL,
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
-  `gender` int(1) NOT NULL,
+  `gender` int(1) NOT NULL DEFAULT 0,
   `address` text NOT NULL,
   `contact_info` varchar(100) NOT NULL,
   `photo` varchar(200) NOT NULL,
@@ -221,8 +221,7 @@ CREATE TABLE `users` (
   `address2` varchar(200) NOT NULL,
   `city` varchar(200) NOT NULL,
   `postal` varchar(200) NOT NULL,
-  `website` varchar(20) NOT NULL,
-  `token` varchar(200) NOT NULL
+  `website` varchar(20) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
