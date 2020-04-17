@@ -33,6 +33,28 @@ $(function(){
     $('.callout').hide();
   });
 
+
+
+   $(function(){
+    $(document).on('click', '.remove-item-button', function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        $.ajax({
+            type: 'POST',
+            url: 'cart_delete.php',
+            data: {id:id},
+            dataType: 'json',
+            success: function(response){
+                if(!response.error){
+                   
+                    getCart();
+                   
+                }
+            }
+        });
+    });
+    });
+
 });
 
 function getCart(){
@@ -46,6 +68,43 @@ function getCart(){
     }
   });
 }
+
+  
+$('.myform').submit(function(){
+    // `this` is the instance of myForm class the event occurred on
+
+    
+    var product = $(this).serialize();
+    $.ajax({
+      type: 'POST',
+      url: 'cart_add.php',
+      data: product,
+      dataType: 'json',
+      success: function(response){
+        alert(response.message)
+        if(response.error){
+          $('.callout1').removeClass('callout-success').addClass('callout-danger');
+        }
+        else{
+        $('.callout1').removeClass('callout-danger').addClass('callout-success');
+        getCart();
+        }
+      }
+    });
+
+
+   
+
+    return false;
+});
+  $(document).on('click', '.close1', function(){
+    $('.callout1').hide();
+  });
+
+
+
+
+
 </script>
 
 

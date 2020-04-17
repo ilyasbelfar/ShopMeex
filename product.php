@@ -254,33 +254,10 @@
                                             <div class="no-item">
                                                 <p class="empty-msg">No products in the cart.</p>
                                             </div>
-                                            <div class="mini-menu">
+                                            <div class="mini-menu" >
                                                 <div class="shopping-cart-widget">
-                                                    <ul class="products-list">
-                                                        <li class="product-item">
-                                                            <a href="#" class="remove-item-button">×</a>
-                                                            <a href="#" class="item-details">
-                                                                <img width="300" height="300" src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg 800w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-150x150.jpg 150w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-300x300.jpg 300w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-768x768.jpg 768w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-660x660.jpg 660w" sizes="(max-width: 300px) 100vw, 300px">Basic t-shirt
-                                                            </a>
-                                                            <div class="clearfix"></div>    
-                                                            <span class="quantitys">1 × <span>$<span class="total-amount">7.99</span></span></span>    
-                                                        </li>
-                                                        <li class="product-item">
-                                                            <a href="#" class="remove-item-button">×</a>
-                                                            <a href="#" class="item-details">
-                                                                <img width="300" height="300" src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg 800w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-150x150.jpg 150w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-300x300.jpg 300w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-768x768.jpg 768w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-660x660.jpg 660w" sizes="(max-width: 300px) 100vw, 300px">Basic t-shirt
-                                                            </a>
-                                                            <div class="clearfix"></div>    
-                                                            <span class="quantitys">1 × <span>$<span class="total-amount">7.99</span></span></span>    
-                                                        </li>
-                                                        <li class="product-item">
-                                                            <a href="#" class="remove-item-button">×</a>
-                                                            <a href="#" class="item-details">
-                                                                <img width="300" height="300" src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg 800w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-150x150.jpg 150w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-300x300.jpg 300w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-768x768.jpg 768w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-660x660.jpg 660w" sizes="(max-width: 300px) 100vw, 300px">Basic t-shirt
-                                                            </a>
-                                                            <div class="clearfix"></div>    
-                                                            <span class="quantitys">1 × <span>$<span class="total-amount">7.99</span></span></span>    
-                                                        </li>
+                                                    <ul class="products-list" id="cart_menu" >
+                                                        
                                                     </ul>
                                                     <p class="total">
                                                         <strong>Subtotal:</strong>
@@ -491,6 +468,9 @@
                             </form>
 
 
+                            <button type='button'  data-id='<?php echo $product['prodid']; ?>' class='add-wishlist'> add to wishlist </button>
+
+
 
 
 
@@ -653,11 +633,7 @@
                 <section class="related-products">
                     <h2>Related products</h2>
 
-                     <div class="callout1" id="callout1" style="display:none">
-                             <button type="button" class="close1"><span aria-hidden="true">&times;</span></button>
-                                <span class="message1"></span>
-                                
-                             </div>
+                   
 
                     
                     <div class="related-wrapper">
@@ -676,10 +652,14 @@
                                                 <i class='ti-eye'></i>
                                                 <span>Quick View</span>
                                             </a>
-                                            <a href='#'>
-                                                <i class='ti-heart '></i>
-                                                <span>Add To Wishlist</span>
-                                            </a>
+
+
+
+                                            <button type='button'  data-id='".$row['id']."' class='add-wishlist'> <i class='ti-heart '></i> </button>
+
+
+
+
                                             <a href='#'>
                                                 <i class='ti-bar-chart-alt'></i>
                                                 <span>Add To Compare</span>
@@ -890,44 +870,37 @@ $(function(){
     });
 
 });
+
+
+  $(function(){
+    $(document).on('click', '.add-wishlist', function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        $.ajax({
+            type: 'POST',
+            url: 'wishlist_add.php',
+            data: {id:id},
+            dataType: 'json',
+            success: function(response){
+                alert( response.message)
+                 if(response.error){
+                 $('.callout').removeClass('callout-success').addClass('callout-danger');
+                  }
+                  else{
+                $('.callout').removeClass('callout-danger').addClass('callout-success');
+       
+                 }
+                }
+        });
+    });
+    });
+
+
 </script>
 
     <?php include 'includes/script.php'; ?>
 
-    <script>  
-$('.myform').submit(function(){
-    // `this` is the instance of myForm class the event occurred on
-
-    
-    var product = $(this).serialize();
-    $.ajax({
-      type: 'POST',
-      url: 'cart_add.php',
-      data: product,
-      dataType: 'json',
-      success: function(response){
-        $('.callout1').show();
-        $('.message1').html(response.message);
-        if(response.error){
-          $('.callout1').removeClass('callout-success').addClass('callout-danger');
-        }
-        else{
-        $('.callout1').removeClass('callout-danger').addClass('callout-success');
-        getCart();
-        }
-      }
-    });
-
-
-    getCart();
-
-    return false;
-});
-  $(document).on('click', '.close1', function(){
-    $('.callout1').hide();
-  });
-
-</script>
+   
 </body>
 
 </html>

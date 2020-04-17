@@ -6,26 +6,54 @@
 
 	if(isset($_SESSION['id'])){
 		try{
-			$stmt = $db->prepare("SELECT *, products.name AS prodname, category.name AS catname FROM cart LEFT JOIN products ON products.id=cart.product_id LEFT JOIN category ON category.id=products.category_id WHERE user_id=:user_id");
+			$stmt = $db->prepare("SELECT *, cart.quantity AS cq , cart.id As cartid FROM cart LEFT JOIN products ON products.id=cart.product_id	 WHERE user_id=:user_id");
 			$stmt->execute(['user_id'=>$user['id']]);
+			$output['count']=$stmt->rowCount();
+			$cmp=0;
 			foreach($stmt as $row){
-				$output['count']++;
-				$image = (!empty($row['photo'])) ? 'images/'.$row['photo'] : 'images/noimage.jpg';
-				$productname = (strlen($row['prodname']) > 30) ? substr_replace($row['prodname'], '...', 27) : $row['prodname'];
+				
+				$cmp++;
+				if ($cmp>5){
+					break;
+				}
+				
 				$output['list'] .= "
-					<li>
-						<a href='product.php?product=".$row['slug']."'>
-							<div class='pull-left'>
-								<img src='".$image."' class='thumbnail' alt='User Image'>
-							</div>
-							<h4>
-		                        <b>".$row['catname']."</b>
-		                        <small>&times; ".$row['quantity']."</small>
-		                    </h4>
-		                    <p>".$productname."</p>
-						</a>
-					</li>
-				";
+					<li class='product-item'>
+
+                      
+
+                        <button type='button' data-id='".$row['cartid']."' class='remove-item-button' ></button>
+
+                        <a href='product.php?product=".$row['slug']."' class='item-details'>
+                       	<img width='300' height='300' src='images/items/".$row['photo']."' class='attachment-woocommerce_thumbnail size-woocommerce_thumbnail' alt='' srcset='images/items/".$row['photo']."' sizes='(max-width: 300px) 100vw, 300px'>".$row['name']."
+                        </a>
+                        <div class='clearfix'></div>    
+                        <span class='quantitys'>".$row['cq']."× <span>$<span class='total-amount'>".number_format($row['price'], 2)."</span></span></span>   
+
+                    </li>
+                    <div class='seperator-line'></div>";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			}
 		}
 		catch(PDOException $e){
@@ -43,24 +71,25 @@
 		else{
 			foreach($_SESSION['cart'] as $row){
 				$output['count']++;
-				$stmt = $db->prepare("SELECT *, products.name AS prodname, category.name AS catname FROM products LEFT JOIN category ON category.id=products.category_id WHERE products.id=:id");
+				$stmt = $db->prepare("SELECT * from products WHERE  id=:id");
 				$stmt->execute(['id'=>$row['productid']]);
 				$product = $stmt->fetch();
-				$image = (!empty($product['photo'])) ? 'images/'.$product['photo'] : 'images/noimage.jpg';
-				$output['list'] .= "
-					<li>
-						<a href='product.php?product=".$product['slug']."'>
-							<div class='pull-left'>
-								<img src='".$image."' class='img-circle' alt='User Image'>
-							</div>
-							<h4>
-		                        <b>".$product['catname']."</b>
-		                        <small>&times; ".$row['quantity']."</small>
-		                    </h4>
-		                    <p>".$product['prodname']."</p>
-						</a>
-					</li>
-				";
+				
+				if($output['count'] <6 ){
+				$output['list'] .= " 
+
+				<li class='product-item'>
+                       
+                        <button type='button' data-id='".$row['productid']."' class='remove-item-button' ></button>
+
+						<a href='product.php?product=".$product['slug']."' class='item-details'>
+                       	<img width='300' height='300' src='images/items/".$product['photo']."' class='attachment-woocommerce_thumbnail size-woocommerce_thumbnail' alt='' srcset='images/items/".$product['photo']."' sizes='(max-width: 300px) 100vw, 300px'>".$product['name']."
+                        </a>
+                        <div class='clearfix'></div>    
+                        <span class='quantitys'> ".$row['quantity']."× <span>$<span class='total-amount'>".$product['price']." </span></span></span>    
+                </li>
+				<div class='seperator-line'></div>
+				"  ;}
 				
 			}
 		}
