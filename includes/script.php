@@ -101,6 +101,29 @@ $('.myform').submit(function(){
     $('.callout1').hide();
   });
 
+  
+ $(function(){
+    $(document).on('click', '.add-wishlist', function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        $.ajax({
+            type: 'POST',
+            url: 'wishlist_add.php',
+            data: {id:id},
+            dataType: 'json',
+            success: function(response){
+                alert( response.message)
+                 if(response.error){
+                 $('.callout').removeClass('callout-success').addClass('callout-danger');
+                  }
+                  else{
+                $('.callout').removeClass('callout-danger').addClass('callout-success');
+       
+                 }
+                }
+        });
+    });
+    });
 
 
 
