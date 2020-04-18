@@ -97,30 +97,33 @@
             $postal=$info['postal'];
 
         //Password
-        if (isset($_POST['password_current'])){
+        if (!empty($_POST['password_current'])){
 
             $password = $info["password"];
             $pass=$_POST['password_current'];
+            $salt="^%r8yuyg";//create our salt; salt is special String added to password // way of encrption on database;
+            $pass = sha1(filter_var($pass.$salt, FILTER_SANITIZE_STRING));// sha1 function to transform the password into long String; known as hashing method;
             if($pass==$password){
                 
                 if(empty($_POST['password_1']) OR empty($_POST['password_2']))
-                    $msgerr="Please fill the fields";
+                    $msgerr="Please fill all the fields";
                 else if($_POST['password_1']==$_POST['password_2']) {
-
-
-                $stm=$db->prepare('UPDATE users set password=? where email=?');
-                $stm->execute(array($_POST['password_1'],$emailid));
-                $msgerr='Password changed successefully ';
+                     $pass=$_POST['password_1'];
+                     $salt="^%r8yuyg";
+                     $pass = sha1(filter_var($pass.$salt, FILTER_SANITIZE_STRING));
+                     $stm=$db->prepare('UPDATE users set password=? where email=?');
+                     $stm->execute(array($pass,$emailid));
+                     $msg='Password changed successefully ';
                 } 
-                else
-                    $msgerr='two Password did not match';
+                 else
+                    $msgerr='The two Passwords did not match';
 
 
 
             }
             else 
                  
-                $msgerr='current password incorrect';
+                $msgerr='Current password incorrect';
 
 
         }      
@@ -465,7 +468,7 @@
                     </div>
 
                     <div class="paneltbs panel-4" id="addresses" style="display: none;">
-                        <form class="form" method="post" action="<?php echo $_server['php_self']; ?>">
+                        <form class="form" method="post" action="dashboarduser.php">
                             <div class="row">
                                 <div class="col-401">
                                     <div class="form-group">
@@ -481,9 +484,11 @@
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="mail">Email Address<span>*<?php if ($_SERVER['REQUEST_METHOD']=='POST') echo $emailInsErr; ?></span></label>
+                                        <label for="mail">Email Address<span>*</span></label>
                                         <input id="mail" name="email" type="email" placeholder="" value="<?php echo $info['email']; ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                                        <p class=error-form><?php if ($_SERVER['REQUEST_METHOD']=='POST') echo $emailInsErr; ?></p>
                                     </div>
+                                     
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
@@ -791,7 +796,6 @@
                                     <div class="form-group">
                                         <button type="submit" class="button" name="save_account_details" value="Save changes">Save changes</button>
                                     </div>
-                                    <div><?php echo $msgerr;?></div>
                                 </div>
                             </div>
                         </form>
@@ -814,15 +818,16 @@
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="mail">Email Address<span>*<?php echo $emailInsErr; 
-            ?></span></label>
+                                        <label for="mail">Email Address<span>*</span></label>
                                          <input id="mail" name="email" type="email" placeholder="" value="<?php echo $info['email']; ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                                         <p class=error-form><?php if ($_SERVER['REQUEST_METHOD']=='POST') echo $emailInsErr; ?></p>
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="username">Username<span>*<?php echo $userErr; ?></span></label>
+                                        <label for="username">Username<span>*</span></label>
                                         <input id="username" name="username" type="text" placeholder="" value="<?php echo $info['username']; ?>">
+                                        <p class=error-form><?php if ($_SERVER['REQUEST_METHOD']=='POST') echo $userErr; ?></p>
                                     </div>
                                 </div>
                                 <div class="col-401 field">
@@ -848,12 +853,21 @@
                                                 </span>
                                             </p>
                                         </fieldset>
+                                             <p class=error-form>
+                                                <?php if ($_SERVER['REQUEST_METHOD']=='POST') {
+                                                         if (!empty($msgerr)) echo $msgerr;
+                                                         else echo $msg;
+                                                      } 
+                                                ?>
+                                                    
+                                            </p>
                                     </div>
+
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <button type="submit" class="button" name="save_account_details" value="Save changes">Save changes</button>
-                                         <div><?php echo $msgerr;?></div>
+                                        <button type="submit" class="button" name="save_account_detailss" value="Save changes">Save changes</button>
+                                         
                                     </div>
                                 </div>
                             </div>
