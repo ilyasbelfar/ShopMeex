@@ -6,6 +6,7 @@
 $(function(){
  
   getCart();
+  getReview(); 
 
   $('#productForm').submit(function(e){
     e.preventDefault();
@@ -125,6 +126,40 @@ $('.myform').submit(function(){
     });
     });
 
+
+ $('#commentform').submit(function(e){
+    e.preventDefault();
+    var review = $(this).serialize();
+    $.ajax({
+      type: 'POST',
+      url: 'review_add.php',
+      data: review,
+      dataType: 'json',
+      success: function(response){
+        alert(response.message);
+        if(!response.error){
+            document.getElementById("commentform").reset();
+        }
+        getReview()
+       
+      }
+    });
+  });
+
+ 
+ function getReview(){
+  $.ajax({
+    type: 'POST',
+    url: 'review_fetch.php',
+    dataType: 'json',
+    success: function(response){
+      $('.commentlist').html(response.list);
+      $('.nbreview').html(response.count);
+
+      
+    }
+  });
+}
 
 
 
