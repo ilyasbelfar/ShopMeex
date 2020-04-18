@@ -29,34 +29,17 @@
             exit();
         }
         $product = $stmt->fetch();
-
+        $_SESSION['prodid']=$product['prodid'];
         //getting the number of orders for this porudct
         $stmt=$db->prepare("SELECT product_id from orders  WHERE product_id=:prodid");
         $stmt->execute(['prodid'=>$product['prodid']]);
         $nborders=$stmt->rowCount();
         
         $now = date('Y-m-d');
-        // creating the review in database
-        if ($_SERVER['REQUEST_METHOD']=='POST'){
-            $rating=$_POST['rating'];
-            $comment=$_POST['comment'];
-            $userid=$_SESSION['id'];
-            $productid=$product['prodid'];
-
-            $stmt=$db->prepare("SELECT id FROM review WHERE product_id=:prodid AND user_id=:usid    ");
-            $stmt->execute(['prodid'=>$productid,'usid'=>$userid]);
-
-            if ($stmt->rowCount()==0){
-            $stmt=$db->prepare("insert into review (rating,comment,user_id,date,product_id) values(?,?,?,?,?)");
-            $stmt->execute([$rating,$comment,$userid,$now,$productid]);
-        }
-
-        }
+       
 
         // getting the reviews
-        $stmt=$db->prepare("SELECT * , rating*20 as ratper from review left join users on review.user_id=users.id  WHERE product_id=:prodid  ");
-        $stmt->execute(['prodid'=>$product['prodid']]);
-        $reviews = $stmt->fetchAll();
+        
 
         //getting total number of reviews
         $stmt=$db->prepare("SELECT * from review WHERE product_id=:prodid  ");
@@ -397,7 +380,7 @@
                                         <i class="fa fa-star"></i>
                                     </li>
                                 </ul>
-                                <small class="label-rating text-muted"><?php echo $nbreview ?> REVIEWS </small>
+                                <small class="label-rating text-muted"> <span  class="nbreview"><?php echo $nbreview ?> </span> REVIEWS </small>
                                 <small class="label-rating text-success"> <i class="fa fa-clipboard-check"></i> <?php 
                                         echo $nborders?> ORDERS </small>
                             </div>
@@ -519,7 +502,7 @@
                                     <a href="#tab-additional_information">Additional information</a>
                                 </li>
                                 <li class="reviews_tab">
-                                    <a href="#tab-reviews">Reviews (<?php echo $nbreview;  ?>)</a>
+                                    <a href="#tab-reviews">Reviews (<span  class="nbreview"><?php echo $nbreview ?> </span>)</a>
                                 </li>
                             </ul>
                             <div class="paneltbs panel-1" id="tab-description">
@@ -550,35 +533,12 @@
                             <div class="paneltbs panel-3" id="tab-reviews" style="display: none;">
                                 <div id="reviews" class="product-reviews">
                                     <div id="comments">
-                                        <h2 class="reviews-title"><?php echo $nbreview ?> <span> reviews </span></h2>
+                                        
                                          <ol class="commentlist">
-                                            <?php  
-                                                foreach ($reviews as $row) {    
-                                                    echo 
-                                                    "<li id='li-comment-11'>
-                                                        <div id='comment-11' class='comment_container'>
-                                                            <img alt='' src='images/users/".$row['photo']."' srcset='
-                                                            images/users/".$row['photo']."' class='avatar avatar-60 photo' height='60' width='60'>
-                                                            <div class='clearfix'></div>
-                                                            <div class='comment-text'>
-                                                                <div class='star-rating' aria-label='Rated 4 out of 5'>
-                                                                    <span style='width:".$row['ratper']."%'>Rated <strong class='rating'>4</strong> out of 5</span>
-                                                                    <div class='clearfix'></div>
-                                                                </div>
-                                                                <p class='meta'>
-                                                                    <strong class='review__author'>".$row['firstname']." ".$row['lastname']." </strong>
-                                                                    <span class='review__dash'>–</span>
-                                                                    <time class='review__published-date' datetime='2020-05-10T14:02:51+01:00'>".$row['date']."</time>
-                                                                </p>
+                                            
 
-                                                                <div class='description'>
-                                                                    <p>".$row['comment']."</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>  " ;
-                                                }
-                                            ?>
+
+
                                         </ol>
                                     </div>
                                     <?php 
@@ -590,7 +550,7 @@
                                         <div id="review_form">
                                             <div id="respond" class="comment-respond">
                                                 <span id="reply-title" class="comment-reply-title">Add a review</span>
-                                                <form <?php echo "action='product.php?product=".$slug."'" ?> method="post" id="commentform" class="comment-form" novalidate="">
+                                                <form  method="post" id="commentform" class="comment-form" novalidate="">
                                                     <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>
                                                     <div class="comment-form-rating">
                                                         <label for="rating">Your rating</label>
@@ -616,9 +576,13 @@
                                                         <label for="comment">Your review&nbsp;<span class="required">*</span></label>
                                                         <textarea id="comment" name="comment" cols="45" rows="8" required=""></textarea>
                                                     </p>
-                                                    
+                                                    <input type="hidden" name="prodid" value="<?php echo $product['prodid'] ?>" >
                                                     <p class="form-submit">
+
                                                         <input name="submit" type="submit" id="submit" class="submit" value="Submit">
+
+
+
                                                     </p>
                                                 </form>
                                             </div>
@@ -878,6 +842,45 @@ $(function(){
 </script>
 
     <?php include 'includes/script.php'; ?>
+    <script >
+
+      getReview();  
+  $('#commentform').submit(function(e){
+    e.preventDefault();
+    var review = $(this).serialize();
+    $.ajax({
+      type: 'POST',
+      url: 'review_add.php',
+      data: review,
+      dataType: 'json',
+      success: function(response){
+        alert(response.message);
+        if(!response.error){
+            document.getElementById("commentform").reset();
+        }
+        getReview()
+       
+      }
+    });
+  });
+
+  function getReview(){
+  $.ajax({
+    type: 'POST',
+    url: 'review_fetch.php',
+    dataType: 'json',
+    success: function(response){
+      $('.commentlist').html(response.list);
+      $('.nbreview').html(response.count);
+
+      
+    }
+  });
+}
+
+
+
+    </script>
 
    
 </body>
