@@ -453,7 +453,7 @@
                                     <div class="form-group">
                                         <label for="pass">Password<span>*</span></label>
                                         <input id="pass" name="password" type="password" placeholder="Password" required>
-                                        <?php echo "<p class=error>$repassErr</p>"; ?>
+                                        <?php echo "<p class=error-form>$repassErr</p>"; ?>
                                     </div>
                                 </div>
                                 <div class="col-401">
