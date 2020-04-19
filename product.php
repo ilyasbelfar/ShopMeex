@@ -56,10 +56,7 @@
         $now = date('Y-m-d');
      
         // getting the reviews
-        if (isset($_SESSION['cart'])) {
-            echo var_dump($_SESSION['cart']);
-        }
-
+     
         //getting total number of reviews
         $stmt=$db->prepare("SELECT * from review WHERE product_id=:prodid  ");
         $stmt->execute(['prodid'=>$product['prodid']]);
