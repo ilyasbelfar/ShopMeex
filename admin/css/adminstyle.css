@@ -1,0 +1,827 @@
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing:border-box;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+	text-align: left;
+	letter-spacing: .2px;
+    overflow: unset;
+}
+body{
+	color: #72777a;
+	background-color: #f9fafb;
+}
+@font-face {
+    font-family : themify;
+    src : url(fonts/themify/themify.eot);
+    src : url(fonts/themify/themify.eot?#iefix) format('embedded-opentype'),
+          url(fonts/themify/themify.woff) format('woff'),
+          url(fonts/themify/themify.ttf) format('truetype');
+    
+}
+.hiding{
+    display: none ! important;
+}
+.sidebar{
+ 	background-color:#fff;
+ 	bottom:0;
+    overflow:hidden;
+ 	position:fixed;
+ 	top:0;
+ 	
+ 	-webkit-transition:all .5s ease-in-out;
+ 	-o-transition:all .5s ease-in-out;
+ 	transition:all .5s ease-in-out;
+ 	-webkit-transition: width .2s ease-in-out;
+ 	-o-transition:width .2s ease-in-out;
+ 	transition:width .2s ease-in-out;
+ 	width:280px;
+ 	z-index:1000;
+ }
+.sidebar *{
+    color: #72777a;
+    
+}
+ .sidebar-menu{
+     border-right:1px solid rgba(0,0,0,.0625);
+     height:calc(100vh - 65px);
+ 		list-style:none;
+ 		margin:0;
+     overflow:auto;padding:0;position:relative
+ 	}
+ .sidebar ul{
+ 	list-style-type:none
+ }
+ .sidebar .sidebar-container ul.sidebar-menu>li>a .title{
+ 	font-weight: 400;
+ 	font-size: 15px;
+ }
+.sidebar .sidebar-container ul.sidebar-menu>li>a .icon-holder{
+	display: inline-block;
+	width: 35px;
+
+
+}
+.sidebar .sidebar-container .sidebar-logo{
+    margin-top: -18px;
+}
+.sidebar .sidebar-container ul.sidebar-menu>li{
+ 	       margin-bottom: 20px;
+ 	       position: relative;
+ }
+ .sidebar .sidebar-container ul.sidebar-menu>li>a{
+ 		padding: 5px 20px;
+ 		white-space: nowrap;
+}
+ 		
+ .sidebar .sidebar-container ul.sidebar-menu>li>a .title{
+ 		text-align: left;
+ 		margin-right: 30px;
+ 		font-size: 14px;
+ 		font-weight: 500;
+ 		letter-spacing: .5px
+ }
+ .sidebar .sidebar-container ul.sidebar-menu>li>a .title:hover{
+ 	color: #000;
+ }
+ .sidebar-container .sidebar-menu li.dropdown .arrow{
+ 		position: absolute;
+ 		right:10px;
+ }
+ .sidebar-container .sidebar-menu li.dropdown .arrow i{
+ 	font-size:.5em
+ }
+ .sidebar .sidebar-container .sidebar-logo{
+ 	border-right:  1px solid #ccc;
+     padding:10px 5px;
+ }
+ .sidebar .sidebar-container .sidebar-logo .peers{
+ 	justify-content: space-between;
+ }
+ .sidebar .sidebar-container .sidebar-logo .peers .peer .sidebar-link .peers1 .logo{
+ 	margin-left:10px;
+ 	margin-right:30px;
+ }
+ .sidebar .sidebar-container .sidebar-logo .peers .peer .sidebar-link .peers1 .title{
+    align-self: center;
+    font-size: 20px;
+    padding:0 0 10px 0;
+ }
+ .sidebar .sidebar-container .sidebar-logo .peers .peer2{
+     align-self: center;
+      padding:0 0 8px 0;
+      margin-right: 10px;
+      display: none;
+ }
+
+
+ @media screen and (min-width:990px) and (max-width:1500px){
+ 	.sidebar{width:70px}
+ 	.sidebar .sidebar-container .sidebar-logo{
+ 		border-bottom:1px solid transparent;
+ 	}
+ 	.sidebar .sidebar-container .sidebar-logo a .logo{
+ 		
+ 	}
+ 	.sidebar .sidebar-container ul.sidebar-menu{
+ 		overflow-x:hidden
+ 	}
+ 	.sidebar .sidebar-container ul.sidebar-menu>li>a .title{
+ 		text-align: left;
+ 		display:none;
+ 		opacity: 0;
+ 		
+ 	}
+ 	
+ 	.sidebar .sidebar-container .sidebar-menu li.dropdown .arrow{display: none;}
+ 	.sidebar .sidebar-container .sidebar-menu li.dropdown.open ul.dropdown-menu{display:none!important}
+ 	.sidebar:hover{width:220px}
+ 	.sidebar:hover .sidebar-container .sidebar-logo{
+ 		border-bottom:1px solid rgba(0,0,0,.0625);
+ 	}
+ 	.sidebar:hover .sidebar-container .sidebar-menu>li>a .title{display:inline-block ;opacity: 1}
+ 	.sidebar:hover .sidebar-container .sidebar-menu li.dropdown .arrow{display:inline-block ;}
+ 	.sidebar:hover .sidebar-container .sidebar-menu li.open>ul.dropdown-menu{display:block!important}
+ }
+.sidebar-container {
+	position: relative;
+	height: 100%;
+}
+.sidebar{
+	clear: both;
+}
+
+/*menu*/
+.content{
+	padding:0 0 0 70px;
+
+}
+.content .header{
+	width: 100%;
+	position: fixed;
+    height: 65px;
+    border-bottom: 1px solid #ccc;
+    -webkit-box-align:center;
+    -ms-flex-align:center;
+    align-items: center;
+    background-color: #fff;
+    z-index: 5;
+}
+.content .header .header-container {
+	width: inherit;
+}
+.content .header .header-container:after{
+	clear: both;
+}
+.content .header .header-container ul.nav-left{
+	margin-left: 30px;
+	float: left;
+}
+.content .header .header-container ul.nav-left *{
+	color: #72777a;
+  margin: 0 10px 0 0 ;
+}
+.content .header .header-container ul.nav-left input{
+	border: 0;
+	outline: 0;
+}
+
+.content .header .header-container ul.nav-right{
+	float: right;
+}
+.content .header .header-container ul.nav-right *{
+
+  color: #72777a;
+}
+.content .header .header-container ul.nav-right>li{
+	position: relative;
+}
+.content .header .header-container ul.nav-right>li span.counter{
+	padding: 2px 4px;
+    color: #fff;
+    font-size: 11px;
+    border-radius: 50%;
+    position: relative;
+  right: -30px;
+  top:-10px;
+  
+}
+.content .header .header-container ul>li{
+	display: inline-block;
+}
+.content .header .header-container ul>li a *{
+  display: inline-block;
+}
+
+.content .header .header-container ul.nav-right .dropdown .dropdown-menu{
+	display: none;
+}
+  
+ @media screen and (min-width:990px) and (max-width:1500px){
+      .content .header{
+      	   width: calc(100% - 70px);
+
+      }
+ }
+
+/*begin main*/
+.content>.main-content {
+    padding: 85px 20px 20px
+}
+.content>.main-content .row1 .row{
+    display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap:wrap;
+	flex-wrap: wrap;
+    justify-content: space-between;
+}
+.content>.main-content .row1 .row>div{
+    background-color: #fff;
+    flex:0 0  22%;
+    padding:10px !important;
+    margin-right:10px;
+}
+.content>.main-content .row1 .row .row-content .layers{
+    padding: 10px;
+    padding-top:0;
+}
+.content>.main-content .row1 .row .row-content .layers .layer{
+    width: 100% !important;
+    margin-bottom: 10px;
+}
+.content>.main-content .row1 .row .row-content .layers .layer .title {
+    font-weight: 550 !important;
+    font-size: .875rem;
+}
+
+.content>.main-content .row1 .row .row-content .layers .layer .peers .peer:first-child {
+    margin-right: auto;
+}
+.content>.main-content .row1 .row .row-content .layers .layer .peers .peer:last-child {
+    font-size: .85em;
+    font-weight: 600;
+    padding: 5px;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+
+.content>.main-content .row1 .row .row-content:first-child .layers .layer .peers .peer:last-child {
+    background-color: rgba(0,181,17,.1);
+    color: rgba(0,181,17,1);
+}
+.content>.main-content .row1 .row .row-content:nth-child(2) .layers .layer .peers .peer:last-child {
+    color: #2196f3;
+    background-color: rgba(33,150,243,.1);
+}
+.content>.main-content .row1 .row .row-content:nth-child(3) .layers .layer .peers .peer:last-child {
+    color: #ff3c7e;
+    background-color: rgba(255,60,127,.1);
+}
+.content>.main-content .row1 .row .row-content:nth-child(4) .layers .layer .peers .peer:last-child {
+    color: #ff5722;
+    background-color: rgba(255,87,34,.1);
+}
+
+/*begin user statistic*/
+.content>.main-content .row2{
+    width: 100%;
+    z-index: -200;
+    top: 235px;
+    padding:0 10px 0 0;
+}
+.content>.main-content .row2 .row2container{
+    margin:20px 0;
+    padding:10px;
+    background-color:#fff;
+    z-index: -200;
+    width: 100%
+}
+.content>.main-content .row2 .row2container .mapaside{
+    border-right: 1px solid #efefef;
+}
+.content>.main-content .row2 .row2container .mapaside .containermapaside .algeriamap .mapcontainer .wrappermap{
+     position: relative;
+}
+.content>.main-content .row2 .row2container .mapaside .containermapaside .algeriamap .mapcontainer .wrappermap div{
+    padding-bottom:18px;
+    text-align: center;
+    width: 20px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    height: 15px;
+    position:absolute;
+    top:15px;
+    left: 15px;
+}
+.content>.main-content .row2 .row2container .mapaside .containermapaside .algeriamap .mapcontainer .wrappermap .zoomneg{
+    left: 50px
+}
+
+
+
+/*end user statistic*/
+/*begin cal statistic*/
+.content>.main-content .row2 .row2container>.statstics >.layers >.layer{
+    padding:10px;
+}
+.content>.main-content .row2 .row2container>.statstics >.layers >.layer .peers{
+    height: 200px;
+    overflow: hidden
+}
+.content>.main-content .row2 .row2container>.statstics >.layers >.layer .layers .layer{
+    padding:10px;
+}
+.content>.main-content .row2 .row2container>.statstics >.layers >.layer .layers .layer h5{
+    padding: 0 0 9px  0;
+}
+.content>.main-content .row2 .row2container>.statstics >.layers >.layer .layers .layer small{
+    font-size: .7em;
+}
+.content>.main-content .row2 .row2container>.statstics >.layers >.layer .layers .layer span{
+    font-size: .8em;
+    margin-left: 136px;
+}
+.content>.main-content .row2 .row2container>.statstics >.layers >.layer .layers .layer .progress{
+    width: 90%;
+    height: 4px;
+    margin-top: 10px;
+    border-radius: 2px;
+    background-color: #ccc;  
+}
+.content>.main-content .row2 .row2container>.statstics >.layers >.layer .layers .layer .progress >.progress-bar{
+    height: 100%;
+    width: 50%;
+}
+.content>.main-content .row2 .row2container>.statstics >.layers >.layer .layers .layer:nth-child(1) .progress >.progress-bar{
+    background-color: #3221c2;
+}
+.content>.main-content .row2 .row2container>.statstics >.layers >.layer .layers .layer:nth-child(2) .progress >.progress-bar{
+    background-color: #23c221;
+}
+.content>.main-content .row2 .row2container>.statstics >.layers >.layer .layers .layer:nth-child(3) .progress >.progress-bar{
+    background-color: #bfd21b;
+}
+.content>.main-content .row2 .row2container>.statstics >.layers >.layer .layers .layer:nth-child(4) .progress >.progress-bar{
+    background-color: #09dddd;
+}
+.content>.main-content .row2 .row2container>.statstics >.layers >.layer .layers .layer:nth-child(5) .progress >.progress-bar{
+    background-color: #df10b2;
+}
+
+.content>.main-content .row2 .row2container>.statstics >.layers >.layer *{
+    width: 100%;
+}
+/* begin row earning*/
+.content>.main-content .row2 .row{
+    background-color: #fff;
+    padding: 20px;
+}
+.content>.main-content .row2 .row .header-info{
+     border-bottom: 2px solid #ccc;
+    padding: 15px ;
+    
+}
+.content >.main-content .row2 .row .header-info > :first-child{
+    font-size: 1.5em;
+}
+
+/*email*/
+
+.content>.main-content>.main-content .full-container{
+    margin: 0 0 -21px 0;
+    background-color: #fff;
+}
+.content>.main-content>.main-content .full-container .email-app .email-side-nav .layers {
+/*    padding: 10px;*/
+    
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .title{
+    padding: 20px 0 20px 0;
+    height: 70px;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .title a{
+    margin: auto;
+    display: block;
+    width: 50%;
+    border-radius: 7px;
+    font-size: 0.9em;
+    padding: 5px 10px;
+    background-color: red;
+    color: #fff;
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not{
+    width: 100%;
+    padding: 20px 0;
+    border: 1px solid #ccc;
+    border-top: 0 ;
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li {
+   position: relative;
+    padding: 10px 0 10px 30px;
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li  a .container{
+    color: #4b4242
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li  a .container *{
+    display: inline-block;
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li  a .container .glif{
+    font-size: 0.8em;
+    padding: 0 2px 5px 0;
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li  a .container .statis{
+   position: absolute;
+   font-size: 0.7em;
+    color: #fff;
+    border-radius: 7px;
+    padding: 2px 5px;
+    right: 20px;
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li:first-child  a .container .statis{
+    background-color: rgba(15,48,145,0.3);
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li:nth-child(2)  a .container .statis{
+    background-color: rgba(155,100,85,0.3);
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li:nth-child(3)  a .container .statis{
+    background-color: rgba(1,228,145,0.3);
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li:nth-child(4)  a .container .statis{
+    background-color: rgba(25,55,5,0.3);
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li:nth-child(5)  a .container .statis{
+    background-color: rgba(222,4,5,0.3);
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li:last-child  a .container .statis{
+    background-color: rgba(225,221,5,0.3);
+}
+
+
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li:first-child  a .container .glif i{
+    color: rgba(15,48,145,1);
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li:nth-child(2)  a .container .glif i{
+    color: rgba(155,100,85,1);
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li:nth-child(3)  a .container .glif i{
+    color: rgba(1,228,145,1);
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li:nth-child(4)  a .container .glif i{
+    color: rgba(25,55,5,1);
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li:nth-child(5)  a .container .glif i{
+    color: rgba(222,4,5,1);
+}
+.content .main-content .main-content .full-container .email-app .email-side-nav .layers .not ul li:last-child  a .container .glif i{
+    color: rgba(225,221,5,1);
+}
+
+/**/
+.content .main-content .main-content .full-container .email-app .email-content{
+    padding-left: 248px;
+}
+.content .main-content .main-content .full-container .email-app .email-content button{
+    background-color: #fff;
+    border: 0;
+    padding: 5px;
+    color: #000;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-list{
+    -webkit-box-flex:0;
+	-ms-flex:0 0 40%;
+	flex: 0 0 40%;
+	max-width: 40%;
+}
+.email-content .email-list .email-list-header{
+    border: .68px  solid #ccc;
+}
+.email-content .email-list .email-list-header .container{
+    padding: 21.5px;
+    position: relative
+}
+.email-content .email-list .email-list-header .container > .aside:last-child{
+    position: absolute;
+    right: 20px;
+    
+}
+.email-content .email-list .email-list-header .container > .aside button {
+    margin-right: 10px;
+}
+.email-content .email-list .email-list-header .container > .aside button i{font-size: 0.8em;}
+.content .main-content .main-content .full-container .email-app .email-content .email-list .email-list-header .container > .aside{
+    display: inline-block;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-list .email-list-header .container > .aside button{
+    padding: 5px;
+    border-radius: 5px;
+    color:#828482;
+    border:.68px  solid #ccc;
+}
+ .content .main-content .main-content .full-container .email-app .email-content .email-list .email-list-content .layer .input{
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-list .email-list-content .layer .input input {
+    border: 0;
+    border: .68px solid #ccc;
+    border-top: 0;
+    border-radius: 0;
+    padding: 15px;
+    width: 100%;
+    outline: 0;
+}
+
+.content .main-content .main-content .full-container .email-app .email-content .email-list .email-list-content .layer .container .email-list-item{
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-top: 0;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-list .email-list-content .layer .container .email-list-item >.peer:first-child .checkbox{
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    height: 15px;
+    margin-right: 10px;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-list .email-list-content .layer .container .email-list-item >.peer:last-child{
+    width: 90%;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-list .email-list-content .layer .container .email-list-item .peer .peers{
+    justify-content: space-between;
+    margin-bottom: 5px;
+    color: #a1a4a7
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-list .email-list-content .layer .container .email-list-item .peer .peers .peer:first-child h6{
+    font-size: .8em;
+    font-weight: 600;
+    letter-spacing: .5px;
+    line-height: 1.2;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-list .email-list-content .layer .container .email-list-item .peer .peers .peer:last-child small{
+    font-size: .7em;
+    letter-spacing: 1px;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-list .email-list-content .layer .container .email-list-item .peer h5{
+    font-size: 15px;
+    padding: 5px 0;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-list .email-list-content .layer .container .email-list-item .peer span{
+    font-size: 11px;
+}
+/*begin message*/
+.content .main-content .main-content .full-container .email-app .email-content .email-content-wrapper{
+    border: 1px solid #ccc;
+     -webkit-box-flex:0;
+	-ms-flex:0 0 60%;
+	flex: 0 0 60%;
+	max-width: 60%;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-content-wrapper .header{
+    padding: 0 20px;
+    height: 120px;
+    position: relative;
+    width: 100%;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-content-wrapper .header .info-aside .image img{
+    width: 50px;
+     border-radius: 50%;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-content-wrapper .header .info-aside .info small{
+    color: #a3a5a7;
+    font-size: .6em;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-content-wrapper .header .info-aside .info span{
+    font-size: .8em;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-content-wrapper .header .info-aside .info h5{
+    font-size: .6em;
+}
+
+.content .main-content .main-content .full-container .email-app .email-content .email-content-wrapper .header .share-aside{
+    margin-left: 250px;
+    background-color: red;
+    padding:10px 10px;
+    border-radius: 100%;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-content-wrapper .header .share-aside i{
+     color: #fff;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-content-wrapper .message{
+    padding: 20px;
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-content-wrapper .message h4{
+    padding: 20px 0;
+    font-size: 0.95em;
+    letter-spacing: .5px
+}
+.content .main-content .main-content .full-container .email-app .email-content .email-content-wrapper .message p{
+    font-size: 0.82em;
+    display: block;
+    margin-bottom: 20px;
+}
+
+
+/*end message*/
+
+
+/**/
+
+/*end email*/
+
+/*calender*/
+.main-content .calender .container .aside:first-child{
+    -webkit-box-flex:0;
+	-ms-flex:0 0 33.333%;
+	flex: 0 0 33.333%;
+	max-width: 33.333%;
+}
+.main-content .calender .container .aside .container .head{
+    color: #fff;
+    background-color: #8a13e5;
+    padding: 20px;
+    text-align: center;
+}
+.main-content .calender .container .aside .container .head *{
+    text-align: center;
+}
+.main-content .calender .container .aside .container .head h1{
+    display: inline-block;
+}
+.main-content .calender .container .aside .container .head h3{
+    padding: 15px;
+    font-size: 1.8em;
+}
+.main-content .calender .container .aside .container .cal-con {
+    position: relative;
+    background-color: #fff;
+    min-height: 400px;
+}
+.main-content .calender .container .aside .container .cal-con button{
+    position: absolute;
+    background-color: yellow;
+    border: 0;
+    padding: 15px;
+    border-radius: 50%;
+    right: 28px;
+    top: -23px;
+}
+.main-content .calender .container .aside .container .cal-con >ul{
+    padding: 20px 0 0 0 ;
+}
+.main-content .calender .container .aside .container .cal-con >ul >li{
+    border-bottom: 1px solid #ccc;
+    padding:20px 10px;
+    position: relative;
+}
+.main-content .calender .container .aside .container .cal-con >ul >li a > div{
+    display: inline-block;
+}
+.main-content .calender .container .aside .container .cal-con >ul >li a.not .clock{
+    position: relative;
+    top: -10px;
+    padding: 0 10px;
+}
+.main-content .calender .container .aside .container .cal-con >ul >li a.not .info span {
+    font-weight: 700;
+    font-size: 0.85em;
+}
+.main-content .calender .container .aside .container .cal-con >ul >li a.not .info span {
+    font-weight: 700;
+    font-size: 0.85em;
+}
+.main-content .calender .container .aside .container .cal-con >ul >li a.not .info .date{
+    padding: 5px 0;
+    color: #9ea3a3;
+    font-size: 0.85em;
+}
+.main-content .calender .container .aside .container .cal-con >ul >li a.not .clock i{
+    font-size: 0.8em;
+}
+.main-content .calender .container .aside .container .cal-con >ul >li:first-child a.not .clock i{
+    color: #2e27b1;
+}
+.main-content .calender .container .aside .container .cal-con >ul >li:nth-child(2) a.not .clock i{
+     color: #fb0816;
+}
+.main-content .calender .container .aside .container .cal-con >ul >li:nth-child(3) a.not .clock i{
+    color: #2fc412;
+}
+.main-content .calender .container .aside .container .cal-con >ul >li:nth-child(4) a.not .clock i{
+    color: #f3d510;
+}
+
+.main-content .calender .container .aside .container .cal-con >ul >li  .edit{
+    position: absolute;
+    right: 0;
+    padding: 5px;
+}
+.main-content .calender .container .aside .container .cal-con >ul >li  .edit i{
+    padding: 0 5px;
+    font-size: 1.3em
+}
+.main-content .calender .container .aside .container .cal-con >ul >li  .edit .mod i{
+ color: #1276ce;   
+}
+.main-content .calender .container .aside .container .cal-con >ul >li  .edit .sup i{
+ color: #fb0816;   
+}
+
+.main-content .calender .container .aside .container .cal-con >ul >li  .edit > div{
+    display: inline-block
+}
+
+.main-content .calender .container .aside:nth-child(2){
+    background-color: #fff;
+    flex: 0 0 60%;
+    margin-left: 30px;
+}
+.main-content .calender .container .aside .head-con  button{
+    border: 0;
+    background-color: #fff;
+}
+.main-content .calender .container .aside .head-con{
+    justify-content: space-between;
+    padding: 20px;
+}
+.main-content .calender .container .aside .head-con .left .container button{
+    padding: 10px;
+    border: 1px solid #f1efef;
+}
+
+.main-content .calender .container .aside .head-con .left .container button:nth-child(1){
+    border-bottom-left-radius: 7px;
+    border-top-left-radius: 7px
+}
+.main-content .calender .container .aside .head-con .left .container button:nth-child(2){
+    border-right: 0;
+    border-left: 0;
+}
+.main-content .calender .container .aside .head-con .left .container button:nth-child(3){
+     border-bottom-right-radius: 7px;
+    border-top-right-radius: 7px
+}
+.main-content .calender .container .aside .head-con .center{
+    align-self: center;
+}
+.main-content .calender .container .aside .head-con .right> button{
+    border: 1px solid #f1efef;
+    color: #ccc;
+    border-radius: 7px;
+    margin-right: 10px;
+    padding: 0 10px;
+}
+.main-content .calender .container .aside .head-con .right .button-group button{
+    padding: 10px;
+    border: 1px solid #f1efef;
+}
+.main-content .calender .container .aside .head-con .right .button-group button:nth-child(1){
+    border-bottom-left-radius: 7px;
+    border-top-left-radius: 7px;
+}
+.main-content .calender .container .aside .head-con .right .button-group button:nth-child(2){
+    border-bottom-right-radius: 7px;
+    border-top-right-radius: 7px;
+}
+/*begin table*/
+.table .container table{
+    width:  100%;
+    border-collapse: collapse;
+}
+.table .container table thead tr{
+    padding: 10px;
+}
+.table .container table thead tr th{
+    font-size: .8em;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px;
+}
+.table .container table tbody td{
+    border: 1px solid #f1efef;
+    height: 100px;
+    margin: 0;
+    position: relative
+}
+.table .container table tbody td .day{
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #ccc;
+    font-size: 0.7em;
+}
+.table .container table tbody td .not{
+    background-color:rgba(11, 93, 241, 0.1);
+    color: rgba(11, 93, 241, .8);
+    margin: 10px;
+    font-size: .8em;
+    padding: 5px;
+}
+/*end table*/
+
+/*end calender*/
+/* end row earning*/
+/*end cal statistic*/
+/*end menu*
