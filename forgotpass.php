@@ -1,11 +1,11 @@
 <?php
     include 'includes/session.php';
     $msg='';
-    if(isset($_POST['submit'])){
-        $email=trim($_POST['email']);
+    if($_SERVER['REQUEST_METHOD']=='POST'){
+        $email=trim($_POST['user-reset']);
         $sql = "SELECT id, email, password FROM users WHERE email = :email";
         //why you met a condition here Mohcene
-        if($stmt = $db->prepare($sql)){
+        $stmt = $db->prepare($sql);
             
             // Bind variables to the prepared statement as parameters
             
@@ -13,40 +13,40 @@
             
             // Set parameters
             
-            $param_email = trim($_POST["email"]);
+            $param_email = trim($_POST["user-reset"]);
             
             // Attempt to execute the prepared statement
             
-            if($stmt->execute()){
+            $stmt->execute();
                 // Check if email exists,we send the reset link
-                if($stmt->rowCount() >0 ){
-                    if($row = $stmt->fetch()){
-                        $db_id = $row["id"];
-                        $db_email = $row["email"];
-                        $token=uniqid(md5(time())); //This a random token
-                        $stmt=$db->prepare('UPDATE users set token=? where email=?');
-                        if($stmt->execute(array($token,$email))){
-                            
-                            $to=$db_email;
-                            $subject="Password reset link";
-                            $body="Click here 'http://localhost/shopmeex-master/reset.php?token=$token' to reset your password.";
-                            $headers="MIME-Version:1.0"."\r\n";
-                            $headers .="Contents-type:text/html;CHARSET=UTF-8"."\r\n";
-                            $headers .='From: <shopmeex22@gmail.com>'."\r\n";
-                            if(mail($to,$subject,$body,$headers))
-                                $msg="Password reset link has sent to your email";
-                            else 
-                                $msg='email sending failed';
+                if($stmt->rowCount() >0){ 
+                    $row = $stmt->fetch();
+                    $db_id = $row["id"];
+                    $to = $row["email"];
+                    $headers = "From : shopmeex1@gmail.com "  ;
+                    $subject="Password reset link";
+                    $headers .="MIME-Version:1.0"."\r\n";
+                    $headers .="Contents-type:text/html;CHARSET=UTF-8"."\r\n";
+                    $headers .= ' From:ShopMeex Contact Form <shopmeex1@gmail.com>';
+                    $body="Click here 'http://localhost/shopmeex/reset.php?email=$email' to reset your password.";
+
+    
+                    if (mail($to, $subject, $body, $headers)) 
+                          $msg="Password reset link has sent to your email";
+                    else 
+                          $msg='email sending failed';
+    
+                             
                             
                         
-                        }
-                        }
-                    }
+                       
+                 }       
+                    
                 else
                     $msg = "No account found with that username.";
-            }
             
-        }
+            
+        
     }
 ?>
 
@@ -306,7 +306,7 @@
 									<p>Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.</p>
 									<div class="form-group">
 										<label for="user-reset">E-mail or Username:</label>
-										<input type="text" name="user-reset" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="user-reset">
+										<input type="text" name="user-reset" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required id="user-reset">
 									</div>
                                     <div class='alert alert-success'>
                                         <?php 

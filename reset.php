@@ -1,19 +1,9 @@
 <?php
 	include 'includes/session.php';
 	$email=$passErr='';
-	if(isset($_GET['token'])){
-		$token=$_GET['token'];
-		$stmt=$db->prepare('SELECT * FROM users  WHERE token=?');
-		$stmt->execute(array($token));
-		if($stmt->rowCount() >0 ){
-			$row = $stmt->fetch();
-			$token=$row['token'];
-			$email=$row['email'];
-		}
-		else
-			header('location:login.php');
-	}
-			
+	if(isset($_GET['email']))
+		$email=$_GET['email'];
+	
 	
 	if($_SERVER['REQUEST_METHOD']=='POST'){
 		$password=$_POST['password'];
@@ -21,13 +11,13 @@
 		if($password!=$confirmpassword)
 			$msg="<div>Sorry,password didnt match</div>";
 		else {
-			$stmt=$db->prepare('UPDATE users set 
-			password=?,
-			token=?
-			where email=?');
-			$stmt->execute(array($password,NULL,$email));
-		
-			$msg="<div >Password Updated</div>";
+			 $salt="^%r8yuyg";//create our salt; salt is special String added to password // way of encrption on database;
+             $password = sha1(filter_var($password.$salt, FILTER_SANITIZE_STRING));// sha1 function to transform the password into long String; known as hashing method;
+			 $stmt=$db->prepare('UPDATE users set 
+			 password=?
+			 where email=?');
+			 $stmt->execute(array($password,$email));
+			 $msg="<div >Password Updated</div>";
 			
 	}
 	}
@@ -227,7 +217,7 @@
 								<form action="" method="post">
 									<div class="form-group">
 										<label for="email">E-mail<span>*</span></label>
-										<input name="email" type="text" placeholder="E-mail" value="<?php echo $email; ?>" id="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+										<input name="email" type="text" placeholder="E-mail" value="<?php echo $email; ?>" id="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" readonly>
 									</div>
 									<div class="form-group">
 										<label for="password">Password<span>*<?php echo $passErr; ?></span></label>

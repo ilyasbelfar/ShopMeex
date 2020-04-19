@@ -113,7 +113,10 @@
                      $pass = sha1(filter_var($pass.$salt, FILTER_SANITIZE_STRING));
                      $stm=$db->prepare('UPDATE users set password=? where email=?');
                      $stm->execute(array($pass,$emailid));
-                     $msg='Password changed successefully ';
+                      $msg='Password changed successefully ';
+                        
+                     
+
                 } 
                  else
                     $msgerr='The two Passwords did not match';
@@ -126,15 +129,16 @@
                 $msgerr='Current password incorrect';
 
 
-        }      
+        }   
+
         if (empty($emailInsErr)&&empty($userErr)&&empty($msgerr)){
         $stmt=$db->prepare('UPDATE users set firstname=?,lastname=?,email=?,username=?,contact_info=?,country=?,state=?,address=?,address2=?,city=?,postal=? where email=?');
         $stmt->execute(array($fname,$lname,$email,$userr,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
-        
+
         if ($stmt) 
             header("Location: dashboarduser.php?user=$userr");
          else 
-             echo '404';
+             header("location: 404.php");
         }
  }
 
@@ -855,9 +859,11 @@
                                         </fieldset>
                                              <p class=error-form>
                                                 <?php if ($_SERVER['REQUEST_METHOD']=='POST') {
-                                                         if (!empty($msgerr)) echo $msgerr;
-                                                         else echo $msg;
-                                                      } 
+                                                       echo $msgerr;
+                                                       echo $msg;
+                                                   }
+                                                         
+                                                      
                                                 ?>
                                                     
                                             </p>
