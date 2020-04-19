@@ -849,12 +849,14 @@
 	.checkout .container .wrapper .col-40 {
 	    margin: 0;
 	}
-	.notices > div {
+	.notices > div,
+	.noticesGroup .list-errors {
         text-align: center;
         flex-direction: column;
         padding: 2rem;
     }
-    .notices > div:before {
+    .notices > div:before,
+    .noticesGroup .list-errors:before {
         height: 5px;
         width: 100%;
         font-size: 0;
