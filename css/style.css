@@ -421,16 +421,48 @@ svg#cart-icon {
 }
 
 
-.notices {
+@-webkit-keyframes pulses {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(250, 52, 52, 0.72);
+    }
+
+    70% {
+        -webkit-box-shadow: 0 0 0 8px rgba(250, 52, 52, 0);
+    }
+
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(250, 52, 52, 0);
+    }
+}
+
+@keyframes pulses {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(250, 52, 52, 0.72);
+        box-shadow: 0 0 0 0 rgba(250, 52, 52, 0.72);
+    }
+
+    70% {
+        -moz-box-shadow: 0 0 0 8px rgba(250, 52, 52, 0);
+        box-shadow: 0 0 0 8px rgba(250, 52, 52, 0);
+    }
+
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(250, 52, 52, 0);
+        box-shadow: 0 0 0 0 rgba(250, 52, 52, 0);
+    }
+}
+
+
+.notices,
+.noticesGroup {
     width: 100%;
 }
-.notices > div {
+.notices > div,
+.noticesGroup .list-errors {
     margin: 0 0 50px;
     padding: 15px 20px 15px 70px;
     text-align: left;
     position: relative;
-    display: inline-flex;
-    align-items: center;
     line-height: 1.2;
     border-radius: 4px;
     background-color: #fff;
@@ -438,6 +470,10 @@ svg#cart-icon {
     width: 100%;
     max-width: 798.1px;
     list-style: none outside;
+}
+.notices > div {
+    display: inline-flex;
+    align-items: center;
     -webkit-animation: seconds 1.0s forwards;
     animation: seconds 1.0s forwards;
     -webkit-animation-iteration-count: 1;
@@ -445,7 +481,12 @@ svg#cart-icon {
     -webkit-animation-delay: 10s;
     animation-delay: 10s;
 }
-.notices > div:before {
+.noticesGroup .list-errors li {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+.notices > div:before,
+.noticesGroup .list-errors:before {
     font-size: 1.5rem;
     border-radius: 4px 0 0 4px;
     width: 50px;
@@ -461,7 +502,8 @@ svg#cart-icon {
     justify-content: center;
     font-weight: bold;
 }
-.notices .errors:before {
+.notices .errors:before,
+.noticesGroup .list-errors:before {
     background-color: #F13725;
     content: "\e6c5";
 }
@@ -986,8 +1028,9 @@ form .search-bar-container .search-icon-container button {
     border-radius: 3rem;
     color: #fff;
     background-color: #fa3434;
-    box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.15);
     font-weight: bold;
+    -webkit-animation: pulses 1.5s infinite cubic-bezier(0.66, 0.33, 0, 1);
+	animation: pulses 1.5s infinite cubic-bezier(0.66, 0.33, 0, 1);
 }
 
 #icone-carte {
