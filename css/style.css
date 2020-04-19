@@ -15,6 +15,9 @@
 img[alt="www.000webhost.com"] {
     display: none !important;
 }
+a#ftwtranslation_button {
+    display: none;
+}
 
 @-webkit-keyframes fadeInDown {
     0% {
@@ -77,6 +80,9 @@ body {
     width: 100%;
     height: auto;
 }
+body {
+    color: #424851;
+}
 
 #main-header .top-sec {
     overflow: hidden;
@@ -85,6 +91,17 @@ body {
 #main-header .bottom-sec,
 #main-header {
     overflow-x: visible;
+}
+
+.checkout,
+.shopping,
+#contact,
+.faq,
+.my-account,
+.user-dashboard,
+.product-details,
+.error-page {
+    background: #faf9f7;
 }
 
 #main-header .top-sec .container,
@@ -317,6 +334,176 @@ svg#cart-icon {
     stroke-miterlimit: 10;
 }
 
+@-webkit-keyframes icon-animation {
+
+    0%,100% {
+    	opacity: 1;
+    	-webkit-transform: translateX(0%);
+    	        transform: translateX(0%);
+    }
+    
+    50% {
+    	opacity: 0;
+    	-webkit-transform: translateX(100%);
+    	        transform: translateX(100%);
+    }
+    
+    51% {
+    	opacity: 0;
+    	-webkit-transform: translateX(-100%);
+    	        transform: translateX(-100%);
+    }
+
+}
+
+@keyframes icon-animation {
+
+    0%,100% {
+    	opacity: 1;
+    	-webkit-transform: translateX(0%);
+    	        transform: translateX(0%);
+    }
+    
+    50% {
+    	opacity: 0;
+    	-webkit-transform: translateX(100%);
+    	        transform: translateX(100%);
+    }
+    
+    51% {
+    	opacity: 0;
+    	-webkit-transform: translateX(-100%);
+    	        transform: translateX(-100%);
+    }
+
+}
+
+@-webkit-keyframes seconds {
+
+    0% {
+    	opacity: 1;
+    	height: auto;
+    }
+    
+    50% {
+    	font-size: 0;
+    }
+    
+    100% {
+    	opacity: 0;
+    	height: 0;
+    	pointer-events: none;
+    	padding: 0;
+    	margin: 0;
+    }
+
+}
+
+@keyframes seconds {
+
+    0% {
+    	opacity: 1;
+    	height: auto;
+    }
+    
+    50% {
+    	font-size: 0;
+    }
+    
+    100% {
+    	opacity: 0;
+    	height: 0;
+    	pointer-events: none;
+    	padding: 0;
+    	margin: 0;
+    }
+
+}
+
+
+.notices {
+    width: 100%;
+}
+.notices > div {
+    margin: 0 0 50px;
+    padding: 15px 20px 15px 70px;
+    text-align: left;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1.2;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px 0 rgba(128,47,0,0.1);
+    width: 100%;
+    max-width: 798.1px;
+    list-style: none outside;
+    -webkit-animation: seconds 1.0s forwards;
+    animation: seconds 1.0s forwards;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-delay: 10s;
+    animation-delay: 10s;
+}
+.notices > div:before {
+    font-size: 1.5rem;
+    border-radius: 4px 0 0 4px;
+    width: 50px;
+    height: 100%;
+    font-family: 'themify';
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #FFF;
+    background-color: #414141;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+.notices .errors:before {
+    background-color: #F13725;
+    content: "\e6c5";
+}
+.notices .message:before {
+    background-color: #79CC3D;
+    content: "\e64d";
+}
+.notices .info:before {
+    background-color: #23B6E7;
+    content: "\e717";
+}
+.notices > div a {
+    top: 0;
+    bottom: auto;
+    left: auto;
+    right: 0;
+    height: 100% !important;
+    width: auto;
+    margin: 0;
+    position: absolute;
+    font-size: 1rem;
+    border: none;
+    display: inline-flex;
+    padding-right: 20px;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #424851;
+    transition: all .15s ease-in-out;
+    -webkit-transition: all .15s ease-in-out;
+}
+.notices > div a:after {
+    content: "\e628";
+    font-family: themify;
+    margin-left: 8px;
+}
+.notices > div a:hover:after {
+    animation: icon-animation .3s;
+    -webkit-animation: icon-animation .3s;
+}
+
 .popup-overlay {
     background: rgba(19, 21, 27, 0.39);
     width: 100%;
@@ -410,7 +597,7 @@ svg#cart-icon {
 
 .promo-popup .popup-content .popup-subscribe .form-group>input:focus {
     z-index: 3;
-    color: #495057;
+    color: #424851;
     background-color: #fff;
     border-color: #a5bdf6;
     -webkit-box-shadow: 0 0 0 0.2rem rgba(49, 103, 235, 0.25);
@@ -684,7 +871,7 @@ form .search-bar-container .form-control {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #495057;
+    color: #424851;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
@@ -696,7 +883,7 @@ form .search-bar-container .form-control {
 
 .form-control:focus {
     z-index: 3;
-    color: #495057;
+    color: #424851;
     background-color: #fff;
     border-color: #a5bdf6;
     outline: 0;
@@ -1039,7 +1226,7 @@ p.sub-buttons a {
 
 #main-header .categories-list .container ul li a,
 #main-header .categories-list .container>a {
-    color: #495057;
+    color: #424851;
     transition: all .3s;
     display: block;
     padding: 10px;
@@ -1639,7 +1826,7 @@ main .trending-area .container .wrapper .row .col-12 .products-info .main-nav .n
     position: relative;
     font-weight: 500;
     color: #fff;
-    background: #333;
+    background: #424851;
     display: inline-block;
     border-radius: 4px;
     text-transform: uppercase;
@@ -2349,7 +2536,7 @@ main .day-deal .container {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #495057;
+    color: #424851;
     background-color: transparent;
     background-clip: padding-box;
     border: 0;
@@ -2363,7 +2550,7 @@ main .day-deal .container {
 
 .newsletter-area .container .wrapper .newsletter-form #mailing:focus {
     z-index: 3;
-    color: #495057;
+    color: #424851;
     background-color: transparent;
     outline: 0;
     -webkit-box-shadow: 0 0 0 0.2rem rgba(49, 103, 235, 0.25);
@@ -2465,7 +2652,7 @@ main .day-deal .container {
 }
 
 .breadcrumbs ul li a {
-    color: #495057;
+    color: #424851;
     font-size: 14px;
     font-weight: 400;
     text-transform: capitalize;
@@ -2476,7 +2663,7 @@ main .day-deal .container {
     margin: 0px 10px;
     font-size: 9px;
     font-weight: 600;
-    color: #495057;
+    color: #424851;
 }
 
 .breadcrumbs ul li a:hover {
@@ -2513,6 +2700,7 @@ main .day-deal .container {
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
+    border: 1px solid rgba(49, 103, 235, 0.25);
 }
 
 #contact .form-main {
@@ -2559,7 +2747,7 @@ form .col-401 {
 }
 
 .form-group label {
-    color: #495057;
+    color: #424851;
     position: relative;
     display: inline-block;
     margin-bottom: .5rem;
@@ -2579,14 +2767,17 @@ form .col-401 {
    margin-top:3px;
    font-size:14px;
 }
-
+.checkout form .form-group textarea {
+    background: rgba(66,72,81,0.03) !important;
+}
 .form-group>input {
+    background: rgba(66,72,81,0.03);
     height: 48px;
     line-height: 48px;
     width: 100%;
     border: 1px solid #e6e2f5;
     padding: 0px 20px;
-    color: #495057;
+    color: #424851;
     border-radius: 4px;
     font-weight: 400;
     -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
@@ -2620,7 +2811,7 @@ form .form-group textarea {
     width: 100%;
     border: 1px solid #e6e2f5;
     padding: 15px 20px;
-    color: #333;
+    color: #424851;
     border-radius: 4px;
     resize: vertical;
     font-weight: 400;
@@ -2639,7 +2830,7 @@ form .form-group button.btn,
     font-weight: 500;
     font-size: 14px;
     color: #fff;
-    background: #333;
+    background: #424851;
     display: inline-block;
     padding: 13px 32px;
     border-radius: 4px;
@@ -2666,6 +2857,7 @@ form .form-group button.btn:hover,
     min-height: 1px;
     padding-right: 15px;
     padding-left: 15px;
+    border: 1px solid rgba(49, 103, 235, 0.25);
 }
 
 #contact .single-head {
@@ -2695,7 +2887,7 @@ form .form-group button.btn:hover,
 .single-info .title {
     margin-bottom: 10px;
     font-weight: 500;
-    color: #495057;
+    color: #424851;
     font-size: 18px;
 }
 
@@ -2704,7 +2896,7 @@ form .form-group button.btn:hover,
 }
 
 .single-info li a {
-    color: #495057;
+    color: #424851;
     transition: all .4s;
 }
 
@@ -2745,27 +2937,44 @@ form .form-group button.btn:hover,
 }
 
 .my-account .container .wrapper>.row {
-    background: 0 0;
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid #f6f7fb;
-    background-color: #fff !important;
     width: 100%;
-    margin: 0 -15px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, .03);
 }
 
 .my-account .container .wrapper .col-50 {
-    flex: 0 0 50%;
-    max-width: 50%;
+    flex: 0 0 70%;
+    max-width: 70%;
     position: relative;
     width: 100%;
     padding: 45px 60px 30px;
     background-color: #fff;
     height: 100%;
     margin: auto;
+    box-shadow: 0 10px 15px 0 rgba(128,47,0,0.1);
+    border: 1px solid rgba(49, 103, 235, 0.25);
 }
-
+.my-account .container .wrapper .col-50 .nice-select,
+.user-dashboard .nice-select {
+    font-weight: normal;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    width: 100%;
+}
+.my-account .container .wrapper .col-50 .nice-select ul.list,
+.user-dashboard .nice-select ul.list {
+    width: 100%;
+    overflow-x :hidden;
+    overflow-y :scroll;
+}
+.my-account .container .wrapper .col-50 .nice-select:nth-of-type(1) ul.list,
+.user-dashboard .nice-select:nth-of-type(1) ul.list{
+    height: 10.3rem;
+}
+.my-account .container .wrapper .col-50 .nice-select:nth-of-type(2) ul.list,
+.user-dashboard .nice-select:nth-of-type(2) ul.list {
+    height: 10rem;
+}
 .my-account .container .wrapper .col-52 {
     position: relative;
     width: 100%;
@@ -2773,6 +2982,7 @@ form .form-group button.btn:hover,
     background-color: #fff;
     height: 100%;
     box-shadow: 0 0 15px rgba(0, 0, 0, .03);
+    border: 1px solid rgba(49, 103, 235, 0.25);
 }
 
 .col-52 p {
@@ -2783,7 +2993,7 @@ form .form-group button.btn:hover,
     margin-right: 20px;
     margin-bottom: 30px;
     font-size: 35px;
-    color: #495057;
+    color: #424851;
 }
 
 .my-account .float-right {
@@ -3002,7 +3212,7 @@ input[type="checkbox"] {
 
 .content-body h2 {
     font-size: 2rem;
-    color: #495057;
+    color: #424851;
 }
 
 .content-body .rating-wrap,
@@ -3234,7 +3444,7 @@ dl.row {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #495057;
+    color: #424851;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
@@ -3793,7 +4003,7 @@ p.stars.selected a.active {
     margin-top: 15px;
     margin-bottom: 45px;
     font-size: 24px;
-    color: #495057;
+    color: #424851;
 }
 
 .related-wrapper {
@@ -3807,7 +4017,6 @@ p.stars.selected a.active {
 /* Start Shopping Cart */
 
 .shopping {
-    background: #f6f6f6;
     padding: 50px 0;
     position: relative;
 }
@@ -3828,6 +4037,11 @@ p.stars.selected a.active {
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
+    padding: 2rem;
+    background: #fff;
+    box-shadow: 0 10px 15px 0 rgba(128,47,0,0.1);
+    border: 1px solid rgba(49, 103, 235, 0.25);
+    border-radius: 4px;
 }
 
 .shopping>.container>.wrapper .col-7 {
@@ -3850,11 +4064,6 @@ p.stars.selected a.active {
     border-spacing: 0;
 }
 
-.shopping-cart thead {
-    background-color: #3167eb;
-    color: #fff;
-}
-
 thead .main-heading {
     padding: 0px 60px;
 }
@@ -3862,10 +4071,9 @@ thead .main-heading {
 .shopping-cart thead tr th {
     border: none;
     font-weight: 600;
-    color: #fff;
     text-align: center;
     vertical-align: bottom;
-    padding: .75rem;
+    padding: .2rem;
 }
 
 .shopping-cart .remove-icon {
@@ -3924,6 +4132,7 @@ tbody .product-name a:hover {
 
 .shopping-cart tbody .prix {
     text-align: center;
+    font-weight: bold;
 }
 
 .input-group.mb-4 {
@@ -3938,6 +4147,7 @@ tbody .product-name a:hover {
 
 .shopping .total-amount {
     margin-top: 50px;
+    font-weight: bold;
 }
 
 .shopping .col-7>.total-amount .row {
@@ -3952,24 +4162,33 @@ tbody .product-name a:hover {
 }
 
 .shopping .col-7>.total-amount .row .col-6 {
-    -ms-flex: 0 0 33.333333%;
-    flex: 0 0 33.333333%;
-    max-width: 33.333333%;
+    -ms-flex: 35%;
+    flex: 0 0 35%;
+    max-width: 35%;
     position: relative;
     width: 100%;
+    margin-left: auto;
 }
 
 .col-7>.total-amount .row .col-6.big {
-    flex: 0 0 66.666667%;
-    max-width: 66.666667%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 5rem;
 }
-
-.shopping .col-7>.total-amount .left .coupon form input {
+.shopping .col-7>.total-amount .left:nth-of-type(1) {
+    margin-right: auto;
+    margin-left: 5px;
+}
+.shopping .col-7>.total-amount .left .coupon input {
+    background: rgba(66,72,81,0.03);
     width: 220px;
     display: inline-block;
     height: 48px;
+    border-radius: 4px;
     padding: 0px 20px;
-    border: none;
+    border: 1px solid #e6e2f5;
     box-shadow: 0px 0px 5px #0000000a;
     -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
     transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
@@ -3977,23 +4196,21 @@ tbody .product-name a:hover {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
-.shopping .col-7>.total-amount .left .coupon form input:focus {
+.shopping .col-7>.total-amount .left .coupon input:focus {
     z-index: 3;
-    background-color: #fff;
-    border-color: #a5bdf6;
     outline: 0;
     -webkit-box-shadow: 0 0 0 0.2rem rgba(49, 103, 235, 0.25);
     box-shadow: 0 0 0 0.2rem rgba(49, 103, 235, 0.25);
 }
 
-.shopping .col-7>.total-amount .left .coupon form .btn {
+.shopping .col-7>.total-amount .left .coupon .btn {
     display: inline-block;
     height: 48px;
-    border: #3167eb;
     cursor: pointer;
-    margin-left: 4px;
-    color: #495057;
-    background: #fff;
+    margin-left: 5px;
+    border-radius: 4px;
+    border: 1px solid #e6e2f5;
+    background: rgba(66,72,81,0.03);
     box-shadow: 0px 0px 5px #00000012;
     position: relative;
     font-weight: 500;
@@ -4003,11 +4220,15 @@ tbody .product-name a:hover {
     transition: all 0.4s ease;
     z-index: 5;
     padding: 13px 32px;
-    border-radius: 0px;
     text-transform: uppercase;
 }
 
-.shopping .col-7>.total-amount .left .coupon form .btn:hover {
+.shopping .col-7>.total-amount .left .coupon .btn:disabled {
+    cursor: not-allowed;
+    opacity: .5;
+    color: inherit;
+}
+.shopping .col-7>.total-amount .left .coupon .btn:hover:not(:disabled) {
     color: #3167eb;
 }
 
@@ -4018,13 +4239,14 @@ tbody .product-name a:hover {
 .shopping .col-7>.total-amount .right ul li {
     font-size: 15px;
     font-weight: 400;
-    color: #495057;
+    color: #424851;
     margin-bottom: 12px;
 }
 
 .shopping .col-7>.total-amount .right ul li span {
     float: right;
     display: inline-block;
+    font-weight: bold;
 }
 
 .shopping .col-7>.total-amount .right ul li.last {
@@ -4045,7 +4267,7 @@ tbody .product-name a:hover {
     color: #fff;
     position: relative;
     font-weight: 500;
-    background: #333;
+    background: #424851;
     -webkit-transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
     transition: all 0.4s ease;
@@ -4058,10 +4280,13 @@ tbody .product-name a:hover {
 .shopping .col-7>.total-amount .right .button5 .btn:hover {
     background: #3167eb;
 }
+.col-9 {
+    display: none;
+}
 
 .col-9 .nothing-found {
     margin-top: 50px;
-    color: #495057;
+    color: #424851;
     font-weight: bold;
     max-width: 500px;
 }
@@ -4131,24 +4356,36 @@ tbody .product-name a:hover {
     width: 100%;
     max-width: 100%;
 }
-
+.checkout .nice-select:nth-of-type(1) ul.list {
+    height: 10.3rem;
+}
+.checkout .nice-select:nth-of-type(2) ul.list {
+    height: 10.2rem;
+}
 .checkout .container .wrapper .col-40 {
-    flex: 0 0 66.666667%;
-    max-width: 66.666667%;
+    flex: 0 0 65%;
+    max-width: 65%;
     position: relative;
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
+    margin-right: 1rem;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 10px 15px 0 rgba(128,47,0,0.1);
+    padding: 3rem;
+    border: 1px solid rgba(49, 103, 235, 0.25);
 }
 
 .checkout .container .wrapper .col-41 {
-    flex: 0 0 33.333333%;
-    max-width: 33.333333%;
+    flex: 0 0 32%;
+    max-width: 32%;
     position: relative;
     width: 100%;
     min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
+    background: #fff;
+    border-radius: 4px;
+    height: fit-content;
+    box-shadow: 0 10px 15px 0 rgba(128,47,0,0.1);
+    border: 1px solid rgba(49, 103, 235, 0.25);
 }
 
 .checkout .nice-select,
@@ -4160,11 +4397,15 @@ tbody .product-name a:hover {
     margin-bottom: 25px;
     border-radius: 4px;
 }
+.user-dashboard .nice-select {
+    background: #f9f9f9;
+}
 
 .checkout .nice-select ul {
     width: 100%;
     height: 300px;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .checkout .nice-select .list {
@@ -4179,7 +4420,7 @@ tbody .product-name a:hover {
     margin-right: 3px;
     line-height: 50px;
     padding: 0 20px;
-    color: #495057 !important;
+    color: #424851 !important;
     border: none;
     background: #F6F7FB;
 }
@@ -4192,7 +4433,8 @@ tbody .product-name a:hover {
 .checkout .col-401.full .form-group {
     margin-top: 1rem;
 }
-.form-group .email-wrong {
+.form-group .email-wrong,
+.error {
     color: red;
     margin-top: 3px;
     font-size: 14px;
@@ -4207,11 +4449,8 @@ tbody .product-name a:hover {
 }
 
 .checkout .col-41 .order-details {
-    margin-top: 30px;
-    background: #fff;
-    padding: 15px 0 30px 0;
-    border: 1px solid #eee;
     line-height: 24px;
+    padding: 1rem;
 }
 
 .checkout .col-41 .single-widget {
@@ -4225,7 +4464,7 @@ tbody .product-name a:hover {
     padding: 10px 30px;
     line-height: 24px;
     text-transform: uppercase;
-    color: #495057;
+    color: #424851;
     padding-bottom: 5px;
 }
 
@@ -4248,7 +4487,7 @@ tbody .product-name a:hover {
     padding: 0px 30px;
     font-size: 15px;
     font-weight: 400;
-    color: #495057;
+    color: #424851;
     margin-bottom: 12px;
 }
 
@@ -4263,7 +4502,7 @@ tbody .product-name a:hover {
     display: block;
     font-size: 15px;
     font-weight: 400;
-    color: #495057;
+    color: #424851;
 }
 
 .checkout .single-widget .checkbox {
@@ -4312,7 +4551,7 @@ tbody .product-name a:hover {
 }
 
 .checkout .single-widget:last-child {
-    margin: 0;
+    margin-bottom: 2rem;
 }
 
 .checkout .single-widget.get-button .btn,
@@ -4327,7 +4566,7 @@ tbody .product-name a:hover {
     position: relative;
     font-weight: 500;
     font-size: 14px;
-    background: #333;
+    background: #424851;
     -webkit-transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
     transition: all 0.4s ease;
@@ -4374,14 +4613,21 @@ tbody .product-name a:hover {
     justify-content: center !important;
     margin: 0 0 1em !important;
 }
-
+.user-dashboard .tabs-wrapper {
+    overflow: hidden;
+}
 .user-dashboard .tabs-wrapper ul.tabs li a {
     font-size: 15px;
 }
 
 .user-dashboard .tabs-wrapper .paneltbs {
     padding: 1rem;
-    border: 1px solid #e4e4e4;
+    background: #fff;
+    box-shadow: 0 10px 15px 0 rgba(128,47,0,0.1);
+    padding: 2rem;
+    border: 1px solid rgba(49, 103, 235, 0.25);
+    border-radius: 4px;
+    
 }
 
 .user-dashboard .tabs-wrapper .paneltbs .myaccount-links {
@@ -4410,7 +4656,7 @@ tbody .product-name a:hover {
     font-weight: 600;
     text-align: center;
     text-transform: uppercase;
-    color: #495057;
+    color: #424851;
 }
 
 .user-dashboard .tabs-wrapper .paneltbs .myaccount-links a:before {
@@ -4455,7 +4701,7 @@ tbody .product-name a:hover {
 }
 
 .user-dashboard .panel-1 a {
-    color: #495057;
+    color: #424851;
     transition: all .2s;
 }
 
@@ -4569,7 +4815,8 @@ tbody .product-name a:hover {
     width: 100%;
     border: 1px solid #e6e2f5;
     padding: 0px 20px;
-    color: #495057;
+    color: #424851;
+    background: rgba(66,72,81,0.03);
     border-radius: 4px;
     font-weight: 400;
     -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
@@ -4652,7 +4899,7 @@ tbody .product-name a:hover {
     padding: 20px 25px;
     text-decoration: none;
     font-weight: 400;
-    color: #495057;
+    color: #424851;
     border-bottom: 1px solid #ddd;
     -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
@@ -4729,7 +4976,7 @@ tbody .product-name a:hover {
     font-weight: 550;
 }
 .error-page .error-row .col-91 p:last-of-type {
-    color: #495057;
+    color: #424851;
     margin-bottom: 25px;
 }
 .error-page .error-row .col-91 a {
