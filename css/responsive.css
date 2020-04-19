@@ -843,6 +843,27 @@
 	.error-page .error-row .col-91 {
 		text-align: center;
 	}
+	.checkout .container .wrapper .col-41 {
+	    margin-top: 4rem;
+	}
+	.checkout .container .wrapper .col-40 {
+	    margin: 0;
+	}
+	.notices > div {
+        text-align: center;
+        flex-direction: column;
+        padding: 2rem;
+    }
+    .notices > div:before {
+        height: 5px;
+        width: 100%;
+        font-size: 0;
+    }
+    .notices > div a {
+        position: static;
+        order: 2;
+        margin-top: 1.5rem;
+    }
 }
 
 /* Small devices (Large Phones Screen)  */
@@ -945,7 +966,10 @@
     .my-account .container .wrapper .col-50 {
         flex: 0 0 100%;
         max-width: 100%;
-        padding: 30px 25px 15px;
+        padding: 1rem;
+    }
+    .my-account .container .wrapper .col-50 form > .form-group {
+        
     }
 
     .my-account .custom-radio .custom-control-input:checked~.custom-control-label::after {
@@ -995,5 +1019,11 @@
 
     #main-header .bottom-sec .container .wrapper .user-details .user-details-container .widget-header1 {
         margin-right: 0 !important;
+    }
+    .checkout .container .wrapper {
+        padding: 0 5px;
+    }
+    .my-account .container .wrapper {
+        padding: 0 1rem;
     }
 }
