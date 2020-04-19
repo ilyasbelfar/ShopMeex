@@ -25,7 +25,7 @@
 		}
 	}
 
-	
+	$db=null;
 	echo json_encode($output);
 
 ?>

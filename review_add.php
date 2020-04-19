@@ -32,6 +32,6 @@
 	else {
 		$output['message']='you need to login to write a review';
 	}
-
+  $db=null;
 	echo json_encode($output)
 ?>        

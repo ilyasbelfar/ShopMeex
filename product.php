@@ -7,7 +7,25 @@
     else {
         $slug="large-dell-inspiron-15-5000-15-6";
     }
-
+    ////////// a coper something else where 
+       if(isset($_SESSION['id'])){
+        if(isset($_SESSION['cart'])){
+            foreach($_SESSION['cart'] as $row){
+                $stmt = $db->prepare("SELECT *, COUNT(*) AS numrows FROM cart WHERE user_id=:user_id AND product_id=:product_id");
+                $stmt->execute(['user_id'=>$user['id'], 'product_id'=>$row['productid']]);
+                $crow = $stmt->fetch();
+                if($crow['numrows'] < 1){
+                    $stmt = $db->prepare("INSERT INTO cart (user_id, product_id, quantity) VALUES (:user_id, :product_id, :quantity)");
+                    $stmt->execute(['user_id'=>$user['id'], 'product_id'=>$row['productid'], 'quantity'=>$row['quantity']]);
+                }
+                else{
+                    $stmt = $db->prepare("UPDATE cart SET quantity=:quantity WHERE user_id=:user_id AND product_id=:product_id");
+                    $stmt->execute(['quantity'=>$row['quantity'], 'user_id'=>$user['id'], 'product_id'=>$row['productid']]);
+                }
+            }
+            unset($_SESSION['cart']);
+        }
+    }
 
 
 
@@ -36,10 +54,11 @@
         $nborders=$stmt->rowCount();
         
         $now = date('Y-m-d');
-       
-
+     
         // getting the reviews
-        
+        if (isset($_SESSION['cart'])) {
+            echo var_dump($_SESSION['cart']);
+        }
 
         //getting total number of reviews
         $stmt=$db->prepare("SELECT * from review WHERE product_id=:prodid  ");
@@ -91,7 +110,7 @@
             
     }
 
-    
+    $db=null;
    
 ?>
 
@@ -244,7 +263,7 @@
                                                     </ul>
                                                     <p class="total">
                                                         <strong>Subtotal:</strong>
-                                                        <span>$<span class="amount">16.98</span></span>
+                                                        <span>$<span class="amount">0</span></span>.00
                                                     </p>
                                                     <p class="sub-buttons">
                                                         <a href="cart.html" class="forward-cart">View cart</a>
@@ -674,7 +693,7 @@
                                 </div>
                                 <div class='product-content'>
                                     <h3>
-                                    <a href='#'>".$row['name']."</a>
+                                    <a href='product.php?product=".$row['slug']."'>".$row['name']."</a>
                                                                     </h3>
                                     <div class='product-price-rating'>
                                         <span title='Price'>$".number_format($row['price'], 2)."</span>
@@ -843,6 +862,7 @@ $(function(){
 
     <?php include 'includes/script.php'; ?>
     <script >
+
 
        
  

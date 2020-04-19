@@ -43,5 +43,6 @@
     	catch(PDOException $e){
 			$output['message'] = $e->getMessage();
 		}
+        $db=null;
 		echo json_encode($output);
 		?>

@@ -7,6 +7,7 @@ $(function(){
  
   getCart();
   getReview(); 
+  getTotal();
 
   $('#productForm').submit(function(e){
     e.preventDefault();
@@ -25,6 +26,7 @@ $(function(){
         else{
         $('.callout').removeClass('callout-danger').addClass('callout-success');
         getCart();
+        getTotal()
         }
       }
     });
@@ -49,6 +51,7 @@ $(function(){
                 if(!response.error){
                    
                     getCart();
+                    getTotal()
                    
                 }
             }
@@ -89,6 +92,7 @@ $('.myform').submit(function(){
         else{
         $('.callout1').removeClass('callout-danger').addClass('callout-success');
         getCart();
+        getTotal();
         }
       }
     });
@@ -159,6 +163,18 @@ $('.myform').submit(function(){
       
     }
   });
+}
+
+function getTotal(){
+    $.ajax({
+        type: 'POST',
+        url: 'cart_total.php',
+        dataType: 'json',
+        success:function(response){
+            total = response;
+            $('.amount').html(response);
+        }
+    });
 }
 
 
