@@ -105,33 +105,39 @@
             $pass = sha1(filter_var($pass.$salt, FILTER_SANITIZE_STRING));// sha1 function to transform the password into long String; known as hashing method;
             if($pass==$password){
                 
-                if(empty($_POST['password_1']) OR empty($_POST['password_2']))
-                    $msgerr="Please fill all the fields";
+                if(empty($_POST['password_1']) OR empty($_POST['password_2'])){
+                    $msg="Please fill all the fields";
+                    $err=true;
+                }
+                
                 else if($_POST['password_1']==$_POST['password_2']) {
                      $pass=$_POST['password_1'];
                      $salt="^%r8yuyg";
                      $pass = sha1(filter_var($pass.$salt, FILTER_SANITIZE_STRING));
-                     $stm=$db->prepare('UPDATE users set password=? where email=?');
-                     $stm->execute(array($pass,$emailid));
-                      $msg='Password changed successefully ';
+                     $stmt=$db->prepare('UPDATE users set password=? where email=?');
+                     if ($stmt->execute(array($pass,$emailid)))
+                      echo "<script>alert('Password updated success.');</script>";
                         
                      
 
                 } 
-                 else
-                    $msgerr='The two Passwords did not match';
+                 else{
+                    $msg='The two Passwords did not match';
+                $err=true;
+            }
 
 
 
             }
             else 
                  
-                $msgerr='Current password incorrect';
+                $msg='Current password incorrect';
+            $err=true;
 
 
         }   
 
-        if (empty($emailInsErr)&&empty($userErr)&&empty($msgerr)){
+        if (empty($emailInsErr)&&empty($userErr)&&empty($err)){
         $stmt=$db->prepare('UPDATE users set firstname=?,lastname=?,email=?,username=?,contact_info=?,country=?,state=?,address=?,address2=?,city=?,postal=? where email=?');
         $stmt->execute(array($fname,$lname,$email,$userr,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
 
@@ -858,12 +864,8 @@
                                             </p>
                                         </fieldset>
                                              <p class=error-form>
-                                                <?php if ($_SERVER['REQUEST_METHOD']=='POST') {
-                                                       echo $msgerr;
-                                                       echo $msg;
-                                                   }
-                                                         
-                                                      
+                                                <?php if ($_SERVER['REQUEST_METHOD']=='POST')  
+                                                     echo $msg;  
                                                 ?>
                                                     
                                             </p>
