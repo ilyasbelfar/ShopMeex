@@ -1,3 +1,97 @@
+<?php
+
+    ob_start();
+    
+    include 'includes/session.php';
+
+    
+    $subtotal = $subTotals = $discount = $discountPrice = 0;
+    $messageSub = '';
+    $messageCoupon = '';
+    
+    
+    $stmt = $db->prepare("SELECT *, cart.quantity AS cq , cart.id As cartid FROM cart LEFT JOIN products ON products.id=cart.product_id	 WHERE user_id=:user_id");
+    $stmt->execute(['user_id'=>$user['id']]);
+    foreach($stmt as $row) {
+        $subtotal += $row['price']*$row['cq'];
+    }
+    
+    if (isset($_POST['Coupon']) && (!empty($_POST['Coupon']))) {
+        $stmt = $db->query("SELECT coupon_value FROM coupons WHERE coupon_code='" . $_POST["Coupon"] . "'");
+        $results = $stmt->fetch();
+        if ($results) {
+			$discountPrice = (int)$results["coupon_value"];
+			if(!empty($discountPrice)) {
+			    if($_SESSION['cart']['total'] > $discountPrice) {
+			        $messageCoupon = '<div class="message" role="alert">Coupon Applied.</div>';
+			        $discount = $discountPrice;
+			    }
+			    else if($_SESSION['cart']['total'] <= $discountPrice) {
+		            $messageCoupon = '<div class="errors" role="alert">Invalid Discount Coupon.</div>';
+		            $discount = 0;
+		        }
+		    }
+        }
+        else {
+		    $messageCoupon = '<div class="errors" role="alert">Invalid Discount Coupon.</div>';
+		    $discount = 0;
+		}
+    }
+    
+    if (isset($_POST['update_cart'])) {
+        foreach ($_POST as $k => $v) {
+            if (strpos($k, 'qty_') !== false) {
+                $id = str_replace('qty_', '', $k);
+                $id = (int)$id;
+                $quantity = (int)$v;
+                 // Always do checks and validation
+                 if ($quantity > 0) {
+                    $stmt = $db->prepare("UPDATE cart SET quantity=? WHERE id=?");
+                    $stmt->bindValue(1,$quantity, PDO::PARAM_INT);
+                    $stmt->bindValue(2,$id, PDO::PARAM_INT);
+			        if($stmt->execute()) {
+                        $messageSub ='<div class="message" role="alert">Products quanities has been has been updated.</div>';
+			        } else {
+			            $messageSub = '<div class="errors" role="alert">Oops! Something Went Wrong, Please Try Again.</div>';
+			        }
+                 }
+             }
+         }
+    }
+    
+
+    // Delete Item From Shopping Cart Not Working
+    if(isset($_GET['remove_item'])) {
+        $ident = $_GET['remove_item'];
+        if(isset($_SESSION['id'])) {
+		    try {
+    			$stmt = $db->prepare("DELETE FROM cart WHERE id=:id");
+    			$stmt->execute(['id'=>$ident]);
+    			foreach($_SESSION['cart'] as $row) {
+        			if($row['productid'] == $ident){
+        				unset($_SESSION['cart'][$key]);
+        				echo "Delete Product Successfully.";
+        			}
+        		}
+    			echo "Delete Product Successfully.";
+            }
+            catch(PDOException $e){
+			    echo "Wrong Message When Delete Product.";
+		    }
+        }
+        else {
+    	    foreach($_SESSION['cart'] as $row) {
+    			if($row['productid'] == $ident){
+    				unset($_SESSION['cart'][$key]);
+    				echo "Delete Product Successfully.";
+    			}
+    		}
+	    }
+	    header('Location: cart.php');
+    }
+    ob_end_flush();
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -17,7 +111,6 @@
     <link rel="stylesheet" type="text/css" href="css/nice-select.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/responsive.css">
-    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body>
@@ -86,7 +179,7 @@
                         </div>
 
                         <div class="search-bar">
-                            <form method="post">
+                            <form method="POST">
                                 <div class="search-bar-container">
                                     <select class="custom-select" name="category_name">
                                         <option value="all categories" data-display="All Categories">All Categories</option>
@@ -108,30 +201,30 @@
                             <div class="user-details-container">
                                 <span class="card-container">
                                     <a href="cart.html" class="widget-header1" id="icone-carte">
-                                    <div class="icon">
-                                        <div class="cart-icon-container">
-                                            <svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 251.6" id="cart-icon">
-                                                <g id="Grid_Layer">
-                                                    <g id="Artboard-3">
-                                                        <g id="Group-2" transform="translate(1 1)">
-                                                            <polyline id="Path-17" class="st2" points="65.7,13.6 95.6,13.6 142.6,133.9 286.2,122 306.2,42.1 108.8,42.1"></polyline>
-                                                            <circle id="Oval-7" class="st2" cx="251.5" cy="210.4" r="21.9"></circle>
-                                                            <circle id="Oval-7-Copy" class="st2" cx="164.1" cy="210.4" r="21.9"></circle>
-                                                            <polyline id="Path-18" class="st2" points="146,133.9 131.3,155.8 284.3,155.8"></polyline>
+                                        <div class="icon">
+                                            <div class="cart-icon-container">
+                                                <svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 251.6" id="cart-icon">
+                                                    <g id="Grid_Layer">
+                                                        <g id="Artboard-3">
+                                                            <g id="Group-2" transform="translate(1 1)">
+                                                                <polyline id="Path-17" class="st2" points="65.7,13.6 95.6,13.6 142.6,133.9 286.2,122 306.2,42.1 108.8,42.1"></polyline>
+                                                                <circle id="Oval-7" class="st2" cx="251.5" cy="210.4" r="21.9"></circle>
+                                                                <circle id="Oval-7-Copy" class="st2" cx="164.1" cy="210.4" r="21.9"></circle>
+                                                                <polyline id="Path-18" class="st2" points="146,133.9 131.3,155.8 284.3,155.8"></polyline>
+                                                            </g>
                                                         </g>
                                                     </g>
-                                                </g>
-                                                <g id="Layer_2">
-                                                    <line class="st2 st1" x1="15.7" y1="85.7" x2="76.6" y2="85.7" data-svg-origin="15.699999809265137 85.69999694824219" transform="matrix(0,0,0,1,15.699999809265137,0)" style="opacity: 0;"></line>
-                                                    <line class="st2 st1" x1="35.4" y1="123" x2="81.5" y2="123" data-svg-origin="35.400001525878906 123" transform="matrix(0,0,0,1,35.400001525878906,0)" style="opacity: 0;"></line>
-                                                    <line class="st2 st1" x1="57.6" y1="160.4" x2="85.2" y2="160.4" data-svg-origin="57.599998474121094 160.39999389648438" transform="matrix(0,0,0,1,57.599998474121094,0)" style="opacity: 0;"></line>
-                                                </g>
-                                            </svg>
+                                                    <g id="Layer_2">
+                                                        <line class="st2 st1" x1="15.7" y1="85.7" x2="76.6" y2="85.7" data-svg-origin="15.699999809265137 85.69999694824219" transform="matrix(0,0,0,1,15.699999809265137,0)" style="opacity: 0;"></line>
+                                                        <line class="st2 st1" x1="35.4" y1="123" x2="81.5" y2="123" data-svg-origin="35.400001525878906 123" transform="matrix(0,0,0,1,35.400001525878906,0)" style="opacity: 0;"></line>
+                                                        <line class="st2 st1" x1="57.6" y1="160.4" x2="85.2" y2="160.4" data-svg-origin="57.599998474121094 160.39999389648438" transform="matrix(0,0,0,1,57.599998474121094,0)" style="opacity: 0;"></line>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <span class="notify">0</span>
                                         </div>
-                                        <span class="notify">0</span>
-                                    </div>
-                                </a>
-                                <div class="sub-menu">
+                                    </a>
+                                    <div class="sub-menu">
                                         <div class="shopping-cart-content">
                                             <div class="no-item">
                                                 <p class="empty-msg">No products in the cart.</p>
@@ -144,38 +237,38 @@
                                                             <a href="#" class="item-details">
                                                                 <img width="300" height="300" src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg 800w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-150x150.jpg 150w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-300x300.jpg 300w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-768x768.jpg 768w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-660x660.jpg 660w" sizes="(max-width: 300px) 100vw, 300px">Basic t-shirt
                                                             </a>
-                                                            <div class="clearfix"></div>    
-                                                            <span class="quantitys">1 × <span>$<span class="total-amount">7.99</span></span></span>    
+                                                            <div class="clearfix"></div>
+                                                            <span class="quantitys">1 × <span>$<span class="total-amount">7.99</span></span></span>
                                                         </li>
                                                         <li class="product-item">
                                                             <a href="#" class="remove-item-button">×</a>
                                                             <a href="#" class="item-details">
                                                                 <img width="300" height="300" src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg 800w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-150x150.jpg 150w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-300x300.jpg 300w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-768x768.jpg 768w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-660x660.jpg 660w" sizes="(max-width: 300px) 100vw, 300px">Basic t-shirt
                                                             </a>
-                                                            <div class="clearfix"></div>    
-                                                            <span class="quantitys">1 × <span>$<span class="total-amount">7.99</span></span></span>    
+                                                            <div class="clearfix"></div>
+                                                            <span class="quantitys">1 × <span>$<span class="total-amount">7.99</span></span></span>
                                                         </li>
                                                         <li class="product-item">
                                                             <a href="#" class="remove-item-button">×</a>
                                                             <a href="#" class="item-details">
                                                                 <img width="300" height="300" src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg 800w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-150x150.jpg 150w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-300x300.jpg 300w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-768x768.jpg 768w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-660x660.jpg 660w" sizes="(max-width: 300px) 100vw, 300px">Basic t-shirt
                                                             </a>
-                                                            <div class="clearfix"></div>    
-                                                            <span class="quantitys">1 × <span>$<span class="total-amount">7.99</span></span></span>    
+                                                            <div class="clearfix"></div>
+                                                            <span class="quantitys">1 × <span>$<span class="total-amount">7.99</span></span></span>
                                                         </li>
                                                     </ul>
                                                     <p class="total">
                                                         <strong>Subtotal:</strong>
-                                                        <span>$<span class="amount">16.98</span></span>
+                                                        <span><span class="amount"></span></span>
                                                     </p>
                                                     <p class="sub-buttons">
-                                                        <a href="cart.html" class="forward-cart">View cart</a>
-                                                        <a href="checkout.html" class="forward-checkout">Checkout</a>
+                                                        <a href="cart.php" class="forward-cart">View cart</a>
+                                                        <a href="checkout.php" class="forward-checkout">Checkout</a>
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
-                                </div>
+                                    </div>
                                 </span>
                                 <a href="#" class="widget-header1">
                                     <div class="icon">
@@ -187,11 +280,11 @@
                                     <div class="icon">
                                         <i class="fa fa-user"></i>
                                         <div class="user-text">
-                                            <small class="text-muted">Sign in | Sign Up</small>
+                                            <small class="text-muted"><a href="login.php">Sign in</a> |
+                                                <a href="register.php">Sign Up</a> </small>
                                             <div>My Account<i class="fa fa-angle-down"></i></div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="clearfix"></div>
@@ -233,91 +326,6 @@
     <!-- End Header -->
 
     <!-- Start Cart -->
-   <?php 
-    // If the user clicked the add to cart button on the product page we can check for the form data
-if (isset($_POST['product_id'], $_POST['quantity']) && is_numeric($_POST['product_id']) && is_numeric($_POST['quantity'])) {
-    // Set the post variables so we easily identify them, also make sure they are integer
-    $product_id = (int)$_POST['product_id'];
-    $quantity = (int)$_POST['quantity'];
-    // Prepare the SQL statement, we basically are checking if the product exists in our databaser
-    $stmt = $pdo->prepare('SELECT * FROM products WHERE id = ?');
-    $stmt->execute([$_POST['product_id']]);
-    // Fetch the product from the database and return the result as an Array
-    $product = $stmt->fetch(PDO::FETCH_ASSOC);
-    // Check if the product exists (array is not empty)
-    if ($product && $quantity > 0) {
-        // Product exists in database, now we can create/update the session variable for the cart
-        if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
-            if (array_key_exists($product_id, $_SESSION['cart'])) {
-                // Product exists in cart so just update the quanity
-                $_SESSION['cart'][$product_id] += $quantity;
-            } else {
-                // Product is not in cart so add it
-                $_SESSION['cart'][$product_id] = $quantity;
-            }
-        } else {
-            // There are no products in cart, this will add the first product to cart
-            $_SESSION['cart'] = array($product_id => $quantity);
-        }
-    }
-    // Prevent form resubmission...
-    //header('location: index.php?page=cart');
-    exit;
-}
-    
-    
-    // Remove product from cart, check for the URL param "remove", this is the product id, make sure it's a number and check if it's in the cart
-if (isset($_GET['remove']) && is_numeric($_GET['remove']) && isset($_SESSION['cart']) && isset($_SESSION['cart'][$_GET['remove']])) {
-    // Remove the product from the shopping cart
-    unset($_SESSION['cart'][$_GET['remove']]);
-}
-    
-    // Update product quantities in cart if the user clicks the "Update" button on the shopping cart page
-if (isset($_POST['update']) && isset($_SESSION['cart'])) {
-    // Loop through the post data so we can update the quantities for every product in cart
-    foreach ($_POST as $k => $v) {
-        if (strpos($k, 'quantity') !== false && is_numeric($v)) {
-            $id = str_replace('quantity-', '', $k);
-            $quantity = (int)$v;
-            // Always do checks and validation
-            if (is_numeric($id) && isset($_SESSION['cart'][$id]) && $quantity > 0) {
-                // Update new quantity
-                $_SESSION['cart'][$id] = $quantity;
-            }
-        }
-    }
-    // Prevent form resubmission...
-    header('location: index.php?page=cart');
-    exit;
-}
-    
-    // Send the user to the place order page if they click the Place Order button, also the cart should not be empty
-if (isset($_POST['placeorder']) && isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    header('Location: index.php?page=placeorder');
-    exit;
-}
-    
-    // Check the session variable for products in cart
-$products_in_cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
-$products = array();
-$subtotal = 0.00;
-// If there are products in cart
-if ($products_in_cart) {
-    // There are products in the cart so we need to select those products from the database
-    // Products in cart array to question mark string array, we need the SQL statement to include IN (?,?,?,...etc)
-    $array_to_question_marks = implode(',', array_fill(0, count($products_in_cart), '?'));
-    $stmt = $pdo->prepare('SELECT * FROM products WHERE id IN (' . $array_to_question_marks . ')');
-    // We only need the array keys, not the values, the keys are the id's of the products
-    $stmt->execute(array_keys($products_in_cart));
-    // Fetch the products from the database and return the result as an Array
-    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // Calculate the subtotal
-    foreach ($products as $product) {
-        $subtotal += (float)$product['price'] * (int)$products_in_cart[$product['id']];
-    }
-}
-?>
-    
 
     <div class="breadcrumbs">
         <div class="container">
@@ -325,8 +333,8 @@ if ($products_in_cart) {
                 <div class="col-35">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="index.html">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="cart.html">Cart</a></li>
+                            <li><a href="index.php">Home<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="cart.php">Cart</a></li>
                         </ul>
                     </div>
                 </div>
@@ -337,6 +345,10 @@ if ($products_in_cart) {
     <section class="shopping">
         <div class="container">
             <div class="wrapper">
+                <div class="notices">
+                    <?php echo $messageSub;?>
+                    <?php echo $messageCoupon;?>
+                </div>
                 <div class="col-9">
                     <div class="nothing-found">
                         <span>Your cart is</span>
@@ -346,8 +358,9 @@ if ($products_in_cart) {
                         <a class="button wc-backward" href="#">Return to shop</a>
                     </p>
                 </div>
+                <form class="cart-form" method="POST">
                 <div class="col-7">
-                    <form class="cart-form" action="#" method="post">
+                    
                         <table class="shopping-cart">
                             <thead>
                                 <tr class="main-heading">
@@ -360,80 +373,81 @@ if ($products_in_cart) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (empty($products)): ?>
+                                <?php if(isset($_SESSION['id'])) {
+		                            try {
+			                            $stmt = $db->prepare("SELECT *, cart.quantity AS cq , cart.id As cartid FROM cart LEFT JOIN products ON products.id=cart.product_id	 WHERE user_id=:user_id");
+			                            $stmt->execute(['user_id'=>$user['id']]);
+			                            foreach($stmt as $row) { ?>
                                 <tr>
-                                <td colspan="5" style="text-align:center;">You have no products added in your Shopping Cart</td>
+                                    <td class="image" data-title="Product Picture"><img src="images/items/<?php echo $row['photo'];?>" alt="Product's Picture"></td>
+                                    <td class="product-des" data-title="Description">
+                                        <p class="product-name"><a href="product.php?product=<?php echo $row['slug'];?>"><?php echo $row['name'];?></a></p>
+                                        <p class="product-des"><?php echo $row['description'];?></p>
+                                    </td>
+                                    <td class="prix" data-title="Price"><span>$<span class="unit-price"><?php echo $row['price'];?></span></span>
+                                    </td>
+                                    <td class="qty" data-title="Quantity">
+                                        <!-- Input Order -->
+                                        <div class="input-group mb-3 mb-4">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-light" type="button" id="button-plus"> + </button>
+                                            </div>
+                                            <input id="quantity" name="qty_<?php echo $row['cartid'];?>" type="text" class="form-control" value="<?php echo $row['cq'];?>">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-light" type="button" id="button-minus"> − </button>
+                                            </div>
+                                        </div>
+                                        <!--/ End Input Order -->
+                                    </td>
+                                    <td class="total-amount" data-title="Total"><span>$<span class="amount"><?php echo $row['price']*$row['cq'];?></span></span>
+                                    </td>
+                                    <td class="action" data-title="Remove"><a href="cart.php?remove_item=<?php echo $row['product_id'];?>" id="remove-product"><i class="ti-trash remove-icon"></i></a></td>
                                 </tr>
-                                <?php else: ?>
-                                <?php foreach ($products as $product): ?>
-                                
-                                   <tr>
-                                    <td class="img">
-                                  <a href="index.php?page=product&id=<?=$product['id']?>">
-                                   <img src="imgs/<?=$product['img']?>" width="50" height="50" alt="<?=$product['name']?>">
-                                  </a>
-                                  </td>
-                               <td>
-                                   <a href="index.php?page=product&id=<?=$product['id']?>"><?=$product['name']?></a>
-                                   <br>
-                                 <a href="index.php?page=cart&remove=<?=$product['id']?>" class="remove">Remove</a>
-                              </td>
-                               <td class="price">&dollar;<?=$product['price']?></td>
-                               <td class="quantity">
-                                   <input type="number" name="quantity-<?=$product['id']?>" value="<?=$products_in_cart[$product['id']]?>" min="1" max="<?=$product['quantity']?>" placeholder="Quantity" required>
-                                  </td>
-                                 <td class="price">&dollar;<?=$product['price'] * $products_in_cart[$product['id']]?></td>
-                                </tr>
-                               <?php endforeach; ?>
-                              <?php endif; ?>
-                                    
-                             
-                                
+
+                                <?php $subTotals += $row['price']*$row['cq'];
+                                    $subtotal += $row['price']*$row['cq'];
+                                }
+		                    } catch(PDOException $e){
+			                        echo "Error: " . $e->getMessage();
+	                        }
+                        }?>
                             </tbody>
                         </table>
-                    //</form>
-                  //</div>
-                
+                </div>
                 <div class="col-7">
                     <div class="total-amount">
                         <div class="row">
                             <div class="col-6 big">
                                 <div class="left">
                                     <div class="coupon">
-                                        <form action="#" target="_blank">
                                             <input name="Coupon" placeholder="Enter Your Coupon">
-                                            <button class="btn">Apply</button>
-                                        </form>
+                                            <button type="submit" class="btn" name="apply_coupon" value="Apply">Apply</button>
+                                    </div>
+                                </div>
+                                <div class="left">
+                                    <div class="coupon">
+                                        <button type="submit" class="btn" name="update_cart" value="Update Cart" disabled>Update Cart</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="right">
                                     <ul>
-                                        <li>Cart Subtotal<span>$330.00</span></li>
+                                        <li>Cart Subtotal<span id="subtot">$<?php echo $subTotals; ?></span></li>
                                         <li>Shipping<span>Free</span></li>
-                                        <li>You Save<span>$20.00</span></li>
-                                        <li class="last">You Pay<span>$310.00</span></li>
+                                        <li>Discount<span>$<?php echo $discount; ?></span></li>
+                                        <li class="last">You Pay<span>$<?php echo ($subTotals - $discount); ?></span></li>
                                     </ul>
+                                    <?php $_SESSION['cart']['total'] = $subTotals - $discount;?>
                                     <div class="button5">
-                                        <a href="checkout.html" class="btn">Proceed to checkout</a>
+                                        <a href="checkout.php" class="btn">Proceed to checkout</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="subtotal">
-                     <span class="text">Subtotal</span>
-                     <span class="price">&dollar;<?=$subtotal?></span>
-                    </div>
-                         <div class="buttons">
-                         <input type="submit" value="Update" name="update">
-                         <input type="submit" value="Place Order" name="placeorder">
-                         </div>
-                    </form>
-                   </div>  
-                    
-               </div>
+                </div>
+                </form>
             </div>
         </div>
     </section>
@@ -503,10 +517,10 @@ if ($products_in_cart) {
                         <h3>Social Media</h3>
                         <ul class="social-media">
                             <li>
-                                <li><a href="#"><i class="fab fa-facebook"></i>Facebook</a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i>Twitter</a></li>
-                                <li><a href="#"><i class="fab fa-instagram"></i>Instagram</a></li>
-                                <li><a href="#"><i class="fa fa-phone"></i>N° Phone</a></li>
+                            <li><a href="#"><i class="fab fa-facebook"></i>Facebook</a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i>Twitter</a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i>Instagram</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i>N° Phone</a></li>
                         </ul>
                     </aside>
                 </div>
