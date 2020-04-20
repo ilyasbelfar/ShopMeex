@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 11, 2020 at 05:00 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.2
+-- Hôte : localhost:3306
+-- Généré le : lun. 20 avr. 2020 à 20:00
+-- Version du serveur :  10.3.16-MariaDB
+-- Version de PHP : 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `shopmeextest`
+-- Base de données : `id13360353_shopmeexer`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cart`
+-- Structure de la table `cart`
 --
 
 CREATE TABLE `cart` (
@@ -35,10 +35,18 @@ CREATE TABLE `cart` (
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`) VALUES
+(25, 12, 7, 9),
+(26, 12, 4, 3);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Structure de la table `category`
 --
 
 CREATE TABLE `category` (
@@ -47,7 +55,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `category`
+-- Déchargement des données de la table `category`
 --
 
 INSERT INTO `category` (`id`, `name`) VALUES
@@ -56,23 +64,45 @@ INSERT INTO `category` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contact`
+-- Structure de la table `contact`
 --
 
 CREATE TABLE `contact` (
   `id` int(11) NOT NULL,
-  `name` varchar(256) NOT NULL,
-  `subject` varchar(256) NOT NULL,
-  `email` varchar(256) NOT NULL,
-  `phone` varchar(10) NOT NULL,
-  `message` text NOT NULL,
+  `name` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `subject` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `message` text COLLATE utf8_unicode_ci NOT NULL,
   `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- Structure de la table `coupons`
+--
+
+CREATE TABLE `coupons` (
+  `id` int(11) NOT NULL,
+  `coupon_code` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `coupon_value` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `coupons`
+--
+
+INSERT INTO `coupons` (`id`, `coupon_code`, `coupon_value`) VALUES
+(1, 'C_USB02', 100),
+(2, 'C_LPN45', 200),
+(3, 'C_3DcAM01', 340),
+(4, 'C_wristWear03', 50);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `orders`
 --
 
 CREATE TABLE `orders` (
@@ -83,7 +113,7 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `orders`
+-- Déchargement des données de la table `orders`
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `product_id`, `quantity`) VALUES
@@ -93,7 +123,7 @@ INSERT INTO `orders` (`id`, `user_id`, `product_id`, `quantity`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Structure de la table `products`
 --
 
 CREATE TABLE `products` (
@@ -117,24 +147,24 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `products`
+-- Déchargement des données de la table `products`
 --
 
 INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `weight`, `dimensions`, `price`, `slug`, `colors`, `owner_id`, `model`, `photo`, `photo1`, `photo2`, `date_view`, `counter`, `total_rating`) VALUES
-(1, 1, 'Dell Laptop 1500 Pavilion', 'one of the best product in the world Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, fa', 0.6, '70 x 60', 200, 'large-dell-inspiron-15-5000-15-6', 'Black White', 4, 'dell pavilion 15', '14.jpg', '12.jpg', '12-1.jpg', '2020-04-11', 105, 3),
-(2, 1, 'mouse', 'one of the beset mouse in the world', 0.1, '20 x 30', 400, 'mouse', 'red grey', 4, 'mouse l-120', 'Photo1.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-04-11', 9, 4),
-(3, 1, 'smart watch', 'one of the best product in teh world', 0.1, '12 x 13', 1200, 'smart-watch', 'red', 4, 'watch-120-M', '7.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-04-11', 17, 5),
-(4, 1, 'thered', 'one of the best product in teh world', 0.6, '', 13, 'thered', '', 4, '', 'Photo2.jpg', 'Photo2.jpg', '', '2020-04-11', 16, 4),
+(1, 1, 'Dell Laptop 1500 Pavilion', 'one of the best product in the world Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, fa', 0.6, '70 x 60', 200, 'large-dell-inspiron-15-5000-15-6', 'Black White', 4, 'dell pavilion 15', '14.jpg', '12.jpg', '12-1.jpg', '2020-04-20', 25, 3),
+(2, 1, 'mouse', 'one of the beset mouse in the world', 0.1, '20 x 30', 400, 'mouse', 'red grey', 4, 'mouse l-120', 'Photo1.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-04-20', 1, 4),
+(3, 1, 'smart watch', 'one of the best product in teh world', 0.1, '12 x 13', 1200, 'smart-watch', 'red', 4, 'watch-120-M', '7.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-04-20', 1, 5),
+(4, 1, 'thered', 'one of the best product in teh world', 0.6, '', 13, 'thered', '', 4, '', 'Photo2.jpg', 'Photo2.jpg', '', '2020-04-20', 1, 4),
 (5, 1, 'the blue', 'one of the best product in teh world222222222222222222222222222222222222222', 0.3, '30 x 50', 200, 'the-blue', 'black grey wihire', 4, '1200-3', 'Photo1.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-04-11', 23, 5),
 (6, 1, 'pill', 'omeone of the best product in teh world', 0, '', 13, 'watch-1200', '', 4, '', '9.jpg', 'Photo2.jpg', '', '2020-04-11', 6, 5),
-(7, 1, 'watch', 'vone of the best product in teh world', 0, '', 13, 'watch-130', '', 4, '', '8.jpg', 'Photo2.jpg', '', '2020-04-11', 4, 5),
+(7, 1, 'watch', 'vone of the best product in teh world', 0, '', 13, 'watch-130', '', 4, '', '8.jpg', 'Photo2.jpg', '', '2020-04-20', 1, 5),
 (8, 1, 'bimo', 'one of the best product in teh world', 0, '', 700, 'bimo-tango', '', 4, '', '10.jpg', 'Photo2.jpg', '', '2020-04-11', 12, 1),
-(9, 1, 'Safina', 'one of the best product in teh world', 0, '', 1200, 'safina-t3am', '', 4, '', '11.jpg', 'Photo2.jpg', '', '2020-04-11', 4, 5);
+(9, 1, 'Safina', 'one of the best product in teh world', 0, '', 1200, 'safina-t3am', '', 4, '', '11.jpg', 'Photo2.jpg', '', '2020-04-18', 4, 5);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `review`
+-- Structure de la table `review`
 --
 
 CREATE TABLE `review` (
@@ -147,7 +177,7 @@ CREATE TABLE `review` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `review`
+-- Déchargement des données de la table `review`
 --
 
 INSERT INTO `review` (`id`, `product_id`, `user_id`, `rating`, `date`, `comment`) VALUES
@@ -201,7 +231,19 @@ INSERT INTO `review` (`id`, `product_id`, `user_id`, `rating`, `date`, `comment`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `signups`
+--
+
+CREATE TABLE `signups` (
+  `id` int(11) NOT NULL,
+  `signup_email_address` varchar(50) NOT NULL,
+  `signup_date` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
 --
 
 CREATE TABLE `users` (
@@ -218,39 +260,29 @@ CREATE TABLE `users` (
   `photo` varchar(200) NOT NULL,
   `country` varchar(200) NOT NULL,
   `state` varchar(200) NOT NULL,
-  `address2` varchar(200) NOT NULL,
+  `address2` varchar(200) NOT NULL DEFAULT '',
   `city` varchar(200) NOT NULL,
   `postal` varchar(200) NOT NULL,
   `website` varchar(20) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`,`username`, `email`, `password`, `type`, `firstname`, `lastname`, `gender`, `address`, `contact_info`, `photo`,`country`,`state`,`address2`,`city`,`postal`, `website`) VALUES
-(1,'red', 'red@red.com', '11e0bb710744b9bd55a358fc6263f1eb77cdbe40', 4, 'thered', 'man', 0, 'red', '', 'profile.jpg','algeria','','','','','www.ff.co'),
-(2, 'batata','batata@gmail.com', '0f2f448a98c1730fd60e80cb9a89028026d94eff', 3, 'batat', 'ba', 0, 'batat', '', 'profile.jpg','Egypt','','aaaa','','1234','www.egybest.com'),
-(3, 'hamza','hamza@hamza.com', '5ed6d69249a73a3cfeedeffd33ee6e497c8047b5', 3, 'hamza', 'ham', 0, 'haza', '', 'profile.jpg','','','','','',''),
-(4, 'dell','dell@dell.com', 'password', 2, 'dell', 'for computers', 0, 'usa ', '+213254612','','USA','New York','Washington','','', 'www.dell.com'),
-(5, 'galaxy','galaxy@gmail.com', '93dd52f276ff266d6170a4068a6e8885f0195563', 3, 'galaxy', 's', 0, 'chlef', '012341567', '','','','','','', 'www.dell.com'),
-(6, 'azer','azer@gmail.com', '4dcd5d4e35e6c9648f8a4fc62dec48bbd78f337d', 3, 'azer', 'e', 0, 'azer', '', 'profile.jpg', '', '','','','','www.azz.zz');
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `type`, `firstname`, `lastname`, `gender`, `address`, `contact_info`, `photo`, `country`, `state`, `address2`, `city`, `postal`, `website`) VALUES
+(1, 'red', 'red@red.com', '11e0bb710744b9bd55a358fc6263f1eb77cdbe40', 4, 'thered', 'man', 0, 'red', '', 'profile.jpg', 'algeria', '', '', '', '', 'www.ff.co'),
+(2, 'batata', 'batata@gmail.com', '0f2f448a98c1730fd60e80cb9a89028026d94eff', 3, 'batat', 'ba', 0, 'batat', '', 'profile.jpg', 'Egypt', '', 'aaaa', '', '1234', 'www.egybest.com'),
+(3, 'hamza', 'hamza@hamza.com', '5ed6d69249a73a3cfeedeffd33ee6e497c8047b5', 3, 'hamza', 'ham', 0, 'haza', '', 'profile.jpg', '', '', '', '', '', ''),
+(4, 'dell', 'dell@dell.com', 'password', 2, 'dell', 'for computers', 0, 'usa ', '+213254612', '', 'USA', 'New York', 'Washington', '', '', 'www.dell.com'),
+(5, 'galaxy', 'galaxy@gmail.com', '93dd52f276ff266d6170a4068a6e8885f0195563', 3, 'galaxy', 's', 0, 'chlef', '012341567', '', '', '', '', '', '', 'www.dell.com'),
+(6, 'azer', 'azer@gmail.com', '4dcd5d4e35e6c9648f8a4fc62dec48bbd78f337d', 3, 'azer', 'e', 0, 'azer', '', 'profile.jpg', '', '', '', '', '', 'www.azz.zz'),
+(12, 'ilyasflbae54', 'mabou.diaz21@gmail.com', 'b5dbf50955330141cd87eb2ffda400e6f998ba0d', 3, 'ilyas', 'belfar', 0, '09 Rue Abdesslam Abdellah, Bor', '00000000', 'profile.jpg', 'US', 'New York', '09 Rue Abdesslam Abdellah, Bor', 'Bordj Bou Arreridj', '34000', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `signups`
---
-
-CREATE TABLE `signups` (
-  `id` int(11) NOT NULL,
-  `signup_email_address` varchar(50) NOT NULL,
-  `signup_date` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
---
--- Table structure for table `wishlist`
+-- Structure de la table `wishlist`
 --
 
 CREATE TABLE `wishlist` (
@@ -260,116 +292,127 @@ CREATE TABLE `wishlist` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `cart`
+-- Index pour la table `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `category`
+-- Index pour la table `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `orders`
+-- Index pour la table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `coupons`
+--
+ALTER TABLE `coupons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `products`
+-- Index pour la table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `review`
+-- Index pour la table `review`
 --
 ALTER TABLE `review`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Index pour la table `signups`
+--
+ALTER TABLE `signups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `wishlist`
+-- Index pour la table `wishlist`
 --
 ALTER TABLE `wishlist`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `cart`
+-- AUTO_INCREMENT pour la table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT for table `category`
+-- AUTO_INCREMENT pour la table `category`
 --
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `orders`
+-- AUTO_INCREMENT pour la table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `coupons`
+--
+ALTER TABLE `coupons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT pour la table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `review`
+-- AUTO_INCREMENT pour la table `review`
 --
 ALTER TABLE `review`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `wishlist`
+-- AUTO_INCREMENT pour la table `wishlist`
 --
 ALTER TABLE `wishlist`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-  
---
--- Indexes for table `signups`
---
-ALTER TABLE `signups`
-  ADD PRIMARY KEY (`id`);
 COMMIT;
-----------------------------------
---Table structure for table `subscribers`
-CREATE TABLE `subscribers` (
- `id` int(11) NOT NULL AUTO_INCREMENT,
- `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
- `email` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
- `verify_code` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
- `is_verified` tinyint(1) NOT NULL DEFAULT '0',
- `created` datetime NOT NULL,
- `modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
- `status` tinyint(1) NOT NULL DEFAULT '1',
- PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
