@@ -100,7 +100,8 @@ body {
 .my-account,
 .user-dashboard,
 .product-details,
-.error-page {
+.error-page,
+.seller-dash {
     background: #faf9f7;
 }
 
@@ -116,7 +117,8 @@ main .container,
 .my-account .container,
 .user-dashboard .container,
 .product-details .container,
-.error-page .container{
+.error-page .container,
+.seller-dash .container {
     width: 100% !important;
     max-width: 100% !important;
 }
@@ -337,21 +339,21 @@ svg#cart-icon {
 @-webkit-keyframes icon-animation {
 
     0%,100% {
-    	opacity: 1;
-    	-webkit-transform: translateX(0%);
-    	        transform: translateX(0%);
+        opacity: 1;
+        -webkit-transform: translateX(0%);
+                transform: translateX(0%);
     }
     
     50% {
-    	opacity: 0;
-    	-webkit-transform: translateX(100%);
-    	        transform: translateX(100%);
+        opacity: 0;
+        -webkit-transform: translateX(100%);
+                transform: translateX(100%);
     }
     
     51% {
-    	opacity: 0;
-    	-webkit-transform: translateX(-100%);
-    	        transform: translateX(-100%);
+        opacity: 0;
+        -webkit-transform: translateX(-100%);
+                transform: translateX(-100%);
     }
 
 }
@@ -359,21 +361,21 @@ svg#cart-icon {
 @keyframes icon-animation {
 
     0%,100% {
-    	opacity: 1;
-    	-webkit-transform: translateX(0%);
-    	        transform: translateX(0%);
+        opacity: 1;
+        -webkit-transform: translateX(0%);
+                transform: translateX(0%);
     }
     
     50% {
-    	opacity: 0;
-    	-webkit-transform: translateX(100%);
-    	        transform: translateX(100%);
+        opacity: 0;
+        -webkit-transform: translateX(100%);
+                transform: translateX(100%);
     }
     
     51% {
-    	opacity: 0;
-    	-webkit-transform: translateX(-100%);
-    	        transform: translateX(-100%);
+        opacity: 0;
+        -webkit-transform: translateX(-100%);
+                transform: translateX(-100%);
     }
 
 }
@@ -381,20 +383,20 @@ svg#cart-icon {
 @-webkit-keyframes seconds {
 
     0% {
-    	opacity: 1;
-    	height: auto;
+        opacity: 1;
+        height: auto;
     }
     
     50% {
-    	font-size: 0;
+        font-size: 0;
     }
     
     100% {
-    	opacity: 0;
-    	height: 0;
-    	pointer-events: none;
-    	padding: 0;
-    	margin: 0;
+        opacity: 0;
+        height: 0;
+        pointer-events: none;
+        padding: 0;
+        margin: 0;
     }
 
 }
@@ -402,20 +404,20 @@ svg#cart-icon {
 @keyframes seconds {
 
     0% {
-    	opacity: 1;
-    	height: auto;
+        opacity: 1;
+        height: auto;
     }
     
     50% {
-    	font-size: 0;
+        font-size: 0;
     }
     
     100% {
-    	opacity: 0;
-    	height: 0;
-    	pointer-events: none;
-    	padding: 0;
-    	margin: 0;
+        opacity: 0;
+        height: 0;
+        pointer-events: none;
+        padding: 0;
+        margin: 0;
     }
 
 }
@@ -1030,7 +1032,7 @@ form .search-bar-container .search-icon-container button {
     background-color: #fa3434;
     font-weight: bold;
     -webkit-animation: pulses 1.5s infinite cubic-bezier(0.66, 0.33, 0, 1);
-	animation: pulses 1.5s infinite cubic-bezier(0.66, 0.33, 0, 1);
+    animation: pulses 1.5s infinite cubic-bezier(0.66, 0.33, 0, 1);
 }
 
 #icone-carte {
@@ -4094,7 +4096,9 @@ p.stars.selected a.active {
     font-size: 14px;
     overflow-x: hidden;
 }
-
+.shopping form.cart-form {
+    width: 100%;
+}
 .shopping-cart {
     background: #fff;
     display: table;
@@ -4323,10 +4327,6 @@ tbody .product-name a:hover {
 .shopping .col-7>.total-amount .right .button5 .btn:hover {
     background: #3167eb;
 }
-.col-9 {
-    display: none;
-}
-
 .col-9 .nothing-found {
     margin-top: 50px;
     color: #424851;
@@ -5043,6 +5043,123 @@ tbody .product-name a:hover {
 }
 
 /* End 404 Page */
+
+
+
+/* Start Seller Dashboard */
+.seller-dash {
+    position: relative;
+    z-index: 43;
+    width: 100%;
+    height: 100%;
+}
+.seller-dash #sellermenu {
+    height: auto;
+    width: 100%;
+    position: relative;
+}
+#sellermenu-back {
+    position: fixed;
+    top: 0;
+    bottom: -120px;
+    z-index: 1;
+}
+#sellermenu-wrap {
+    position: fixed;
+    float: left;
+    z-index: 999;
+    margin-top: 2.6rem;
+}
+#sellermenu-wrap,
+#sellermenu-back {
+    width: 160px;
+    height: 100%;
+    background-color: #23282d;
+}
+#sellermenu-wrap > ul#sel-menu {
+    clear: left;
+    margin: 12px 0;
+    padding: 0;
+    list-style: none;
+}
+#sellermenu-wrap > ul li {
+    border: none;
+    min-height: 34px;
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    margin: 1rem 0;
+}
+#sellermenu-wrap > ul li a {
+    font-size: 15px;
+    display: block;
+    color: #eee;
+    font-weight: 400;
+    line-height: 1.3;
+    padding: 8px 0;
+}
+#sellermenu-wrap > ul li a i {
+    margin-right: 8px;
+}
+#dash-content {
+    padding: 0;
+    overflow-x: hidden!important;
+    min-height: calc(100vh - 32px);
+    margin-left: 160px;
+    height: 100%;
+}
+#dash-content .sell-bar {
+    line-height: 2.46;
+    height: 32px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-width: 600px;
+    z-index: 99999;
+    background: #23282d;
+}
+#dash-content .sell-body {
+    position: relative;
+    margin-top: 32px;
+}
+#dash-content .sell-body-content {
+    padding: 0;
+    overflow-x: hidden!important;
+    min-height: calc(100vh - 32px);
+    float: left;
+    width: 100%;
+    overflow: visible!important;
+}
+#dash-content .sell-bar a {
+    color: #eee;
+}
+#dash-content .sell-body-content .layout-header a {
+    color: #424851;
+}
+#dash-content .sell-body-content .layout-header {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    background: #fff;
+    border-bottom: 1px solid rgba(49, 103, 235, 0.25);
+    box-shadow: 0 5px 10px 0 rgba(128,47,0,0.1);
+}
+#dash-content .sell-body-content .breadcrumbs {
+    background: transparent;
+    margin-right: auto;
+}
+#dash-content .sell-body-content .layout-header .activity-buttons a {
+    padding: 2rem;
+}
+
+
+
+
+/* End Seller Dashboard */
 
 
 
