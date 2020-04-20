@@ -1,0 +1,189 @@
+*{
+	background-color: #7DB810‬;
+}
+section.user-content{
+	margin-top: 30px;
+}
+section.user-content .maincontainer .wrapper aside.flexquart  ul.list-group{
+	margin:0;
+	padding: 0;
+}
+section.user-content .maincontainer .wrapper aside.flexquart{
+	padding: 16px;
+	margin-right: 30px;
+}
+
+section.user-content .maincontainer .wrapper aside.flexquart  ul.list-group a.list-group-item{
+	border: 1px solid rgba(0, 0, 0, 0.125);
+    padding:15px 20px;
+    line-height: 1.2;
+    text-align: left;
+}
+section.user-content .maincontainer .wrapper aside.flexquart  ul.list-group a:first-child {
+       border-top-right-radius: 7px;
+       border-top-left-radius: 7px;
+}
+section.user-content .maincontainer .wrapper aside.flexquart  ul.list-group a:last-child {
+       border-bottom-right-radius: 7px;
+       border-bottom-left-radius: 7px;
+ }
+.active{
+	border-color: #3167eb;
+	background-color: #3167eb;;
+	color: white;
+}
+section.user-content .maincontainer .wrapper .main{
+	-webkit-box-flex:0;
+	-ms-flex:0 0 65%;
+	flex: 0 0 65%;
+	max-width: 65%;
+    padding: 16px; 
+}
+section.user-content .maincontainer .wrapper .main article{
+	width: 100%;
+	border:1px solid rgba(0, 0, 0, 0.1);
+	margin-bottom: 2rem;
+	border-radius: 0.6rem;
+}
+section.user-content .maincontainer .wrapper .main article .container{
+	padding: 0.8rem;
+	width: 100%;
+   
+}
+section.user-content .maincontainer .wrapper .main article .container *{
+	text-align: left;
+}
+section.user-content .maincontainer .wrapper .main article .container * i{
+	color: #ccc;
+}
+section.user-content .maincontainer .wrapper .main article .container figure.icontext{
+	 border-bottom: 1px solid #000;
+	 margin-bottom: 15px;
+	 padding: 15px 0;
+}
+section.user-content .maincontainer .wrapper .main article .container figure .icon{
+    margin-right:  0.9rem;
+    border-radius: 40%;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+   
+   
+}
+
+
+ section.user-content .maincontainer .wrapper .main article .container figure .icon  img{
+ 	border:1px solid #ccc;
+	border-radius: 50%;
+ 	width: 5rem;
+ 	height: 5rem;
+ 	vertical-align: middle;
+ 	-ms-transition:all .3s ease-in-out ;
+ 	-webkit-transition: all .3s ease-in-out ; /* For Safari 3.1 to 6.0 */
+    transition: all .3s ease-in-out ;
+
+ }
+ section.user-content .maincontainer .wrapper .main article .container figure .icon  img:hover{
+ 	-ms-transform: rotateZ(20deg);/* IE 9 */
+    -webkit-transform: rotateZ(20deg);/* Safari */
+    transform: rotateZ(20deg);
+
+    
+ }
+ 
+ 
+ 
+
+
+ section.user-content .maincontainer .wrapper .main article .container figure .text{
+ 	padding: 10px;
+ 	font-size: 0.9rem;
+ }
+ section.user-content .maincontainer .wrapper .main article .container p{
+ 	padding: 0 0 1rem 0;
+ 	font-size: 0.9rem;
+ }
+ section.user-content .maincontainer .wrapper .main article .container article.card-group{
+ 	background-color: #f8f9fa;
+ }
+
+section.user-content .maincontainer .wrapper .main article .container article.card-group  figure.card{
+	padding: 20px;
+	font-size: 0.9rem;
+	-webkit-box-flex:0;
+	-ms-flex:0 0 20%;
+	flex: 0 0 20%;
+	max-width: 20%;
+	border-right: 1px solid #ccc;
+
+}
+section.user-content .maincontainer .wrapper .main article .container article.card-group  figure.card:last-child{
+	border-right:0;
+}
+section.user-content .maincontainer .wrapper .main article .container article.card-group  figure.card h5{
+	font-size: 1.2rem;
+	margin-bottom: 10px;
+}
+
+/*shop list*/
+article.card .card-body{
+	padding: 15px;
+}
+article.card .card-body h5.card-title{
+	font-size: 1.4rem;
+	line-height: 1.5;
+	font-weight: 600;
+	text-align: left;
+}
+article.card .card-body  .row .col {
+	padding: 8px;
+	margin-bottom: 10px;
+}
+article.card .card-body  .row .col figure.itemside *{
+	text-align: left;
+}
+
+article.card .card-body  .row .col figure.itemside .aside img{
+	width: 80px;
+	height: 80px;
+	border: 1px solid #ccc;
+    padding: 10px;
+    margin-right: 10px;
+    -ms-transition:all .3s ease-in-out ;
+ 	-webkit-transition: all .3s ease-in-out ; /* For Safari 3.1 to 6.0 */
+    transition: all .3s ease-in-out ;
+    
+
+}
+article.card .card-body  .row .col figure.itemside .aside img:hover{
+	-ms-transform: scale(1.2);/* IE 9 */
+    -webkit-transform: scale(1.2);/* Safari */
+    transform: scale(1.2);
+}
+time.text-muted {
+	color: #ccc;
+}
+time.text-muted i{
+	margin-right: 10px;
+	margin-top: 1px;
+}
+.row .col .info{
+	align-content: space-around;
+}
+.row .col .info *{
+     font-size: 0.8rem;
+}
+.row .col .info p{
+     line-height: 1.5;
+}
+article.card .card-body a.see-all {
+	border:1px solid #3167eb;
+	padding: 8px 10px;
+	border-radius: 10px;
+	font-weight: 600;
+	margin-right: auto;
+	text-align: left;
+}
+article.card .card-body a.see-all:hover {
+	color: #fff;
+	background-color: #3167eb;
+}
