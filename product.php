@@ -55,7 +55,7 @@
         
         $now = date('Y-m-d');
      
-        // getting the reviews
+        
      
         //getting total number of reviews
         $stmt=$db->prepare("SELECT * from review WHERE product_id=:prodid  ");
