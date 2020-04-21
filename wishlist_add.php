@@ -32,6 +32,9 @@
 			$output['message'] = 'Product already in wishlist';
 		}
 	}
+	else{
+		$output['message']='You need to login to add items to your wishlist';
+	}
 	
 	
 	$db=null;
