@@ -9,15 +9,17 @@
 		$password=$_POST['password'];
 		$confirmpassword=$_POST['confirmpassword'];
 		if($password!=$confirmpassword)
-			$msg="<div>Sorry,password didnt match</div>";
+			$msg="Sorry,password didnt match";
 		else {
 			 $salt="^%r8yuyg";//create our salt; salt is special String added to password // way of encrption on database;
              $password = sha1(filter_var($password.$salt, FILTER_SANITIZE_STRING));// sha1 function to transform the password into long String; known as hashing method;
 			 $stmt=$db->prepare('UPDATE users set 
 			 password=?
 			 where email=?');
-			 $stmt->execute(array($password,$email));
-			 $msg="<div >Password Updated</div>";
+			 if($stmt->execute(array($password,$email))){
+			 echo "<script>alert('Password updated success.');</script>";
+			 
+			}
 			
 	}
 	}
@@ -220,19 +222,15 @@
 										<input name="email" type="text" placeholder="E-mail" value="<?php echo $email; ?>" id="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" readonly>
 									</div>
 									<div class="form-group">
-										<label for="password">Password<span>*<?php echo $passErr; ?></span></label>
+										<label for="password">Password<span>*</span></label>
 										<input name="password" type="password" placeholder="Password" id="password"  required>
 									</div>
 									<div class="form-group">
-										<label for="password">ConfirmPassword<span>*<?php echo $passErr; ?></span></label>
+										<label for="password">ConfirmPassword<span>*</span></label>
 										<input name="confirmpassword" type="password" placeholder="Password"id="password"  required>
 									</div>
-									<div class='alert alert-success'>
-										<?php 
-											if(isset($msg))
-												echo $msg;
-										?>
-									</div>
+								    <p class="error-form"><?php if(isset($msg)) echo $msg; ?></p>
+
 									
 									<div class="clearfix"></div>
 									<div class="form-group">

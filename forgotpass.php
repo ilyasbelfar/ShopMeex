@@ -32,10 +32,9 @@
 
     
                     if (mail($to, $subject, $body, $headers)) 
-                          $msg="Password reset link has sent to your email";
+                         echo "<script>alert('Password reset link has sent to your email.');</script>"; 
                     else 
-                          $msg='email sending failed';
-    
+                          echo "<script>alert('email sending fail.');</script>"; 
                              
                             
                         
@@ -308,12 +307,7 @@
 										<label for="user-reset">E-mail or Username:</label>
 										<input type="text" name="user-reset" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required id="user-reset">
 									</div>
-                                    <div class='alert alert-success'>
-                                        <?php 
-                                            if(isset($msg))
-                                                echo $msg;
-                                        ?>
-                                    </div>
+                                     <p class="error-form"><?php if(isset($msg)) echo $msg; ?></p>
 									<div class="form-group">
 										<button type="submit" class="btn">Send</button>
 									</div>									
