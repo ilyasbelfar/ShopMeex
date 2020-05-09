@@ -19,6 +19,7 @@
 	text-align: center;
 
 }
+
 ::selection{
 	background-color:  #3167eb;
 	color: #fff;
@@ -35,9 +36,12 @@ body {
     line-height: 1.4;
 }
 a {
-	color: #3167eb;
+	color: #000;
     text-decoration: none;
     background-color: transparent;
+}
+.order{
+    padding:0;
 }
 
 .clearfix {
