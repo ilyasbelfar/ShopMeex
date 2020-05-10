@@ -601,7 +601,7 @@ section.product-area .maincontainer .wrapper aside.product-view .wrapper article
 section.product-area .maincontainer .wrapper aside.product-view .wrapper article.list-view .container .wrapper aside.Shop div div a.order button:hover{
     background-color: blue;
 }
-section.product-area .maincontainer .wrapper aside.product-view .wrapper article.list-view .container .wrapper aside.Shop div div a.details button{
+section.product-area .maincontainer .wrapper aside.product-view .wrapper article.list-view .container .wrapper aside.Shop div div  button{
     outline: 0;
     border:0;
     border-radius: 7px;
