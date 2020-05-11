@@ -8,6 +8,8 @@
         $emailid = $info['email'];
         
     }
+    else 
+        header('location:login.php');
     $emailInsErr=$userErr=$msg=$msgerr="";
     function test_input($data) {
         $data = trim($data);
@@ -107,6 +109,7 @@
                 
                 if(empty($_POST['password_1']) OR empty($_POST['password_2'])){
                     $msg="Please fill all the fields";
+                    echo "<script>alert('Password updated failed.');</script>";
                     $err=true;
                 }
                 
@@ -353,7 +356,7 @@
                                                         if(!isset($_SESSION['loggedin'])){
                                                             
                                                             echo '<small class="text-muted"><a href="login.php">Sign in </a> |<a href="register.php">Sign Up</a></small>';
-                                                            echo '<div>My Account<i class="fa fa-angle-down"></i></div>';
+                                                            echo '<div> My Account<i class="fa fa-angle-down"></i></div>';
                                                         }
                                                         else{
                                                             echo '<div><a href="dashboarduser.php">My Account</a><i class="fa fa-angle-down"></i></div>';
@@ -429,7 +432,7 @@
                             <a href="#dashboard">Dashboard</a>
                         </li>
                         <li class="orders">
-                            <a href="#orders">Orders</a>
+                            <a href="product.php">Orders</a>
                         </li>
                         <li class="downloads">
                             <a href="#downloads">Downloads</a>
@@ -444,7 +447,7 @@
                             <a href="#wishlist">Wishlist</a>
                         </li>
                         <li class="logout">
-                            <a href="#logout">Log Out</a>
+                            <a href="logout.php">Log Out</a>
                         </li>
                     </ul>
                     <div class="paneltbs panel-1" id="dashboard" style="">
