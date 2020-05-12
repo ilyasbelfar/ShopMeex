@@ -424,13 +424,13 @@
                                 <div class="col-401">
                                     <div class="form-group">
                                         <label for="fname">First Name<span>*</span></label>
-                                        <input id="fname" name="firstname" type="text" placeholder="First Name" value="<?php if (isset($_POST['firstname'])) echo $_POST['firstname']; ?>" required>
+                                        <input id="fname" name="firstname" type="text" placeholder="First Name" value="<?php if (isset($_POST['firstname'])) echo $_POST['firstname']; ?>" required pattern="[a-zA-Z\s]+">
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
                                         <label for="lname">Last Name<span>*</span></label>
-                                        <input name="lastname" type="text" placeholder="Last Name" id="lname" value="<?php if (isset($_POST['lastname'])) echo $_POST['lastname']; ?>" required >
+                                        <input name="lastname" type="text" placeholder="Last Name" id="lname" value="<?php if (isset($_POST['lastname'])) echo $_POST['lastname']; ?>" required pattern="[a-zA-Z\s]+" >
                                     </div>
                                 </div>
                             </div>

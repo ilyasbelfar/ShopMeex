@@ -70,12 +70,12 @@
             else
             $contact=$info['contact_info'];
     
-        if (isset($_POST['country_name']))
+        if (isset($_POST['country_name'])&&($_POST['country_name']!='Please select ...'))
             $country=$_POST['country_name'];
             else
             $country=$info['country'];
     
-        if (isset($_POST['state-province']))
+        if (isset($_POST['state-province'])&&($_POST['state-province']!='Please select ...'))
             $state=$_POST['state-province'];
             else
             $state=$info['state'];
