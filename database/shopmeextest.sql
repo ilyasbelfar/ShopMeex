@@ -162,9 +162,9 @@ INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `weight`, `d
 (6, 1, 'wireless speakers', 'omeone of the best product in teh world', 0, '', 13, 'watch-1200', '', 4, '', '9.jpg', 'Photo2.jpg', '', '2020-04-19', 3, 0, 0),
 (7, 1, 'Airpods', 'vone of the best product in teh world', 0, '', 13, 'watch-130', '', 4, '', '8.jpg', 'Photo2.jpg', '', '2020-05-12', 2, 5, 0),
 (8, 1, 'watch', 'one of the best product in the world', 0, '', 700, 'bimo-tango', '', 4, '', '10.jpg', 'Photo2.jpg', '', '2020-05-12', 2, 5, 0),
-(9, 1, 'Go Pro Camera', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', '11.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 5, 0);
-(10, 1, 'Tablet', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', 'tab.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 5, 0);
-(11, 1, 'iPhone X', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', 'iphonex.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 5, 0);
+(9, 1, 'Go Pro Camera', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', '11.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 5, 0),
+(10, 1, 'Tablet', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', 'tab.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 5, 0),
+(11, 1, 'iPhone X', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', 'iphonex.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 5, 0),
 (12, 1, 'VR Box', 'one of the best Top 10 products last year', 0, '', 999.99, 'BEST', 'white', 4, '', 'VR1.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 5, 0);
 
 -- --------------------------------------------------------
