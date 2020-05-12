@@ -11,16 +11,20 @@
        if(isset($_SESSION['id'])){
         if(isset($_SESSION['cart'])){
             foreach($_SESSION['cart'] as $row){
-                $stmt = $db->prepare("SELECT *, COUNT(*) AS numrows FROM cart WHERE user_id=:user_id AND product_id=:product_id");
-                $stmt->execute(['user_id'=>$user['id'], 'product_id'=>$row['productid']]);
-                $crow = $stmt->fetch();
-                if($crow['numrows'] < 1){
-                    $stmt = $db->prepare("INSERT INTO cart (user_id, product_id, quantity) VALUES (:user_id, :product_id, :quantity)");
-                    $stmt->execute(['user_id'=>$user['id'], 'product_id'=>$row['productid'], 'quantity'=>$row['quantity']]);
-                }
-                else{
-                    $stmt = $db->prepare("UPDATE cart SET quantity=:quantity WHERE user_id=:user_id AND product_id=:product_id");
-                    $stmt->execute(['quantity'=>$row['quantity'], 'user_id'=>$user['id'], 'product_id'=>$row['productid']]);
+                if (isset($row['productid'])) {
+                    # code...
+                
+                    $stmt = $db->prepare("SELECT *, COUNT(*) AS numrows FROM cart WHERE user_id=:user_id AND product_id=:product_id");
+                    $stmt->execute(['user_id'=>$user['id'], 'product_id'=>$row['productid']]);
+                    $crow = $stmt->fetch();
+                    if($crow['numrows'] < 1){
+                        $stmt = $db->prepare("INSERT INTO cart (user_id, product_id, quantity) VALUES (:user_id, :product_id, :quantity)");
+                        $stmt->execute(['user_id'=>$user['id'], 'product_id'=>$row['productid'], 'quantity'=>$row['quantity']]);
+                    }
+                    else{
+                        $stmt = $db->prepare("UPDATE cart SET quantity=:quantity WHERE user_id=:user_id AND product_id=:product_id");
+                        $stmt->execute(['quantity'=>$row['quantity'], 'user_id'=>$user['id'], 'product_id'=>$row['productid']]);
+                    }
                 }
             }
             unset($_SESSION['cart']);
@@ -224,7 +228,7 @@
                         <div class="user-details">
                             <div class="user-details-container">
                                 <span class="card-container">
-                                    <a href="cart.html" class="widget-header1" id="icone-carte">
+                                    <a href="cart.php" class="widget-header1" id="icone-carte">
                                     <div class="icon">
                                         <div class="cart-icon-container">
                                             <svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 251.6" id="cart-icon">
@@ -263,7 +267,7 @@
                                                         <span>$<span class="amount">0</span></span>.00
                                                     </p>
                                                     <p class="sub-buttons">
-                                                        <a href="cart.html" class="forward-cart">View cart</a>
+                                                        <a href="cart.php" class="forward-cart">View cart</a>
                                                         <a href="checkout.html" class="forward-checkout">Checkout</a>
                                                     </p>
                                                 </div>
