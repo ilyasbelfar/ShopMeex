@@ -304,7 +304,7 @@
 								<form action="forgotpass.php" method="post">
 									<p>Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.</p>
 									<div class="form-group">
-										<label for="user-reset">E-mail or Username:</label>
+										<label for="user-reset">E-mail:</label>
 										<input type="text" name="user-reset" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required id="user-reset">
 									</div>
                                      <p class="error-form"><?php if(isset($msg)) echo $msg; ?></p>
