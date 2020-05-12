@@ -77,7 +77,7 @@
                         
                             // Redirect user to welcome page
                             
-                            header("location: index.php");
+                            header("location: dashboarduser.php?user=$userr");
                         } else
                             // Display an error message if password is not valid
                             
