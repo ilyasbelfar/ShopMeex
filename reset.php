@@ -19,6 +19,8 @@
 			 if($stmt->execute(array($password,$email))){
 			 echo "<script>alert('Password updated success.');</script>";
 			 
+echo "<script>window.open('login.php','_self')</script>";
+			 
 			}
 			
 	}

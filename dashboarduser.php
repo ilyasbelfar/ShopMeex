@@ -8,6 +8,8 @@
         $emailid = $info['email'];
         
     }
+    else
+        header('location:login.php');
     $emailInsErr=$userErr=$msg=$msgerr="";
     function test_input($data) {
         $data = trim($data);
@@ -36,6 +38,7 @@
             $count=$stmtt->rowCount();
             if ($count>0){  
                 $emailInsErr="Email Already Taken";
+                echo "<script>alert('Email Already Taken.');</script>";
                 unset($stmt);
             }
             
@@ -52,6 +55,7 @@
             $count=$st->rowCount();
             if ($count>0){  
                 $userErr="Username Already Taken";
+                echo "<script>alert('Username Already Taken.');</script>";
                 unset($st);
             }
             
@@ -66,12 +70,12 @@
             else
             $contact=$info['contact_info'];
     
-        if (isset($_POST['country_name']))
+        if (isset($_POST['country_name'])&&($_POST['country_name']!='Please select ...'))
             $country=$_POST['country_name'];
             else
             $country=$info['country'];
     
-        if (isset($_POST['state-province']))
+        if (isset($_POST['state-province'])&&($_POST['state-province']!='Please select ...'))
             $state=$_POST['state-province'];
             else
             $state=$info['state'];
@@ -107,6 +111,7 @@
                 
                 if(empty($_POST['password_1']) OR empty($_POST['password_2'])){
                     $msg="Please fill all the fields";
+                    echo "<script>alert('Please fill all the fields.');</script>";
                     $err=true;
                 }
                 
@@ -123,26 +128,34 @@
                 } 
                  else{
                     $msg='The two Passwords did not match';
+                    echo "<script>alert('The two Passwords did not match.');</script>";
                 $err=true;
             }
 
 
 
             }
-            else 
+            else {
                  
                 $msg='Current password incorrect';
+                echo "<script>alert('Current password incorrect.');</script>";
             $err=true;
+        }
 
 
         }   
 
         if (empty($emailInsErr)&&empty($userErr)&&empty($err)){
+
         $stmt=$db->prepare('UPDATE users set firstname=?,lastname=?,email=?,username=?,contact_info=?,country=?,state=?,address=?,address2=?,city=?,postal=? where email=?');
         $stmt->execute(array($fname,$lname,$email,$userr,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
 
-        if ($stmt) 
-            header("Location: dashboarduser.php?user=$userr");
+        if ($stmt) {
+            
+            echo "<script>alert('User Has Been Updated successfully and login again')</script>";
+
+            echo "<script>window.open('dashboarduser.php?user=$userr','_self')</script>";
+        }
          else 
              header("location: 404.php");
         }
@@ -233,7 +246,7 @@
                 <div class="container">
                     <div class="wrapper">
                         <div class="logo-container">
-                            <a href="#">
+                            <a href="index.php">
                                 <img src="images/Logo-header.png" class="logo">
                             </a>
                         </div>
@@ -441,7 +454,7 @@
                             <a href="#logout">Log Out</a>
                         </li>
                     </ul>
-                    <div class="paneltbs panel-1" id="dashboard" style="">
+                    <div class="paneltbs panel-1" id="dashboard" style="" >
                         <p>Hello <strong><?php echo $_SESSION["username"]; ?></strong> (not <strong><?php echo $_SESSION["username"]; ?></strong>? <a href="logout.php">Log out</a>)</p>
                         <p>From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.</p>
                         <div class="myaccount-links">
@@ -458,23 +471,23 @@
                                 <a href="#">Addresses</a>
                             </div>
                             <div class="edit-account-link">
-                                <a href="#">Account details</a>
+                                <a href="#acc-details">Account details</a>
                             </div>
                             <div class="wishlist-link">
                                 <a href="#">Wishlist</a>
                             </div>
                             <div class="customer-logout-link">
-                                <a href="#">Logout</a>
+                                <a href="logout.php">Logout</a>
                             </div>
                         </div>
                     </div>
 
                     <div class="paneltbs panel-2" id="orders" style="display: none;">
-                        <div class="alert-message"><a href="#">Browse products </a>No order has been made yet.</div>
+                        <div class="alert-message"><a href="product.php">Browse products </a>No order has been made yet.</div>
                     </div>
 
                     <div class="paneltbs panel-3" id="downloads" style="display: none;">
-                        <div class="alert-message"><a href="#">Browse products </a>No downloads available yet.</div>
+                        <div class="alert-message"><a href="product.php">Browse products </a>No downloads available yet.</div>
                     </div>
 
                     <div class="paneltbs panel-4" id="addresses" style="display: none;">
@@ -742,9 +755,9 @@
                                             <option value="UA">Ukraine</option>
                                             <option value="AE">United Arab Emirates</option>
                                             <option value="<?php if(!empty($info['country']))                                             echo $info['country'];
-                                            else echo 'US';
+                                            else echo 'Please select ...';
                                              ?>" selected="selected"><?php if(!empty($info['country']))                                             echo $info['country'];
-                                            else echo 'US';
+                                            else echo 'Please select ...';
                                              ?></option>
                                             <option value="UY">Uruguay</option>
                                             <option value="UM">U.S. Minor Outlying Islands</option>
@@ -767,8 +780,8 @@
                                         <label for="state-province">State / Divition<span>*</span></label>
                                         <select name="state-province" id="state-province">
                                             <option value="<?php if (!empty($info['state'] )) echo $info['state'];
-                                            else echo 'New York';?>" selected="selected"><?php if (!empty($info['state'] )) echo $info['state'];
-                                            else echo 'New York';?>                                          </option>
+                                            else echo 'Please select ...';?>" selected="selected"><?php if (!empty($info['state'] )) echo $info['state'];
+                                            else echo 'Please select ...';?>                                          </option>
                                             <option>Los Angeles</option>
                                             <option>Chicago</option>
                                             <option>Houston</option>

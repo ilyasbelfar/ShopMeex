@@ -34,9 +34,6 @@ body {
     background-color: #fff;
     line-height: 1.4;
 }
-.order{
-	padding:0;
-}
 a {
 	color: #3167eb;
     text-decoration: none;
@@ -59,6 +56,10 @@ a {
 }
 .clearfix {
 	clear: both;
+}
+.order {
+    
+     padding: 0 ;
 }
 .loader__cart{margin:0 auto}.loader__cart svg#cart-icon{width:90px;margin:0 auto;text-align:center;display:block}.loader__circles{margin-top:3.2rem;text-align:center}.cart-loader{width:150px}.loader__cart svg#cart-icon #Group-2{stroke:#fff}.cir{width:20px;height:20px;background-color:#3167eb;margin:10px;-moz-border-radius:50% 50% 50% 50%;-webkit-border-radius:50% 50% 50% 50%;border-radius:50% 50% 50% 50%;display:inline-block}#cir_one{-webkit-animation:cir_one 1.5s infinite;animation:cir_one 1.5s infinite}#cir_two{-webkit-animation:cir_two 1.5s infinite;-moz-animation:cir_two 1.5s infinite;animation:cir_two 1.5s infinite;-webkit-animation-delay:.25s;-moz-animation-delay:.25s;animation-delay:.25s}#cir_three{-webkit-animation:cir_three 1.5s infinite;animation:cir_three 1.5s infinite;-webkit-animation-delay:.5s;animation-delay:.5s}@-webkit-keyframes cir_one{75%{-webkit-transform:scale(0)}}@keyframes cir_one{75%{transform:scale(0);-webkit-transform:scale(0)}}@-webkit-keyframes cir_two{75%{-webkit-transform:scale(0)}}@keyframes cir_two{75%{transform:scale(0);-webkit-transform:scale(0)}}@-webkit-keyframes cir_three{75%{-webkit-transform:scale(0)}}@keyframes cir_three{75%{transform:scale(0);-webkit-transform:scale(0)}}.cart-loader .cls-1{fill:#3167eb;opacity:.2}.cart-loader .cls-2,.cart-loader .cls-3{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:16px}.cart-loader .cls-2{stroke:#3167eb}.cart-loader .cls-3{stroke:#777474}
 
@@ -600,7 +601,7 @@ section.product-area .maincontainer .wrapper aside.product-view .wrapper article
 section.product-area .maincontainer .wrapper aside.product-view .wrapper article.list-view .container .wrapper aside.Shop div div a.order button:hover{
     background-color: blue;
 }
-section.product-area .maincontainer .wrapper aside.product-view .wrapper article.list-view .container .wrapper aside.Shop div div a.details button{
+section.product-area .maincontainer .wrapper aside.product-view .wrapper article.list-view .container .wrapper aside.Shop div div  button{
     outline: 0;
     border:0;
     border-radius: 7px;
