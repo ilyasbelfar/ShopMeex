@@ -57,3 +57,12 @@ I have added new table 'signups' for newsletter, which contain these rows(id,sig
 Abdou
 
 I have add new table 'subscribers' for the newsletter which contain (id,name,email,verify_code,is_verified,created,modified,statue)
+
+-----------------------**********************************------------------------------------------
+-----------------------*********************************--------------------------------------------
+
+13/04/2020 21:45
+Souhil
+i added some products.
+
+
