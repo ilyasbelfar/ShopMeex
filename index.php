@@ -191,8 +191,8 @@
                                                         <span>$<span class="amount">16.98</span></span>
                                                     </p>
                                                     <p class="sub-buttons">
-                                                        <a href="cart.html" class="forward-cart">View cart</a>
-                                                        <a href="checkout.html" class="forward-checkout">Checkout</a>
+                                                        <a href="cart.php" class="forward-cart">View cart</a>
+                                                        <a href="checkout.php" class="forward-checkout">Checkout</a>
                                                     </p>
                                                 </div>
                                             </div>
