@@ -6,7 +6,12 @@
 	$output = array('error'=>false);
 
 	$id = $_POST['id'];
-	$quantity = $_POST['quantity'];
+	if(isset($_POST['quantity'])){
+		$quantity = $_POST['quantity'];
+	}
+	else{
+		$quantity=1;
+	}
 	
 
 

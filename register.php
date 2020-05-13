@@ -92,7 +92,7 @@
 
             $salt="^%r8yuyg";//create our salt; salt is special String added to password // way of encrption on database;
             $pass = sha1(filter_var($pass.$salt, FILTER_SANITIZE_STRING));// sha1 function to transform the password into long String; known as hashing method;
-            $sql="insert into users (username,email,password,type,firstname,lastname,address,contact_info) values(?,?,?,?,?,?,?,?)";
+            $sql="insert into users (username,email,password,type,firstname,lastname,address,contact_info,photo) values(?,?,?,?,?,?,?,?,?)";
             $stmt = $db->prepare($sql);
             if ($typeidString=="Seller") {
                 $typeid=2;
@@ -112,7 +112,7 @@
             $stmt->bindValue(6,$lname);
             $stmt->bindValue(7,$address);
             $stmt->bindValue(8,$number);
-           
+            $stmt->bindValue(9,'profile.jpg');
             
             $stmt->execute();
             
