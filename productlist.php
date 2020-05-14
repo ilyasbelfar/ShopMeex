@@ -83,23 +83,25 @@
 							</div>
 
 							<div class="search-bar">
-								<form method="post">
+								<form method="post" action="productlist.php">
 									<div class="search-bar-container">
+
 										<select class="custom-select" name="category_name">
 											<option value="">All types</option>
 											<option value="special">Special</option>
 											<option value="best">Only best</option>
 											<option value="recent">Latest</option>
 										</select>
-										<input type="search" class="form-control" placeholder="Search Here...">
+										<input type="search" class="form-control" id="navbar-search-input" placeholder="Search Here..." name="keyword" required="">
 										<div class="search-icon-container">
-											<button class="search-icon" type="submit">
+											<button class="search-icon" type="submit" name="submit">
 												<i class="fa fa-search"></i>
 											</button>
 										</div>
 									</div>
 								</form>
 							</div>
+							
 
 							<div class="user-details">
 								<div class="user-details-container">
@@ -168,37 +170,14 @@
 
 
             <!-- begin  main -->
+            
             <section class="product-area negop">
             	<div class="maincontainer">
             		<div class="wrapper flex ">
             			<aside class="product-view flextroisquart">
 	            			<div class="wrapper">
-	            				<div class="top-row">
-	            					<div class="container-top-row flex ">
-	            						<span class="items-founds"><span>25</span> <span>items  trouvé</span></span>
-	            						<div class="change-view flex">
-	            							<form class="select-form flex">
-	            								<select>
-	            									<option> nouveuax</option>
-	            									<option> en tendanse </option>
-	            									<option> moin prix </option>
-	            									<option> bla blaa blaa </option>
-	            								</select>
-	            							</form>
-	            							<div class="flex">
-	            								<button class="select-list-view">
-	            									<a href="#"><i class="fa fa-bars"></i></a>
-	            							    </button>	            									
-
-	            								<button class="select-grid-view selected">
-	            									<a href="#"><i class="fa fa-th"></i></a>
-	            								</button>
-	            							</div>
-	            							
-	            						</div>
-	            					</div>
-	            					
-	            				</div>
+                                
+	            				
 	            				<article class="list-view flex marginbottom">
 	            					<div class="container">
 	            						<div class="wrapper flex">
@@ -261,8 +240,9 @@
 	            						</div>
 	            					</div>
 	            				</article>
-	            				<article class="grid-view"> 
-	            					<div class="wraapper flex flexwrap">
+	            				
+                                <?php include 'search.php';?>
+<!--
                                         <div class="product-view-grid">
                                     
                                                 <div class="container-product">
@@ -294,7 +274,9 @@
                                                 </div>
                                         
                                         </div>
+-->
                                         
+<!--
 	            						<div class="product-view-grid">
                                             
                                                 <div class="container-product ">
@@ -391,28 +373,11 @@
                                                 </div>
                                             
                                         </div>
+-->
 	            						
 
-	            					</div>
 	            					
-	            				</article>
-	            				
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <article class="list-view flex marginbottom">
+	            				<article class="list-view flex marginbottom">
 	            					<div class="container">
 	            						<div class="wrapper flex">
 	            							<aside class="product-image flexquart ">
@@ -474,21 +439,7 @@
 	            						</div>
 	            					</div>
 	            				</article>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <article class="list-view flex marginbottom">
+                                <article class="list-view flex marginbottom">
 	            					<div class="container">
 	            						<div class="wrapper flex">
 	            							<aside class="product-image flexquart ">
@@ -830,6 +781,7 @@
          
 
 			<!-- End Footer -->
+            
             <script src="js/popup.js"></script>
             <script src="js/TweenMax.min.js"></script>
 			<script src="js/custom.js"></script>
@@ -837,3 +789,5 @@
 		</body>
 
 </html>
+
+
