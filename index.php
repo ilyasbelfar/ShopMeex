@@ -116,9 +116,9 @@
                                         <option value="best">Best</option>
                                         <option value="recent">Latest</option>
                                     </select>
-                                    <input type="text" class="form-control" placeholder="Search Here...">
+                                    <input type="text" class="form-control" placeholder="Search Here..." name="keyword">
                                     <div class="search-icon-container">
-                                        <button class="search-icon" type="submit">
+                                        <button class="search-icon" type="submit" formaction="productlist.php">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </div>
