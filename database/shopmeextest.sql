@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2020 at 01:39 PM
+-- Generation Time: May 14, 2020 at 04:51 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -62,10 +62,8 @@ INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`) VALUES
 (90, 11, 3, 1),
 (91, 11, 2, 1),
 (92, 11, 8, 1),
-(100, 6, 8, 1),
-(101, 6, 2, 1),
-(102, 6, 1, 1),
-(103, 6, 4, 1);
+(111, 12, 1, 1),
+(118, 6, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -145,6 +143,7 @@ CREATE TABLE `products` (
   `photo2` varchar(200) NOT NULL,
   `date_view` date NOT NULL,
   `counter` int(11) NOT NULL,
+  `sold_cmp` int(11) NOT NULL,
   `total_rating` int(10) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -153,19 +152,20 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `weight`, `dimensions`, `price`, `slug`, `colors`, `owner_id`, `model`, `photo`, `photo1`, `photo2`, `date_view`, `counter`, `total_rating`, `quantity`) VALUES
-(1, 1, 'Dell Laptop 1500 Pavilion', 'one of the best product in the world Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, fa', 0.6, '70 x 60', 200, 'large-dell-inspiron-15-5000-15-6', 'Black White', 4, 'dell pavilion 15', '14.jpg', '12.jpg', '12-1.jpg', '2020-05-12', 6, 4, 0),
-(2, 1, 'mouse', 'one of the beset mouse in the world', 0.1, '20 x 30', 400, 'mouse', 'red grey', 4, 'mouse l-120', 'Photo1.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-05-08', 1, 2, 0),
-(3, 1, 'smart watch', 'one of the best product in teh world', 0.1, '12 x 13', 1200, 'smart-watch', 'red', 4, 'watch-120-M', '7.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-05-07', 1, 5, 0),
-(4, 1, 'Wirless Mouse', 'one of the best product in teh world', 0.6, '', 13, 'thered', '', 4, '', 'Photo2.jpg', 'Photo2.jpg', '', '2020-05-12', 1, 4, 0),
-(5, 1, 'Logitech mouse', 'one of the best product in teh world', 0.3, '30 x 50', 200, 'the-blue', 'black grey wihire', 4, '1200-3', 'Photo1.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-05-10', 1, 3, 0),
-(6, 1, 'wireless speakers', 'omeone of the best product in teh world', 0, '', 13, 'watch-1200', '', 4, '', '9.jpg', 'Photo2.jpg', '', '2020-04-19', 3, 0, 0),
-(7, 1, 'Airpods', 'vone of the best product in teh world', 0, '', 13, 'watch-130', '', 4, '', '8.jpg', 'Photo2.jpg', '', '2020-05-12', 2, 5, 0),
-(8, 1, 'watch', 'one of the best product in the world', 0, '', 700, 'bimo-tango', '', 4, '', '10.jpg', 'Photo2.jpg', '', '2020-05-12', 2, 5, 0),
-(9, 1, 'Go Pro Camera', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', '11.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 5, 0),
-(10, 1, 'Tablet', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', 'tab.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 5, 0),
-(11, 1, 'iPhone X', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', 'iphonex.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 5, 0),
-(12, 1, 'VR Box', 'one of the best Top 10 products last year', 0, '', 999.99, 'BEST', 'white', 4, '', 'VR1.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 5, 0);
+INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `weight`, `dimensions`, `price`, `slug`, `colors`, `owner_id`, `model`, `photo`, `photo1`, `photo2`, `date_view`, `counter`, `sold_cmp`, `total_rating`, `quantity`) VALUES
+(1, 1, 'Dell Laptop 1500 Pavilion', 'one of the best product in the world Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, fa', 0.6, '70 x 60', 200, 'large-dell-inspiron-15-5000-15-6', 'Black White', 4, 'dell pavilion 15', 'dell.jpg', '12.jpg', '12-1.jpg', '2020-05-14', 31, 0, 4, 0),
+(2, 1, 'mouse', 'one of the beset mouse in the world', 0.1, '20 x 30', 400, 'mouse', 'red grey', 4, 'mouse l-120', 'Photo1.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-05-14', 1, 0, 2, 0),
+(3, 1, 'smart watch', 'one of the best product in teh world', 0.1, '12 x 13', 120, 'smart-watch', 'red', 4, 'watch-120-M', '7.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-05-14', 12, 1, 5, 0),
+(4, 1, 'Wirless Mouse', 'one of the best product in teh world', 0.6, '', 13, 'thered', '', 4, '', 'Photo2.jpg', 'Photo2.jpg', '', '2020-05-14', 7, 0, 4, 0),
+(5, 1, 'Logitech mouse', 'one of the best product in teh world', 0.3, '30 x 50', 200, 'the-blue', 'black grey wihire', 4, '1200-3', 'Photo1.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-05-14', 2, 10, 3, 0),
+(6, 1, 'wireless speakers', 'omeone of the best product in teh world', 0, '', 13, 'watch-1200', '', 4, '', '9.jpg', 'Photo2.jpg', '', '2020-05-14', 2, 0, 4, 0),
+(7, 1, 'Airpods', 'vone of the best product in teh world', 0, '', 13, 'watch-130', '', 4, '', '8.jpg', 'Photo2.jpg', '', '2020-05-14', 2, 12, 5, 0),
+(8, 1, 'watch', 'one of the best product in the world', 0, '', 700, 'bimo-tango', '', 4, '', '10.jpg', 'Photo2.jpg', '', '2020-05-12', 2, 0, 5, 0),
+(9, 1, 'Go Pro Camera', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', '11.jpg', 'Photo2.jpg', '', '2020-05-14', 1, 2, 5, 0),
+(10, 1, 'Tablet', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', 'tab.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 0, 5, 0),
+(11, 1, 'iPhone X', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', 'iphonex.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 0, 5, 0),
+(12, 1, 'VR Box', 'one of the best Top 10 products last year', 0, '', 999.99, 'BEST', 'white', 4, '', 'VR1.jpg', 'Photo2.jpg', '', '2020-05-14', 1, 0, 0, 0),
+(13, 0, '', '', 0, '', 0, '', '', 0, '', '', '', '', '0000-00-00', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -200,7 +200,8 @@ INSERT INTO `review` (`id`, `product_id`, `user_id`, `rating`, `date`, `comment`
 (96, 9, 6, 5, '2020-05-07', ' is the best'),
 (97, 1, 8, 4, '2020-05-10', 'zzz'),
 (98, 4, 8, 5, '2020-05-10', 'nice'),
-(99, 5, 8, 4, '2020-05-10', 'nice');
+(99, 5, 8, 4, '2020-05-10', 'nice'),
+(100, 1, 12, 5, '2020-05-14', 'nice pp');
 
 -- --------------------------------------------------------
 
@@ -256,7 +257,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `type`, `firstname`,
 (8, 'reer40', 'z@z.com', 'beea6ab2a05799f82f451d1ab583baa81be40d7a', 3, 're', 're', 0, 'z', '00000000', 'profile.jpg', 'US', 'New York', 'z', 'z', 'z', NULL, ''),
 (9, 'aza178', 'az@gmail.com', 'ab13098a3e0c51b5e8574456a78a8188eb791c13', 3, 'az', 'a', 0, 'az', '00000000', 'profile.jpg', 'AF', 'Los Angeles', 'az', 'az', 'az', NULL, ''),
 (10, 'azerarze183', 'aze@gmail.com', 'ab13098a3e0c51b5e8574456a78a8188eb791c13', 3, 'azer', 'azer', 0, 'az', '00000000', 'profile.jpg', 'AF', 'New York', 'az', 'az', 'az', NULL, ''),
-(11, 'ytty68', 'yt@gmail.com', '5a28eb83e371c75ee91a9879603daae0a3b9ac1b', 3, 'yt', 'yt', 0, 'yt', '00000000', 'profile.jpg', 'AX', 'Los Angeles', 'yt', 'yt', 'yt', NULL, '');
+(11, 'ytty68', 'yt@gmail.com', '5a28eb83e371c75ee91a9879603daae0a3b9ac1b', 3, 'yt', 'yt', 0, 'yt', '00000000', 'profile.jpg', 'AX', 'Los Angeles', 'yt', 'yt', 'yt', NULL, ''),
+(12, 'acedeee73', 'ko@ko.com', '4dcd5d4e35e6c9648f8a4fc62dec48bbd78f337d', 3, 'aced', 'eee', 0, 'azer', '54', 'profile.jpg', '', '', '', '', '', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -282,7 +284,13 @@ INSERT INTO `wishlist` (`id`, `user_id`, `product_id`) VALUES
 (13, 6, 7),
 (14, 6, 8),
 (15, 6, 5),
-(16, 8, 5);
+(16, 8, 5),
+(17, 12, 1),
+(18, 12, 8),
+(19, 12, 4),
+(20, 12, 5),
+(21, 12, 3),
+(22, 12, 2);
 
 --
 -- Indexes for dumped tables
@@ -344,7 +352,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -362,25 +370,25 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
