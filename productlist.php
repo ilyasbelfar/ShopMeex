@@ -176,7 +176,7 @@
             		<div class="wrapper flex ">
             			<aside class="product-view flextroisquart">
 	            			<div class="wrapper">
-                                
+                                <?php include 'search.php';?>
 	            				
 	            				<article class="list-view flex marginbottom">
 	            					<div class="container">
@@ -241,139 +241,8 @@
 	            					</div>
 	            				</article>
 	            				
-                                <?php include 'search.php';?>
-<!--
-                                        <div class="product-view-grid">
-                                    
-                                                <div class="container-product">
-                                                    <div class="wrapimage">
-                                                        <span>new</span>
-                                                        <img src="images/items/8.jpg">
-                                                    </div>
-                                                    <div class="info">
-                                                        <p> lorem ipsum dolor sit amet, </p>
-                                                        <span class="new-price"> <span class="price">152</span> <span class="coin">DA</span></span>
-                                                        <span class="old-price"> <span class="price">152</span> <span class="coin">DA</span> </span>
-                                                        <div class="rating">
-                                                            <ul class="pos-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                            <ul class="neg-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                        
-                                        </div>
--->
-                                        
-<!--
-	            						<div class="product-view-grid">
-                                            
-                                                <div class="container-product ">
-                                                    <div class="wrapimage">
-                                                        <span>new</span>
-                                                        <img src="images/items/7.jpg">
-                                                    </div>
-                                                    <div class="info">
-                                                        <p> lorem ipsum dolor sit amet, </p>
-                                                        <span class="new-price"> <span class="price">152</span> <span class="coin">DA</span></span>
-                                                        <span class="old-price"> <span class="price">152</span> <span class="coin">DA</span> </span>
-                                                        <div class="rating">
-                                                            <ul class="pos-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                            <ul class="neg-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
+                                
 
-
-                                                </div>
-                                        
-	            						</div>
-	            						<div class="product-view-grid">
-                                            
-                                                <div class="container-product ">
-                                                    <div class="wrapimage">
-                                                        <span>new</span>
-                                                        <img src="images/items/10.jpg">
-                                                    </div>
-                                                    <div class="info">
-                                                        <p> lorem ipsum dolor sit amet, </p>
-                                                        <span class="new-price"> <span class="price">152</span> <span class="coin">DA</span></span>
-                                                        <span class="old-price"> <span class="price">152</span> <span class="coin">DA</span> </span>
-                                                        <div class="rating">
-                                                            <ul class="pos-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                            <ul class="neg-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-	            								</div>
-                                        
-                                        </div>
-	            						<div class="product-view-grid">
-                                    
-                                                <div class="container-product ">
-                                                    <div class="wrapimage">
-                                                        <span>new</span>
-                                                        <img src="images/items/11.jpg">
-                                                    </div>
-                                                    <div class="info">
-                                                        <p> lorem ipsum dolor sit amet, </p>
-                                                        <span class="new-price"> <span class="price">152</span> <span class="coin">DA</span></span>
-                                                        <span class="old-price"> <span class="price">152</span> <span class="coin">DA</span> </span>
-                                                        <div class="rating">
-                                                            <ul class="pos-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                            <ul class="neg-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            
-                                        </div>
--->
 	            						
 
 	            					
