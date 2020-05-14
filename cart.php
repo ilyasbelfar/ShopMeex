@@ -225,7 +225,7 @@
                                         <li>Discount<span>$<?php echo $discount; ?></span></li>
                                         <li class="last">You Pay<span>$<?php echo ($subTotals - $discount); ?></span></li>
                                     </ul>
-                                    <?php //$_SESSION['cart']['total'] = $subTotals - $discount;?>
+                                    <?php $_SESSION['cart']['total'] = $subTotals - $discount;?>
                                     <div class="button5">
                                         <a href="checkout.php" class="btn">Proceed to checkout</a>
                                     </div>
