@@ -127,20 +127,14 @@ $(document).on('click', '#button-minus', function() {
     if (currentNumber >= 1) {
         $(this).parent().siblings('input#quantity').val(currentNumber);
     }
-    var priceUnit = parseInt($(this).closest('td').siblings('td.prix').find('.unit-price').text());
-    if (currentNumber > 0) {
-        $(this).closest('td').next().find('span.amount').text(priceUnit * currentNumber);
-    }
+    $('button[name="update_cart"]').removeAttr('disabled');
 });
 $(document).on('click', '#button-plus', function() {
     var currentNumber = parseInt($(this).parent().siblings('input#quantity').val()) + 1;
     if (currentNumber >= 0) {
         $(this).parent().siblings('input#quantity').val(currentNumber);
     }
-    var priceUnit = parseInt($(this).closest('td').siblings('td.prix').find('.unit-price').text());
-    if (currentNumber > 0) {
-        $(this).closest('td').next().find('span.amount').text(priceUnit * currentNumber);
-    }
+    $('button[name="update_cart"]').removeAttr('disabled');
 });
 $('p.stars a').click(function(e) {
     e.preventDefault();
@@ -168,15 +162,11 @@ $("body").on("init", ".tabs-wrapper, .tabs", function() {
 function isEmpty(el) {
     return !$.trim(el.html())
 }
-$('.col-9').css('display', 'none');
-$(document).on('click', 'a#remove-product', function(event) {
-    event.preventDefault();
-    $(this).closest('tr').remove();
-    if (isEmpty($('.shopping-cart tbody'))) {
+
+if (isEmpty($('.shopping-cart tbody'))) {
         $('.col-7').remove();
-        $('.col-9').css('display', 'block');
     }
-});
+
 $('.inphidden').css('display', 'none');
 $('#cbox').click(function() {
     if ($(this).is(':checked')) {
@@ -256,7 +246,7 @@ $('.form-group input[type=email]').blur(function() {
             color: 'red',
             border: '1px solid red'
         });
-        if ($(this).parent().children().length == 2) {
+        if ($(this).parent().children().length == 3) {
             $(this).after('<p class=email-wrong>This doesn\'t look like an email</p>');
         }
         $(this).closest('.wrapper').find('.btn').css({
@@ -280,5 +270,15 @@ $('.form-group input[type=email]').blur(function() {
     }
 });
 
-$('.img-big-wrap').zoom();
-$('a[data-rel^=lightcase]').lightcase();
+$('.shopping-cart .qty .form-control').on("input", function() {
+    $('button[name="update_cart"]').removeAttr('disabled');
+});
+if($('.cart-form').children().lenght == 0) {
+    $(this).css('display', 'none');
+    $('.col-9').css('display', 'block');
+} else {
+    $(this).css('display', 'block');
+    $('.col-9').css('display', 'none');
+}
+var subTotal = $('.right span#subtot').text();
+$('.total .amount').text(subTotal);
