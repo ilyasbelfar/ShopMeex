@@ -85,7 +85,7 @@
                                 <img src="images/Logo-header.png" class="logo">
                             </a>
                         </div>
-                        <div class="search-bar">
+                       <div class="search-bar">
                             <form method="post">
                                 <div class="search-bar-container">
                                     <select class="custom-select" name="category_name">
@@ -96,8 +96,9 @@
                                     </select>
                                     <input type="text" class="form-control" placeholder="Search Here...">
                                     <div class="search-icon-container">
-                                        <button class="search-icon" type="submit"> <i class="fa fa-search"></i>
-                                        </button>
+									<a href="productlist.php" type="button" class="search-icon" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        
                                     </div>
                                 </div>
                             </form>
