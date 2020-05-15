@@ -436,36 +436,28 @@
                             <tbody>';
                                 
     
-                                    $getcart->execute(array($customer_id));
-                                    $i = 0;
-                                    while ($infoo = $getcart->fetch()){
-
-                                         $cart_id = $infoo['id'];
-
-                                         $quantity = $infoo['quantity'];
-
-                                            $product_id = $infoo['product_id'];
-                                            $price='200';
-
-
-
-                                        $i++;
-
+                                    $stmt = $db->prepare("SELECT *, cart.quantity AS cq , cart.id As cartid FROM cart LEFT JOIN products ON products.id=cart.product_id  WHERE user_id=:user_id");
+                                        $stmt->execute(['user_id'=>$customer_id]);
+                                        foreach($stmt as $row) {
+    
                                     
-
                                 echo '<tr>
                                     <td class="action" data-title="Remove"><a href="#" id="remove-product"><i class="ti-trash remove-icon"></i></a></td>
-                                    <td class="image" data-title="No"><img src="images/items/item1.jpg" alt="#"></td>
+                                    <td class="image" data-title="No"><img src="images/items/';
+                                    echo $row['photo'];
+                                    echo ' "alt="#"></td>
                                     <td class="product-des" data-title="Description">
-                                        <p class="product-name"><a href="#">Women Dress</a></p>
-                                        <p class="product-des">Maboriosam in a tonto nesciung eget distingy magndapibus.</p>
+                                        <p class="product-name"><a href="../product.php?product=';echo $row['slug'];
+                                        echo '">';
+                                        echo $row['name'];echo '</a></p>
+                                        <p class="product-des">';echo $row['description'];echo '</p>
                                     </td>
                                     <td class="prix" data-title="Price"><span>$';
-                                    echo $price; 
+                                    echo $row['price']; 
                                     echo '<span class="unit-price"></span></span>
                                     </td>
                                     <td class="prix" data-title="Quantity">
-                                        <span>'; echo $quantity;
+                                        <span>'; echo $row['cq'];;
                                         echo '</span>
                                     </td>';
                             }
