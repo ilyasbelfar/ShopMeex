@@ -185,7 +185,7 @@
 
         if ($stmt) {
             
-            echo "<script>alert('User Has Been Updated successfully and login again')</script>";
+            echo "<script>alert('User Has Been Updated successfully')</script>";
 
             echo "<script>window.open('dashboarduser.php?user=$userr','_self')</script>";
         }
@@ -325,7 +325,7 @@
                         </table></div>';}
                             else 
                                 echo  '<div class="paneltbs panel-2" id="orders" style="display: none;">
-                        <div class="alert-message"><a href="product.php">Browse products </a>No order has been made yet.</div>
+                        <div class="alert-message"><a href="../product.php">Browse products </a>No order has been made yet.</div>
                     </div>'; ?>
                             
                     
@@ -381,7 +381,7 @@
                         </table> </div>'; }
                             else 
                                 echo  '<div class="paneltbs panel-3" id="downloads" style="display: none;">
-                        <div class="alert-message"><a href="product.php">Browse products </a>Your cart is currently empty.</div>
+                        <div class="alert-message"><a href="../product.php">Browse products </a>Your cart is currently empty.</div>
                     </div>'; ?>
                             
                    
@@ -838,7 +838,7 @@
                         </table> </div>'; }
                             else 
                                 echo  '<div class="paneltbs panel-4" id="wishlist" style="display:none;">
-                        <div class="alert-message"><a href="product.php">Browse products </a>No wishlist has been made yet.</div>
+                        <div class="alert-message"><a href="../product.php">Browse products </a>No wishlist has been made yet.</div>
                     </div>'; ?>
 
                     <div class="paneltbs panel-6" id="logout" style="display: none;">
