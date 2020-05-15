@@ -655,6 +655,7 @@
             <script src="js/TweenMax.min.js"></script>
 			<script src="js/custom.js"></script>
 			<script src="js/product.js"></script>
+			<script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
 		</body>
 
 </html>

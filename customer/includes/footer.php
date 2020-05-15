@@ -28,7 +28,7 @@
                     <div class="about-shopmx">
                         <div class="row">
                             <div class="logo">
-                                <a href="index.php">
+                                <a href="../index.php">
                                     <img src="../images/Logo-header.png">
                                 </a>
                             </div>
