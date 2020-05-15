@@ -46,7 +46,7 @@ echo "<script>window.open('login.php','_self')</script>";
 						<div class="col-35">
 							<div class="bread-inner">
 							    <ul class="bread-list">
-							            <li><a href="index.html">Home<i class="ti-arrow-right"></i></a></li>
+							            <li><a href="../index.php">Home<i class="ti-arrow-right"></i></a></li>
 							        <li class="active"><a href="login.php">Sign In<i class="ti-arrow-right"></i></a></li>
 							        <li class="active"><a href="forgotpass.php">Forget Password<i class="ti-arrow-right"></i></a></li>
 									<li class="active"><a href="reset.php">Reset Password</a></li>
