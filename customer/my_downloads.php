@@ -695,12 +695,12 @@
         <a href="#" class="gotop"><i class="fa fa-arrow-up"></i></a>
     </div>
 
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/TweenMax.min.js"></script>
-    <script src="js/jquery.nice-select.js"></script>
-    <script src="js/jquery.countdown.min.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/owl.carousel.min.js"></script>
+    <script src="../js/TweenMax.min.js"></script>
+    <script src="../js/jquery.nice-select.js"></script>
+    <script src="../js/jquery.countdown.min.js"></script>
+    <script src="../js/custom.js"></script>
     <script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
 </body>
 
