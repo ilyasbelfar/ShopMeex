@@ -167,8 +167,8 @@
                 <div class="col-35">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="index.html">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="register.html">Register</a></li>
+                            <li><a href="../index.php">Home<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="register.php">Register</a></li>
                         </ul>
                     </div>
                 </div>
