@@ -269,7 +269,9 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `type`, `firstname`,
 CREATE TABLE `wishlist` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL
+  `product_id` int(11) NOT NULL,
+  `Price` int(11) NOT NULL
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
