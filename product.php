@@ -549,6 +549,7 @@
     <script src="js/jquery.nice-select.js"></script>
     <script src="js/jquery.countdown.min.js"></script>
     <script src="js/jquery.zoom.js"></script>
+    <script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
     <script src="js/lightcase.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function($) {});

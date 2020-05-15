@@ -470,6 +470,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			<script src="js/gmap.min.js"></script>
 			<script src="js/map-script.js"></script>
 			<script src="js/custom.js"></script>
+            <script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
 		</body>
 
 </html>
