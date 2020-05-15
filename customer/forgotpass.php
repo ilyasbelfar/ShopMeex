@@ -63,7 +63,7 @@
 						<div class="col-35">
 							<div class="bread-inner">
 							    <ul class="bread-list">
-							        <li><a href="index.html">Home<i class="ti-arrow-right"></i></a></li>
+							        <li><a href="../index.php">Home<i class="ti-arrow-right"></i></a></li>
 							        <li class="active"><a href="login.php">My Account<i class="ti-arrow-right"></i></a></li>
 							        <li class="active"><a href="forgotpass.php">Forget Password</a></li>
 							    </ul>
