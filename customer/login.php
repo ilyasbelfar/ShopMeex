@@ -119,8 +119,8 @@
 						<div class="col-35">
 							<div class="bread-inner">
 							    <ul class="bread-list">
-							        <li><a href="index.html">Home<i class="ti-arrow-right"></i></a></li>
-							        <li class="active"><a href="login.html">Login</a></li>
+							        <li><a href="../index.php">Home<i class="ti-arrow-right"></i></a></li>
+							        <li class="active"><a href="login.php">Login</a></li>
 							    </ul>
 							</div>
 						</div>
@@ -186,7 +186,7 @@
 			<script src="../js/jquery.nice-select.js"></script>
 			<script src="../js/jquery.countdown.min.js"></script>
 			<script src="../js/custom.js"></script>
-            <script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
+           	        <script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
 		</body>
 
 </html>
