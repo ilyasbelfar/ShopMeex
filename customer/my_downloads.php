@@ -50,7 +50,7 @@
                 <div class="col-35">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="index.html">Home<i class="ti-arrow-right"></i></a></li>
+                            <li><a href="../index.php">Home<i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="dashboarduser.php">My Account</a></li>
                         </ul>
                     </div>
@@ -161,7 +161,7 @@
                         </table></div>';}
                             else 
                                 echo  '<div class="paneltbs panel-2" id="orders" style="display:none;">
-                        <div class="alert-message"><a href="product.php">Browse products </a>No order has been made yet.</div>
+                        <div class="alert-message"><a href="../product.php">Browse products </a>No order has been made yet.</div>
                     </div>'; ?>
                             
                     
@@ -217,7 +217,7 @@
                         </table> </div>'; }
                             else 
                                 echo  '<div class="paneltbs panel-3" id="downloads" style="">
-                        <div class="alert-message"><a href="product.php">Browse products </a>Your cart is currently empty.</div>
+                        <div class="alert-message"><a href="../product.php">Browse products </a>Your cart is currently empty.</div>
                     </div>'; ?>
                             
                    
@@ -675,7 +675,7 @@
                         </table> </div>'; }
                             else 
                                 echo  '<div class="paneltbs panel-4" id="wishlist" style="display:none;">
-                        <div class="alert-message"><a href="product.php">Browse products </a>No wishlist has been made yet.</div>
+                        <div class="alert-message"><a href="../product.php">Browse products </a>No wishlist has been made yet.</div>
                     </div>'; ?>
 
 
