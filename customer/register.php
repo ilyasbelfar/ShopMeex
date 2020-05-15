@@ -9,7 +9,7 @@
 
     //define variables and set to empty values
 
-    $fname=$lname=$email=$fullname=$username=$address=$pass=$repass=$number="";
+    $fname=$lname=$email=$fullname=$username=$address=$pass=$repass=$gender=$number="";
 
     $repassErr=$emailInsErr=$username_Err="";
 
@@ -33,6 +33,7 @@
         $repass=$_POST['repassword'];
         $address=test_input($_POST['address']);
         $number=test_input($_POST['number']);
+        $gender=$_POST['gender'];
         
         // Validate email
     
@@ -92,7 +93,7 @@
 
             $salt="^%r8yuyg";//create our salt; salt is special String added to password // way of encrption on database;
             $pass = sha1(filter_var($pass.$salt, FILTER_SANITIZE_STRING));// sha1 function to transform the password into long String; known as hashing method;
-            $sql="insert into users (username,email,password,type,firstname,lastname,address,contact_info) values(?,?,?,?,?,?,?,?)";
+            $sql="insert into users (username,email,password,type,firstname,lastname,address,contact_info,gender) values(?,?,?,?,?,?,?,?,?)";
             $stmt = $db->prepare($sql);
             if ($typeidString=="Seller") {
                 $typeid=2;
@@ -103,6 +104,16 @@
             else {
                 $typeid=4;
             }
+            //Gender
+            if ($gender=="Male") {
+                $gender=2;
+            }
+            else if ($gender=="Female"){
+                $gender=3;
+            }
+            else {
+                $gender=4;
+            }
             
             $stmt->bindValue(1,$username);
             $stmt->bindValue(2,$email);
@@ -112,6 +123,7 @@
             $stmt->bindValue(6,$lname);
             $stmt->bindValue(7,$address);
             $stmt->bindValue(8,$number);
+            $stmt->bindValue(9,$gender);
            
             
             $stmt->execute();
@@ -406,17 +418,17 @@
                         </div>
                         <form action="register.php" method="post">
                             <div class="form-group" style="display: flex;align-items: center;">
-                                <label style="margin-right: 1.5rem;">I am a:</label>
+                                <label style="margin-right: 1.5rem;">I am a:<span>*</span></label>
                                 <label class="custom-control custom-radio custom-control-inline">
-                                    <input class="custom-control-input" checked type="radio" name="typeid" value="Buyer">
+                                    <input class="custom-control-input"  type="radio" name="typeid" value="Buyer" required="">
                                     <i class="custom-control-label"> Buyer </i>
                                 </label>
                                 <label class="custom-control custom-radio custom-control-inline">
-                                    <input class="custom-control-input" type="radio" name="typeid" value="Seller">
+                                    <input class="custom-control-input" type="radio" name="typeid" value="Seller" required="">
                                     <i class="custom-control-label"> Seller </i>
                                 </label>
                                 <label class="custom-control custom-radio custom-control-inline">
-                                    <input class="custom-control-input" type="radio" name="typeid" value="Both">
+                                    <input class="custom-control-input" type="radio" name="typeid" value="Both" required="">
                                     <i class="custom-control-label"> Both </i>
                                 </label>
                             </div>
@@ -463,6 +475,22 @@
                             <div class="form-group">
                                 <label for="phone">Phone Number<span>*</span></label>
                                 <input name="number" type="tel" placeholder="Phone number" id="phone" value="<?php if (isset($_POST['number'])) echo $_POST['number']; ?>" pattern="[0-9]*" required>
+                            </div>
+
+                            <div class="form-group" style="display: flex;align-items: center;">
+                                <label style="margin-right: 1.5rem;">Gender:<span>*</span></label>
+                                <label class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input"  type="radio" name="gender" value="Male" required="">
+                                    <i class="custom-control-label"> Male </i>
+                                </label>
+                                <label class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" type="radio" name="gender" value="Female" required="">
+                                    <i class="custom-control-label"> Female </i>
+                                </label>
+                                <label class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" type="radio" name="gender" value="Other" required="">
+                                    <i class="custom-control-label"> Other </i>
+                                </label>
                             </div>
                             
                             
