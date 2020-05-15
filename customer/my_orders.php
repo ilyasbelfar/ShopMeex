@@ -680,7 +680,7 @@
                         </table> </div>'; }
                             else 
                                 echo  '<div class="paneltbs panel-4" id="wishlist" style="display:none;">
-                        <div class="alert-message"><a href="product.php">Browse products </a>No wishlist has been made yet.</div>
+                        <div class="alert-message"><a href="../product.php">Browse products </a>No wishlist has been made yet.</div>
                     </div>'; ?>
 
 
