@@ -190,7 +190,7 @@
             echo "<script>window.open('dashboarduser.php?user=$userr','_self')</script>";
         }
          else 
-             header("location: 404.php");
+             header("location: ../404.php");
         }
  }
 
