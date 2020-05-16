@@ -151,7 +151,7 @@
                                         </div>
                                 </div>
                                 </span>
-                                <a href="#" class="widget-header1">
+                                <a href="my_wishlist.php" class="widget-header1">
                                     <div class="icon">
                                         <i class="fa fa-heart"></i>
                                     </div>

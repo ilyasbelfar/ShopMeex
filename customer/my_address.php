@@ -411,7 +411,7 @@
                                 <div class="col-401">
                                     <div class="form-group">
                                         <label for="phone">Phone Number<span>*</span></label>
-                                        <input id="phone" name="company_name" type="tel" placeholder="" value="<?php echo $info['contact_info']; ?>">
+                                        <input id="phone" name="company_name" type="tel" placeholder="" value="<?php echo $info['contact_info']; ?>"required pattern="[0-9]*" >
                                     </div>
                                 </div>
                                 <div class="col-401">
