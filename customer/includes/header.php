@@ -165,11 +165,11 @@
                                             <?php
                                                         if(!isset($_SESSION['loggedin'])){
                                                             
-                                                            echo '<small class="text-muted"><a href="customer/login.php">Sign in </a> |<a href="customer/register.php">Sign Up</a></small>';
+                                                            echo '<small class="text-muted"><a href="login.php">Sign in </a> |<a href="register.php">Sign Up</a></small>';
                                                             echo '<div>My Account<i class="fa fa-angle-down"></i></div>';
                                                         }
                                                         else{
-                                                            echo '<div><a href="customer/dashboarduser.php">My Account</a><i class="fa fa-angle-down"></i></div>';
+                                                            echo '<div><a href="dashboarduser.php">My Account</a><i class="fa fa-angle-down"></i></div>';
                                                             echo '<small class="text-muted"><a                      href="logout.php">Logout</a></small>';
                                                         }
                                                     ?>
