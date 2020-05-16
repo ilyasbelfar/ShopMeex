@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2020 at 05:02 PM
+-- Generation Time: May 16, 2020 at 04:47 PM
 -- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.2
+-- PHP Version: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -61,7 +60,8 @@ INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`) VALUES
 (89, 11, 4, 1),
 (90, 11, 3, 1),
 (91, 11, 2, 1),
-(92, 11, 8, 1);
+(92, 11, 8, 1),
+(128, 18, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -104,6 +104,28 @@ CREATE TABLE `contact` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `coupons`
+--
+
+CREATE TABLE `coupons` (
+  `id` int(11) NOT NULL,
+  `coupon_code` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `coupon_value` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `coupons`
+--
+
+INSERT INTO `coupons` (`id`, `coupon_code`, `coupon_value`) VALUES
+(1, 'C_USB02', 100),
+(2, 'C_LPN45', 200),
+(3, 'C_3DcAM01', 340),
+(4, 'C_wristWear03', 50);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
@@ -140,7 +162,10 @@ CREATE TABLE `orders_items` (
 
 INSERT INTO `orders_items` (`order_id`, `product_id`, `quantity`) VALUES
 (1, 1, 1),
-(2, 3, 1);
+(2, 3, 1),
+(4, 2, 6),
+(5, 2, 6),
+(6, 4, 23);
 
 -- --------------------------------------------------------
 
@@ -161,7 +186,11 @@ CREATE TABLE `placed_orders` (
 
 INSERT INTO `placed_orders` (`order_id`, `order_date`, `order_name`, `order_email`) VALUES
 (1, '2020-05-14 21:36:28', 'johnioumr147', 'johnmirou91@gmail.com'),
-(2, '2020-05-14 21:38:36', 'johnioumr147', 'johnmirou91@gmail.com');
+(2, '2020-05-14 21:38:36', 'johnioumr147', 'johnmirou91@gmail.com'),
+(3, '2020-05-16 13:12:52', 'ilyaseflba24', 'jascacj@gmail.com'),
+(4, '2020-05-16 13:13:34', 'ilyaseflba24', 'jascacj@gmail.com'),
+(5, '2020-05-16 13:15:22', 'ilyaseflba24', 'jascacj@gmail.com'),
+(6, '2020-05-16 13:28:49', 'ilyasalfbe66', 'ilyasbelfar28@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -196,7 +225,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `weight`, `dimensions`, `price`, `slug`, `colors`, `owner_id`, `model`, `photo`, `photo1`, `photo2`, `date_view`, `counter`, `sold_cmp`, `total_rating`, `quantity`) VALUES
-(1, 1, 'Dell Laptop 1500 Pavilion', 'one of the best product in the world Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, fa', 0.6, '70 x 60', 200, 'large-dell-inspiron-15-5000-15-6', 'Black White', 4, 'dell pavilion 15', 'dell1.jpg', '12.jpg', '12-1.jpg', '2020-05-15', 4, 0, 4, 0),
+(1, 1, 'Dell Laptop 1500 Pavilion', 'one of the best product in the world Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, fa', 0.6, '70 x 60', 200, 'large-dell-inspiron-15-5000-15-6', 'Black White', 4, 'dell pavilion 15', 'dell1.jpg', '12.jpg', '12-1.jpg', '2020-05-16', 1, 0, 4, 0),
 (2, 1, 'mouse', 'one of the beset mouse in the world', 0.1, '20 x 30', 400, 'mouse', 'red grey', 4, 'mouse l-120', 'Photo1.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-05-15', 1, 0, 2, 0),
 (3, 1, 'smart watch', 'one of the best product in teh world', 0.1, '12 x 13', 1200, 'smart-watch', 'red', 4, 'watch-120-M', '7.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-05-15', 1, 0, 5, 0),
 (4, 1, 'Wirless Mouse', 'one of the best product in teh world', 0.6, '', 13, 'thered', '', 4, '', 'Photo2.jpg', 'Photo2.jpg', '', '2020-05-12', 1, 0, 4, 0),
@@ -351,7 +380,9 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `type`, `firstname`,
 (13, 'Polo', 'Polo@polo.coom', 'fdfdf', 2, 'Polo ', 'TER', 1, 'usa', '546219849', 'photo.jpg', 'usa', '', '', '', '412', 'polo.com', ''),
 (14, 'health', 'health@health.com', 'oihjfodih', 2, 'health ', 'im', 1, 'usa', '425421', '4.jpg', 'usa', '', '', '', '757', 'health.com', ''),
 (15, 'home', 'home@home.com', 'fdfd', 2, 'Home ', 'for life', 0, 'usa', '456454865', '4.jpg', 'usa', 'usa', 'uysa', 'dfdf', '5345', 'home.com', ''),
-(16, 'toys', 'toys@toys.cp', 'omfgg', 2, 'toys ', 'for life', 0, '', '65464', 'f', '', '', '', '', '', 'toys.com', '');
+(16, 'toys', 'toys@toys.cp', 'omfgg', 2, 'toys ', 'for life', 0, '', '65464', 'f', '', '', '', '', '', 'toys.com', ''),
+(17, 'ilyaseflba24', 'jascacj@gmail.com', '6c4d5da494a97c739dac2cb1dbff4c2ae1ad3a00', 3, 'ilyas', 'belfar', 2, '897897 jhkjh', '897897987', '', '', '', '', '', '', NULL, ''),
+(18, 'ilyasalfbe66', 'ilyasbelfar28@gmail.com', '8b2e5d9d2061671b5f89d498d14c1440cb66a39b', 3, 'ilyas', 'belfar', 2, '89789 jllkjkl', '90890809890', '', '', '', '', '', '', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -393,6 +424,12 @@ ALTER TABLE `cart`
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `coupons`
+--
+ALTER TABLE `coupons`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -448,13 +485,19 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `coupons`
+--
+ALTER TABLE `coupons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -466,7 +509,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `placed_orders`
 --
 ALTER TABLE `placed_orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -484,7 +527,7 @@ ALTER TABLE `review`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
