@@ -28,7 +28,7 @@
                     $headers .="MIME-Version:1.0"."\r\n";
                     $headers .="Contents-type:text/html;CHARSET=UTF-8"."\r\n";
                     $headers .= ' From:ShopMeex Contact Form <shopmeex1@gmail.com>';
-                    $body="Click here 'http://localhost/shopmeex/reset.php?email=$email' to reset your password.";
+                    $body="Click here 'http://localhost/shopmeex/customer/reset.php?email=$email' to reset your password.";
 
     
                     if (mail($to, $subject, $body, $headers)) 
