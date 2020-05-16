@@ -32,7 +32,7 @@
     }
     
     if(isset($_SESSION['id']) && isset($_SESSION['cart']) && isset($_POST['submitted'])) {
-        $stmt = $db->prepare("INSERT INTO orders (order_name, order_email) VALUES (:username, :email)");
+        $stmt = $db->prepare("INSERT INTO placed_orders (order_name, order_email) VALUES (:username, :email)");
         $stmt->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
         $stmt->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR);
         $stmt->execute();
@@ -40,7 +40,7 @@
         
         $stmt1 = $db->query("SELECT product_id, quantity FROM cart WHERE user_id='" . $_SESSION['id'] . "'");
         $Res1 = $stmt1->fetchAll();
-        $stmt2 = $db->query("SELECT order_id FROM orders WHERE order_id=LAST_INSERT_ID()");
+        $stmt2 = $db->query("SELECT order_id FROM placed_orders WHERE order_id=LAST_INSERT_ID()");
         $Res2 = $stmt2->fetchAll();
         if($Res1 && $Res2) {
             foreach($Res1 as $row) {
