@@ -13,6 +13,9 @@ body{
 	color: #72777a;
 	background-color: #f9fafb;
 }
+.hide{
+    width: 0;
+}
 @font-face {
     font-family : themify;
     src : url(fonts/themify/themify.eot);
@@ -75,7 +78,6 @@ body{
  		padding: 5px 20px;
  		white-space: nowrap;
 }
- 		
  .sidebar .sidebar-container ul.sidebar-menu>li>a .title{
  		text-align: left;
  		margin-right: 30px;
@@ -115,9 +117,7 @@ body{
       margin-right: 10px;
       display: none;
  }
-
-
- @media screen and (min-width:990px) and (max-width:1500px){
+@media screen and (min-width:990px) and (max-width:1500px){
  	.sidebar{width:70px}
  	.sidebar .sidebar-container .sidebar-logo{
  		border-bottom:1px solid transparent;
@@ -152,7 +152,6 @@ body{
 .sidebar{
 	clear: both;
 }
-
 /*menu*/
 .content{
 	padding:0 0 0 70px;
@@ -187,7 +186,6 @@ body{
 	border: 0;
 	outline: 0;
 }
-
 .content .header .header-container ul.nav-right{
 	float: right;
 }
@@ -214,18 +212,15 @@ body{
 .content .header .header-container ul>li a *{
   display: inline-block;
 }
-
 .content .header .header-container ul.nav-right .dropdown .dropdown-menu{
 	display: none;
 }
-  
- @media screen and (min-width:990px) and (max-width:1500px){
+@media screen and (min-width:990px) and (max-width:1500px){
       .content .header{
       	   width: calc(100% - 70px);
 
       }
  }
-
 /*begin main*/
 .content>.main-content {
     padding: 85px 20px 20px
@@ -255,7 +250,6 @@ body{
     font-weight: 550 !important;
     font-size: .875rem;
 }
-
 .content>.main-content .row1 .row .row-content .layers .layer .peers .peer:first-child {
     margin-right: auto;
 }
@@ -266,8 +260,6 @@ body{
     border-radius: 10px;
     padding: 5px 10px;
 }
-
-
 .content>.main-content .row1 .row .row-content:first-child .layers .layer .peers .peer:last-child {
     background-color: rgba(0,181,17,.1);
     color: rgba(0,181,17,1);
@@ -284,7 +276,6 @@ body{
     color: #ff5722;
     background-color: rgba(255,87,34,.1);
 }
-
 /*begin user statistic*/
 .content>.main-content .row2{
     width: 100%;
@@ -320,8 +311,6 @@ body{
 .content>.main-content .row2 .row2container .mapaside .containermapaside .algeriamap .mapcontainer .wrappermap .zoomneg{
     left: 50px
 }
-
-
 
 /*end user statistic*/
 /*begin cal statistic*/
@@ -371,7 +360,6 @@ body{
 .content>.main-content .row2 .row2container>.statstics >.layers >.layer .layers .layer:nth-child(5) .progress >.progress-bar{
     background-color: #df10b2;
 }
-
 .content>.main-content .row2 .row2container>.statstics >.layers >.layer *{
     width: 100%;
 }
@@ -388,7 +376,280 @@ body{
 .content >.main-content .row2 .row .header-info > :first-child{
     font-size: 1.5em;
 }
+/* befin row 3 */
+.hide{
+    display: none;
+}
+.content >.main-content .row3{
+    width: 100%;
+    padding: 0 20px 0 0;
+    
+}
+.content >.main-content .row3 > .left-col{
+    padding: 0 20px 0 0;
+}
+.content >.main-content .row3 > .right-col{
+    padding: 0 0  0 20px ;
+}
+.content >.main-content .row3 > .left-col >.container{
+    background-color: #fff;
+}
+.content >.main-content .row3 > .right-col > .container{
+    background-color: #fff;
+    width: 100%;
+    height: 100%
+}
+.content >.main-content .row3 > .left-col > .container > .head {
+    padding:  15px;
+    border-bottom: 1px solid #ccc;
+}
+.content >.main-content .row3 > .left-col > .container > .head >.container {
+    justify-content: space-between
+}
+.content >.main-content .row3 > .left-col > .container > .head >.container .left{
+    padding: 5px;
+}
+.content >.main-content .row3 > .left-col > .container > .head >.container .left i {
+    color: #5d3bca
+}
+.content >.main-content .row3 > .left-col > .container > .head >.container .drop{
+    padding: 5px;
+}
+.content >.main-content .row3 > .left-col > .container > .head >.container .drop i{
+    color: #6b10e9;
+    font-size: 1.2em;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph{
+    position: relative;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph >.plus{
+    position: absolute;
+    right: -3.4%;
+    border: 0;
+    background-color: #fff;
+    border:1px solid #ccc;
+    top: 40%;
+    font-size: 1.3em;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 0 15px;
+    outline: none;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph >.plus:hover{
+    background-color: #ccc;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph >.neg:hover{
+    background-color: #ccc;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph > * > *{
+    font-size: 1em;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph >.neg{
+    position: absolute;
+    border: 0;
+    background-color: #fff;
+    border:1px solid #ccc;
+    top: 40%;
+    left: -3.4%;
+    font-size: 1.3em;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 0 13px;
+    outline: none;
+}
+.content >.main-content .row3 > .left-col > .container > .h5{
+    border-bottom: 1px solid #ccc;
+}
+.content >.main-content .row3 > .left-col > .container > .h5 h5{
+    text-transform: uppercase;
+    color: #ccc;
+    padding:23px;
+    font-size: 1em;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph .con .head{
+   padding: 10px 30px;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph .con .head > .container .title *{
+    color: #ccc;
+    font-variant: all-small-caps;
+    padding: 0 0 20px 0;
+    font-size: 20px;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph .con .head  >.container .statis> *{
+    display: inline-block;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph .con .head  >.container .statis h1{
+    font-size:50px;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph .con .head  >.container .statis span{
+    opacity: .5;
+    padding-left: .25rem;
+    font-size: 2.2em;
+    font-weight: 800;
+    padding-left: 10px;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph .con .head  >.container .statis .inc{
+    font-weight: 800;
+    color: #3ac47d;
+     padding-left: 20px;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph .con .head  >.container .statis .chan{
+    font-variant: all-small-caps;
+     padding-left: 10px;
+    font-size: 19px;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph .con > .graph{
+    width: 100%;
+    height: 200px;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph .graph canvas{
+    height: 180px;
+    width: 100%;
+}
+.content >.main-content .row3 > .left-col > .container > .content-graph .dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
 
+.content >.main-content .row3 > .left-col > .container > .content-graph .dotactive:hover {
+  background-color: #717171;
+}
+.dotactive{
+    background-color: #717171 !important;
+}
+.dotactive, .dot:hover {
+  background-color: #717171;
+}
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+.content >.main-content .row3 .left-col .container .botton{
+    padding: 10px;
+}
+.content .main-content .main-content .row3 .left-col .container .botton .container .botton-top .descr .order{
+    font-weight: 800;
+    font-size: .95em;
+}
+.content .main-content .main-content .row3 .left-col .container .botton .container .botton-top >.profit{
+    justify-content: space-between;
+}
+.content .main-content .main-content .row3 .left-col .container .botton .container .botton-top .profit .order-spec{
+    color: #ccc;
+    padding: 10px 0;
+}
+.content .main-content .main-content .row3 .left-col .container .botton .container .botton-top >.profit .profit{
+    font-weight: 700;
+    color: #2a8030;
+    font-size: 1.8em;
+}
+.content .main-content .main-content .row3 .left-col .container .botton .container .stat .pourcent{
+    background-color: #ccc;
+    border-radius: 8px;
+    height: 7px;
+    border-radius: 8px;
+}
+.content .main-content .main-content .row3 .left-col .container .botton .container .stat .pourcent .progress-bar{
+    background-color: #f52;
+     height: 7px;
+    width: 50%;
+    border-radius: 8px;
+}
+.content .main-content .main-content .row3 .left-col .container .botton .container .stat .progress-sub-label{
+    justify-content: space-between;
+    padding: 10px 0;
+}
+.content .main-content .main-content .row3 .left-col .container .botton .container .stat .sub-label-left{
+    color: #ccc;
+    font-size: .95em;
+}
+.content .main-content .main-content .row3 .left-col .container .botton .container .stat .sub-label-right{
+   color: #ccc;
+    font-size: .95em;
+}
+.content .main-content .main-content .row3 .right-col{
+    overflow: hidden;
+    max-height: 589.5x;
+    position: relative;
+}
+.content .main-content .main-content .row3 .right-col .container{position: relative;}
+.content .main-content .main-content .row3 .right-col .list-content{
+    padding: 25px 30px;
+}
+.content .main-content .main-content .row3 .right-col .list-content >.container{
+    border-left: 3px solid #ccc;
+}
+.content .main-content .main-content .row3 .right-col .list-content .container .event{
+   padding: 10px 20px;
+}
+.content .main-content .main-content .row3 .right-col .list-content .container{
+   position: relative; 
+}
+.content .main-content .main-content .row3 .right-col .list-content .container .event .circle{
+    background-color: #cccc;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    border: 3px solid #458;
+    background: #fff;
+    left: -29px;
+    border-radius: 50%;
+}
+.content .main-content .main-content .row3 .right-col .bottom{
+    background: #fff;
+    bottom: 0;
+    position: absolute;
+    border-top: 1px solid #ccc;
+width:100%;
+}
+.content .main-content .main-content .row3 .right-col .bottom .container{
+    text-align: center;
+    padding: 20px;
+}
+.content .main-content .main-content .row3 .right-col .bottom button{
+    margin: auto;
+    border: 0;
+    background-color: #8e7dc2;
+    color: #fff;
+    padding: 7px 12px;
+    border-radius: 10px;
+    font-weight: 700;
+    
+}
+
+
+
+    
+.content .main-content .main-content .row3 .right-col .list-content .container .event:nth-child(1) .circle{border-color: #458}
+.content .main-content .main-content .row3 .right-col .list-content .container .event:nth-child(2) .circle{border-color: #1f8}
+.content .main-content .main-content .row3 .right-col .list-content .container .event:nth-child(3) .circle{border-color: #e88}
+.content .main-content .main-content .row3 .right-col .list-content .container .event:nth-child(4) .circle{border-color: #cec}
+.content .main-content .main-content .row3 .right-col .list-content .container .event:nth-child(6) .circle{border-color: #ecc}
+.content .main-content .main-content .row3 .right-col .list-content .container .event:nth-child(7) .circle{border-color: #bfb}
+.content .main-content .main-content .row3 .right-col .list-content .container .event:nth-child(8) .circle{border-color: #a58}
+.content .main-content .main-content .row3 .right-col .list-content .container .event:nth-child(9) .circle{border-color: #958}
+
+/*end row 3*/
 /*email*/
 
 .content>.main-content>.main-content .full-container{
