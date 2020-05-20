@@ -1,48 +1,21 @@
-<?php
-    include "includes/session.php";
-   if (isset($_GET['product'])) {
-    $slug=$_GET['product'];
-    
-    }
-    else {
-        $slug="Digital-Goods";
-    }
-
-
-     //getting product from database
-        $stmt = $db->prepare("SELECT * FROM category where slug = :slug");
-        $stmt->execute(['slug' => $slug]);
-        $category =$stmt->fetch();
-
-
-
-
-
-
-
-
-
-
-
-    ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 	<html>
 		<head>
-			<style>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>ShopMeex Online Store</title>
+			<link rel="icon" href="images/favicon.png">
+			<link rel="stylesheet" type="text/css" href="css/style.css">
+			<link rel="stylesheet" type="text/css" href="css/productstyle.css">
+			<link rel="stylesheet" type="text/css" href="FontAwesome/css/all.css">
+			<link rel="stylesheet" type="text/css" href="css/reapeatingstyle.css">
+			<link rel="stylesheet" type="text/css" href="css/color/color.css">
+            <script src="js/jquery-3.4.1.min.js"></script>
+            <link rel="stylesheet" type="text/css" href="FontAwesome/css/themify.css">
+            <link rel="stylesheet" type="text/css" href="css/reapeatingStyle.css">
+            <link rel="stylesheet" type="text/css" href="css/popup.css">
+            <link rel="stylesheet" type="text/css" href="css/responsive.css">
+            <style>
             @font-face {
             font-family : themify;
             src : url(fonts/themify/themify.eot);
@@ -50,48 +23,145 @@
                   url(fonts/themify/themify.woff) format('woff'),
                   url(fonts/themify/themify.ttf) format('truetype');
             </style>
-            <script src="js/jquery-3.4.1.min.js"></script>
-            <meta charset="UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<link rel="icon" href="images/favicon.png">
-			<link rel="stylesheet" type="text/css" href="css/style.css">
-			<link rel="stylesheet" type="text/css" href="css/productstyle.css">
-			<link rel="stylesheet" type="text/css" href="FontAwesome/css/all.css">
-			<link rel="stylesheet" type="text/css" href="css/reapeatingstyle.css">
-			<link rel="stylesheet" type="text/css" href="css/color/color.css">
-            
-            <link rel="stylesheet" type="text/css" href="FontAwesome/css/themify.css">
-            <link rel="stylesheet" type="text/css" href="css/reapeatingStyle.css">
-            <link rel="stylesheet" type="text/css" href="css/popup.css">
+		</head>
+		
+		<body>
+			<!-- Start Loader -->
+			<div class="loader_container">
+				<div class="loader__cart">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" class="cart-loader"><g id="Layer_2" data-name="Layer 2"><path class="cls-1" d="M33.57,232.47S-3.5,131.75,49.65,116.37,142,108.67,135,142.94,97.91,253.45,33.57,232.47Z"></path><line class="cls-2" x1="16.09" y1="145.32" x2="65.94" y2="145.32" data-svg-origin="16.09000015258789 145.32000732421875" transform="matrix(1,0,0,1,0,0)" style="opacity: 1;"></line><line class="cls-2" x1="37.75" y1="177.7" x2="77.6" y2="177.7" data-svg-origin="37.75 177.6999969482422" transform="matrix(1,0,0,1,0,0)" style="opacity: 1;"></line><line class="cls-2" x1="54.87" y1="208.79" x2="84.72" y2="208.79" data-svg-origin="54.869998931884766 208.7899932861328" transform="matrix(1,0,0,1,0,0)" style="opacity: 1;"></line><polyline class="cls-3" points="40 65.9 77.65 65.9 122.32 206.88 221.77 206.88 270.56 107.9 121.71 107.9"></polyline><circle class="cls-3" cx="139.46" cy="251.69" r="18.54"></circle><circle class="cls-3" cx="207" cy="251.69" r="18.54"></circle></g></svg>
+					<div class="loader__circles">
+					<div class="cir" id="cir_one"></div>
+					<div class="cir" id="cir_two"></div>
+					<div class="cir" id="cir_three"></div>
+					</div>
+				</div>
+			</div>
+			<!-- End Loader -->
 
-    		<title><?php echo $category['name']; ?> | ShopMeex Online Store</title>
-    			<?php 
-        // inlude the header 
+			<!-- Start Header -->
+			<header id="main-header" class="negop">
+				<!-- Start Top Section -->
+				<section class="top-sec">
+					<div class="container">
+						<nav>
+							<ul class="social-media">
+								<li><a href="#"><i class="fab fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fab fa-instagram"></i></a></li>
+								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+							</ul>
+							<ul class="nav-items">
+								<li><a href="#">Help</a></li>
+								<li class="dropdown-menu1">
+									<a href="#">DZD<i class="fas fa-angle-down"></i></a>
+									<ul class="dropdown-list">
+										<li><a href="#">USD</a></li>
+										<li><a href="#">EUR</a></li>
+									</ul>
+									<div class="clearfix"></div>
+								</li>
+								<li class="dropdown-menu2">
+									<a href="#">Français<i class="fa fa-angle-down"></i></a>
+									<ul class="dropdown-list">
+										<li><a href="#">Anglais</a></li>
+										<li><a href="#">Arabe</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</section>
+				<!-- End Top Section -->
 
-       			 include 'includes/header.php';
+				<!-- Start Bottom Section -->
+				<section class="bottom-sec">
+					<div class="container">
+						<div class="wrapper">
+							<div class="logo-container">
+								<a href="#">
+									<img src="images/Logo-header.png" class="logo">
+								</a>
+							</div>
 
+							<div class="search-bar">
+								<form method="post" action="productlist.php">
+									<div class="search-bar-container">
 
-    			?>
+										<select class="custom-select" name="category_name">
+											<option value="">All types</option>
+											<option value="special">Special</option>
+											<option value="best">Only best</option>
+											<option value="recent">Latest</option>
+										</select>
+										<input type="search" class="form-control" id="navbar-search-input" placeholder="Search Here..." name="keyword" required="">
+										<div class="search-icon-container">
+											<button class="search-icon" type="submit" name="submit">
+												<i class="fa fa-search"></i>
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							
 
+							<div class="user-details">
+								<div class="user-details-container">
+									<a href="#" class="widget-header1">
+										<div class="icon">
+											<i class="fa fa-shopping-cart"></i>
+											<span class="notify">0</span>
+										</div>
+									</a>
+									<a href="#" class="widget-header1">
+										<div class="icon">
+											<i class="fa fa-heart"></i>
+										</div>
+									</a>
 
+									<div class="widget-header1 dropdown">
+										<div class="icon">
+											<i class="fa fa-user"></i>
+											<div class="user-text">
+												<small class="text-muted">Sign in | Sign Up</small>
+												<div>My Account<i class="fa fa-angle-down"></i></div>
+											</div>
+										</div>
 
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- End Bottom Section -->
 
-
-
-
-
-
-
-
-
-
-
+				<!-- Start Categories Links -->
+				<nav class="categories-list">
+					<div class="container">
+						<ul>
+							<li><a href="#"><strong>Toutes Les Catégories</strong></a></li>
+							<li><a href="#"><strong>Machines</strong></a></li>
+							<li><a href="#"><strong>Electronique</strong></a></li>
+							<li><a href="#"><strong>Electroménagie</strong></a></li>
+							<li><a href="#"><strong>Services & Equipements</strong></a></li>
+							<li><a href="#"><strong>Santé</strong></a></li>
+							<li><a href="#"><strong>Toys & Hobbies</strong></a></li>
+							<li><a href="#"><strong>Home Textiles</strong></a></li>
+						</ul>
+					</div>
+				</nav>
+			</header>
             <!-- begin  div separable-->
             <section class="row-separabble marginbottom  negop">
             	<div class="container">
-            		<h2 class="title">Clothes</h2>
+            		<h2 class="title"> Les Categorie Des Produits </h2>
             		<nav class="row-cat">
-            			
+            			<ol>
+            				<li> <a href="#">Home / </a></li>
+            				<li></li>
+            				<li></li>
+            			</ol>
             		</nav>
             		
             	</div>
@@ -101,14 +171,15 @@
 
 
             <!-- begin  main -->
+            
             <section class="product-area negop">
             	<div class="maincontainer">
             		<div class="wrapper flex ">
             			<aside class="product-view flextroisquart">
 	            			<div class="wrapper">
-	            				<div class="top-row">
+                                <div class="top-row">
 	            					<div class="container-top-row flex ">
-	            						<span class="items-founds"><span>25</span> <span>items  trouvé</span></span>
+	            						<span class="items-founds " id="number-res-search"><span>Search results for word </span></span>
 	            						<div class="change-view flex">
 	            							<form class="select-form flex">
 	            								<select>
@@ -132,6 +203,450 @@
 	            					</div>
 	            					
 	            				</div>
+                                 <article class="grid-view"> 
+	            					<div class="wraapper flex flexwrap">
+                         <div class="product-view-grid">
+                                        <div class="container-product">
+                                                <div class="wrapimage">
+                                                    <span>new</span>
+                                                    <img src="images/items/12.jpg">
+                                                </div>
+                                                <div class="info">
+                                                    <p> lorem ipsum dolor sit amet, </p>
+                                                    <span class="new-price" style="
+                                                            color: green;
+                                                        "> <span class="price" style="
+                                                            color: #269e39c2;
+                                                            /* letter-spacing: .1em; */
+                                                            font-size: 1.3em;
+                                                            padding: 0;
+                                                            margin: 0;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #269e39c2;
+                                                            font-size: .8em;
+                                                        ">DA</span></span>
+                                                 <span class="old-price" style="
+                                                            font-size: .5em;
+                                                        "> <span class="price" style="
+                                                            font-size: 1.8em;
+                                                            color: #f6560e;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #f6560e;
+                                                        ">DA</span> </span>
+                                                    <div class="rating">
+                                                        <ul class="pos-rate">
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                        </ul>
+                                                        <ul class="neg-rate">
+                                                             <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="product-view-grid">
+                                        <div class="container-product">
+                                                <div class="wrapimage">
+                                                    <span>new</span>
+                                                    <img src="images/items/12.jpg">
+                                                </div>
+                                                <div class="info">
+                                                    <p> lorem ipsum dolor sit amet, </p>
+                                                    <span class="new-price" style="
+                                                            color: green;
+                                                        "> <span class="price" style="
+                                                            color: #269e39c2;
+                                                            /* letter-spacing: .1em; */
+                                                            font-size: 1.3em;
+                                                            padding: 0;
+                                                            margin: 0;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #269e39c2;
+                                                            font-size: .8em;
+                                                        ">DA</span></span>
+                                                 <span class="old-price" style="
+                                                            font-size: .5em;
+                                                        "> <span class="price" style="
+                                                            font-size: 1.8em;
+                                                            color: #f6560e;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #f6560e;
+                                                        ">DA</span> </span>
+                                                    <div class="rating">
+                                                        <ul class="pos-rate">
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            </ul>
+                                                        <ul class="neg-rate">
+                                                             <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="product-view-grid">
+                                        <div class="container-product">
+                                                <div class="wrapimage">
+                                                    <span>new</span>
+                                                    <img src="images/items/12.jpg">
+                                                </div>
+                                                <div class="info">
+                                                    <p> lorem ipsum dolor sit amet, </p>
+                                                    <span class="new-price" style="
+                                                            color: green;
+                                                        "> <span class="price" style="
+                                                            color: #269e39c2;
+                                                            /* letter-spacing: .1em; */
+                                                            font-size: 1.3em;
+                                                            padding: 0;
+                                                            margin: 0;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #269e39c2;
+                                                            font-size: .8em;
+                                                        ">DA</span></span>
+                                                 <span class="old-price" style="
+                                                            font-size: .5em;
+                                                        "> <span class="price" style="
+                                                            font-size: 1.8em;
+                                                            color: #f6560e;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #f6560e;
+                                                        ">DA</span> </span>
+                                                    <div class="rating">
+                                                        <ul class="pos-rate">
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            </ul>
+                                                        <ul class="neg-rate">
+                                                             <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="product-view-grid">
+                                        <div class="container-product">
+                                                <div class="wrapimage">
+                                                    <span>new</span>
+                                                    <img src="images/items/12.jpg">
+                                                </div>
+                                                <div class="info">
+                                                    <p> lorem ipsum dolor sit amet, </p>
+                                                    <span class="new-price" style="
+                                                            color: green;
+                                                        "> <span class="price" style="
+                                                            color: #269e39c2;
+                                                            /* letter-spacing: .1em; */
+                                                            font-size: 1.3em;
+                                                            padding: 0;
+                                                            margin: 0;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #269e39c2;
+                                                            font-size: .8em;
+                                                        ">DA</span></span>
+                                                 <span class="old-price" style="
+                                                            font-size: .5em;
+                                                        "> <span class="price" style="
+                                                            font-size: 1.8em;
+                                                            color: #f6560e;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #f6560e;
+                                                        ">DA</span> </span>
+                                                    <div class="rating">
+                                                        <ul class="pos-rate">
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            </ul>
+                                                        <ul class="neg-rate">
+                                                             <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="product-view-grid">
+                                        <div class="container-product">
+                                                <div class="wrapimage">
+                                                    <span>new</span>
+                                                    <img src="images/items/12.jpg">
+                                                </div>
+                                                <div class="info">
+                                                    <p> lorem ipsum dolor sit amet, </p>
+                                                    <span class="new-price" style="
+                                                            color: green;
+                                                        "> <span class="price" style="
+                                                            color: #269e39c2;
+                                                            /* letter-spacing: .1em; */
+                                                            font-size: 1.3em;
+                                                            padding: 0;
+                                                            margin: 0;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #269e39c2;
+                                                            font-size: .8em;
+                                                        ">DA</span></span>
+                                                 <span class="old-price" style="
+                                                            font-size: .5em;
+                                                        "> <span class="price" style="
+                                                            font-size: 1.8em;
+                                                            color: #f6560e;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #f6560e;
+                                                        ">DA</span> </span>
+                                                    <div class="rating">
+                                                        <ul class="pos-rate">
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            </ul>
+                                                        <ul class="neg-rate">
+                                                             <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="product-view-grid">
+                                        <div class="container-product">
+                                                <div class="wrapimage">
+                                                    <span>new</span>
+                                                    <img src="images/items/12.jpg">
+                                                </div>
+                                                <div class="info">
+                                                    <p> lorem ipsum dolor sit amet, </p>
+                                                    <span class="new-price" style="
+                                                            color: green;
+                                                        "> <span class="price" style="
+                                                            color: #269e39c2;
+                                                            /* letter-spacing: .1em; */
+                                                            font-size: 1.3em;
+                                                            padding: 0;
+                                                            margin: 0;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #269e39c2;
+                                                            font-size: .8em;
+                                                        ">DA</span></span>
+                                                 <span class="old-price" style="
+                                                            font-size: .5em;
+                                                        "> <span class="price" style="
+                                                            font-size: 1.8em;
+                                                            color: #f6560e;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #f6560e;
+                                                        ">DA</span> </span>
+                                                    <div class="rating">
+                                                        <ul class="pos-rate">
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            </ul>
+                                                        <ul class="neg-rate">
+                                                             <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="product-view-grid">
+                                        <div class="container-product">
+                                                <div class="wrapimage">
+                                                    <span>new</span>
+                                                    <img src="images/items/12.jpg">
+                                                </div>
+                                                <div class="info">
+                                                    <p> lorem ipsum dolor sit amet, </p>
+                                                    <span class="new-price" style="
+                                                            color: green;
+                                                        "> <span class="price" style="
+                                                            color: #269e39c2;
+                                                            /* letter-spacing: .1em; */
+                                                            font-size: 1.3em;
+                                                            padding: 0;
+                                                            margin: 0;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #269e39c2;
+                                                            font-size: .8em;
+                                                        ">DA</span></span>
+                                                 <span class="old-price" style="
+                                                            font-size: .5em;
+                                                        "> <span class="price" style="
+                                                            font-size: 1.8em;
+                                                            color: #f6560e;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #f6560e;
+                                                        ">DA</span> </span>
+                                                    <div class="rating">
+                                                        <ul class="pos-rate">
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            </ul>
+                                                        <ul class="neg-rate">
+                                                             <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="product-view-grid">
+                                        <div class="container-product">
+                                                <div class="wrapimage">
+                                                    <span>new</span>
+                                                    <img src="images/items/12.jpg">
+                                                </div>
+                                                <div class="info">
+                                                    <p> lorem ipsum dolor sit amet, </p>
+                                                    <span class="new-price" style="
+                                                            color: green;
+                                                        "> <span class="price" style="
+                                                            color: #269e39c2;
+                                                            /* letter-spacing: .1em; */
+                                                            font-size: 1.3em;
+                                                            padding: 0;
+                                                            margin: 0;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #269e39c2;
+                                                            font-size: .8em;
+                                                        ">DA</span></span>
+                                                 <span class="old-price" style="
+                                                            font-size: .5em;
+                                                        "> <span class="price" style="
+                                                            font-size: 1.8em;
+                                                            color: #f6560e;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #f6560e;
+                                                        ">DA</span> </span>
+                                                    <div class="rating">
+                                                        <ul class="pos-rate">
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            </ul>
+                                                        <ul class="neg-rate">
+                                                             <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="product-view-grid">
+                                        <div class="container-product">
+                                                <div class="wrapimage">
+                                                    <span>new</span>
+                                                    <img src="images/items/12.jpg">
+                                                </div>
+                                                <div class="info">
+                                                    <p> lorem ipsum dolor sit amet, </p>
+                                                    <span class="new-price" style="
+                                                            color: green;
+                                                        "> <span class="price" style="
+                                                            color: #269e39c2;
+                                                            /* letter-spacing: .1em; */
+                                                            font-size: 1.3em;
+                                                            padding: 0;
+                                                            margin: 0;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #269e39c2;
+                                                            font-size: .8em;
+                                                        ">DA</span></span>
+                                                 <span class="old-price" style="
+                                                            font-size: .5em;
+                                                        "> <span class="price" style="
+                                                            font-size: 1.8em;
+                                                            color: #f6560e;
+                                                        ">152</span> <span class="coin" style="
+                                                            color: #f6560e;
+                                                        ">DA</span> </span>
+                                                    <div class="rating">
+                                                        <ul class="pos-rate">
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            </ul>
+                                                        <ul class="neg-rate">
+                                                             <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                            <li><a> <i class="fa fa-star"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+
+                                        </div>
+
+                                </article>
+	            				
 	            				<article class="list-view flex marginbottom">
 	            					<div class="container">
 	            						<div class="wrapper flex">
@@ -194,158 +709,13 @@
 	            						</div>
 	            					</div>
 	            				</article>
-	            				<article class="grid-view"> 
-	            					<div class="wraapper flex flexwrap">
-                                        <div class="product-view-grid">
-                                    
-                                                <div class="container-product">
-                                                    <div class="wrapimage">
-                                                        <span>new</span>
-                                                        <img src="images/items/8.jpg">
-                                                    </div>
-                                                    <div class="info">
-                                                        <p> lorem ipsum dolor sit amet, </p>
-                                                        <span class="new-price"> <span class="price">152</span> <span class="coin">DA</span></span>
-                                                        <span class="old-price"> <span class="price">152</span> <span class="coin">DA</span> </span>
-                                                        <div class="rating">
-                                                            <ul class="pos-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                            <ul class="neg-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                        
-                                        </div>
-                                        
-	            						<div class="product-view-grid">
-                                            
-                                                <div class="container-product ">
-                                                    <div class="wrapimage">
-                                                        <span>new</span>
-                                                        <img src="images/items/7.jpg">
-                                                    </div>
-                                                    <div class="info">
-                                                        <p> lorem ipsum dolor sit amet, </p>
-                                                        <span class="new-price"> <span class="price">152</span> <span class="coin">DA</span></span>
-                                                        <span class="old-price"> <span class="price">152</span> <span class="coin">DA</span> </span>
-                                                        <div class="rating">
-                                                            <ul class="pos-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                            <ul class="neg-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
+	            				
+                                
 
-
-                                                </div>
-                                        
-	            						</div>
-	            						<div class="product-view-grid">
-                                            
-                                                <div class="container-product ">
-                                                    <div class="wrapimage">
-                                                        <span>new</span>
-                                                        <img src="images/items/10.jpg">
-                                                    </div>
-                                                    <div class="info">
-                                                        <p> lorem ipsum dolor sit amet, </p>
-                                                        <span class="new-price"> <span class="price">152</span> <span class="coin">DA</span></span>
-                                                        <span class="old-price"> <span class="price">152</span> <span class="coin">DA</span> </span>
-                                                        <div class="rating">
-                                                            <ul class="pos-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                            <ul class="neg-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-	            								</div>
-                                        
-                                        </div>
-	            						<div class="product-view-grid">
-                                    
-                                                <div class="container-product ">
-                                                    <div class="wrapimage">
-                                                        <span>new</span>
-                                                        <img src="images/items/11.jpg">
-                                                    </div>
-                                                    <div class="info">
-                                                        <p> lorem ipsum dolor sit amet, </p>
-                                                        <span class="new-price"> <span class="price">152</span> <span class="coin">DA</span></span>
-                                                        <span class="old-price"> <span class="price">152</span> <span class="coin">DA</span> </span>
-                                                        <div class="rating">
-                                                            <ul class="pos-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                            <ul class="neg-rate">
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                                <li><a> <i class="fa fa-heart"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            
-                                        </div>
 	            						
 
-	            					</div>
 	            					
-	            				</article>
-	            				
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <article class="list-view flex marginbottom">
+	            				<article class="list-view flex marginbottom">
 	            					<div class="container">
 	            						<div class="wrapper flex">
 	            							<aside class="product-image flexquart ">
@@ -407,21 +777,7 @@
 	            						</div>
 	            					</div>
 	            				</article>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <article class="list-view flex marginbottom">
+                                <article class="list-view flex marginbottom">
 	            					<div class="container">
 	            						<div class="wrapper flex">
 	            							<aside class="product-image flexquart ">
@@ -763,21 +1119,14 @@
          
 
 			<!-- End Footer -->
-			 <script src="js/jquery-3.4.1.min.js"></script>
-		    <script src="js/owl.carousel.min.js"></script>
-		    <script src="js/TweenMax.min.js"></script>
-		    <script src="js/jquery.nice-select.js"></script>
-		    <script src="js/jquery.countdown.min.js"></script>
-		    <script src="js/jquery.zoom.js"></script>
-		    <script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
-		    <script src="js/lightcase.js"></script>
-		    <script type="text/javascript"></script>
-
+            
             <script src="js/popup.js"></script>
             <script src="js/TweenMax.min.js"></script>
 			<script src="js/custom.js"></script>
 			<script src="js/product.js"></script>
-			<?php include 'includes/script.php'; ?>
+			<script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
 		</body>
 
 </html>
+
+
