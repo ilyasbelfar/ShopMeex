@@ -13,60 +13,40 @@
         $stmt = $db->prepare("SELECT * FROM category where slug = :slug");
         $stmt->execute(['slug' => $slug]);
         $category =$stmt->fetch();
-
-
-
-
-
-
-
-
-
-
-
-    ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 	<html>
 		<head>
-			<style>
-            @font-face {
-            font-family : themify;
-            src : url(fonts/themify/themify.eot);
-            src : url(fonts/themify/themify.eot?#iefix) format('embedded-opentype'),
-                  url(fonts/themify/themify.woff) format('woff'),
-                  url(fonts/themify/themify.ttf) format('truetype');
-            </style>
-            <script src="js/jquery-3.4.1.min.js"></script>
-            <meta charset="UTF-8">
+			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>ShopMeex Online Store</title>
 			<link rel="icon" href="images/favicon.png">
 			<link rel="stylesheet" type="text/css" href="css/style.css">
 			<link rel="stylesheet" type="text/css" href="css/productstyle.css">
 			<link rel="stylesheet" type="text/css" href="FontAwesome/css/all.css">
 			<link rel="stylesheet" type="text/css" href="css/reapeatingstyle.css">
 			<link rel="stylesheet" type="text/css" href="css/color/color.css">
-            
-            <link rel="stylesheet" type="text/css" href="FontAwesome/css/themify.css">
-            <link rel="stylesheet" type="text/css" href="css/reapeatingStyle.css">
-            <link rel="stylesheet" type="text/css" href="css/popup.css">
-
-    		<title><?php echo $category['name']; ?> | ShopMeex Online Store</title>
-    			<?php 
+            		<script src="js/jquery-3.4.1.min.js"></script>
+            		<link rel="stylesheet" type="text/css" href="FontAwesome/css/themify.css">
+            		<link rel="stylesheet" type="text/css" href="css/reapeatingStyle.css">
+            		<link rel="stylesheet" type="text/css" href="css/popup.css">
+            		<link rel="stylesheet" type="text/css" href="css/responsive.css">
+            		<style>
+            			@font-face {
+            				font-family : themify;
+            				src : url(fonts/themify/themify.eot);
+            				src : url(fonts/themify/themify.eot?#iefix) format('embedded-opentype'),
+                  			url(fonts/themify/themify.woff) format('woff'),
+                  			url(fonts/themify/themify.ttf) format('truetype');
+				}
+            				</style>
+		
+    					<title>
+						<?php echo $category['name']; ?> | ShopMeex Online Store</title>
+			</head>
+    						<?php 
         // inlude the header 
+	
+	
 
        			 include 'includes/header.php';
 
