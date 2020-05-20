@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
     <link rel="icon" href="images/favicon.png">
-    <link rel="stylesheet" type="text/css" href="FontAwesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="../FontAwesome/css/all.css">
     <script src="js/jquery-3.4.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/adminstyle.css">
-    <link rel="stylesheet" type="text/css" href="FontAwesome/css/themify.css">
+    <link rel="stylesheet" type="text/css" href="../FontAwesome/css/themify.css">
     <link rel="stylesheet" type="text/css" href="css/reapeatingStyle.css">
     <link rel="stylesheet" type="text/css" href="">
     <link rel="stylesheet" type="text/css" href="css/color/color.css">
@@ -222,7 +221,7 @@
             </div>
 		</div>
             
-        <div class="content">         
+        <div class="content">        
             <div class="header flex">
                 <div class="header-container">
                     <ul class="nav-left">
@@ -560,7 +559,7 @@
      								</div>
                             </aside>
                         </div>
-                        <div class="row"> 
+                        <!--<div class="row"> 
                             <div class="header-info">
                                 <div class="container">
                                     <div class="title">
@@ -576,8 +575,286 @@
                             <div class="dashboard_graph">
                                <canvas id="graph1" ></canvas>
                             </div>
+                        </div>-->
+                    </div>
+                    <div class="row3 flex">
+                        <div class="left-col flexdemi">
+                            <div class="container"> 
+                                <div  class="head"> 
+                                    <div class="container flex">
+                                        <div class="left">
+                                            <i class="fa fa-cogs"> </i>
+                                            <span> technical  support</span>
+                                        </div>
+                                        <div class="drop">
+                                            <i class="fa fa-chevron-circle-down">
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content-graph">
+                                    <div class="con con1 fade">
+                                        <div class="head">
+                                            <div class="container">
+                                                <div class="title">
+                                                    <h4> New account since <span>2018</span></h4>
+                                                </div>
+                                                <div class="statis"> 
+                                                    <h1>78</h1>
+                                                    <span>%</span>
+                                                    <p class="inc">+14%</p>
+                                                    <p class="chan">increase</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="graph">
+                                            <canvas id="my-graph-1"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="con con2 fade">
+                                        <div class="head">
+                                            <div class="container">
+                                                <div class="title">
+                                                    <h4> kNew account since <span>2018</span></h4>
+                                                </div>
+                                                <div class="statis"> 
+                                                    <h1>78</h1>
+                                                    <span>%</span>
+                                                    <p class="inc">+14%</p>
+                                                    <p class="chan">increase</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="graph">
+                                            <canvas id="my-graph-2"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="con con3 fade">
+                                        <div class="head">
+                                            <div class="container">
+                                                <div class="title">
+                                                    <h4> hNew account since <span>2018</span></h4>
+                                                </div>
+                                                <div class="statis"> 
+                                                    <h1>78</h1>
+                                                    <span>%</span>
+                                                    <p class="inc">+14%</p>
+                                                    <p class="chan">increase</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="graph">
+                                            <canvas id="my-graph-3"></canvas>
+                                        </div>
+                                    </div>
+                                    
+                                    <button class="plus" onclick="plusSlides(1)">
+                                        <i class="fa fa-angle-right" ></i>
+                                    </button>
+                                    <button class="neg" onclick="plusSlides(-1)">
+                                        <i class="fa fa-angle-left"></i>
+                                    </button>
+                                    <div style="text-align:center">
+                                      <span class="dot " onclick="currentSlide(1)"></span>
+                                      <span class="dot" onclick="currentSlide(2)"></span>
+                                      <span class="dot" onclick="currentSlide(3)"></span>
+                                    </div>
+                                    
+                                </div>
+                                <div class="h5">
+                                    <h5> SALES PROGRESS </h5>
+                                </div>
+                                <div class="botton"> 
+                                    <div class="container">
+                                        <div class="botton-top">
+                                            <div class="descr">
+                                                <div class="order">Total Orders
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="profit flex">
+                                                <div class="order-spec">Last year
+                                                    expenses
+                                                </div>
+                                                <div class="profit">
+                                                    <small>$1896</small>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="stat">
+                                            <div class="pourcent">
+                                                <div class="progress-bar"></div>
+                                            </div>
+                                            <div class="progress-sub-label flex">
+                                                <div class="sub-label-left">YoY Growth</div>
+                                                <div class="sub-label-right">100%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-col left-col flexdemi">
+                            
+                            <div class="container">
+                                <div  class="head"> 
+                                    <div class="container flex">
+                                        <div class="left">
+                                            <i class="fa fa-cogs"> </i>
+                                            <span> technical  support</span>
+                                        </div>
+                                        <div class="drop">
+                                            <i class="fa fa-chevron-circle-down">
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-content">
+                                    <div class="container">
+                                        <div class="event">
+                                            <div class="container">
+                                                <div class="circle"></div> 
+                                                <div class="what">
+                                                    <div class="container">
+                                                        <p> All Hands Meeting</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="event">
+                                            <div class="container">
+                                                <div class="circle"></div> 
+                                                <div class="what">
+                                                    <div class="container">
+                                                        <p> this is the event</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="event">
+                                            <div class="container">
+                                                <div class="circle"></div> 
+                                                <div class="what">
+                                                    <div class="container">
+                                                        <p> this is the event</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="event">
+                                            <div class="container">
+                                                <div class="circle"></div> 
+                                                <div class="what">
+                                                    <div class="container">
+                                                        <p> this is the event</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="event">
+                                            <div class="container">
+                                                <div class="circle"></div> 
+                                                <div class="what">
+                                                    <div class="container">
+                                                        <p> this is the event</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="event">
+                                            <div class="container">
+                                                <div class="circle"></div> 
+                                                <div class="what">
+                                                    <div class="container">
+                                                        <p> this is the event</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="event">
+                                            <div class="container">
+                                                <div class="circle"></div> 
+                                                <div class="what">
+                                                    <div class="container">
+                                                        <p> this is the event</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="event">
+                                            <div class="container">
+                                                <div class="circle"></div> 
+                                                <div class="what">
+                                                    <div class="container">
+                                                        <p> this is the event</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+<div class="event">
+                                            <div class="container">
+                                                <div class="circle"></div> 
+                                                <div class="what">
+                                                    <div class="container">
+                                                        <p> this is the event</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+<div class="event">
+                                            <div class="container">
+                                                <div class="circle"></div> 
+                                                <div class="what">
+                                                    <div class="container">
+                                                        <p> this is the event</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+<div class="event">
+                                            <div class="container">
+                                                <div class="circle"></div> 
+                                                <div class="what">
+                                                    <div class="container">
+                                                        <p> this is the event</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+<div class="event">
+                                            <div class="container">
+                                                <div class="circle"></div> 
+                                                <div class="what">
+                                                    <div class="container">
+                                                        <p> this is the event</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="event">
+                                            <div class="container">
+                                                <div class="circle"></div> 
+                                                <div class="what">
+                                                    <div class="container">
+                                                        <p> this is the event</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bottom">
+                                    <div class="container">
+                                        <button class="all">
+                                            view all message
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    
                     
                 </div>
             </main>

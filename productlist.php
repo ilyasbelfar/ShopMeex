@@ -14,6 +14,7 @@
             <link rel="stylesheet" type="text/css" href="FontAwesome/css/themify.css">
             <link rel="stylesheet" type="text/css" href="css/reapeatingStyle.css">
             <link rel="stylesheet" type="text/css" href="css/popup.css">
+            <link rel="stylesheet" type="text/css" href="css/responsive.css">
             <style>
             @font-face {
             font-family : themify;

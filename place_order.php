@@ -11,7 +11,7 @@
     $subTotal = 0;
     $orderNum = $s = '';
     
-    $stmt = $db->query("SELECT order_id, order_date FROM orders WHERE order_email = '" .$_SESSION['email']."' ORDER BY order_id DESC LIMIT 1");
+    $stmt = $db->query("SELECT order_id, order_date FROM placed_orders WHERE order_email = '" .$_SESSION['email']."' ORDER BY order_id DESC LIMIT 1");
     $results = $stmt->fetch();
     if($results) {
         $orderNum = $results['order_id'];
@@ -298,7 +298,7 @@
                                     <li>Product<span>Total</span></li>
                                     <?php if(isset($_SESSION['id'])) {
                         				try {
-                        					$stmt = $db->prepare("SELECT * FROM orders_items LEFT JOIN products ON products.id=orders_items.product_id LEFT JOIN (SELECT * FROM orders ORDER BY order_id DESC LIMIT 1) orders ON orders.order_id=orders_items.order_id WHERE order_name=:username");
+                        					$stmt = $db->prepare("SELECT * FROM orders_items LEFT JOIN products ON products.id=orders_items.product_id LEFT JOIN (SELECT * FROM placed_orders ORDER BY order_id DESC LIMIT 1) placed_orders ON placed_orders.order_id=orders_items.order_id WHERE order_name=:username");
                         					$stmt->execute(['username'=>$_SESSION['username']]);
                         					foreach($stmt as $row) { ?>
                         					    <li class="cart_item">
