@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2020 at 04:47 PM
+-- Generation Time: May 21, 2020 at 01:17 AM
 -- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.5
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -61,7 +62,15 @@ INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`) VALUES
 (90, 11, 3, 1),
 (91, 11, 2, 1),
 (92, 11, 8, 1),
-(128, 18, 4, 1);
+(145, 6, 7, 1),
+(146, 6, 6, 1),
+(147, 6, 5, 1),
+(148, 6, 36, 1),
+(149, 6, 13, 1),
+(150, 6, 8, 1),
+(151, 6, 1, 1),
+(153, 17, 3, 1),
+(155, 17, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -71,19 +80,20 @@ INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`) VALUES
 
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `slug` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`id`, `name`) VALUES
-(1, 'Digital Goods'),
-(2, 'Clothes'),
-(3, 'Health and Care'),
-(4, 'Home Interior'),
-(5, 'Toys and Games');
+INSERT INTO `category` (`id`, `name`, `slug`) VALUES
+(1, 'Digital Goods', 'Digital-Goods'),
+(2, 'Clothes', 'Clothes'),
+(3, 'Health and Care', 'Health-And-Care'),
+(4, 'Home Interior', 'Home-Interior'),
+(5, 'Toys and Games', 'Toys-And-Games');
 
 -- --------------------------------------------------------
 
@@ -100,28 +110,6 @@ CREATE TABLE `contact` (
   `message` text COLLATE utf8_unicode_ci NOT NULL,
   `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `coupons`
---
-
-CREATE TABLE `coupons` (
-  `id` int(11) NOT NULL,
-  `coupon_code` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `coupon_value` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `coupons`
---
-
-INSERT INTO `coupons` (`id`, `coupon_code`, `coupon_value`) VALUES
-(1, 'C_USB02', 100),
-(2, 'C_LPN45', 200),
-(3, 'C_3DcAM01', 340),
-(4, 'C_wristWear03', 50);
 
 -- --------------------------------------------------------
 
@@ -162,10 +150,7 @@ CREATE TABLE `orders_items` (
 
 INSERT INTO `orders_items` (`order_id`, `product_id`, `quantity`) VALUES
 (1, 1, 1),
-(2, 3, 1),
-(4, 2, 6),
-(5, 2, 6),
-(6, 4, 23);
+(2, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -186,11 +171,7 @@ CREATE TABLE `placed_orders` (
 
 INSERT INTO `placed_orders` (`order_id`, `order_date`, `order_name`, `order_email`) VALUES
 (1, '2020-05-14 21:36:28', 'johnioumr147', 'johnmirou91@gmail.com'),
-(2, '2020-05-14 21:38:36', 'johnioumr147', 'johnmirou91@gmail.com'),
-(3, '2020-05-16 13:12:52', 'ilyaseflba24', 'jascacj@gmail.com'),
-(4, '2020-05-16 13:13:34', 'ilyaseflba24', 'jascacj@gmail.com'),
-(5, '2020-05-16 13:15:22', 'ilyaseflba24', 'jascacj@gmail.com'),
-(6, '2020-05-16 13:28:49', 'ilyasalfbe66', 'ilyasbelfar28@gmail.com');
+(2, '2020-05-14 21:38:36', 'johnioumr147', 'johnmirou91@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -225,20 +206,20 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `weight`, `dimensions`, `price`, `slug`, `colors`, `owner_id`, `model`, `photo`, `photo1`, `photo2`, `date_view`, `counter`, `sold_cmp`, `total_rating`, `quantity`) VALUES
-(1, 1, 'Dell Laptop 1500 Pavilion', 'one of the best product in the world Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, fa', 0.6, '70 x 60', 200, 'large-dell-inspiron-15-5000-15-6', 'Black White', 4, 'dell pavilion 15', 'dell1.jpg', '12.jpg', '12-1.jpg', '2020-05-16', 1, 0, 4, 0),
-(2, 1, 'mouse', 'one of the beset mouse in the world', 0.1, '20 x 30', 400, 'mouse', 'red grey', 4, 'mouse l-120', 'Photo1.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-05-15', 1, 0, 2, 0),
-(3, 1, 'smart watch', 'one of the best product in teh world', 0.1, '12 x 13', 1200, 'smart-watch', 'red', 4, 'watch-120-M', '7.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-05-15', 1, 0, 5, 0),
-(4, 1, 'Wirless Mouse', 'one of the best product in teh world', 0.6, '', 13, 'thered', '', 4, '', 'Photo2.jpg', 'Photo2.jpg', '', '2020-05-12', 1, 0, 4, 0),
+(1, 1, 'Dell Laptop 1500 Pavilion', 'one of the best product in the world Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, fa', 0.6, '70 x 60', 200, 'large-dell-inspiron-15-5000-15-6', 'Black White', 4, 'dell pavilion 15', 'dell1.jpg', '12.jpg', '12-1.jpg', '2020-05-20', 2, 0, 4, 0),
+(2, 1, 'mouse', 'one of the beset mouse in the world', 0.1, '20 x 30', 400, 'mouse', 'red grey', 4, 'mouse l-120', 'Photo1.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-05-17', 8, 0, 2, 0),
+(3, 1, 'smart watch', 'one of the best product in teh world', 0.1, '12 x 13', 1200, 'smart-watch', 'red', 4, 'watch-120-M', '7.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-05-16', 2, 0, 5, 0),
+(4, 1, 'Wirless Mouse', 'one of the best product in teh world', 0.6, '', 13, 'thered', '', 4, '', 'Photo2.jpg', 'Photo2.jpg', '', '2020-05-17', 1, 0, 4, 0),
 (5, 1, 'Logitech mouse', 'one of the best product in teh world', 0.3, '30 x 50', 200, 'the-blue', 'black grey wihire', 4, '1200-3', 'Photo1.jpg', 'Photo2.jpg', 'Photo3.jpg', '2020-05-10', 1, 0, 3, 0),
 (6, 1, 'wireless speakers', 'omeone of the best product in teh world', 0, '', 13, 'watch-1200', '', 4, '', '9.jpg', 'Photo2.jpg', '', '2020-04-19', 3, 0, 0, 0),
 (7, 1, 'Airpods', 'vone of the best product in teh world', 0, '', 13, 'watch-130', '', 4, '', '8.jpg', 'Photo2.jpg', '', '2020-05-12', 2, 0, 5, 0),
-(8, 1, 'watch', 'one of the best product in the world', 0, '', 700, 'bimo-tango', '', 4, '', '10.jpg', 'Photo2.jpg', '', '2020-05-12', 2, 0, 5, 0),
-(9, 1, 'Go Pro Camera', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', '11.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 0, 5, 0),
+(8, 1, 'watch', 'one of the best product in the world', 0, '', 700, 'bimo-tango', '', 4, '', '10.jpg', 'Photo2.jpg', '', '2020-05-17', 2, 0, 4, 0),
+(9, 1, 'Go Pro Camera', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', '11.jpg', 'Photo2.jpg', '', '2020-05-17', 1, 0, 5, 0),
 (10, 1, 'Tablet', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', 'tab.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 0, 5, 0),
 (11, 1, 'iPhone X', 'one of the best product in the world', 0, '', 1200, 'safina-t3am', '', 4, '', 'iphonex.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 0, 5, 0),
 (12, 1, 'VR Box', 'one of the best Top 10 products last year', 0, '', 999.99, 'BEST', 'white', 4, '', 'VR1.jpg', 'Photo2.jpg', '', '2020-05-07', 2, 0, 5, 0),
-(13, 2, 'T-shirt', 'best t shirt in the world', 0, '', 1200, 't-shirt-1', 'black and white ', 13, 'fgfgf', '1.jpg', '1.jpg', '1.jpg', '2020-05-15', 1, 5, 0, 15),
-(14, 2, 'T-shirt alphja', 'lerom mijoifj omjdk op oijoijfd ooijfd md kfkj, ', 0, '', 1254, 'the-bad-luck1', '', 13, '', '1.jpg', '1.jpg', '1.jpg', '0000-00-00', 0, 0, 0, 0),
+(13, 2, 'the dark knight', 'best t shirt in the world', 0, '', 1200, 'the-dark', 'black and white ', 13, 'fgfgf', '1.jpg', '1.jpg', '1.jpg', '2020-05-15', 1, 5, 0, 15),
+(14, 2, 'omega', 'lerom mijoifj omjdk op oijoijfd ooijfd md kfkj, ', 0, '', 1254, 'jocker', '', 13, '', '1.jpg', '1.jpg', '1.jpg', '2020-09-10', 0, 0, 0, 0),
 (15, 2, 'T-shirt 1', 'lerom mijoifj omjdk op oijoijfd ooijfd md kfkj, ', 0, '', 1254, 'the-bad-luck2', '', 13, '', '1.jpg', '1.jpg', '1.jpg', '0000-00-00', 0, 0, 0, 0),
 (16, 2, 'T-shirt 2', 'lerom mijoifj omjdk op oijoijfd ooijfd md kfkj, ', 0, '', 1254, 'the-bad-luck3', '', 13, '', '1.jpg', '1.jpg', '1.jpg', '2020-05-15', 6, 0, 5, 0),
 (17, 2, 'T-shirt alph3', 'lerom mijoifj omjdk op oijoijfd ooijfd md kfkj, ', 0, '', 1254, 'the-bad-luck4', '', 13, '', '1.jpg', '1.jpg', '1.jpg', '0000-00-00', 0, 0, 0, 0),
@@ -246,21 +227,21 @@ INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `weight`, `d
 (19, 2, 'T-shirt alphja5', 'lerom mijoifj omjdk op oijoijfd ooijfd md kfkj, ', 0, '', 1254, 'the-bad-luck6', '', 13, '', '1.jpg', '1.jpg', '1.jpg', '2020-05-15', 2, 0, 0, 0),
 (20, 2, 'T-shirt alphja6', 'lerom mijoifj omjdk op oijoijfd ooijfd md kfkj, ', 0, '', 1254, 'the-bad-luck7', '', 13, '', '1.jpg', '1.jpg', '1.jpg', '2020-05-15', 4, 0, 5, 0),
 (21, 2, 'T-shirt alphja7', 'lerom mijoifj omjdk op oijoijfd ooijfd md kfkj, ', 0, '', 1254, 'the-bad-luck8', '', 13, '', '1.jpg', '1.jpg', '1.jpg', '0000-00-00', 0, 0, 0, 0),
-(22, 2, 'T-shirt alphja8', 'lerom mijoifj omjdk op oijoijfd ooijfd md kfkj, ', 0, '', 1254, 'the-bad-luck9', '', 13, '', '1.jpg', '1.jpg', '1.jpg', '2020-05-15', 1, 0, 0, 0),
+(22, 2, 'alpha', 'lerom mijoifj omjdk op oijoijfd ooijfd md kfkj, ', 0, '', 1254, 'the-bad-luck9', '', 13, '', '1.jpg', '1.jpg', '1.jpg', '2020-07-08', 1, 0, 0, 0),
 (23, 3, 'bag-12', 'the best bag int the ifidj  ld hidlez o', 0, '', 1200, 'bag-for-life', '', 14, '', '4.jpg', '4.jpg', '4.jpg', '0000-00-00', 0, 0, 0, 0),
-(24, 3, 'bag-12', 'the best bag int the ifidj ld hidlez o', 0, '', 1200, 'bag-for-life1', '', 14, '', '4.jpg', '4.jpg', '4.jpg', '0000-00-00', 0, 0, 0, 0),
+(24, 3, 'bag-12', 'the best bag int the ifidj ld hidlez o', 0, '', 1200, 'bag-for-life1', '', 14, '', '4.jpg', '4.jpg', '4.jpg', '2020-05-16', 2, 0, 0, 0),
 (25, 3, 'bag-13', 'the best bag int the ifidj ld hidlez o', 0, '', 1200, 'bag-for-life2', '', 14, '', '4.jpg', '4.jpg', '4.jpg', '2020-05-15', 4, 0, 5, 0),
 (26, 3, 'bag-144', 'the best bag int the ifidj ld hidlez o', 0, '', 1200, 'bag-for-life3', '', 14, '', '4.jpg', '4.jpg', '4.jpg', '0000-00-00', 0, 0, 0, 0),
 (27, 3, 'bag-15', 'the best bag int the ifidj ld hidlez o', 0, '', 1200, 'bag-for-life4', '', 14, '', '4.jpg', '4.jpg', '4.jpg', '0000-00-00', 0, 0, 0, 0),
-(28, 3, 'bag-16', 'the best bag int the ifidj ld hidlez o', 0, '', 1200, 'bag-for-life5', '', 14, '', '4.jpg', '4.jpg', '4.jpg', '2020-05-15', 5, 0, 5, 0),
+(28, 3, 'bag-16', 'the best bag int the ifidj ld hidlez o', 0, '', 1200, 'bag-for-life5', '', 14, '', '4.jpg', '4.jpg', '4.jpg', '2020-05-15', 6, 0, 5, 0),
 (29, 3, 'bag-15', 'the best bag int the ifidj ld hidlez o', 0, '', 1200, 'bag-for-life6', '', 14, '', '4.jpg', '4.jpg', '4.jpg', '2020-05-15', 4, 0, 5, 0),
 (30, 3, 'bag-16', 'the best bag int the ifidj ld hidlez o', 0, '', 1200, 'bag-for-life7', '', 14, '', '4.jpg', '4.jpg', '4.jpg', '2020-05-15', 4, 0, 4, 0),
 (31, 3, 'bag-17', 'the best bag int the ifidj ld hidlez o', 0, '', 1200, 'bag-for-life8', '', 14, '', '4.jpg', '4.jpg', '4.jpg', '2020-05-15', 3, 0, 0, 0),
 (32, 3, 'bag-18', 'the best bag int the ifidj ld hidlez o', 0, '', 1200, 'bag-for-life9', '', 14, '', '4.jpg', '4.jpg', '4.jpg', '2020-05-15', 2, 0, 0, 0),
-(33, 4, 'Chair1', 'good for back oand odj a az joijf \r\nfdjfoi jdjfaoijfj of f', 1120, '10', 412, 'chair-for-life1', 'blue', 15, 'alpha', '6.jpg', '6.jpg', '6.jpg', '0000-00-00', 0, 0, 0, 0),
+(33, 4, 'Chair1', 'good for back oand odj a az joijf \r\nfdjfoi jdjfaoijfj of f', 1120, '10', 412, 'chair-for-life1', 'blue', 15, 'alpha', '6.jpg', '6.jpg', '6.jpg', '2020-05-17', 4, 0, 0, 0),
 (34, 4, 'Chair2', 'good for back oand odj a az joijf \r\nfdjfoi jdjfaoijfj of f', 1120, '10', 412, 'chair-for-life2', 'blue', 15, 'alpha', '6.jpg', '6.jpg', '6.jpg', '0000-00-00', 0, 0, 0, 0),
 (35, 4, 'Chair3', 'good for back oand odj a az joijf \r\nfdjfoi jdjfaoijfj of f', 1120, '10', 412, 'chair-for-life3', 'blue', 15, 'alpha', '6.jpg', '6.jpg', '6.jpg', '0000-00-00', 0, 0, 0, 0),
-(36, 4, 'Chair4', 'good for back oand odj a az joijf \r\nfdjfoi jdjfaoijfj of f', 1120, '10', 412, 'chair-for-life4', 'blue', 15, 'alpha', '6.jpg', '6.jpg', '6.jpg', '0000-00-00', 0, 0, 0, 0),
+(36, 4, 'Chair4', 'good for back oand odj a az joijf \r\nfdjfoi jdjfaoijfj of f', 1120, '10', 412, 'chair-for-life4', 'blue', 15, 'alpha', '6.jpg', '6.jpg', '6.jpg', '2020-05-16', 6, 0, 1, 0),
 (37, 4, 'Chair5', 'good for back oand odj a az joijf \r\nfdjfoi jdjfaoijfj of f', 1120, '10', 412, 'chair-for-life5', 'blue', 15, 'alpha', '6.jpg', '6.jpg', '6.jpg', '0000-00-00', 0, 0, 0, 0),
 (38, 4, 'Chair6', 'good for back oand odj a az joijf \r\nfdjfoi jdjfaoijfj of f', 1120, '10', 412, 'chair-for-life6', 'blue', 15, 'alpha', '6.jpg', '6.jpg', '6.jpg', '2020-05-15', 4, 0, 5, 0),
 (39, 4, 'Chair7', 'good for back oand odj a az joijf \r\nfdjfoi jdjfaoijfj of f', 1120, '10', 412, 'chair-for-life7', 'blue', 15, 'alpha', '6.jpg', '6.jpg', '6.jpg', '2020-05-15', 2, 0, 5, 0),
@@ -274,7 +255,7 @@ INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `weight`, `d
 (47, 5, 'Pikachu6', 'good for kids and for lonelyh kids', 5, '9', 4521, 'pikatchu-for-life5', 'yellow', 16, '', 'pika.jpg', 'pika.jpg', 'pika.jpg', '0000-00-00', 0, 0, 0, 0),
 (48, 5, 'Pikachu87', 'good for kids and for lonelyh kids', 5, '9', 4521, 'pikatchu-for-life6', 'yellow', 16, '', 'pika.jpg', 'pika.jpg', 'pika.jpg', '0000-00-00', 0, 0, 0, 0),
 (49, 5, 'Pikachu8', 'good for kids and for lonelyh kids', 5, '9', 4521, 'pikatchu-for-life7', 'yellow', 16, '', 'pika.jpg', 'pika.jpg', 'pika.jpg', '0000-00-00', 0, 0, 0, 0),
-(50, 5, 'Pikachu9', 'good for kids and for lonelyh kids', 5, '9', 4521, 'pikatchu-for-life8', 'yellow', 16, '', 'pika.jpg', 'pika.jpg', 'pika.jpg', '2020-05-15', 2, 0, 0, 0);
+(50, 5, 'Pikachu9', 'good for kids and for lonelyh kids', 5, '9', 4521, 'pikatchu-for-life8', 'yellow', 16, '', 'pika.jpg', 'pika.jpg', 'pika.jpg', '2020-05-16', 5, 0, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -319,7 +300,10 @@ INSERT INTO `review` (`id`, `product_id`, `user_id`, `rating`, `date`, `comment`
 (106, 28, 6, 5, '2020-05-15', ''),
 (107, 38, 6, 5, '2020-05-15', ''),
 (108, 39, 6, 5, '2020-05-15', ''),
-(109, 42, 6, 5, '2020-05-15', '');
+(109, 42, 6, 5, '2020-05-15', ''),
+(110, 50, 6, 3, '2020-05-16', ''),
+(111, 36, 6, 1, '2020-05-16', ''),
+(112, 8, 17, 4, '2020-05-16', 'good product !');
 
 -- --------------------------------------------------------
 
@@ -381,8 +365,7 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `type`, `firstname`,
 (14, 'health', 'health@health.com', 'oihjfodih', 2, 'health ', 'im', 1, 'usa', '425421', '4.jpg', 'usa', '', '', '', '757', 'health.com', ''),
 (15, 'home', 'home@home.com', 'fdfd', 2, 'Home ', 'for life', 0, 'usa', '456454865', '4.jpg', 'usa', 'usa', 'uysa', 'dfdf', '5345', 'home.com', ''),
 (16, 'toys', 'toys@toys.cp', 'omfgg', 2, 'toys ', 'for life', 0, '', '65464', 'f', '', '', '', '', '', 'toys.com', ''),
-(17, 'ilyaseflba24', 'jascacj@gmail.com', '6c4d5da494a97c739dac2cb1dbff4c2ae1ad3a00', 3, 'ilyas', 'belfar', 2, '897897 jhkjh', '897897987', '', '', '', '', '', '', NULL, ''),
-(18, 'ilyasalfbe66', 'ilyasbelfar28@gmail.com', '8b2e5d9d2061671b5f89d498d14c1440cb66a39b', 3, 'ilyas', 'belfar', 2, '89789 jllkjkl', '90890809890', '', '', '', '', '', '', NULL, '');
+(17, 'heeg125', 'he@gmail.com', '06329409289c57c8d752083daa4fda02f1fabbfc', 3, 'he', 'ge', 2, 'he', '456465', '', '', '', '', '', '', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -408,7 +391,10 @@ INSERT INTO `wishlist` (`id`, `user_id`, `product_id`) VALUES
 (13, 6, 7),
 (14, 6, 8),
 (15, 6, 5),
-(16, 8, 5);
+(16, 8, 5),
+(17, 6, 28),
+(18, 6, 19),
+(19, 17, 8);
 
 --
 -- Indexes for dumped tables
@@ -424,12 +410,6 @@ ALTER TABLE `cart`
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `coupons`
---
-ALTER TABLE `coupons`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -485,19 +465,13 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `coupons`
---
-ALTER TABLE `coupons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -509,7 +483,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `placed_orders`
 --
 ALTER TABLE `placed_orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -521,19 +495,19 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

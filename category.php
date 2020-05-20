@@ -1,35 +1,15 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
-=======
-<?php
-    include "includes/session.php";
-   if (isset($_GET['product'])) {
-    $slug=$_GET['product'];
-    
-    }
-    else {
-        $slug="Digital-Goods";
-    }
-
-
-     //getting product from database
-        $stmt = $db->prepare("SELECT * FROM category where slug = :slug");
-        $stmt->execute(['slug' => $slug]);
-        $category =$stmt->fetch();
-?><!DOCTYPE html>
->>>>>>> 4386db5c01041f8b3d39659b60602fc89c17c79b
-	<html>
-		<head>
-			<meta charset="UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title>ShopMeex Online Store</title>
-			<link rel="icon" href="images/favicon.png">
-			<link rel="stylesheet" type="text/css" href="css/style.css">
-			<link rel="stylesheet" type="text/css" href="css/productstyle.css">
-			<link rel="stylesheet" type="text/css" href="FontAwesome/css/all.css">
-			<link rel="stylesheet" type="text/css" href="css/reapeatingstyle.css">
-			<link rel="stylesheet" type="text/css" href="css/color/color.css">
-<<<<<<< HEAD
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>ShopMeex Online Store</title>
+            <link rel="icon" href="images/favicon.png">
+            <link rel="stylesheet" type="text/css" href="css/style.css">
+            <link rel="stylesheet" type="text/css" href="css/productstyle.css">
+            <link rel="stylesheet" type="text/css" href="FontAwesome/css/all.css">
+            <link rel="stylesheet" type="text/css" href="css/reapeatingstyle.css">
+            <link rel="stylesheet" type="text/css" href="css/color/color.css">
             <script src="js/jquery-3.4.1.min.js"></script>
             <link rel="stylesheet" type="text/css" href="FontAwesome/css/themify.css">
             <link rel="stylesheet" type="text/css" href="css/reapeatingStyle.css">
@@ -43,176 +23,135 @@
                   url(fonts/themify/themify.woff) format('woff'),
                   url(fonts/themify/themify.ttf) format('truetype');
             </style>
-		</head>
-		
-		<body>
-			<!-- Start Loader -->
-			<div class="loader_container">
-				<div class="loader__cart">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" class="cart-loader"><g id="Layer_2" data-name="Layer 2"><path class="cls-1" d="M33.57,232.47S-3.5,131.75,49.65,116.37,142,108.67,135,142.94,97.91,253.45,33.57,232.47Z"></path><line class="cls-2" x1="16.09" y1="145.32" x2="65.94" y2="145.32" data-svg-origin="16.09000015258789 145.32000732421875" transform="matrix(1,0,0,1,0,0)" style="opacity: 1;"></line><line class="cls-2" x1="37.75" y1="177.7" x2="77.6" y2="177.7" data-svg-origin="37.75 177.6999969482422" transform="matrix(1,0,0,1,0,0)" style="opacity: 1;"></line><line class="cls-2" x1="54.87" y1="208.79" x2="84.72" y2="208.79" data-svg-origin="54.869998931884766 208.7899932861328" transform="matrix(1,0,0,1,0,0)" style="opacity: 1;"></line><polyline class="cls-3" points="40 65.9 77.65 65.9 122.32 206.88 221.77 206.88 270.56 107.9 121.71 107.9"></polyline><circle class="cls-3" cx="139.46" cy="251.69" r="18.54"></circle><circle class="cls-3" cx="207" cy="251.69" r="18.54"></circle></g></svg>
-					<div class="loader__circles">
-					<div class="cir" id="cir_one"></div>
-					<div class="cir" id="cir_two"></div>
-					<div class="cir" id="cir_three"></div>
-					</div>
-				</div>
-			</div>
-			<!-- End Loader -->
+        </head>
+        
+        <body>
+            <!-- Start Loader -->
+            <div class="loader_container">
+                <div class="loader__cart">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" class="cart-loader"><g id="Layer_2" data-name="Layer 2"><path class="cls-1" d="M33.57,232.47S-3.5,131.75,49.65,116.37,142,108.67,135,142.94,97.91,253.45,33.57,232.47Z"></path><line class="cls-2" x1="16.09" y1="145.32" x2="65.94" y2="145.32" data-svg-origin="16.09000015258789 145.32000732421875" transform="matrix(1,0,0,1,0,0)" style="opacity: 1;"></line><line class="cls-2" x1="37.75" y1="177.7" x2="77.6" y2="177.7" data-svg-origin="37.75 177.6999969482422" transform="matrix(1,0,0,1,0,0)" style="opacity: 1;"></line><line class="cls-2" x1="54.87" y1="208.79" x2="84.72" y2="208.79" data-svg-origin="54.869998931884766 208.7899932861328" transform="matrix(1,0,0,1,0,0)" style="opacity: 1;"></line><polyline class="cls-3" points="40 65.9 77.65 65.9 122.32 206.88 221.77 206.88 270.56 107.9 121.71 107.9"></polyline><circle class="cls-3" cx="139.46" cy="251.69" r="18.54"></circle><circle class="cls-3" cx="207" cy="251.69" r="18.54"></circle></g></svg>
+                    <div class="loader__circles">
+                    <div class="cir" id="cir_one"></div>
+                    <div class="cir" id="cir_two"></div>
+                    <div class="cir" id="cir_three"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Loader -->
 
-			<!-- Start Header -->
-			<header id="main-header" class="negop">
-				<!-- Start Top Section -->
-				<section class="top-sec">
-					<div class="container">
-						<nav>
-							<ul class="social-media">
-								<li><a href="#"><i class="fab fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fab fa-instagram"></i></a></li>
-								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-							</ul>
-							<ul class="nav-items">
-								<li><a href="#">Help</a></li>
-								<li class="dropdown-menu1">
-									<a href="#">DZD<i class="fas fa-angle-down"></i></a>
-									<ul class="dropdown-list">
-										<li><a href="#">USD</a></li>
-										<li><a href="#">EUR</a></li>
-									</ul>
-									<div class="clearfix"></div>
-								</li>
-								<li class="dropdown-menu2">
-									<a href="#">Français<i class="fa fa-angle-down"></i></a>
-									<ul class="dropdown-list">
-										<li><a href="#">Anglais</a></li>
-										<li><a href="#">Arabe</a></li>
-									</ul>
-								</li>
-							</ul>
-						</nav>
-					</div>
-				</section>
-				<!-- End Top Section -->
-=======
-            		<script src="js/jquery-3.4.1.min.js"></script>
-            		<link rel="stylesheet" type="text/css" href="FontAwesome/css/themify.css">
-            		<link rel="stylesheet" type="text/css" href="css/reapeatingStyle.css">
-            		<link rel="stylesheet" type="text/css" href="css/popup.css">
-            		<link rel="stylesheet" type="text/css" href="css/responsive.css">
-            		<style>
-            			@font-face {
-            				font-family : themify;
-            				src : url(fonts/themify/themify.eot);
-            				src : url(fonts/themify/themify.eot?#iefix) format('embedded-opentype'),
-                  			url(fonts/themify/themify.woff) format('woff'),
-                  			url(fonts/themify/themify.ttf) format('truetype');
-				}
-            				</style>
-		
-    					<title>
-						<?php echo $category['name']; ?> | ShopMeex Online Store</title>
-			</head>
-    						<?php 
-        // inlude the header 
-	
-	
+            <!-- Start Header -->
+            <header id="main-header" class="negop">
+                <!-- Start Top Section -->
+                <section class="top-sec">
+                    <div class="container">
+                        <nav>
+                            <ul class="social-media">
+                                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            </ul>
+                            <ul class="nav-items">
+                                <li><a href="#">Help</a></li>
+                                <li class="dropdown-menu1">
+                                    <a href="#">DZD<i class="fas fa-angle-down"></i></a>
+                                    <ul class="dropdown-list">
+                                        <li><a href="#">USD</a></li>
+                                        <li><a href="#">EUR</a></li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </li>
+                                <li class="dropdown-menu2">
+                                    <a href="#">Français<i class="fa fa-angle-down"></i></a>
+                                    <ul class="dropdown-list">
+                                        <li><a href="#">Anglais</a></li>
+                                        <li><a href="#">Arabe</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </section>
+                <!-- End Top Section -->
 
-       			 include 'includes/header.php';
+                <!-- Start Bottom Section -->
+                <section class="bottom-sec">
+                    <div class="container">
+                        <div class="wrapper">
+                            <div class="logo-container">
+                                <a href="#">
+                                    <img src="images/Logo-header.png" class="logo">
+                                </a>
+                            </div>
 
+                            <div class="search-bar">
+                                <form method="post" action="productlist.php">
+                                    <div class="search-bar-container">
 
-    			?>
+                                        <select class="custom-select" name="category_name">
+                                            <option value="">All types</option>
+                                            <option value="special">Special</option>
+                                            <option value="best">Only best</option>
+                                            <option value="recent">Latest</option>
+                                        </select>
+                                        <input type="search" class="form-control" id="navbar-search-input" placeholder="Search Here..." name="keyword" required="">
+                                        <div class="search-icon-container">
+                                            <button class="search-icon" type="submit" name="submit">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            
 
+                            <div class="user-details">
+                                <div class="user-details-container">
+                                    <a href="#" class="widget-header1">
+                                        <div class="icon">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span class="notify">0</span>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="widget-header1">
+                                        <div class="icon">
+                                            <i class="fa fa-heart"></i>
+                                        </div>
+                                    </a>
 
+                                    <div class="widget-header1 dropdown">
+                                        <div class="icon">
+                                            <i class="fa fa-user"></i>
+                                            <div class="user-text">
+                                                <small class="text-muted">Sign in | Sign Up</small>
+                                                <div>My Account<i class="fa fa-angle-down"></i></div>
+                                            </div>
+                                        </div>
 
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- End Bottom Section -->
 
-
-
-
-
-
-
-
-
->>>>>>> 4386db5c01041f8b3d39659b60602fc89c17c79b
-
-				<!-- Start Bottom Section -->
-				<section class="bottom-sec">
-					<div class="container">
-						<div class="wrapper">
-							<div class="logo-container">
-								<a href="#">
-									<img src="images/Logo-header.png" class="logo">
-								</a>
-							</div>
-
-							<div class="search-bar">
-								<form method="post" action="productlist.php">
-									<div class="search-bar-container">
-
-										<select class="custom-select" name="category_name">
-											<option value="">All types</option>
-											<option value="special">Special</option>
-											<option value="best">Only best</option>
-											<option value="recent">Latest</option>
-										</select>
-										<input type="search" class="form-control" id="navbar-search-input" placeholder="Search Here..." name="keyword" required="">
-										<div class="search-icon-container">
-											<button class="search-icon" type="submit" name="submit">
-												<i class="fa fa-search"></i>
-											</button>
-										</div>
-									</div>
-								</form>
-							</div>
-							
-
-							<div class="user-details">
-								<div class="user-details-container">
-									<a href="#" class="widget-header1">
-										<div class="icon">
-											<i class="fa fa-shopping-cart"></i>
-											<span class="notify">0</span>
-										</div>
-									</a>
-									<a href="#" class="widget-header1">
-										<div class="icon">
-											<i class="fa fa-heart"></i>
-										</div>
-									</a>
-
-									<div class="widget-header1 dropdown">
-										<div class="icon">
-											<i class="fa fa-user"></i>
-											<div class="user-text">
-												<small class="text-muted">Sign in | Sign Up</small>
-												<div>My Account<i class="fa fa-angle-down"></i></div>
-											</div>
-										</div>
-
-									</div>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>
-				</section>
-				<!-- End Bottom Section -->
-
-				<!-- Start Categories Links -->
-				<nav class="categories-list">
-					<div class="container">
-						<ul>
-							<li><a href="#"><strong>Toutes Les Catégories</strong></a></li>
-							<li><a href="#"><strong>Machines</strong></a></li>
-							<li><a href="#"><strong>Electronique</strong></a></li>
-							<li><a href="#"><strong>Electroménagie</strong></a></li>
-							<li><a href="#"><strong>Services & Equipements</strong></a></li>
-							<li><a href="#"><strong>Santé</strong></a></li>
-							<li><a href="#"><strong>Toys & Hobbies</strong></a></li>
-							<li><a href="#"><strong>Home Textiles</strong></a></li>
-						</ul>
-					</div>
-				</nav>
-			</header>
+                <!-- Start Categories Links -->
+                <nav class="categories-list">
+                    <div class="container">
+                        <ul>
+                            <li><a href="#"><strong>Toutes Les Catégories</strong></a></li>
+                            <li><a href="#"><strong>Machines</strong></a></li>
+                            <li><a href="#"><strong>Electronique</strong></a></li>
+                            <li><a href="#"><strong>Electroménagie</strong></a></li>
+                            <li><a href="#"><strong>Services & Equipements</strong></a></li>
+                            <li><a href="#"><strong>Santé</strong></a></li>
+                            <li><a href="#"><strong>Toys & Hobbies</strong></a></li>
+                            <li><a href="#"><strong>Home Textiles</strong></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
             <!-- begin  div separable-->
             <section class="row-separabble marginbottom  negop">
             	<div class="container">
