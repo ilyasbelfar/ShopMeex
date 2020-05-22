@@ -1,0 +1,60 @@
+/* begin for java script */
+.selected{
+    background-color: #c3dddd !important;
+}
+.hide{
+    display: none;
+}
+/*end for java script */
+
+.content main.main-content .main-content .user-content{
+    margin-top: 50px;
+    padding: 15px;
+    margin-left: 20px;
+    border: 1px solid #e1dfdf;
+    background-color: #fff;
+}
+.content main.main-content .main-content .user-content .tit h1{
+    text-transform: capitalize;
+    font-size: 1.4em;
+}   
+.content main.main-content .main-content .user-content .tit{
+     justify-content: space-between;
+    border-bottom: 2px solid #E6E9ED;
+    margin-bottom: 20px;
+    padding: 0 0 10px 0;
+}
+.content main.main-content .main-content .user-content .user-table-head{
+    justify-content: space-around
+}
+.content main.main-content .main-content .user-content .user-table-head .table-length label select {
+    padding: 5px
+}
+.content main.main-content .main-content .user-content .user-table-head .table-search label input {
+    padding: 5px
+}
+.content main.main-content .main-content .user-content table {
+    border-collapse: collapse;
+    margin: auto;
+    margin-top:30px; 
+}
+.content main.main-content .main-content .user-content table thead  tr th{
+    border:1.5px solid #ccc;
+    padding: 10px
+}
+.content main.main-content .main-content .user-content tbody   tr.odd{
+    background-color: #e5e5e5;
+}
+.content main.main-content .main-content .user-content tbody   tr td{
+    border:1px solid #ccc;
+    padding: 10px
+}
+/*for edit*/
+.content main.main-content .main-content >.row {
+    background-color: #fff;
+    margin: 20px;
+    padding: 20px;
+}
+.content main.main-content .main-content >.row .col-50 .title-box{
+    margin: 0 0 10px 0;
+}
