@@ -1,6 +1,6 @@
 <?php include 'includes/session.php'; ?>
 
-<?php include 'includes/conn.php'; ?>
+<?php //include 'includes/conn.php'; ?>
 <body class="">
 <div class="">
 
