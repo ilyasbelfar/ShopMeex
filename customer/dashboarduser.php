@@ -832,7 +832,11 @@
                                         <span>In Stock</span>
                                     </td>
                                     <td class="add-card" data-title="Add To Card">
-                                        <a href="#" title="Add To Cart" class="add-cart">Add To Cart<i class="fa fa-shopping-cart"></i></a>
+                                    <form class="form-inline" id="productForm">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-flat"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                        </div>
+                                        </form>
                                     </td>';
                             }
                             echo '</tbody>
@@ -866,6 +870,7 @@
     <script src="../js/jquery.countdown.min.js"></script>
     <script src="../js/custom.js"></script>
     <script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
+    <?php include '../includes/script.php'; ?>
 </body>
 
 </html>
