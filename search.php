@@ -4,7 +4,7 @@ include 'includes/conn.php';?>
         <?php
               $conn = $pdo->open();
               if (isset($_POST['keyword'])) {
-                    $stmt = $conn->prepare("SELECT COUNT(*) AS numrows FROM products WHERE name LIKE :keyword");
+                    $stmt = $conn->prepare("SELECT COUNT(*) AS numrows FROM products WHERE name LIKE :keyword OR description LIKE :keyword");
                     $stmt->execute(['keyword' => '%'.$_POST['keyword'].'%']);
                     $row = $stmt->fetch();
                     if($row['numrows'] < 1){
