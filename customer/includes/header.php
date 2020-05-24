@@ -104,7 +104,7 @@
                         <div class="user-details">
                             <div class="user-details-container">
                                 <span class="card-container">
-                                    <a href="cart.php" class="widget-header1" id="icone-carte">
+                                    <a href="../cart.php" class="widget-header1" id="icone-carte">
                                     <div class="icon">
                                         <div class="cart-icon-container">
                                             <svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 251.6" id="cart-icon">
@@ -143,7 +143,7 @@
                                                         <span>$<span class="amount">0</span></span>.00
                                                     </p>
                                                     <p class="sub-buttons">
-                                                        <a href="cart.php" class="forward-cart">View cart</a>
+                                                        <a href="../cart.php" class="forward-cart">View cart</a>
                                                         <a href="checkout.html" class="forward-checkout">Checkout</a>
                                                     </p>
                                                 </div>

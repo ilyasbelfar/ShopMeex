@@ -802,7 +802,7 @@
                                     <th>NAME</th>
                                     <th class="text-center">UNIT PRICE</th>
                                     <th class="text-center">STOCK STATUS</th>
-                                    <th class="text-center"></th>
+                                    <th class="text-center">ADD TO CART</th>
                                 </tr>
                             </thead>
                             <tbody>';
@@ -832,11 +832,16 @@
                                         <span>In Stock</span>
                                     </td>
                                     <td class="add-card" data-title="Add To Card">
-                                    <form class="form-inline" id="productForm">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-lg btn-flat"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-                                        </div>
-                                        </form>
+
+
+                                    <a href="#" rel="'.$row['product_id'].'" class="add_to_c" title="Add To Cart"><i class="fa fa-shopping-cart" ></i></a>
+
+
+                                    
+
+
+
+
                                     </td>';
                             }
                             echo '</tbody>
@@ -870,7 +875,7 @@
     <script src="../js/jquery.countdown.min.js"></script>
     <script src="../js/custom.js"></script>
     <script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
-    <?php include '../includes/script.php'; ?>
+    <?php include 'includes/script.php'; ?>
 </body>
 
 </html>
