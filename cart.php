@@ -159,7 +159,7 @@
 			                            $stmt = $db->prepare("SELECT *, cart.quantity AS cq , cart.id As cartid FROM cart LEFT JOIN products ON products.id=cart.product_id	 WHERE user_id=:user_id");
 			                            $stmt->execute(['user_id'=>$user['id']]);
 			                            foreach($stmt as $row) { ?>
-                                <tr>
+                                <tr >
                                     <td class="image" data-title="Product Picture"><img src="images/items/<?php echo $row['photo'];?>" alt="Product's Picture"></td>
                                     <td class="product-des" data-title="Description">
                                         <p class="product-name"><a href="product.php?product=<?php echo $row['slug'];?>"><?php echo $row['name'];?></a></p>
@@ -186,7 +186,7 @@
                                         class="delete_cart" rel="<?php echo $row['cartid'];  ?>"
                                         href="#"
 
-                                     id="remove-product"><i class="ti-trash remove-icon"></i></a>
+                                     id="remove-product"  ><i class="ti-trash remove-icon"></i></a>
                                     </td>
                                     
                                 </tr>
@@ -340,7 +340,15 @@
 
 
     <?php include 'includes/script.php'; ?>
-    
+  <script >
+      $(document).ready(function(){
+        $('.delete_cart').click(function(e) { 
+            e.preventDefault();
+           $(this).closest("tr").hide();
+        
+   });
+}); // this to remove product statically from the page ! sohaib
+</script>  
     
 
     

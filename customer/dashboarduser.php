@@ -808,13 +808,18 @@
                             <tbody>';
                                 
     
-                                    $stmt = $db->prepare("SELECT * FROM wishlist LEFT JOIN products ON products.id=wishlist.product_id  WHERE user_id=:user_id");
+                                    $stmt = $db->prepare("SELECT * , wishlist.id AS wishid FROM  wishlist LEFT JOIN products ON products.id=wishlist.product_id  WHERE user_id=:user_id");
                                         $stmt->execute(['user_id'=>$customer_id]);
                                         foreach($stmt as $row) {
                                     
 
-                                echo '<tr>
-                                    <td class="action" data-title="Remove"><a href="#" id="remove-product"><i class="ti-trash remove-icon"></i></a></td>
+                                echo '<tr >
+
+
+                                    <td class="action" data-title="Remove"><a href="#" id="remove-product" rel="'.$row['product_id'].'" class="wishlist_delete"   ><i class="ti-trash remove-icon"></i></a></td>
+
+
+
                                     <td class="image" data-title="No"><img src="../images/items/';
                                     echo $row['photo'];
                                     echo ' "alt="#"></td>
@@ -879,3 +884,30 @@
 </body>
 
 </html>
+<script >
+      $(document).ready(function(){
+        $('.wishlist_delete').click(function(e) { 
+            e.preventDefault();
+           $(this).closest("tr").hide();
+        
+   });
+});
+
+ $(document).ready(function(){
+            $('a.wishlist_delete').click(function() { 
+             var id = $(this).attr('rel');
+             $.ajax({
+             type: 'POST',
+             url: 'wishlist_delete.php',
+             data: {id:id},
+                dataType: 'json',
+                success: function(response){
+                
+            }
+        });
+
+               
+         });
+        });
+
+</script>
