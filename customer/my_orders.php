@@ -136,7 +136,7 @@
     
                                     
                                 echo '<tr>
-                                    <td class="action" data-title="Remove"><a href="#" id="remove-product"><i class="ti-trash remove-icon"></i></a></td>
+                                    <td class="action" data-title="Remove"><a href="#" id="remove-product" rel="'.$row['product_id'].'" class="order_delete"   ><i class="ti-trash remove-icon"></i></a></td>
                                     <td class="image" data-title="No"><img src="../images/items/';
                                     echo $row['photo'];
                                     echo ' "alt="#"></td>
@@ -195,7 +195,7 @@
     
                                     
                                 echo '<tr>
-                                    <td class="action" data-title="Remove"><a href="#" id="remove-product"><i class="ti-trash remove-icon"></i></a></td>
+                                    <td class="action" data-title="Remove"><a href="#" id="remove-product" rel="'.$row['product_id'].'" class="cart_delete"   ><i class="ti-trash remove-icon"></i></a></td>
                                     <td class="image" data-title="No"><img src="../images/items/';
                                     echo $row['photo'];
                                     echo ' "alt="#"></td>
@@ -649,13 +649,18 @@
                             <tbody>';
                                 
     
-                                    $stmt = $db->prepare("SELECT * FROM wishlist LEFT JOIN products ON products.id=wishlist.product_id  WHERE user_id=:user_id");
+                                    $stmt = $db->prepare("SELECT * , wishlist.id AS wishid FROM  wishlist LEFT JOIN products ON products.id=wishlist.product_id  WHERE user_id=:user_id");
                                         $stmt->execute(['user_id'=>$customer_id]);
                                         foreach($stmt as $row) {
                                     
 
-                                echo '<tr>
-                                    <td class="action" data-title="Remove"><a href="#" id="remove-product"><i class="ti-trash remove-icon"></i></a></td>
+                                echo '<tr >
+
+
+                                    <td class="action" data-title="Remove"><a href="#" id="remove-product" rel="'.$row['product_id'].'" class="wishlist_delete"   ><i class="ti-trash remove-icon"></i></a></td>
+
+
+
                                     <td class="image" data-title="No"><img src="../images/items/';
                                     echo $row['photo'];
                                     echo ' "alt="#"></td>
@@ -669,11 +674,20 @@
                                     echo $row['price']; 
                                     echo '<span class="unit-price"></span></span>
                                     </td>
-                                     <td class="stock-status" data-title="Status">
+                                    <td class="stock-status" data-title="Status">
                                         <span>In Stock</span>
                                     </td>
                                     <td class="add-card" data-title="Add To Card">
-                                        <a href="#" title="Add To Cart" class="add-cart">Add To Cart<i class="fa fa-shopping-cart"></i></a>
+
+
+                                    <a href="#" rel="'.$row['product_id'].'" class="add_to_c" title="Add To Cart"><i class="fa fa-shopping-cart" ></i></a>
+
+
+                                    
+
+
+
+
                                     </td>';
                             }
                             echo '</tbody>
@@ -707,9 +721,88 @@
     <script src="../js/jquery.countdown.min.js"></script>
     <script src="../js/custom.js"></script>
     <script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
+<?php include 'includes/script.php'; ?>
 </body>
 
 </html>
+<script >
+
+    // WISHLIST
+
+      $(document).ready(function(){
+        $('.wishlist_delete').click(function(e) { 
+            e.preventDefault();
+           $(this).closest("tr").hide();
+        
+   });
+});
+
+ $(document).ready(function(){
+            $('a.wishlist_delete').click(function() { 
+             var id = $(this).attr('rel');
+             $.ajax({
+             type: 'POST',
+             url: 'wishlist_delete.php',
+             data: {id:id},
+                dataType: 'json',
+                success: function(response){
+                
+            }
+        });       
+         });
+        });
+
+ // ORDERS
+
+ $(document).ready(function(){
+        $('.order_delete').click(function(e) { 
+            e.preventDefault();
+           $(this).closest("tr").hide();
+        
+   });
+});
+
+ $(document).ready(function(){
+            $('a.order_delete').click(function() { 
+             var id = $(this).attr('rel');
+             $.ajax({
+             type: 'POST',
+             url: 'order_delete.php',
+             data: {id:id},
+                dataType: 'json',
+                success: function(response){
+                
+            }
+        });
+         });
+        });
+
+ //CART
+  $(document).ready(function(){
+        $('.cart_delete').click(function(e) { 
+            e.preventDefault();
+           $(this).closest("tr").hide();
+        
+   });
+});
+
+ $(document).ready(function(){
+            $('a.cart_delete').click(function() { 
+             var id = $(this).attr('rel');
+             $.ajax({
+             type: 'POST',
+             url: 'cart_delete.php',
+             data: {id:id},
+                dataType: 'json',
+                success: function(response){
+                
+            }
+        });
+
+               
+         });
+        });
+</script>
 
 
  
