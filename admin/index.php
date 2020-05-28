@@ -5,7 +5,7 @@ if (!isset($_SESSION['admin_id'])) {
   header("location:login.php");
 }
 
-include "./templates/table.php"; 
+include "./table.php"; 
 
 ?>
  
