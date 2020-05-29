@@ -393,14 +393,9 @@ include "./table.php";
               
             </tr>
           </thead>
-          <tbody id="admin_list">
-            
-          </tbody>
-        </table>
-      </div>
-    </main>
-  </div>
-</div>
+         
+       
+
 <?php 
 
 
@@ -452,6 +447,10 @@ unset($stmt);
 unset($pdo);
 }
 ?> 
-	
+	 </table>
+      </div>
+    </main>
+  </div>
+</div>
 </body>
 </html>
