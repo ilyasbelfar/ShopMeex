@@ -1,6 +1,9 @@
 <?php
+
     include 'includes/session.php';
+
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+
         $getUser = $db->prepare("SELECT * FROM users WHERE email = ?");
         $getUser->execute(array($_SESSION["email"]));
         $info = $getUser->fetch();
@@ -14,185 +17,38 @@
         $infoo = $getcart->fetch();
         if (!empty($infoo))
             $b=true;
-         else $b=false;
+        else 
+            $b=false;
 
-         // ORDERS
+        // ORDERS
 
-         $getorders = $db->prepare("SELECT * FROM orders WHERE user_id = ?");
+        $getorders = $db->prepare("SELECT * FROM orders WHERE user_id = ?");
         $getorders->execute(array($customer_id));
         $infoo = $getorders->fetch();
         if (!empty($infoo))
             $c=true;
-         else $c=false;
+         else 
+            $c=false;
 
-          //Wishlist
+        //Wishlist
 
-         $getwish = $db->prepare("SELECT * FROM wishlist WHERE user_id = ?");
+        $getwish = $db->prepare("SELECT * FROM wishlist WHERE user_id = ?");
         $getwish->execute(array($customer_id));
         $infoo = $getwish->fetch();
         if (!empty($infoo))
             $a=true;
-         else $a=false;
+         else 
+            $a=false;
          
          
-         }
+    }
 
     else
         header('location:login.php');
 
 
    
-    $emailInsErr=$userErr=$msg=$msgerr="";
-    function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-        }
-       
-
-     
-
-    if ($_SERVER['REQUEST_METHOD']=='POST') {
-        if (isset($_POST['fname']))
-            $fname=$_POST['fname'];
-        else
-            $fname=$info['firstname'];
-            
-        if (isset($_POST['lname']))
-            $lname=$_POST['lname'];
-        else
-            $lname=$info['lastname'];
-            
-        if (isset($_POST['email'])&&($_POST['email']!=$info['email'])){
-            $email=$_POST['email'];
-            $stmtt=$db->prepare('SELECT email from users where email=?');
-            $stmtt->execute(array($email));
-            $count=$stmtt->rowCount();
-            if ($count>0){  
-                $emailInsErr="Email Already Taken";
-                echo "<script>alert('Email Already Taken.');</script>";
-                unset($stmt);
-            }
-            
-            else 
-                $_SESSION["email"] = $email;
-        }
-        else
-            $email=$info['email'];
-            
-        if (isset($_POST['username'])&&($_POST['username']!=$info['username'])){
-            $userr=$_POST['username'];
-            $st=$db->prepare('SELECT username from users where username=?');
-            $st->execute(array($userr));
-            $count=$st->rowCount();
-            if ($count>0){  
-                $userErr="Username Already Taken";
-                echo "<script>alert('Username Already Taken.');</script>";
-                unset($st);
-            }
-            
-            else 
-                $_SESSION["username"] = $userr;
-        }
-        else
-            $userr=$info['username'];
-            
-        if (isset($_POST['company_name']))
-            $contact=$_POST['company_name'];
-            else
-            $contact=$info['contact_info'];
-    
-        if (isset($_POST['country_name'])&&($_POST['country_name']!='Please select ...'))
-            $country=$_POST['country_name'];
-            else
-            $country=$info['country'];
-    
-        if (isset($_POST['state-province'])&&($_POST['state-province']!='Please select ...'))
-            $state=$_POST['state-province'];
-            else
-            $state=$info['state'];
-
-        if (isset($_POST['address-1']))
-            $address1=$_POST['address-1'];
-            else
-            $address1=$info['address'];
-            
-        if (isset($_POST['address-2']))
-            $address2=$_POST['address-2'];
-            else
-            $address2=$info['address2'];
-            
-        if (isset($_POST['town']))
-            $city=$_POST['town'];
-            else
-            $city=$info['city'];
-        
-        if (isset($_POST['zip-code']))
-            $postal=$_POST['zip-code'];
-            else
-            $postal=$info['postal'];
-
-        //Password
-        if (!empty($_POST['password_current'])){
-
-            $password = $info["password"];
-            $pass=$_POST['password_current'];
-            $salt="^%r8yuyg";//create our salt; salt is special String added to password // way of encrption on database;
-            $pass = sha1(filter_var($pass.$salt, FILTER_SANITIZE_STRING));// sha1 function to transform the password into long String; known as hashing method;
-            if($pass==$password){
-                
-                if(empty($_POST['password_1']) OR empty($_POST['password_2'])){
-                    $msg="Please fill all the fields";
-                    echo "<script>alert('Please fill all the fields.');</script>";
-                    $err=true;
-                }
-                
-                else if($_POST['password_1']==$_POST['password_2']) {
-                     $pass=$_POST['password_1'];
-                     $salt="^%r8yuyg";
-                     $pass = sha1(filter_var($pass.$salt, FILTER_SANITIZE_STRING));
-                     $stmt=$db->prepare('UPDATE users set password=? where email=?');
-                     if ($stmt->execute(array($pass,$emailid)))
-                      echo "<script>alert('Password updated success.');</script>";
-                        
-                     
-
-                } 
-                 else{
-                    $msg='The two Passwords did not match';
-                    echo "<script>alert('The two Passwords did not match.');</script>";
-                $err=true;
-            }
-
-
-
-            }
-            else {
-                 
-                $msg='Current password incorrect';
-                echo "<script>alert('Current password incorrect.');</script>";
-            $err=true;
-        }
-
-
-        }   
-
-        if (empty($emailInsErr)&&empty($userErr)&&empty($err)){
-
-        $stmt=$db->prepare('UPDATE users set firstname=?,lastname=?,email=?,username=?,contact_info=?,country=?,state=?,address=?,address2=?,city=?,postal=? where email=?');
-        $stmt->execute(array($fname,$lname,$email,$userr,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
-
-        if ($stmt) {
-            
-            echo "<script>alert('User Has Been Updated successfully and login again')</script>";
-
-            echo "<script>window.open('dashboarduser.php?user=$userr','_self')</script>";
-        }
-         else 
-             header("location: ../404.php");
-        }
- }
+   
 
 ?>
 

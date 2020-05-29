@@ -14,25 +14,28 @@
         $infoo = $getcart->fetch();
         if (!empty($infoo))
             $b=true;
-         else $b=false;
+         else 
+            $b=false;
 
-         // ORDERS
+        // ORDERS
 
-         $getorders = $db->prepare("SELECT * FROM orders WHERE user_id = ?");
+        $getorders = $db->prepare("SELECT * FROM orders WHERE user_id = ?");
         $getorders->execute(array($customer_id));
         $infoo = $getorders->fetch();
         if (!empty($infoo))
             $c=true;
-         else $c=false;
+        else 
+            $c=false;
          
-          //Wishlist
+        //Wishlist
 
-         $getwish = $db->prepare("SELECT * FROM wishlist WHERE user_id = ?");
+        $getwish = $db->prepare("SELECT * FROM wishlist WHERE user_id = ?");
         $getwish->execute(array($customer_id));
         $infoo = $getwish->fetch();
         if (!empty($infoo))
             $a=true;
-         else $a=false;
+        else 
+            $a=false;
          
          }
 
@@ -47,7 +50,7 @@
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return $data;
-        }
+    }
        
 
      
@@ -99,37 +102,37 @@
             
         if (isset($_POST['company_name']))
             $contact=$_POST['company_name'];
-            else
+        else
             $contact=$info['contact_info'];
     
         if (isset($_POST['country_name'])&&($_POST['country_name']!='Please select ...'))
             $country=$_POST['country_name'];
-            else
+        else
             $country=$info['country'];
     
         if (isset($_POST['state-province'])&&($_POST['state-province']!='Please select ...'))
             $state=$_POST['state-province'];
-            else
+        else
             $state=$info['state'];
 
         if (isset($_POST['address-1']))
             $address1=$_POST['address-1'];
-            else
+        else
             $address1=$info['address'];
             
         if (isset($_POST['address-2']))
             $address2=$_POST['address-2'];
-            else
+        else
             $address2=$info['address2'];
             
         if (isset($_POST['town']))
             $city=$_POST['town'];
-            else
+        else
             $city=$info['city'];
         
         if (isset($_POST['zip-code']))
             $postal=$_POST['zip-code'];
-            else
+        else
             $postal=$info['postal'];
 
         //Password
@@ -153,16 +156,16 @@
                      $pass = sha1(filter_var($pass.$salt, FILTER_SANITIZE_STRING));
                      $stmt=$db->prepare('UPDATE users set password=? where email=?');
                      if ($stmt->execute(array($pass,$emailid)))
-                      echo "<script>alert('Password updated success.');</script>";
+                        echo "<script>alert('Password updated success.');</script>";
                         
                      
 
                 } 
-                 else{
+                else{
                     $msg='The two Passwords did not match';
                     echo "<script>alert('The two Passwords did not match.');</script>";
-                $err=true;
-            }
+                    $err=true;
+                }
 
 
 
@@ -171,8 +174,8 @@
                  
                 $msg='Current password incorrect';
                 echo "<script>alert('Current password incorrect.');</script>";
-            $err=true;
-        }
+                $err=true;
+            }
 
 
         }   
@@ -183,13 +186,11 @@
         $stmt->execute(array($fname,$lname,$email,$userr,$contact,$country,$state,$address1,$address2,$city,$postal,$emailid));
 
         if ($stmt) {
-            
             echo "<script>alert('User Has Been Updated successfully')</script>";
-
             echo "<script>window.open('dashboarduser.php?user=$userr','_self')</script>";
         }
-         else 
-             header("location: ../404.php");
+        else 
+            header("location: ../404.php");
         }
  }
 

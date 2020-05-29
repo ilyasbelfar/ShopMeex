@@ -14,28 +14,31 @@
         $infoo = $getcart->fetch();
         if (!empty($infoo))
             $b=true;
-         else $b=false;
+        else 
+            $b=false;
 
-         // ORDERS
+        // ORDERS
 
-         $getorders = $db->prepare("SELECT * FROM orders WHERE user_id = ?");
+        $getorders = $db->prepare("SELECT * FROM orders WHERE user_id = ?");
         $getorders->execute(array($customer_id));
         $infoo = $getorders->fetch();
         if (!empty($infoo))
             $c=true;
-         else $c=false;
+        else 
+            $c=false;
 
-          //Wishlist
+        //Wishlist
 
-         $getwish = $db->prepare("SELECT * FROM wishlist WHERE user_id = ?");
+        $getwish = $db->prepare("SELECT * FROM wishlist WHERE user_id = ?");
         $getwish->execute(array($customer_id));
         $infoo = $getwish->fetch();
         if (!empty($infoo))
             $a=true;
-         else $a=false;
+        else 
+            $a=false;
          
          
-         }
+    }
 
     else
         header('location:login.php');
