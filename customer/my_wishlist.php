@@ -1,5 +1,6 @@
 <?php
     include 'includes/session.php';
+
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
         $getUser = $db->prepare("SELECT * FROM users WHERE email = ?");
         $getUser->execute(array($_SESSION["email"]));
@@ -14,25 +15,28 @@
         $infoo = $getcart->fetch();
         if (!empty($infoo))
             $b=true;
-         else $b=false;
+        else 
+            $b=false;
 
-         // ORDERS
+        // ORDERS
 
-         $getorders = $db->prepare("SELECT * FROM orders WHERE user_id = ?");
+        $getorders = $db->prepare("SELECT * FROM orders WHERE user_id = ?");
         $getorders->execute(array($customer_id));
         $infoo = $getorders->fetch();
         if (!empty($infoo))
             $c=true;
-         else $c=false;
+        else 
+            $c=false;
 
-         //Wishlist
+        //Wishlist
 
-         $getwish = $db->prepare("SELECT * FROM wishlist WHERE user_id = ?");
+        $getwish = $db->prepare("SELECT * FROM wishlist WHERE user_id = ?");
         $getwish->execute(array($customer_id));
         $infoo = $getwish->fetch();
         if (!empty($infoo))
             $a=true;
-         else $a=false;
+        else 
+            $a=false;
          
          }
 

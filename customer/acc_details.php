@@ -1,5 +1,6 @@
 <?php
     include 'includes/session.php';
+    
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
         $getUser = $db->prepare("SELECT * FROM users WHERE email = ?");
         $getUser->execute(array($_SESSION["email"]));
