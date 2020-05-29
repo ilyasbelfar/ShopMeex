@@ -25,6 +25,7 @@ include "./table.php";
     <link rel="stylesheet" type="text/css" href="css/color/color.css">
     <script type="text/javascript" src="js/dist/Chart.js"></script>
     <script src="js/jquery-3.4.1.min.js"></script>
+	
      <style>
     @font-face {
     font-family : themify;
@@ -32,10 +33,14 @@ include "./table.php";
     src : url(fonts/themify/themify.eot?#iefix) format('embedded-opentype'),
           url(fonts/themify/themify.woff) format('woff'),
           url(fonts/themify/themify.ttf) format('truetype');
+	}
+	.body{
+		padding: 300px;
+	}
     </style>
-</head>
+
    
-<body>
+
 <!--
 	<script type="text/javascript">
 		window.addEventListener('load', () => {
@@ -46,6 +51,8 @@ include "./table.php";
 		});
 	</script>
 -->
+</head>
+<body>
     <div>
 		<div class="sidebar">
 			<div class="sidebar-container"> .
@@ -382,8 +389,8 @@ include "./table.php";
               <th>#</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Status</th>
-              <th>Action</th>
+              <th>Password</th>
+              
             </tr>
           </thead>
           <tbody id="admin_list">
@@ -394,5 +401,57 @@ include "./table.php";
     </main>
   </div>
 </div>
-<script type="text/javascript" src="./js/admin.js"></script>
-                       
+<?php 
+
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+
+try {
+  $conn = new PDO("mysql:host=$servername;dbname=shopmeextest", $username, $password);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  echo "Connected ";
+} catch(PDOException $e) {
+  echo "Connection failed: " . $e->getMessage();
+}
+
+
+
+$r = "SELECT id, name, email, password from admin";
+if($stmt = $conn->prepare($r)){
+$stmt->bindParam(":login", $param_login, PDO::PARAM_STR);
+            
+// Set parameters
+
+
+
+// Attempt to execute the prepared statement
+
+$stmt->execute();
+	
+	// Check if email exists, if yes then verify password
+	
+	if($stmt->rowCount() > 0){
+  while($row = $stmt->fetch()){
+    echo"<tr>";
+    echo"<td>" . $row['id'] ."</td>";
+    echo"<td>" . $row['name'] ."</td>";
+    echo"<td>" . $row['email'] ."</td>";
+    echo"<td>" . $row['password'] ."</td>"."<br>";
+  }
+  echo "</table>";
+}
+else {
+  echo "no result";
+}
+$conn = null;
+unset($stmt);
+
+unset($pdo);
+}
+?> 
+	
+</body>
+</html>
