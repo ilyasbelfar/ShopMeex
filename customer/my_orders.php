@@ -145,22 +145,15 @@
                                     
                                 echo '<tr>
                                     <td class="action" data-title="Remove"><a href="#" id="remove-product" rel="'.$row['product_id'].'" class="order_delete"   ><i class="ti-trash remove-icon"></i></a></td>
-                                    <td class="image" data-title="No"><img src="../images/items/';
-                                    echo $row['photo'];
-                                    echo ' "alt="#"></td>
+                                    <td class="image" data-title="No"><img src="../images/items/'.$row['photo'].' "alt="#"></td>
                                     <td class="product-des" data-title="Description">
-                                        <p class="product-name"><a href="../product.php?product=';echo $row['slug'];
-                                        echo '">';
-                                        echo $row['name'];echo '</a></p>
-                                        <p class="product-des">';echo $row['description'];echo '</p>
+                                        <p class="product-name"><a href="../product.php?product='.$row['slug'].'">'. $row['name'].'</a></p>
+                                        <p class="product-des">'. $row['description'].'</p>
                                     </td>
-                                    <td class="prix" data-title="Price"><span>$';
-                                    echo $row['price']; 
-                                    echo '<span class="unit-price"></span></span>
+                                    <td class="prix" data-title="Price"><span>$'. $row['price'].'<span class="unit-price"></span></span>
                                     </td>
                                     <td class="prix" data-title="Quantity">
-                                        <span>'; echo $row['oq'];;
-                                        echo '</span>
+                                        <span>'.$row['oq'].'</span>
                                     </td>
                                     <td class="prix" data-title="Status">
                                         <span>PAID</span>
@@ -204,22 +197,15 @@
                                     
                                 echo '<tr>
                                     <td class="action" data-title="Remove"><a href="#" id="remove-product" rel="'.$row['product_id'].'" class="cart_delete"   ><i class="ti-trash remove-icon"></i></a></td>
-                                    <td class="image" data-title="No"><img src="../images/items/';
-                                    echo $row['photo'];
-                                    echo ' "alt="#"></td>
+                                    <td class="image" data-title="No"><img src="../images/items/'.$row['photo'].' "alt="#"></td>
                                     <td class="product-des" data-title="Description">
-                                        <p class="product-name"><a href="../product.php?product=';echo $row['slug'];
-                                        echo '">';
-                                        echo $row['name'];echo '</a></p>
-                                        <p class="product-des">';echo $row['description'];echo '</p>
+                                        <p class="product-name"><a href="../product.php?product='. $row['slug'].'">'. $row['name'].'</a></p>
+                                        <p class="product-des">'.$row['description'].'</p>
                                     </td>
-                                    <td class="prix" data-title="Price"><span>$';
-                                    echo $row['price']; 
-                                    echo '<span class="unit-price"></span></span>
+                                    <td class="prix" data-title="Price"><span>$'. $row['price'].'<span class="unit-price"></span></span>
                                     </td>
                                     <td class="prix" data-title="Quantity">
-                                        <span>'; echo $row['cq'];;
-                                        echo '</span>
+                                        <span>'.$row['cq'].'</span>
                                     </td>';
                             }
                             echo '</tbody>
@@ -669,18 +655,12 @@
 
 
 
-                                    <td class="image" data-title="No"><img src="../images/items/';
-                                    echo $row['photo'];
-                                    echo ' "alt="#"></td>
+                                    <td class="image" data-title="No"><img src="../images/items/'.$row['photo']. ' "alt="#"></td>
                                     <td class="product-des" data-title="Description">
-                                        <p class="product-name"><a href="../product.php?product=';echo $row['slug'];
-                                        echo '">';
-                                        echo $row['name'];echo '</a></p>
-                                        <p class="product-des">';echo $row['description'];echo '</p>
+                                        <p class="product-name"><a href="../product.php?product='.$row['slug'].'">'. $row['name'].'</a></p>
+                                        <p class="product-des">'.$row['description']. '</p>
                                     </td>
-                                    <td class="prix" data-title="Price"><span>$';
-                                    echo $row['price']; 
-                                    echo '<span class="unit-price"></span></span>
+                                    <td class="prix" data-title="Price"><span>$'.$row['price']. '<span class="unit-price"></span></span>
                                     </td>
                                     <td class="stock-status" data-title="Status">
                                         <span>In Stock</span>
