@@ -17,11 +17,13 @@
 
 
 	if(isset($_SESSION['id'])){
-		$stmt = $db->prepare("SELECT *, COUNT(*) AS numrows FROM cart WHERE user_id=:user_id AND product_id=:product_id");
+
+		$stmt = $db->prepare("SELECT *, COUNT(*) AS numrows , cart.quantity AS cq FROM cart WHERE user_id=:user_id AND product_id=:product_id");
 		$stmt->execute(['user_id'=>$user['id'], 'product_id'=>$id]);
 		$row = $stmt->fetch();
 		if($row['numrows'] < 1){
 			try{
+				
 				$stmt = $db->prepare("INSERT INTO cart (user_id, product_id, quantity) VALUES (:user_id, :product_id, :quantity)");
 				$stmt->execute(['user_id'=>$user['id'], 'product_id'=>$id, 'quantity'=>$quantity]);
 				$output['message'] = 'Item added to cart';
@@ -31,6 +33,25 @@
 				$output['error'] = true;
 				$output['message'] = $e->getMessage();
 			}
+		}
+
+		elseif ($row['numrows']==1 && $row['cq']!=$quantity) {
+
+			try{
+				
+				$stmt = $db->prepare("UPDATE cart SET quantity=:quantity WHERE user_id=:user_id AND product_id=:product_id ");
+				$stmt->execute(['user_id'=>$user['id'], 'product_id'=>$id, 'quantity'=>$quantity]);
+				
+				$output['message'] = 'quanity have been updated';
+				
+			}
+			catch(PDOException $e){
+				$output['error'] = true;
+				$output['message'] = $e->getMessage();
+			}
+
+				
+			
 		}
 		else{
 			$output['error'] = true;
@@ -50,7 +71,7 @@
 
 		if(in_array($id, $exist)){
 			$output['error'] = true;
-			$output['message'] = 'Product already in cart';
+			$output['message'] = 'Product already in cart [to update quanity you have to singin]';
 		}
 		else{
 			$data['productid'] = $id;
