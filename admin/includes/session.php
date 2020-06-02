@@ -1,9 +1,9 @@
 <?php
-	include '../includes/conn.php';
+	include 'connn.php';
 	session_start();
 
 	if(!isset($_SESSION['admin']) || trim($_SESSION['admin']) == ''){
-		header('location: ../index.php');
+	      header('location: ../index.php');
 		exit();
 	}
 
