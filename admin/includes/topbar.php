@@ -1,6 +1,6 @@
 <div class="header flex">
-                            <div class="header-container">
-                                <ul class="nav-left">
+    <div class="header-container">
+        <ul class="nav-left">
                                     <li>
                                         <a id="sidebar-toggle" class="sidebar-toggle" href="javascript:void(0);">
                                             <i class="ti-menu"></i>
@@ -18,7 +18,7 @@
                                         <input class="form-control" type="text" placeholder="Search...">
                                     </li>
                                 </ul>
-                                <ul class="nav-right">
+        <ul class="nav-right" style="margin: 0 -40px">
                                     <li class="notifications dropdown" style="vertical-align: super;">
                                         <span class="counter bg-pink">3</span> 
                                         <a href="#" class="dropdown-toggle no-after" data-toggle="dropdown">
@@ -67,7 +67,6 @@
                                         </li>
           </ul>
                                 </ul>
-                            </div>
-                       
-            </div>
+    </div>
+</div>
     
