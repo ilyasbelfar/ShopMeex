@@ -9,68 +9,78 @@
               <h4 class="modal-title"><b>Add New User</b></h4>
             </div>
             <div class="modal-body">
-              <form class="form-horizontal" method="POST" action="users_add.php" enctype="multipart/form-data">
+              <form class="form-horizontal" method="POST" action="localhost/shopMeex/register.php" enctype="multipart/form-data">
+                  <div class="form-group" >
+                                <label style="width: 25%;text-align: right;
+                                padding: 0 20px;">Gender:<span>*</span></label>
+                                <label class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input"  type="radio" name="gender" value="Male" required="">
+                                    <i class="custom-control-label"> Male </i>
+                                </label>
+                                <label class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" type="radio" name="gender" value="Female" required="">
+                                    <i class="custom-control-label"> Female </i>
+                                </label>
+                                <label class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" type="radio" name="gender" value="Other" required="">
+                                    <i class="custom-control-label"> Other </i>
+                                </label>
+                            </div>
+                            
                 <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">Email</label>
 
-                    <div class="col-sm-9">
+                    <div class="input">
                       <input type="email" class="form-control" id="email" name="email" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-3 control-label">Password</label>
 
-                    <div class="col-sm-9">
+                    <div class="input">
                       <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-                </div>
-                  <div class="form-group">
-                    <label for="repassword" class="col-sm-3 control-label">Password</label>
-
-                    <div class="col-sm-9">
-                      <input type="password" class="form-control" id="repassword" name="repassword" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="firstname" class="col-sm-3 control-label">Firstname</label>
 
-                    <div class="col-sm-9">
+                    <div class="input">
                       <input type="text" class="form-control" id="firstname" name="firstname" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="lastname" class="col-sm-3 control-label">Lastname</label>
 
-                    <div class="col-sm-9">
+                    <div class="input">
                       <input type="text" class="form-control" id="lastname" name="lastname" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="address" class="col-sm-3 control-label">Address</label>
 
-                    <div class="col-sm-9">
+                    <div class="input">
                       <textarea class="form-control" id="address" name="address"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="contact" class="col-sm-3 control-label">Contact Info</label>
 
-                    <div class="col-sm-9">
+                    <div class="input">
                       <input type="text" class="form-control" id="contact" name="contact">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="photo" class="col-sm-3 control-label">Photo</label>
 
-                    <div class="col-sm-9">
+                    <div class="input">
                       <input type="file" id="photo" name="photo">
                     </div>
                 </div>
+                </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
               <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Save</button>
-              </form>
             </div>
         </div>
     </div>
@@ -87,7 +97,7 @@
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="users_edit.php">
-                <input type="hidden" class="userid" name="id">
+                <input type="hidden" id="user-id-ed" class="userid" name="id">
                 <div class="form-group">
                     <label for="edit_email" class="col-sm-3 control-label">Email</label>
 
@@ -106,7 +116,7 @@
                     <label for="edit_firstname" class="col-sm-3 control-label">Firstname</label>
 
                     <div class="input">
-                      <input type="text" class="form-control" id="edit_firstname" name="firstname">
+                      <input type="text" class="form-control" id="edit_firstname" autofocus="" name="firstname">
                     </div>
                 </div>
                 <div class="form-group">
@@ -139,10 +149,9 @@
         </div>
     </div>
 </div>
-
-<!-- Delete -->
+<!--delete-->
 <div class="modal fade" id="delete">
-    <div class="modal-dialog">
+    <div class="modal-dialog"> 
         <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -152,9 +161,11 @@
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="users_delete.php">
                 <input type="hidden" class="userid" name="id">
-                <div class="text-center">
-                    <p>DELETE USER</p>
-                    <h2 class="bold fullname"></h2>
+                <div  class="text-center">
+                    <p style="text-align:center;font-size: .75em;">DELETE USER</p>
+                    <h2 id="user-name-del" style="text-align: center;padding: 20px;" class="bold fullname">
+                       
+                    </h2>
                 </div>
                <div class="modal-footer">
                   <button type="button"  data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
@@ -165,7 +176,6 @@
         </div>
     </div>
 </div>
-
 <!-- Update Photo -->
 <div class="modal fade" id="edit_photo">
     <div class="modal-dialog">
@@ -173,19 +183,19 @@
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title"><b><span class="fullname"></span></b></h4>
+              <h4 class="modal-title"><b><span class="fullname">thered men</span></b></h4>
             </div>
             <div class="modal-body">
-              <form class="form-horizontal" method="POST" action="users_photo.php" enctype="multipart/form-data">
-                <input type="hidden" class="userid" name="id">
-                <div class="form-group">
-                    <label for="photo" class="col-sm-3 control-label">Photo</label>
-
-                    <div class="input">
-                      <input type="file" id="photo" name="photo" required>
+                <form class="form-horizontal" method="POST" action="users_photo.php" enctype="multipart/form-data">
+                    <input type="hidden" class="userid" name="id">
+                    <div style="padding: 0 16px;" class="form-group">
+                        <label style="padding-top: 2px;font-size: .9em;font-weight: 600;"for="photo" >Photo</label>
+                        <div class="input">
+                            <input type="file" id="photo" name="photo" required>
+                        </div>
                     </div>
-                </div>
                 </form>
+            </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
               <button type="submit" class="btn btn-success btn-flat" name="upload"><i class="fa fa-check-square-o"></i> Update</button>
@@ -193,33 +203,5 @@
         </div>
     </div>
 </div> 
-
-
-<!-- Activate -->
-<div class="modal fade" id="activate">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title"><b>Activating...</b></h4>
-            </div>
-            <div class="modal-body">
-              <form class="form-horizontal" method="POST" action="users_activate.php">
-                <input type="hidden" class="userid" name="id">
-                    <div class="text-center">
-                        <p>ACTIVATE USER</p>
-                        <h2 class="bold fullname"></h2>
-                    </div>
-                </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-                    <button type="submit" class="btn btn-success btn-flat" name="activate"><i class="fa fa-check"></i> Activate</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> 
-
 
      
