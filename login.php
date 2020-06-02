@@ -52,7 +52,10 @@
                         $userr=$row["username"];
                         $password = $row["password"];
                         if($pass==$password){
-                            
+                            if($row['type']== 1){
+                            $_SESSION['admin'] = $row['id'];
+                              header("location: admin/admin.php");
+                            } 
                             // Password is correct, so start a new session
                             if(!empty($_POST["remember"])) {
                                     $hour = time()+3600 ;   //3600=1hour
