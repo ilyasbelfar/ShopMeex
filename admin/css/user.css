@@ -1,60 +1,76 @@
-/* begin for java script */
-.selected{
-    background-color: #c3dddd !important;
-}
-.hide{
-    display: none;
-}
-/*end for java script */
+/*pour tpo bar drop down change*/
 
-.content main.main-content .main-content .user-content{
-    margin-top: 50px;
-    padding: 15px;
-    margin-left: 20px;
-    border: 1px solid #e1dfdf;
+
+/*end top bar drowp down change */
+
+button{
+    cursor: pointer
+}
+.user-show{
     background-color: #fff;
+    /*-webkit-box-shadow:0px -1px 1px 2px #ccc;
+    -moz-box-shadow:0px -1px 1px 2px #ccc;
+    box-shadow:0px -1px 1px 2px #ccc;*/
 }
-.content main.main-content .main-content .user-content .tit h1{
-    text-transform: capitalize;
-    font-size: 1.4em;
-}   
-.content main.main-content .main-content .user-content .tit{
-     justify-content: space-between;
-    border-bottom: 2px solid #E6E9ED;
-    margin-bottom: 20px;
-    padding: 0 0 10px 0;
+.user-show .container .head{
+    padding: 15px;
+    border-bottom: 1px solid #ccc
 }
-.content main.main-content .main-content .user-content .user-table-head{
-    justify-content: space-around
+.user-show .container .head a{
+    font-size: .75em;
+    padding: 8px;
+    background-color: #3c8dbc;
+    color: white;
 }
-.content main.main-content .main-content .user-content .user-table-head .table-length label select {
-    padding: 5px
+.user-show .container .content-box{
+    padding: 15px;
 }
-.content main.main-content .main-content .user-content .user-table-head .table-search label input {
-    padding: 5px
+.user-show .container .content-box table td{
+    border: 1px solid #f4f4f4;
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    font-size: .9em
 }
-.content main.main-content .main-content .user-content table {
+.user-show .container .content-box table th{
+    border: 1px solid #f4f4f4;
+    border-bottom: 3px solid #f4f4f4;
+    padding: 5px 10px;
+    font-size: .9em;
+}
+.user-show .container .content-box table{
     border-collapse: collapse;
     margin: auto;
-    margin-top:30px; 
+    width: 100%;
 }
-.content main.main-content .main-content .user-content table thead  tr th{
-    border:1.5px solid #ccc;
-    padding: 10px
+.user-show .container .content-box table tr td:nth-child(1) {
+    text-align:center;
+    
 }
-.content main.main-content .main-content .user-content tbody   tr.odd{
-    background-color: #e5e5e5;
+.user-show .container .content-box table tr td:last-child > * {
+    padding: 9px;   
+    margin: 0 5px;
+    outline: 0;
+    border: 0;
+    font-size: .8em;
+    color: #fff;
+    opacity: .8;
 }
-.content main.main-content .main-content .user-content tbody   tr td{
-    border:1px solid #ccc;
-    padding: 10px
+.user-show .container .content-box table tr td:last-child > button :hover{
+    opacity: 1;
 }
-/*for edit*/
-.content main.main-content .main-content >.row {
-    background-color: #fff;
-    margin: 20px;
-    padding: 20px;
+.user-show .container .content-box table tr td:last-child > a{
+    background-color: #00c0ef;
 }
-.content main.main-content .main-content >.row .col-50 .title-box{
-    margin: 0 0 10px 0;
+.user-show .container .content-box table tr td:last-child > button:nth-child(2){
+    background-color: #008d46;
+}
+
+.user-show .container .content-box table tr td:last-child > button:nth-child(3){
+    background-color: #d73925;
+}
+.content-box table tr td > span{
+    display: block;
+    color: #5c91ef;
+    font-size: .9em;
 }

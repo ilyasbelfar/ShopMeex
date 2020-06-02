@@ -1,0 +1,138 @@
+*{
+    box-sizing: border-box;
+}
+button{
+    cursor: pointer
+}
+a{
+    cursor: pointer
+}
+.head-prod{
+    display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    justify-content: space-between;
+}
+.head-prod a{
+   max-height: 30px; 
+}
+.head-prod .pull-right label{
+    font-size: .9em;
+    padding: 5px;
+    font-weight: 600;
+}
+.head-prod .pull-right select{
+    margin: 0 5px;
+    padding: 3px 0;
+    outline: 0;
+}
+.head-prod .pull-right select option{
+    outline: 0;
+}
+.user-show .row{
+    justify-content: space-between;
+    padding: 16px 6px 16px 16px;
+}
+.user-show .row label{
+    font-size: .9em;
+    font-weight: 600;
+}
+.user-show .row label select {
+    padding: 5px;
+    outline: 0;
+}
+.user-show .row label  input{
+    padding: 5px;
+    outline: 0;
+}
+td.flex{
+    justify-content: space-between;
+}
+td.flex .pull-right i{
+    color:#503bc8
+}
+td.tools button{
+    padding: 8px !important;
+}
+td.tools button:first-child{
+    background-color: #00a65a;
+}
+td.tools button:last-child{
+    background-color: #dd4b39 !important;
+}
+td.view a{
+    background-color: #00c0ef;
+    color: #fff;
+    padding: 8px;
+    font-size: .9em;
+}
+td.view a i{
+    font-size: .8em;
+}
+td.text{
+    color: #333;
+    font-size: .8em;
+    text-align: left !important;
+    }
+#desc{
+    font-size: .8em;
+    color: #333333;
+}
+.floatnone{
+    float: none !important;
+}
+.modal-footer button:nth-child(1){
+    border: 0 !important;
+}
+.modal-body{
+    padding: 15px 15px 30px 15px !important;
+}
+.text-center > p{
+    font-size: .9em;
+    padding: 10px;
+    text-align: center;
+}
+.text-center > h2{
+    text-align: center
+}
+ @media (min-width: 768px){
+    .modal .modal-edit{
+        width: 700px !important;
+    }
+}
+.control-label{
+    float: none !important;
+}
+.f1{
+   margin-right: 4px !important; 
+}
+
+.form-control{
+    padding: 5px 8px !important;
+    width: 200px;
+}
+#description-text{
+       display: block;
+    margin: 10px 12%;
+    padding: 10px;
+}
+#add-description-text{
+     display: block;
+    margin: 10px 12%;
+    padding: 10px;
+}
+#lebel-descr{
+    display: block;
+    padding: 5px 16px;
+    font-size: .9em;
+    font-weight: 600;
+}
+#lebel-descr-add{
+    display: block;
+    padding: 5px 16px;
+    font-size: .9em;
+    font-weight: 600;
+}
+.modal-footer-err{
+    padding: 20px 10px 0 10px !important ;
+}
