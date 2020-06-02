@@ -695,7 +695,9 @@
                         <div class="alert-message"><a href="../product.php">Browse products </a>No wishlist has been made yet.</div>
                     </div>'; ?>
                     <div class="paneltbs panel-6" id="logout" style="display: none;">
-                        <h3>Logout</h3>
+                        <a href="logout.php">
+                            <i class="fas fa-sign-out-alt"></i>Logout
+                        </a>
                     </div>
                 </div>
             </div>
