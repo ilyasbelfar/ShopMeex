@@ -183,7 +183,7 @@
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title"><b><span class="fullname">thered men</span></b></h4>
+              <h4 class="modal-title"><b><span class="fullname"></span></b></h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="POST" action="users_photo.php" enctype="multipart/form-data">
@@ -194,11 +194,12 @@
                             <input type="file" id="photo" name="photo" required>
                         </div>
                     </div>
-                </form>
+                
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
               <button type="submit" class="btn btn-success btn-flat" name="upload"><i class="fa fa-check-square-o"></i> Update</button>
+                </form>
             </div>
         </div>
     </div>
