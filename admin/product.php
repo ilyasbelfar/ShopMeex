@@ -41,7 +41,7 @@ $where = '';
                 <div class="container">
                     <div class="head  head-prod">
                       <a onclick="addnewprod()" data-toggle="modal"  id="addproduct"><i class="fa fa-plus"></i> New</a>
-                      <div class="pull-right">
+                      <div class="pull-right" style="margin-right: -16px">
                         <form class="form-inline">
                           <div class="form-group">
                             <label>Category: </label>
@@ -78,7 +78,7 @@ $where = '';
                                 </select> 
                             </label>
                         </div>
-                        <div class="forserach">
+                        <div class="forserach" style="padding: 0 10px;">
                             <div id="example1_filter" class="dataTables_filter">
                                 <label>Search:
                                     <input type="search" class="form-control input-sm" placeholder="" aria-controls="example1">
