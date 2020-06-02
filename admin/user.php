@@ -10,7 +10,6 @@
       <main class="main-content">
         <div class="main-content">
         <?php
-            <?php
                if(isset($_SESSION['error'])){
           echo "
             <div style=\"background-color: #dd4b39;color: #fff;padding: 15px;margin-bottom: 20px;border: 1px solid transparent;border-radius: 3px;font-size: .8em;\" class=\"modal-error\">

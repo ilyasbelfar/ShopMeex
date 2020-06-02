@@ -1,5 +1,4 @@
 'use strict';
-
 var slideIndex = 1;
 showSlides(slideIndex);
 
@@ -31,14 +30,7 @@ var slides = document.getElementsByClassName("con");
   dots[slideIndex-1].className += " dotactive";
 };
 
-
-
-
-
-
-
-
-        $(document).ready(function(){
+$(document).ready(function(){
             var forClick = document.querySelectorAll(".sidebar .sidebar-container > ul > li"); 
             for (var i = 0; i < forClick.length-10; i++) { 
                 forClick[i].addEventListener("click", function(e) {
