@@ -1,0 +1,115 @@
+/*-custom select */
+.select-box {
+  display: flex;
+  width: 250px;
+  flex-direction: column;
+    position: relative;
+        margin-bottom: 1px solid #ccc;
+}
+.select-box .options-container {
+  background: #a0a1a2;;
+  color: #f5f6fa;
+  max-height: 0;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.4s;
+  border-radius: 8px;
+  overflow: hidden;
+position: absolute;
+    top: 35px; 
+    z-index: 200;
+  order: 1;
+}
+
+.option-selected {
+  background: #a0a1a2;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: #f5f6fa;
+  position: relative;
+
+  order: 0;
+}
+
+.option-selected::after {
+  content: "";
+  background: url("img/arrow-down.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  position: absolute;
+  height: 100%;
+  width: 32px;
+  right: 10px;
+  top: 5px;
+
+  transition: all 0.4s;
+}
+
+.select-box .options-container.active-option {
+  max-height: 240px;
+  opacity: 1;
+  overflow-y: scroll;
+}
+
+.select-box .options-container.active-option + .option-selected::after {
+  transform: rotateX(180deg);
+  top: -6px;
+}
+
+.select-box .options-container::-webkit-scrollbar {
+  width: 8px;
+  background: #0d141f;
+  border-radius: 0 8px 8px 0;
+}
+
+.select-box .options-container::-webkit-scrollbar-thumb {
+  background: #525861;
+  border-radius: 0 8px 8px 0;
+}
+
+.select-box .option,
+.option-selected {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.select-box .option:hover {
+  background: #414b57;
+}
+
+.select-box label {
+  cursor: pointer;
+}
+
+.select-box .option .radio {
+  display: none;
+}
+/*end custom select */
+
+
+section.product-area{
+    background-color: #f8f9fa;
+}
+section.product-area .product-view{
+    background-color: #fff;
+}
+.head-top-row{
+    justify-content: space-between;
+    padding: 5px 10px;
+    border-bottom: 1px solid #ccc;
+    padding-top: 20px;
+}
+.head-top-row h1{
+    font-size: .95em;
+    font-weight: 700
+}
+.bottom-top-row{
+    padding: 5px 10px;
+}
+.items-founds {
+    display: block;
+        font-size: .95em;
+    font-weight: 500;
+    padding: 5px 0;
+}
