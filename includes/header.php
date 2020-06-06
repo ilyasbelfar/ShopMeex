@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" type="text/css" href="css/all.css">
+    <link rel="stylesheet" type="text/css" href="css/productonpromotion.css">
     <link rel="stylesheet" type="text/css" href="css/brands.css">
     <link rel="stylesheet" type="text/css" href="css/solid.css">
     <link rel="stylesheet" type="text/css" href="css/fontawesome.css">
