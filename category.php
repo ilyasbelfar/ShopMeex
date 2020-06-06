@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="css/productstyle.css">
         <link rel="stylesheet" type="text/css" href="FontAwesome/css/all.css">
         <link rel="stylesheet" type="text/css" href="css/reapeatingstyle.css">
+        <link rel="stylesheet" type="text/css" href="css/category.css">
         <link rel="stylesheet" type="text/css" href="css/color/color.css">
         <script src="js/jquery-3.4.1.min.js"></script>
         <link rel="stylesheet" type="text/css" href="FontAwesome/css/themify.css">
@@ -211,7 +212,7 @@
                 </nav>
             </header>
             <!-- begin  div separable-->
-            <section class="row-separabble marginbottom  negop">
+            <section class="row-separabble  negop">
                 <div class="container">
                     <h2 class="title">Les Categorie Des Produits </h2>
                     <nav class="row-cat">
@@ -230,22 +231,148 @@
             <section class="product-area negop">
                 <div class="maincontainer">
                     <div class="wrapper flex ">
+                       <aside class="filter-area flexquart">
+                            <div class="container">
+                                <div class="wrapper flex ">
+                                    <article>
+                                        <div class="filtre-tag flex flexwrap">
+                                            <p>Categories</p>
+                                            <i class="fa fa-chevron-down "></i>
+                                        </div>
+                                        <div class="content-tag ">
+                                            <div class="container-content-tag ">
+                                                <form action="category.php" method="get">
+                                                <ul>
+                                                     <li class="navi-item">
+								            <a class="navi-link" data-toggle="tab" href="#Digital Goods" role="tab" aria-selected="false">Digital                                                     Goods</a>
+								        </li>
+                                        <li class="navi-item">
+                                            <a class="navi-link " data-toggle="tab" href="#Clothes" role="tab" ariaselected="false">Clothes</a>
+                                        </li>
+                                        <li class="navi-item">
+								            <a class="navi-link " data-toggle="tab" href="#Health and Care" role="tab" aria-selected="false">Health and                                             Care</a>
+								        </li>
+								        <li class="navi-item">
+								            <a class="navi-link " data-toggle="tab" href="#Home Interior" role="tab" aria-selected="false">Home                                                     Interior</a>
+								        </li>
+								        <li class="navi-item">
+								            <a class="navi-link " data-toggle="tab" href="#Toys and Games" role="tab" aria-selected="false">Toys and                                                     Games</a>
+								        </li>	
+                                                </ul>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    <article>
+                                        <div class="filtre-tag flex flexwrap">
+                                            <p>price</p>
+                                            <i class="fa fa-chevron-down "></i>
+                                        </div>
+                                        <div class="content-tag ">
+                                            <div class="container-content-tag">
+                                                <input type="range" class="custom-range" name="range-price" style="border: 0">
+                                            </div>
+                                            <form class="form-price flex">
+                                                <div class="min flexdemi">
+                                                    <labe name="min">min
+    
+    </label><input type="text" class="input-price" name="min" placeholder="$0">
+    </div>
+    <div class="max flexdemi">
+        <label name="max">max</label>
+        <input type="number" class="input-price" name="max" placeholder="$0">
+    </div>
+    </form>
+    <a class="submit-price" href="#">
+        <button class="submit-price">Apply</button>
+    </a>
+    </div></article>
+    <article>
+        <div class="filtre-tag flex flexwrap">
+            <p>les categorie</p>
+            <i class="fa fa-chevron-down "></i>
+        </div>
+        <div class="content-tag">
+            <div class="container-content-tag flex flexwrap ">
+                <label class="label-size flexpart">
+                    <input type="checkbox" name="">
+                    <span>L</span>
+                </label>
+                <label class="label-size flexpart">
+                    <input type="checkbox" name="">
+                    <span>X</span>
+                </label>
+                <label class="label-size flexpart">
+                    <input type="checkbox" name="">
+                    <span>XL</span>
+                </label>
+                <label class="label-size flexpart">
+                    <input type="checkbox" name="">
+                    <span>XLL</span>
+                </label>
+            </div>
+        </div>
+    </article>
+    <article>
+        <div class="filtre-tag flex flexwrap">
+            <p>les categorie</p>
+            <i class="fa fa-chevron-down "></i>
+        </div>
+        <div class="content-tag"></div>
+    </article>
+    </div></div></aside>
                         <aside class="product-view flextroisquart">
                             <div class="wrapper">
                                 <div class="top-row">
-                                    <div class="container-top-row flex ">
+                                    <div class="container-top-row">
+                                       <div class="head-top-row flex">
+                                            <h1> Digital Goods</h1>
+                                            <form class="select-form flex">
+                                                <div class="select-box flex">
+                                                <div class="options-container">
+                                                  <div class="option">
+                                                    <input
+                                                      type="radio"
+                                                      class="radio"
+                                                      id="pd"
+                                                      name="category"
+                                                    />
+                                                    <label for="pd">le plus demendée</label>
+                                                  </div>
+
+                                                  <div class="option">
+                                                    <input type="radio" class="radio" id="pc" name="category" />
+                                                    <label for="pc">prix croissant</label>
+                                                  </div>
+
+                                                  <div class="option">
+                                                    <input type="radio" class="radio" id="pdc" name="category" />
+                                                    <label for="pdc">pri decoissant</label>
+                                                  </div>
+                                                  <div class="option">
+                                                    <input type="radio" class="radio" id="nv" name="category" />
+                                                    <label for="nv">nouvelearrivage</label>
+                                                  </div>
+                                                  <div class="option">
+                                                    <input type="radio" class="radio" id="mieux" name="category" />
+                                                    <label for="mieux">mieux notée</label>
+                                                  </div>
+
+                                                  
+                                                </div>
+
+                                                <div class="option-selected">
+                                                  le plus demendée
+                                                </div>
+                                              </div>                                            
+                                           </form>
+                                       </div>
+                                       <div class="bottom-top-row flex">
                                         <span class="items-founds " id="number-res-search">
-                                            <span>Search results for word </span>
+                                            20 items 
                                         </span>
                                         <div class="change-view flex">
-                                            <form class="select-form flex">
-                                                <select>
-                                                    <option>nouveuax</option>
-                                                    <option>en tendanse </option>
-                                                    <option>moin prix </option>
-                                                    <option>bla blaa blaa </option>
-                                                </select>
-                                            </form>
+                                            
                                             <div class="flex">
                                                 <button class="select-list-view">
                                                     <a href="#">
@@ -258,6 +385,7 @@
                                                     </a>
                                                 </button>
                                             </div>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1098,97 +1226,7 @@
                                 </article>
                             </div>
                         </aside>
-                        <aside class="filter-area flexquart">
-                            <div class="container">
-                                <div class="wrapper flex ">
-                                    <article>
-                                        <div class="filtre-tag flex flexwrap">
-                                            <p>les categorie</p>
-                                            <i class="fa fa-chevron-down "></i>
-                                        </div>
-                                        <div class="content-tag ">
-                                            <div class="container-content-tag ">
-                                                <form class="filter-search flex">
-                                                    <input class="flextroisquart" type="Search" name="filter-seearh" placeholder="search">
-                                                    <button class="flexquart">
-                                                        <i class="fa fa-search flexquart"></i>
-                                                    </button>
-                                                </form>
-                                                <ul>
-                                                    <li>
-                                                        <a href="#">Electronique </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Electrominagie</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Vetments</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Livres</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article>
-                                        <div class="filtre-tag flex flexwrap">
-                                            <p>price</p>
-                                            <i class="fa fa-chevron-down "></i>
-                                        </div>
-                                        <div class="content-tag ">
-                                            <div class="container-content-tag">
-                                                <input type="range" class="custom-range" name="range-price" style="border: 0">
-                                            </div>
-                                            <form class="form-price flex">
-                                                <div class="min flexdemi">
-                                                    <labe name="min">min
-    
-    </label><input type="text" class="input-price" name="min" placeholder="$0">
-    </div>
-    <div class="max flexdemi">
-        <label name="max">max</label>
-        <input type="number" class="input-price" name="max" placeholder="$0">
-    </div>
-    </form>
-    <a class="submit-price" href="#">
-        <button class="submit-price">Apply</button>
-    </a>
-    </div></article>
-    <article>
-        <div class="filtre-tag flex flexwrap">
-            <p>les categorie</p>
-            <i class="fa fa-chevron-down "></i>
-        </div>
-        <div class="content-tag">
-            <div class="container-content-tag flex flexwrap ">
-                <label class="label-size flexpart">
-                    <input type="checkbox" name="">
-                    <span>L</span>
-                </label>
-                <label class="label-size flexpart">
-                    <input type="checkbox" name="">
-                    <span>X</span>
-                </label>
-                <label class="label-size flexpart">
-                    <input type="checkbox" name="">
-                    <span>XL</span>
-                </label>
-                <label class="label-size flexpart">
-                    <input type="checkbox" name="">
-                    <span>XLL</span>
-                </label>
-            </div>
-        </div>
-    </article>
-    <article>
-        <div class="filtre-tag flex flexwrap">
-            <p>les categorie</p>
-            <i class="fa fa-chevron-down "></i>
-        </div>
-        <div class="content-tag"></div>
-    </article>
-    </div></div></aside></div></div></section>
+                        </div></div></section>
     <!-- end main -->
     <!-- End Header -->
     <!-- Start NewsLetter -->
@@ -1455,6 +1493,23 @@
         </div>
     </div>
     <!-- End Footer -->
+    <script>
+        const selected = document.querySelector(".option-selected");
+const optionsContainer = document.querySelector(".options-container");
+
+const optionsList = document.querySelectorAll(".option");
+
+selected.addEventListener("click", () => {
+  optionsContainer.classList.toggle("active-option");
+});
+
+optionsList.forEach(o => {
+  o.addEventListener("click", () => {
+    selected.innerHTML = o.querySelector("label").innerHTML;
+    optionsContainer.classList.remove("active-option");
+  });
+});
+        </script>
     <script src="js/popup.js"></script>
     <script src="js/TweenMax.min.js"></script>
     <script src="js/custom.js"></script>
