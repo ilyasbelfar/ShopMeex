@@ -16,7 +16,7 @@ ul.nav-tabs {
     margin: 20px;
     min-height: 450px;
     position: relative;
-    background-color: #c39d6d;
+    background-color: #8191a5;
 }
 
 .productarea .container .wrapper .product .container{
@@ -42,7 +42,7 @@ ul.nav-tabs {
 }
 .productprice{
     position: absolute;
-    color: #c39d6d;
+    color: #5278cc;
     font-size: 25px;
     font-weight: 600;
     line-height: 45px;
