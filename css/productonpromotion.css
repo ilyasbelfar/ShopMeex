@@ -23,12 +23,7 @@ ul.nav-tabs {
  height:100%;   
 }
 
-.product:hover .product-hover-tools{
-  bottom: 43%;
-  text-align: center;
-  visibility: visible;
-  opacity: 1;
-}
+
 
 .productarea .container .wrapper .product img{
     width: 100%;
@@ -62,7 +57,7 @@ color: #000}
     position: absolute;
     z-index: 2;
     bottom: 46%;
-    right: 36%;
+    right: 30%;
     text-align: center;
     visibility: hidden;
     opacity: 0;
@@ -72,6 +67,12 @@ color: #000}
      -webkit-transition: top 0.3s, ease-in-out 0.3s;
     -moz-transition: top 0.3s, ease-in-out 0.3s;
     -o-transition: top 0.3s, ease-in-out 0;
+}
+.product:hover .product-hover-tools{
+  bottom: 43%;
+  text-align: center;
+  visibility: visible;
+  opacity: 1;
 }
 
 .product .product-hover-tools a{
