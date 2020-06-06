@@ -25,7 +25,6 @@ ul.nav-tabs {
 
 .product:hover .product-hover-tools{
   bottom: 43%;
-  right: 36%;
   text-align: center;
   visibility: visible;
   opacity: 1;
