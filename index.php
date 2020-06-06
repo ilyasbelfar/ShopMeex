@@ -31,64 +31,6 @@
    
 ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 	<html>
 		<head>
@@ -470,7 +412,39 @@
 						</div>
 					</div>
 				</section>
-<div class="product">
+				<section class="product-on-promotion">
+                    <div class="container">
+                        <div class="wrapper">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="section-title">
+                                        <h2>Product On promotion</h2>
+                                        <p style="font-size: 14px;">We Keep You Updated To Discover Our Lastest Products.</p>
+                                    </div>
+                                    <ul class="nav-tabs flex" id="myTabpromotion" role="tablist">
+                                        <li class="nav-item">
+								            <a class="nav-link " data-toggle="tab" href="#Digital Goods" role="tab" aria-selected="false">Digital                                                     Goods</a>
+								        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link " data-toggle="tab" href="#Clothes" role="tab" ariaselected="false">Clothes</a>
+                                        </li>
+                                        <li class="nav-item">
+								            <a class="nav-link " data-toggle="tab" href="#Health and Care" role="tab" aria-selected="false">Health and                                             Care</a>
+								        </li>
+								        <li class="nav-item">
+								            <a class="nav-link " data-toggle="tab" href="#Home Interior" role="tab" aria-selected="false">Home                                                     Interior</a>
+								        </li>
+								        <li class="nav-item">
+								            <a class="nav-link " data-toggle="tab" href="#Toys and Games" role="tab" aria-selected="false">Toys and                                                     Games</a>
+								        </li>											
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <div class="productarea">
+                                <div class="container">
+                                    <div class="wrapper flex">
+                                         <div class="product">
                                           <div class="container">
                                            <h5 class="productprice">
                                                <del>$255</del>
@@ -487,6 +461,93 @@
                                             <a href="#" class="cart" data-toggle="tooltip" title="" data-original-title="Add to Cart">
                                                 <i class="fa fa-shopping-cart"></i>
                                             </a>
+                                            <a href="#" class="heart view" data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                            
+                                            </div>
+                                            <div class="product-detail">
+                                                 <h5 class="product-title">PRODUCT TITLE</h5>
+                                                <p class="product-category">CATEGORY</p>
+                                            </div>
+                                        </div>
+                                       
+                                        </div> <div class="product">
+                                          <div class="container">
+                                           <h5 class="productprice">
+                                               <del>$255</del>
+                                               155
+                                           </h5>
+                                           <div class="product-hover">
+                                               
+                                           </div>
+                                            <img src="images/items/12.jpg">
+                                            <div class="product-hover-tools">
+                                                    <a href="#" class="view" data-toggle="tooltip" title="" data-original-title="ViewProduct">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="#" class="cart" data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                            <a href="#" class="heart view" data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                            
+                                            </div>
+                                            <div class="product-detail">
+                                                 <h5 class="product-title">PRODUCT TITLE</h5>
+                                                <p class="product-category">CATEGORY</p>
+                                            </div>
+                                        </div>
+                                       
+                                        </div> <div class="product">
+                                          <div class="container">
+                                           <h5 class="productprice">
+                                               <del>$255</del>
+                                               155
+                                           </h5>
+                                           <div class="product-hover">
+                                               
+                                           </div>
+                                            <img src="images/items/12.jpg">
+                                            <div class="product-hover-tools">
+                                                    <a href="#" class="view" data-toggle="tooltip" title="" data-original-title="ViewProduct">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="#" class="cart" data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                            <a href="#" class="heart view" data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                            
+                                            </div>
+                                            <div class="product-detail">
+                                                 <h5 class="product-title">PRODUCT TITLE</h5>
+                                                <p class="product-category">CATEGORY</p>
+                                            </div>
+                                        </div>
+                                       
+                                        </div> <div class="product">
+                                          <div class="container">
+                                           <h5 class="productprice">
+                                               <del>$255</del>
+                                               155
+                                           </h5>
+                                           <div class="product-hover">
+                                               
+                                           </div>
+                                            <img src="images/items/12.jpg">
+                                            <div class="product-hover-tools">
+                                                    <a href="#" class="view" data-toggle="tooltip" title="" data-original-title="ViewProduct">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="#" class="cart" data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                            <a href="#" class="heart view" data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
                                             
                                             </div>
                                             <div class="product-detail">
@@ -496,6 +557,44 @@
                                         </div>
                                        
                                         </div>
+                                        <div class="product">
+                                          <div class="container">
+                                           <h5 class="productprice">
+                                               <del>$255</del>
+                                               155
+                                           </h5>
+                                           <div class="product-hover">
+                                               
+                                           </div>
+                                            <img src="images/items/12.jpg">
+                                            <div class="product-hover-tools">
+                                                    <a href="#" class="view" data-toggle="tooltip" title="" data-original-title="ViewProduct">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="#" class="cart" data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                            <a href="#" class="heart view" data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                            
+                                            </div>
+                                            <div class="product-detail">
+                                                 <h5 class="product-title">PRODUCT TITLE</h5>
+                                                <p class="product-category">CATEGORY</p>
+                                            </div>
+                                        </div>
+                                       
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				    
+				</section>
+
 				<section class="new-products">
 					<div class="container">
 						<div class="wrapper">
@@ -725,5 +824,4 @@
 			<script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
 		</body>
          <?php include 'includes/script.php'; ?>
-
 </html>
