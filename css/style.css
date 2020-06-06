@@ -1723,8 +1723,8 @@ main .trending-area .container .wrapper .row .col-12 .products-info .main-nav .n
 }
 
 .tab-col {
-    flex: 0 0 23%;
-    max-width: 23%;
+    flex: 0 0 30%;
+    max-width: 30%;
     overflow: hidden;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 3px;
@@ -1800,7 +1800,7 @@ main .trending-area .container .wrapper .row .col-12 .products-info .main-nav .n
     color: #424646;
     font-size: 16px;
     display: inline-block !important;
-    margin-right: 15px;
+    margin-right: 12px;
     text-align: right;
     height: 52px;
     position: relative;
@@ -1867,8 +1867,8 @@ main .trending-area .container .wrapper .row .col-12 .products-info .main-nav .n
 
 .single-product .product-img .product-action-2 a {
     height: auto;
-    font-size: .82rem;
-    padding: 0.35rem 0.5rem;
+    font-size: .65rem;
+    padding: 0.35rem 0.4rem;
     line-height: 1.5;
     position: relative;
     font-weight: 500;
