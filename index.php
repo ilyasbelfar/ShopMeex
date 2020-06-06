@@ -470,7 +470,32 @@
 						</div>
 					</div>
 				</section>
-
+<div class="product">
+                                          <div class="container">
+                                           <h5 class="productprice">
+                                               <del>$255</del>
+                                               155
+                                           </h5>
+                                           <div class="product-hover">
+                                               
+                                           </div>
+                                            <img src="images/items/12.jpg">
+                                            <div class="product-hover-tools">
+                                                    <a href="#" class="view" data-toggle="tooltip" title="" data-original-title="ViewProduct">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="#" class="cart" data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                            
+                                            </div>
+                                            <div class="product-detail">
+                                                 <h5 class="product-title">PRODUCT TITLE</h5>
+                                                <p class="product-category">CATEGORY</p>
+                                            </div>
+                                        </div>
+                                       
+                                        </div>
 				<section class="new-products">
 					<div class="container">
 						<div class="wrapper">
