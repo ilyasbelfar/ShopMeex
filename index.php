@@ -1,446 +1,833 @@
-<!DOCTYPE html>
-<?php 
-session_start();  
+<?php
+    include 'includes/session.php';
 
+    try{          
 
-include "./table.php"; 
+        
+        // getting TopViewed products
+        $stmt=$db->query("SELECT * from products ORDER BY counter DESC limit 3 ");
+        $TopViewedProducts= $stmt->fetchAll();
+        // getting best selling  products
+        $stmt=$db->query("SELECT * from products ORDER BY sold_cmp DESC limit 3 ");
+        $TopSellingProducts= $stmt->fetchAll();
+        // getting on sold products (random products)
+        $stmt=$db->query("SELECT * from products ORDER BY RAND() DESC limit 3 ");
+        $TopOnProducts= $stmt->fetchAll();
 
-?>
- 
+        //Gettng new products
+        $stmt=$db->query("SELECT * from products ORDER BY date_view DESC limit 8 ");
+        $NewProducts= $stmt->fetchAll();
+        /// Getting Categories
+        $stmt = $db-> query("SELECT * FROM category");
+        $categories=$stmt->fetchAll();
 
-<html>
-<head>
-	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
-    <link rel="icon" href="images/favicon.png">
-    <link rel="stylesheet" type="text/css" href="../FontAwesome/css/all.css">
-    <script src="js/jquery-3.4.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/adminstyle.css">
-    <link rel="stylesheet" type="text/css" href="../FontAwesome/css/themify.css">
-    <link rel="stylesheet" type="text/css" href="css/reapeatingStyle.css">
-    <link rel="stylesheet" type="text/css" href="">
-    <link rel="stylesheet" type="text/css" href="css/color/color.css">
-    <script type="text/javascript" src="js/dist/Chart.js"></script>
-    <script src="js/jquery-3.4.1.min.js"></script>
-	
-     <style>
-    @font-face {
-    font-family : themify;
-    src : url(fonts/themify/themify.eot);
-    src : url(fonts/themify/themify.eot?#iefix) format('embedded-opentype'),
-          url(fonts/themify/themify.woff) format('woff'),
-          url(fonts/themify/themify.ttf) format('truetype');
-	}
-	.body{
-		padding: 300px;
-	}
-    </style>
+    }
+    catch(PDOException $e){
+        echo "There is some problem in connection: " . $e->getMessage();
+        
+            
+    }
 
    
+?>
 
-<!--
-	<script type="text/javascript">
-		window.addEventListener('load', () => {
-			const loader = document.getElementById('loader');
-			setTimeout(() => {
-				loader.classList.add('fadeOut');
-			}, 300);
-		});
-	</script>
--->
-</head>
-<body>
-    <div>
-		<div class="sidebar">
-			<div class="sidebar-container"> .
-				<div class="sidebar-logo">
-					<div class="peers flex flexnowrap">
-						<div class="peer ">
-							<a class="sidebar-link" href="#">
-								<div class="peers1 flex">
-									<div class="peer1">  
-										<div class="logo">
-											<img width="40px" height="40px" src="images/Logo-header.png" alt="">
-										</div>
-									</div>
-									<div class="title flex">
-										<h5 class="logo-text">Administrator</h5>
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title>ShopMeex Online Store</title>
+			<?php include 'includes/header.php'; ?>
+
+    <!-- End Header -->
+
+			<!-- Start Main -->
+
+			<main>
+				<section class="section-main">
+					<div class="container">
+						<div class="wrapper">
+							<aside class="side-cat">
+								<nav class="card">
+									<ul class="menu-category">
+										<li><a href="#">Best clothes</a></li>
+										<li><a href="#">Automobiles</a></li>
+										<li><a href="#">Home interior</a></li>
+										<li><a href="#">Electronics</a></li>
+										<li><a href="#">Technologies</a></li>
+										<li><a href="#">Digital goods</a></li>
+										<li class="has-submenu"><a href="#">More items</a></li>
+									</ul>
+								</nav>
+							</aside>
+
+							<div class="owl-carousel banner-slides owl-theme">
+								<div>
+									<img src="images/banners/2.jpg">
+									<span class="new">New</span>
+								</div>
+								<div>
+									<img src="images/banners/2.jpg">
+									<span class="hot">Hot</span>
+								</div>
+								<div>
+									<img src="images/banners/2.jpg">
+									<span class="new">New</span>
+								</div>
+								<div>
+									<img src="images/banners/2.jpg">
+									<span class="hot">Hot</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="section-features">
+					<div class="container">
+						<article class="card-features">
+							<div class="wrapper">
+								<div class="col-1">
+									<div class="article-show">
+										<span><i class="fa fa-user"></i></span>
+										<h3>Customer Support</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 									</div>
 								</div>
-							</a>
-						</div>
-                        <div class="peer2">
-                            <div class="mobile-toggle">
-                                    <a href="#">
-                                        <i class="ti-arrow-circle-left ">
-                                            
-                                        </i>
+					
+								<div class="col-1">
+									<div class="article-show">
+										<span><i class="fa fa-star white"></i></span>
+										<h3>Five Star Quality</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+									</div>
+								</div>
+
+								<div class="col-1">
+									<div class="article-show">
+										<span><i class="fa fa-truck white"></i></span>
+										<h3>Express Delivery</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+									</div>
+								</div>
+
+								<div class="col-1">
+									<div class="article-show">
+										<span><i class="fa fa-dollar-sign"></i></span>
+										<h3>Reasonable Prices</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+									</div>
+								</div>
+							</div>
+						</article>
+					</div>
+				</section>
+
+				<section class="trending-area">
+					<div class="container">
+						<div class="wrapper">
+							<div class="row">
+								<div class="col-12">
+									<div class="section-title">
+										<h2>Trending Products</h2>
+										<p style="font-size: 14px;">There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form</p>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12">
+									<div class="products-info">
+										<div class="main-nav">
+											<ul class="nav-tabs" id="myTab" role="tablist">
+
+												
+												<?php 
+												foreach ($categories as $row ){
+												echo 	
+												'<li class="nav-item">
+													<a class="nav-link " data-toggle="tab" href="#'.$row["name"].'" role="tab" aria-selected="false">'.$row["name"].'</a>
+												</li>';}
+											   ?>
+											</ul>
+										</div>
+										<div class="tab-content">
+											<?php 
+
+											foreach($categories as $row_ ){
+
+
+
+											echo "<div class='tab-panel active fade show'
+											 id='".$row_['name']."'>
+
+
+												<div class='container'>
+													<div class='wrapper'>";
+
+		$stmt=$db->prepare("SELECT * from products where category_id=:catid ORDER BY date_view DESC  limit 8 ");
+        $stmt->execute(['catid'=>$row_['id']]);
+        $products= $stmt->fetchAll(); 
+														
+			foreach($products as $row) {
+                      echo "<div class='tab-col'>
+                            <div class='single-product'>
+                                <div class='product-img'>
+                                    <a href='product.php?product=".$row['slug']."'>
+                                        <img src='images/items/".$row['photo']."'>
+                                        <img class='hover-default' src='images/items/".$row['photo']."'>
                                     </a>
+                                    <div class='button-head'>
+                                        <div class='product-action'>
+                                            <a href='#'>
+                                                <i class='ti-eye'></i>
+                                                <span>Quick View</span>
+                                            </a>
+
+
+                                            <a   rel=".$row['id']." class='add_to_wishlist'  href='#'  >
+                                               <i class='ti-heart' ></i>
+                                                <span>Add To Wishlist</span>
+                                            </a>
+
+
+
+
+                                            <a href='#'>
+                                                <i class='ti-bar-chart-alt'></i>
+                                                <span>Add To Compare</span>
+                                            </a>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+                                        <div class='product-action-2'>
+                                 
+
+                           
+            
+                       
+                        <a href='#' rel=".$row['id']." class='add_to_c' title='Add To Cart'>Add To Cart<i class='fa fa-shopping-cart'></i></a>
+           
+
+
+
+
+
+                            </div>
+
+
+
+
+
+
+
+
+
+                                    </div>
+                                </div>
+                                <div class='product-content'>
+                                    <h3>
+                                    <a href='product.php?product=".$row['slug']."'>".$row['name']."</a>
+                                                                    </h3>
+                                    <div class='product-price-rating'>
+                                        <span title='Price'>$".number_format($row['price'], 2)."</span>
+                                        <ul title='Rating'>
+                                            <li class='stars-active'>";
+
+                                            for ($i=1;$i<=$row['total_rating'];$i++){
+                                                echo "<i class='fa fa-star'></i>\n";
+                                            }
+                                                
+
+                                            echo "</li>
+                                            <li>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>" ;  }	
+														
+													
+						echo "</div>
+							</div>
+							</div>";}
+								$db=null; ?>
+
+													
+										
+
+
+
+
+
+										
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="top-sales">
+					<div class="container">
+						<div class="wrapper">
+							<div class="col-20">
+								<div class="row-title">
+									<div class="shop-section-title">
+										<h1>On Sale (random)</h1>
+									</div>
+								</div>
+								
+								<?php 
+                                foreach($TopOnProducts as $row)
+                                echo "<div class='single-list'>
+                                    <div class='row'>
+                                        <div class='product-pic'>
+                                            <div class='img-list'>
+                                                <img src='images/items/".$row['photo']."' >
+                                                <a href='product.php?product=".$row['slug']."' class='buy'><i class='fa fa-shopping-bag'></i></a>
+                                            </div>
+                                        </div>
+                                        <div class='product-cont'>
+                                            <div class='content'>
+                                                <h3 class='title'>".$row['name']."</h3>
+                                                <div>
+                                                    <p class='discounting-price' title='Discounting Price'>$".number_format($row['price'], 2)."</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>" ;
+                                ?>
+								
+
+							</div>
+
+
+
+
+
+							<div class="col-20">
+								<div class="row-title">
+									<div class="shop-section-title">
+										<h1>Best Selling</h1>
+									</div>
+								</div>
+								<?php 
+                                foreach($TopSellingProducts as $row)
+                                echo "<div class='single-list'>
+                                    <div class='row'>
+                                        <div class='product-pic'>
+                                            <div class='img-list'>
+                                                <img src='images/items/".$row['photo']."' >
+                                                <a href='product.php?product=".$row['slug']."' class='buy'><i class='fa fa-shopping-bag'></i></a>
+                                            </div>
+                                        </div>
+                                        <div class='product-cont'>
+                                            <div class='content'>
+                                                <h3 class='title'>".$row['name']."</h3>
+                                                <div>
+                                                    <p class='discounting-price' title='Discounting Price'>$".number_format($row['price'], 2)."</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>" ;
+                                ?>
+								
+								
+							</div>
+
+
+
+
+
+
+
+
+
+
+
+
+							<div class="col-20">
+								<div class="row-title">
+									<div class="shop-section-title">
+										<h1>Top Viewed</h1>
+									</div>
+								</div>
+								
+							<?php 
+                                foreach($TopViewedProducts as $row)
+								echo "<div class='single-list'>
+									<div class='row'>
+										<div class='product-pic'>
+											<div class='img-list'>
+												<img src='images/items/".$row['photo']."' >
+												<a href='product.php?product=".$row['slug']."' class='buy'><i class='fa fa-shopping-bag'></i></a>
+											</div>
+										</div>
+										<div class='product-cont'>
+											<div class='content'>
+												<h3 class='title'>".$row['name']."</h3>
+												<div>
+													<p class='discounting-price' title='Discounting Price'>$".number_format($row['price'], 2)."</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>" ;
+                                ?>
+
+
+							</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						</div>
+					</div>
+				</section>
+				<section class="product-on-promotion">
+                    <div class="container">
+                        <div class="wrapper">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="section-title">
+                                        <h2>Product On promotion</h2>
+                                        <p style="font-size: 14px;">We Keep You Updated To Discover Our Lastest Products.</p>
+                                    </div>
+                                    <ul class="nav-tabs flex" id="myTabpromotion" role="tablist">
+                                        <li class="nav-item">
+								            <a class="nav-link " data-toggle="tab" href="#Digital Goods" role="tab" aria-selected="false">Digital                                                     Goods</a>
+								        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link " data-toggle="tab" href="#Clothes" role="tab" ariaselected="false">Clothes</a>
+                                        </li>
+                                        <li class="nav-item">
+								            <a class="nav-link " data-toggle="tab" href="#Health and Care" role="tab" aria-selected="false">Health and                                             Care</a>
+								        </li>
+								        <li class="nav-item">
+								            <a class="nav-link " data-toggle="tab" href="#Home Interior" role="tab" aria-selected="false">Home                                                     Interior</a>
+								        </li>
+								        <li class="nav-item">
+								            <a class="nav-link " data-toggle="tab" href="#Toys and Games" role="tab" aria-selected="false">Toys and                                                     Games</a>
+								        </li>											
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <div class="productarea">
+                                <div class="container">
+                                    <div class="wrapper flex">
+                                        
+                                        <div class="product">
+                                          <div class="container">
+                                           <h5 class="productprice">
+                                               <del>$255</del>
+                                               155
+                                           </h5>
+                                           <div class="product-hover">
+                                               
+                                           </div>
+                                            <img src="images/items/12.jpg">
+                                            <div class="product-hover-tools">
+                                                    <a href="#" class="view" data-toggle="tooltip" title="" data-original-title="ViewProduct">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="#" class="cart" data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                            <a href="#" class="heart view " data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                            
+                                            </div>
+                                            <div class="product-detail">
+                                                 <h5 class="product-title">PRODUCT TITLE</h5>
+                                                <p class="product-category">CATEGORY</p>
+                                            </div>
+                                        </div>
+                                       
+                                        </div> <div class="product">
+                                          <div class="container">
+                                           <h5 class="productprice">
+                                               <del>$255</del>
+                                               155
+                                           </h5>
+                                           <div class="product-hover">
+                                               
+                                           </div>
+                                            <img src="images/items/12.jpg">
+                                            <div class="product-hover-tools">
+                                                    <a href="#" class="view" data-toggle="tooltip" title="" data-original-title="ViewProduct">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="#" class="cart" data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                            <a href="#" class="heart view " data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                            
+                                            </div>
+                                            <div class="product-detail">
+                                                 <h5 class="product-title">PRODUCT TITLE</h5>
+                                                <p class="product-category">CATEGORY</p>
+                                            </div>
+                                        </div>
+                                       
+                                        </div> <div class="product">
+                                          <div class="container">
+                                           <h5 class="productprice">
+                                               <del>$255</del>
+                                               155
+                                           </h5>
+                                           <div class="product-hover">
+                                               
+                                           </div>
+                                            <img src="images/items/12.jpg">
+                                            <div class="product-hover-tools">
+                                                    <a href="#" class="view" data-toggle="tooltip" title="" data-original-title="ViewProduct">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="#" class="cart" data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                            <a href="#" class="heart view " data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                            
+                                            </div>
+                                            <div class="product-detail">
+                                                 <h5 class="product-title">PRODUCT TITLE</h5>
+                                                <p class="product-category">CATEGORY</p>
+                                            </div>
+                                        </div>
+                                       
+                                        </div> <div class="product">
+                                          <div class="container">
+                                           <h5 class="productprice">
+                                               <del>$255</del>
+                                               155
+                                           </h5>
+                                           <div class="product-hover">
+                                               
+                                           </div>
+                                            <img src="images/items/12.jpg">
+                                            <div class="product-hover-tools">
+                                                    <a href="#" class="view" data-toggle="tooltip" title="" data-original-title="ViewProduct">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="#" class="cart" data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                            <a href="#" class="heart view " data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                            
+                                            </div>
+                                            <div class="product-detail">
+                                                 <h5 class="product-title">PRODUCT TITLE</h5>
+                                                <p class="product-category">CATEGORY</p>
+                                            </div>
+                                        </div>
+                                       
+                                        </div>
+                                    
+                                        
+                                       
+                                       
+                                        
+                                        <div class="product">
+                                          <div class="container">
+                                           <h5 class="productprice">
+                                               <del>$255</del>
+                                               155
+                                           </h5>
+                                           <div class="product-hover">
+                                               
+                                           </div>
+                                            <img src="images/items/12.jpg">
+                                            <div class="product-hover-tools">
+                                                    <a href="#" class="view" data-toggle="tooltip" title="" data-original-title="ViewProduct">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="#" class="cart" data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                            <a href="#" class="heart view " data-toggle="tooltip" title="" data-original-title="Add to Cart">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                            
+                                            </div>
+                                            <div class="product-detail">
+                                                 <h5 class="product-title">PRODUCT TITLE</h5>
+                                                <p class="product-category">CATEGORY</p>
+                                            </div>
+                                        </div>
+                                       
+                                        </div>
+                                        
+                                    </div>
+                                </div>
                             </div>
                         </div>
-					</div>
-				</div>
-                <ul class="sidebar-menu scrollable pos-r ps ps--active-y">
-    					<li class="nav-item mT-30 active">
-    						<a class="sidebar-link <?php echo ($page == '' || $page == 'index.php') ? 'active' : ''; ?>" href="index.php">
-    							<span class="icon-holder">
-    								<i class="c-blue-500 ti-home"></i> 
-    							</span>
-    							<span class="title">Dashboard
-    							</span>
-    						</a>
-    					</li>
-    					<li class="nav-item">
-    						<a class="sidebar-link" href="#">
-    							<span class="icon-holder">
-    								<i class="c-brown-500 ti-email">
-    								</i> 
-    							</span>
-    							<span class="title">Email</span>
-    						</a>
-    					</li>
-    					<li class="nav-item">
-    						<a class="sidebar-link" href="#">
-    							<span class="icon-holder">
-    								<i class="c-blue-500 ti-share">
-    									
-    								</i> 
-    							</span>
-    							<span class="title">Compose</span>
-    						</a>
-    					</li>
-    					<li class="nav-item">
-    						<a class="sidebar-link" href="#">
-    							<span class="icon-holder">
-    								<i class="c-deep-orange-500 ti-calendar"></i> 
-    							</span>
-    							<span class="title">Calendar</span>
-    						</a>
-    					</li>
-    					<li class="nav-item">
-    						<a class="sidebar-link" href="#">
-    							<span class="icon-holder">
-    								<i class="c-deep-purple-500 ti-comment-alt"></i> 
-    							</span>
-    							<span class="title">Chat</span>
-    						</a>
-    					</li>
-    					<li class="nav-item">
-    						<a class="sidebar-link" href="#">
-    							<span class="icon-holder">
-                                    <i class="c-indigo-500 ti-bar-chart">
-    								</i> 
-                                </span>
-                                <span class="title">Charts</span>
-    						</a>
-    					</li>
-    					<li class="nav-item">
-    						<a class="sidebar-link" href="#">
-    							<span class="icon-holder">
-    								<i class="c-light-blue-500 ti-pencil">
-    								</i> 
-    							</span>
-    							<span class="title">Forms
-    							</span>
-    						</a>
-    					</li>
-    					<li class="nav-item dropdown">
-    						<a class="sidebar-link" href="#">
-    							<span class="icon-holder">
-    								<i class="c-pink-500 ti-palette">
-    								</i> 
-    							</span>
-    							<span class="title">UI Elements</span>
-    						</a>
-    					</li>
-    					<li class="nav-item dropdown">
-    						<a class="dropdown-toggle" href="javascript:void(0);">
-    							<span class="icon-holder">
-    								<i class="c-orange-500 ti-layout-list-thumb">
-    									
-    								</i> 
-    							</span>
-    							<span class="title">Tables</span> 
-    							<span class="arrow">
-    								<i class="ti-angle-right"></i>
-    							</span>
-    						</a>
-    						<ul class="dropdown-menu hiding">
-    							<li><a class="sidebar-link" href="#">Basic Table</a>
-    							</li>
-    							<li>
-    								<a class="sidebar-link" href="#">Data Table</a>
-    							</li>
-    						</ul>
-    					</li>
-    					<li class="nav-item dropdown">
-    						<a class="dropdown-toggle" href="javascript:void(0);">
-    							<span class="icon-holder"><i class="c-purple-500 ti-map"></i> 
-    							</span>
-    							<span class="title">Maps
-    							</span> 
-    							<span class="arrow"><i class="ti-angle-right"></i>
-    							</span>
-    						</a>
-    						<ul class="dropdown-menu hiding">
-    							<li><a href="#">Google Map</a>
-    							</li>
-    							<li><a href="#">Vector Map</a>
-    							</li>
-    						</ul>
-    					</li>
-    					<li class="nav-item dropdown">
-    						<a class="dropdown-toggle" href="javascript:void(0);">
-    							<span class="icon-holder"><i class="c-red-500 ti-files"></i> 
-    							</span>
-    							<span class="title">Pages</span> 
-    							<span class="arrow"><i class="ti-angle-right"></i></span>
-    						</a>
-    						<ul class="dropdown-menu hiding">
-    							<li><a class="sidebar-link" href="#">404</a>
-    							</li>
-    							<li><a class="sidebar-link" href="#">500</a>
-    							</li>
-    							<li><a class="sidebar-link" href="#">Sign In</a>
-    							</li>
-    							<li><a class="sidebar-link" href="#">Sign Up</a>
-    							</li>
-    						</ul>
-    					</li>
-    					<li class="nav-item dropdown">
-    						<a class="dropdown-toggle" href="javascript:void(0);">
-    							<span class="icon-holder"><i class="c-teal-500 ti-view-list-alt"></i> 
-    							</span>
-    							<span class="title">Multiple Levels</span> 
-    							<span class="arrow"><i class="ti-angle-right"></i></span>
-    						</a>
-    						<ul class="dropdown-menu hiding">
-    							<li class="nav-item dropdown">
-    								<a href="javascript:void(0);">
-    								<span>Menu Item</span></a>
-    							</li>
-    							<li class="nav-item dropdown">
-    								<a href="javascript:void(0);"><span>Menu Item</span> <span class="arrow"><i class="ti-angle-right"></i></span></a>
-    								<ul class="dropdown-menu hiding">
-    									<li>
-    										<a href="javascript:void(0);">Menu Item</a>
-    									</li>
-    									<li><a href="javascript:void(0);">Menu Item</a>
-    									</li>
-    								</ul>
-    							</li>
-    						</ul>
-    					</li>
-                    
-                </ul>
-            </div>
-            </div>
-            
-            <div class="content">        
-                <div class="header flex">
-                    <div class="header-container">
-                        <ul class="nav-left">
-                            <li>
-                                <a id="sidebar-toggle" class="sidebar-toggle" href="javascript:void(0);">
-                                    <i class="ti-menu"></i>
-                                </a>
-                            </li>
-                            <li class="search-box">
-                                <a class="search-toggle no-pdd-right" href="javascript:void(0);">
-                                    <i class="search-icon ti-search pdd-right-10"></i> 
-                                    <i class="search-icon-close ti-close pdd-right-10 hiding">
-                                        
-                                    </i>
-                                </a>
-                            </li>
-                            <li class="search-input hiding">
-                                <input class="form-control" type="text" placeholder="Search...">
-                            </li>
-                        </ul>
-                        <ul class="nav-right">
-                            <li class="notifications dropdown">
-                                <span class="counter bg-pink">3</span> 
-                                <a href="#" class="dropdown-toggle no-after" data-toggle="dropdown">
-                                    <i class="ti-bell">
-                                        
-                                    </i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    
-                                </ul>
-                            </li>
-                            <li class="notifications dropdown">
-                                <span class="counter bg-pink">3</span> 
-                                <a href="#" class="dropdown-toggle no-after" data-toggle="dropdown">
-                                    <i class="ti-email"></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle " data-toggle="dropdown">
-                                     <div class="peer "><img class="" src="images/avata/1.jpj" alt="">
+                    </div>
+				    
+				</section>
+
+				<section class="new-products">
+					<div class="container">
+						<div class="wrapper">
+							<div class="row">
+								<div class="col-12">
+									<div class="section-title">
+										<h2>New Products</h2>
+										<p style="font-size: 14px;">We Keep You Updated To Discover Our Lastest Products.</p>
+									</div>
+								</div>
+							</div>
+							<div class="owl-carousel nouv-prod owl-theme">
+								<div class="tab-content">
+									<div class="tab-panel active fade show newpro">
+										<div class="container">
+											<div class="wrapper">
+
+
+
+											<?php 	
+					foreach($NewProducts as $row) {
+                      echo "<div class='tab-col'>
+                            <div class='single-product'>
+                                <div class='product-img'>
+                                    <a href='product.php?product=".$row['slug']."'>
+                                        <img src='images/items/".$row['photo']."'>
+                                        <img class='hover-default' src='images/items/".$row['photo']."'>
+                                    </a>
+                                    <div class='button-head'>
+                                        <div class='product-action'>
+                                            <a href='#'>
+                                                <i class='ti-eye'></i>
+                                                <span>Quick View</span>
+                                            </a>
+
+
+                                            <a   rel=".$row['id']." class='add_to_wishlist'  href='#'  >
+                                               <i class='ti-heart' ></i>
+                                                <span>Add To Wishlist</span>
+                                            </a>
+
+
+
+
+                                            <a href='#'>
+                                                <i class='ti-bar-chart-alt'></i>
+                                                <span>Add To Compare</span>
+                                            </a>
                                         </div>
-                                   <div class="peer"><span class="">mohamed</span>
-                                  </div>
-                               </a>
-                               <!-- <ul class="dropdown-menu">
-                                <li><a href="#" class=""><i class="ti-settings mR-10"></i> <span>Setting</span></a>
-                                </li>
-                                <li><a href="#" class=""><i class="#"></i> <span>Profile</span></a>
-                                </li>
-                                <li><a href="#" class=""><i class="ti-email mR-10"></i> <span>Messages</span></a>
-                                </li>
-                                <li role="separator" class="divider">
-                                </li>
-                                <li><a href="#" class="#"><i class=""></i> <span>Logout</span></a>
-                                </li>
-                                </ul> -->
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <main class="main-content">
-                <div class="main-content">
-                    <div class="row row1 ">
-    							<div class="row">
-    								<div class="row-content">
-                                        <div class="layers">
-    										<div class="layer">											
-                                                <h6 class="title">Total Visits</h6>
-    										</div>
-    										<div class="layer">
-    											<div class="peers ">
-    												<div class="peer">
-                                                        <canvas id="app-sale1" height="20" width="55"></canvas>
-    												</div>
-    												<div class="peer">
-    													<span class="info">+10%</span>
-    												</div>
-    											</div>
-    										</div>
-    									</div>
-    								</div>
-    								<div class="row-content">
-                                        <div class="layers">
-    										<div class="layer">											
-                                                <h6 class="title">Total Visits</h6>
-    										</div>
-    										<div class="layer">
-    											<div class="peers ">
-    												<div class="peer">
-                                                        <canvas id="app-sale2" height="20" width="55"></canvas>
-    												</div>
-    												<div class="peer">
-    													<span class="info">+10%</span>
-    												</div>
-    											</div>
-    										</div>
-    									</div>
-    								</div>
-                                    <div class="row-content">
-                                        <div class="layers">
-    										<div class="layer">											
-                                                <h6 class="title">Total Visits</h6>
-    										</div>
-    										<div class="layer">
-    											<div class="peers ">
-    												<div class="peer">
-                                                        <canvas id="app-sale3" height="20" width="55"></canvas>
-    												</div>
-    												<div class="peer">
-    													<span class="info">+10%</span>
-    												</div>
-    											</div>
-    										</div>
-    									</div>
-    								</div>
-                                    <div class="row-content">
-                                        <div class="layers">
-    										<div class="layer">											
-                                                <h6 class="title">Total Visits</h6>
-    										</div>
-    										<div class="layer">
-    											<div class="peers ">
-    												<div class="peer">
-                                                        <canvas id="app-sale4" height="20" width="55"></canvas>
-    												</div>
-    												<div class="peer">
-    													<span class="info">+10%</span>
-    												</div>
-    											</div>
-    										</div>
-    									</div>
-    								</div>
-                    </div>
-    					</div>               
-    							
-    						</div>
-    					</div>
-              <div class="row2 ">
-              <h2>Other Admins</h2>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Password</th>
-              
-            </tr>
-          </thead>
-         
-       
-
-<?php 
-
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-
-try {
-  $conn = new PDO("mysql:host=$servername;dbname=shopmeextest", $username, $password);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  
-} catch(PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
-}
 
 
 
-$r = "SELECT id, name, email, password from admin";
 
 
-$stmt->execute();
-	
-	
-	if($stmt->rowCount() > 0){
-  while($row = $stmt->fetch()){
-    echo"<tr>";
-    echo"<td>" . $row['id'] ."</td>";
-    echo"<td>" . $row['name'] ."</td>";
-    echo"<td>" . $row['email'] ."</td>";
-    echo"<td>" . $row['password'] ."</td>"."<br>";
-  }
-  echo "</table>";
-}
-else {
-  echo "no result";
-}
-$conn = null;
-unset($stmt);
 
-unset($pdo);
-}
-?> 
-	 </table>
-      </div>
-    </main>
-  </div>
-</div>
-</body>
+
+
+
+
+
+                                        <div class='product-action-2'>
+                                 
+
+                           
+            
+                       
+                        <a href='#' rel=".$row['id']." class='add_to_c' title='Add To Cart'>Add To Cart<i class='fa fa-shopping-cart'></i></a>
+           
+
+
+
+
+
+                            </div>
+
+
+
+
+
+
+
+
+
+                                    </div>
+                                </div>
+                                <div class='product-content'>
+                                    <h3>
+                                    <a href='product.php?product=".$row['slug']."'>".$row['name']."</a>
+                                                                    </h3>
+                                    <div class='product-price-rating'>
+                                        <span title='Price'>$".number_format($row['price'], 2)."</span>
+                                        <ul title='Rating'>
+                                            <li class='stars-active'>";
+
+                                            for ($i=1;$i<=$row['total_rating'];$i++){
+                                                echo "<i class='fa fa-star'></i>\n";
+                                            }
+                                                
+
+                                            echo "</li>
+                                            <li>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>" ;  }
+                        ?>
+												
+												
+												
+												
+												
+												</div>
+											</div>
+										</div>
+									</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="day-deal">
+					<div class="container">
+						<div class="wrapper">
+							<div class="col-30">
+								<div class="img-deal">
+									<img src="images/items/item4.png">
+								</div>
+							</div>
+							<div class="col-30 col-31">
+								<div class="row">
+									<div class="content">
+										<p class="small-title">Deal of day</p>
+										<h3 class="title">Beatutyful dress for women</h3>
+										<p class="text">Suspendisse massa leo, vestibulum cursus nulla sit amet, frungilla placerat lorem. Cars fermentum, sapien.</p>
+										<h1 class="price">$1200 <s>$1890</s></h1>
+										<div class="coming-time">
+											<div class="countsdown clearfix" data-countdown="2021/03/07"><div class="cdown"><span class="days"><strong>359</strong><p>Days.</p></span></div><div class="cdown"><span class="hour"><strong> 7</strong><p>Hours.</p></span></div> <div class="cdown"><span class="minutes"><strong>31</strong> <p>MINUTES.</p></span></div><div class="cdown"><span class="second"><strong> 49</strong><p>SECONDS.</p></span></div></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="section-blog">
+					<div class="container">
+						<div class="wrapper">
+							<div class="row">
+								<div class="col-12">
+									<div class="section-title">
+										<h2>From Our Blog</h2>
+										<p style="font-size: 14px;">There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form</p>
+									</div>
+								</div>
+							</div>
+							<div class="posts-row">
+								<div class="col-25">
+									<div class="single-shop-blog">
+										<img src="images/items/post.jpg" title="Blog-Post Image" alt="Blog-Post Image">
+										<div class="content-post">
+											<p class="date">15 July , 2021. Monday</p>
+											<a href="#" class="title">Sed adipiscing ornare.</a>
+											<p class="post-description">Find all the information you need to ensure your experience.</p>
+											<a href="#" class="more-btn">Continue Reading</a>
+											<div>
+												<i class="ti-heart">72</i>
+												<i class="ti-comment-alt">29</i>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-25">
+									<div class="single-shop-blog">
+										<img src="images/items/post.jpg" title="Blog-Post Image" alt="Blog-Post Image">
+										<div class="content-post">
+											<p class="date">15 July , 2021. Monday</p>
+											<a href="#" class="title">Sed adipiscing ornare.</a>
+											<p class="post-description">Find all the information you need to ensure your experience.</p>
+											<a href="#" class="more-btn">Continue Reading</a>
+											<div>
+												<i class="ti-heart">72</i>
+												<i class="ti-comment-alt">29</i>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-25">
+									<div class="single-shop-blog">
+										<img src="images/items/post.jpg" title="Blog-Post Image" alt="Blog-Post Image">
+										<div class="content-post">
+											<p class="date">15 July , 2021. Monday</p>
+											<a href="#" class="title">Sed adipiscing ornare.</a>
+											<p class="post-description">Find all the information you need to ensure your experience.</p>
+											<a href="#" class="more-btn">Continue Reading</a>
+											<div>
+												<i class="ti-heart">72</i>
+												<i class="ti-comment-alt">29</i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</main>
+
+			<!-- End Main -->
+
+		<?php  include 'includes/footer.php'; 
+                 ?>
+
+			<script src="js/jquery-3.4.1.min.js"></script>
+			<script src="js/owl.carousel.min.js"></script>
+			<script src="js/TweenMax.min.js"></script>
+			<script src="js/jquery.nice-select.js"></script>
+			<script src="js/jquery.countdown.min.js"></script>
+			<script src="js/custom.js"></script>
+			<script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
+		</body>
+         <?php include 'includes/script.php'; ?>
 </html>
