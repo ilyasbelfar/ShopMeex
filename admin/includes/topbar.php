@@ -1,44 +1,50 @@
 <div class="header flex">
     <div class="header-container">
         <ul class="nav-left">
-                                    <li>
-                                        <a id="sidebar-toggle" class="sidebar-toggle" href="javascript:void(0);">
-                                            <i class="ti-menu"></i>
-                                        </a>
-                                    </li>
-                                    <li class="search-box">
-                                        <a class="search-toggle no-pdd-right" href="javascript:void(0);">
-                                            <i class="search-icon ti-search pdd-right-10"></i> 
-                                            <i class="search-icon-close ti-close pdd-right-10 hiding">
+            <li>
+                <a id="sidebar-toggle" class="sidebar-toggle" href="javascript:void(0);">
+                    <i class="ti-menu"></i>
+                </a>
+            </li>
+            <li class="search-box">
+                <a class="search-toggle no-pdd-right" href="javascript:void(0);">
+                    <i class="search-icon ti-search pdd-right-10"></i> 
+                    <i class="search-icon-close ti-close pdd-right-10 hiding">
 
-                                            </i>
-                                        </a>
-                                    </li>
-                                    <li class="search-input hiding">
-                                        <input class="form-control" type="text" placeholder="Search...">
-                                    </li>
-                                </ul>
+                    </i>
+                </a>
+            </li>
+            <li class="search-input hiding">
+                <input class="form-control" type="text" placeholder="Search...">
+            </li>
+        </ul>
         <ul class="nav-right" style="margin: 0 -40px">
-                                    <li class="notifications dropdown" style="vertical-align: super;">
-                                        <span class="counter bg-pink">3</span> 
-                                        <a href="#" class="dropdown-toggle no-after" data-toggle="dropdown">
-                                            <i class="ti-bell">
+                <li class="notifications dropdown" style="vertical-align: super;">
+                    <span class="counter bg-pink">3</span> 
+                    <a href="#" class="dropdown-toggle no-after" data-toggle="dropdown">
+                        <i class="ti-bell">
 
-                                            </i>
-                                        </a>
-                                        <ul class="dropdown-menu">
+                        </i>
+                    </a>
+                    <ul class="dropdown-menu">
 
-                                        </ul>
-                                    </li>
-                                    <li class="notifications dropdown" style="vertical-align: super;">
-                                        <span class="counter bg-pink">3</span> 
-                                        <a href="#" class="dropdown-toggle no-after" data-toggle="dropdown">
-                                            <i class="ti-email"></i>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown">
+                    </ul>
+                </li>
+                <li class="notifications dropdown" style="vertical-align: super;">
+                    <span class="counter bg-pink">3</span> 
+                    <a href="#" class="dropdown-toggle no-after" data-toggle="dropdown">
+                        <i class="ti-email"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                    </ul>
+                </li>
+               <li class="notifications dropdown" style="vertical-align: super;">
+                    <span class="counter bg-pink">3</span> 
+                    <a onClick="shownavchat()" class="dropdown-toggle no-after" data-toggle="dropdown">
+                        <i class="ti-comment-alt"></i>
+                    </a>
+                </li>
+                <li class="dropdown">
                                         <a class="dropdown-toggle  " data-toggle="dropdown">
                                             <div class="peer flex " style="position:relative;width: 30px;height: 30px;border-radius: 50%;">
                                                 <img  style="width: 100%;border-radius: 50%;" src="<?php echo (!empty($admin['photo'])) ? '../images/'.$admin['photo'] : '../images/profile.jpg'; ?>" class="user-image" alt="User Image">
