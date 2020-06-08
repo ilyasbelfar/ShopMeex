@@ -1,0 +1,227 @@
+/* exterieur */
+.content .main-content.flex{
+    justify-content: space-between;
+}
+.row .row-content{
+    box-shadow: 0 5px 5px 0 #ccc;
+}
+.row2 .row2container{
+    box-shadow: 0 5px 5px 0 #ccc;
+}
+/*-------------- */
+@media screen and (min-width:1200px){
+    .el3{
+        min-width: 30%;
+    }
+    .el4{
+        min-width: 30%;
+    }
+    .el5{
+        min-width: 30%;
+    }
+    .el6{
+        min-width: 100%
+    }
+}
+.el3{
+    padding: 10px;
+}
+.el3 .container{
+    padding: 15px;
+    color: #fff !important;
+    background-color: #4099ff;
+    border-radius: 8px;
+    box-shadow: 0 5px 5px 0 #054ba8;
+}
+.el3 .container .col {
+    min-width: 33%;
+    padding: 5px;
+    text-align: center
+}
+.el3 .container .col *{
+    text-align: center;
+}
+.el3 .container .col h5 {
+    font-size: 16px;
+    padding :5px 0;
+}
+.el3 .container .col  h6{
+    font-size: 14px
+}
+.el3 .container .line-chart{
+    padding:  0 0 0 45px
+}
+.el3 .container .bar-chart{
+    padding:  0 0 0 45px
+}
+
+/* bgin what new */
+.el{
+    padding: 10px;
+}
+.el> .container{
+    box-shadow:  0 5px 9px 0 #ccc
+}
+.el .container{
+    background-color: #fff;
+    width: 100%;
+}
+.el .new-header {
+  padding: 20px;  
+}
+.el .new-header h5{
+    color: #333333;
+    font-size: 16px;
+    position: relative;
+}
+.el .new-header h5:after{
+    content: "";
+    background-color: #d2d2d2;
+    width: 60px;
+    height: 1px;
+    position: absolute;
+    bottom: -20px;
+    left: 0
+}
+.el .content-what-new{
+  padding: 10px 20px;
+}
+.latest-update-box{
+    position: relative;
+}
+.el .for-scrool{
+    overflow: hidden;
+    height: 330px;
+    
+}
+.latest-update-box:after{
+    content: "";
+    position: absolute;
+    background: #ebebeb;
+    height: 100%;
+    width: 3px;
+    top: 0;
+    left: 19px;
+    z-index: 1;
+}
+.latest-update-box .row{
+    padding: 20px 0;
+}
+.el4 .row .ac-image{
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    box-shadow: 0 5px 12px 0 #ccc;
+}
+.el4 .row .ac-image img{
+    width: 100%;
+    padding: 2px;
+    border-radius: 100%;
+}
+.el .row .acdescr{
+    padding:  0 10px;
+    min-width: 80%;
+}
+.el .row .acdescr a{
+    font-size: 16px;
+    color: #333;
+}
+.el .row .acdescr a:hover{
+    font-size: 16px;
+    color: #446cd8;
+}
+.el .row .acdescr p{
+    font-size: .9em;
+    padding: 5px 0;
+}
+/*end what new*/
+.el .row .ac-icone{
+    width: 40px;
+    margin-left: 12.5px;
+    height: 16px;
+    z-index: 2;
+    background-color: #fff;
+}
+.el .row .ac-icone i{
+    font-weight: 500
+}
+.el .row .acdescr p a{
+    color: #6181db;
+}
+/* begin new product */
+.el6{
+    margin-top: 30px;
+    padding: 10px;
+}
+.el6 .container{
+    background-color: #fff;
+    box-shadow: 0 5px 5px 0 #ccc;
+}
+.el6 .new-header h5{
+    position: relative;
+    font-size: 15px;
+}
+.el6 .new-header{
+    padding: 20px;
+}
+.el6 .new-header h5:after{
+    content: "";
+    background-color: #d2d2d2;
+    width: 60px;
+    height: 1px;
+    position: absolute;
+    bottom: -20px;
+    left: 0
+}
+.el6 .content-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.el6 .content-table table td ,.el6 .content-table table th{
+    vertical-align: top;
+    border-bottom: 1px solid #dee2e6;
+}
+.el6 .content-table table thead tr,.el6 .content-table table tbody tr{
+    padding-bottom: 20px;
+}
+.el6 .content-table table tbody tr:hover{    
+    background-color: rgba(64,153,255,0.1)
+}
+.el6 .content-table table thead tr th,.el6 .content-table table tbody tr td{
+   padding: 20px;
+}
+.el6 .content-table table tbody tr td{
+    font-size: .9em;
+}
+.el6 .content-table table tbody tr td label.stock{
+    color: #fff;
+    font-size: .85em;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+.el6 .content-table table tbody tr td .stock.outstock{
+   background-color: #ff5370;
+}
+.el6 .content-table table tbody tr td .stock.instock{
+   background-color: #2ed8b6;
+}
+
+.el6 .content-table table tbody tr td.rating ul li{
+   display: inline-block;
+    margin: 0
+}
+.el6 .content-table table tbody tr td.rating{
+    position: relative;
+}
+.el6 .content-table table tbody tr td.rating .ratneg li a i {
+            color: #ccc;
+}
+.el6 .content-table table tbody tr td.rating .ratpos li a i {
+            color: #de8135;
+}
+
+.el6 .content-table table tbody tr td.rating .ratneg{
+    position: absolute;
+    z-index: -1;
+}
