@@ -1,7 +1,8 @@
 <?php include 'includes/session.php'; ?>
 <?php include 'includes/header-admin.php'; 
 ?>
-
+   
+<body>
 <!--
 	<script type="text/javascript">
 		window.addEventListener('load', () => {
@@ -18,7 +19,7 @@
         <div class="content">        
             <?php
             include 'includes/topbar.php';
-            ?>
+      ?>
             <main class="main-content">
                 <div class="main-content flex" style="flex-wrap:wrap">
                     <div class="row row1 " style="flex:0 0 100%; min-width:100%;">
