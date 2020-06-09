@@ -44,7 +44,7 @@
         
         //getting product from database
         $stmt = $db->prepare("SELECT *, products.name AS prodname, category.name AS catname, products.id AS prodid,
-        category.id as catid FROM products LEFT JOIN category ON category.id=products.category_id WHERE products.slug = :slug");
+        category.id as catid ,category.slug as catslug FROM products LEFT JOIN category ON category.id=products.category_id WHERE products.slug = :slug");
         $stmt->execute(['slug' => $slug]);//id product;
         if ($stmt->rowCount()==0) {
             header("location: 404.php");
@@ -142,7 +142,14 @@
                     <div class="bread-inner">
                         <ul class="bread-list">
                             <li><a href="index.php">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="#"><?php echo $product['catname'] ?><i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="
+                                    <?php
+                                  echo  'category.php?category='.$product['catslug'];
+                                    ?>
+
+                                ">
+
+                                <?php echo $product['catname'] ?><i class="ti-arrow-right"></i></a></li>
                             <li class="active"> <?php echo $product['prodname'];?></li>
                         </ul>
                     </div>

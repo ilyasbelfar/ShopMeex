@@ -1,9 +1,57 @@
+<?php
+    include "includes/session.php";
+   if (isset($_GET['category'])) {
+    $slug=$_GET['category'];
+    
+    }
+    else {
+        $slug="Digital-Goods";
+    }
+
+
+    try {
+
+        $stmt = $db->prepare("SELECT * from category WHERE slug = :slug");
+        $stmt->execute(['slug' => $slug]);//id category;
+        if ($stmt->rowCount()==0) {
+            header("location: 404.php");
+            exit();
+        }
+        $category = $stmt->fetch();
+
+
+
+        $stmt=$db->prepare("SELECT * from products where category_id=:catid  limit 8 ");
+        $stmt->execute(['catid'=>$category['id']]);
+        $products= $stmt->fetchAll();
+        $numberproduct=$stmt->rowCount();
+
+        
+    } catch (Exception $e) {
+        echo "There is some problem in connection: " . $e->getMessage();
+        
+    }
+
+
+
+?>
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ShopMeex Online Store</title>
+        <title><?php echo $category['name']; ?> | ShopMeex Online Store</title>
         <link rel="icon" href="images/favicon.png">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/productstyle.css">
@@ -22,203 +70,27 @@
                 src : url(fonts/themify/themify.eot);
                 src : url(fonts/themify/themify.eot?#iefix) format('embedded-opentype'), url(fonts/themify/themify.woff) format('woff'), url(fonts/themify/themify.ttf) format('truetype');
             </style>
-        </head>
-        <body>
-            <!-- Start Loader -->
-            <div class="loader_container">
-                <div class="loader__cart">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" class="cart-loader">
-                        <g id="Layer_2" data-name="Layer 2">
-                            <path class="cls-1" d="M33.57,232.47S-3.5,131.75,49.65,116.37,142,108.67,135,142.94,97.91,253.45,33.57,232.47Z"></path>
-                            <line class="cls-2" x1="16.09" y1="145.32" x2="65.94" y2="145.32" data-svg-origin="16.09000015258789 145.32000732421875" transform="matrix(1,0,0,1,0,0)" style="opacity: 1;"></line>
-                            <line class="cls-2" x1="37.75" y1="177.7" x2="77.6" y2="177.7" data-svg-origin="37.75 177.6999969482422" transform="matrix(1,0,0,1,0,0)" style="opacity: 1;"></line>
-                            <line class="cls-2" x1="54.87" y1="208.79" x2="84.72" y2="208.79" data-svg-origin="54.869998931884766 208.7899932861328" transform="matrix(1,0,0,1,0,0)" style="opacity: 1;"></line>
-                            <polyline class="cls-3" points="40 65.9 77.65 65.9 122.32 206.88 221.77 206.88 270.56 107.9 121.71 107.9"></polyline>
-                            <circle class="cls-3" cx="139.46" cy="251.69" r="18.54"></circle>
-                            <circle class="cls-3" cx="207" cy="251.69" r="18.54"></circle>
-                        </g>
-                    </svg>
-                    <div class="loader__circles">
-                        <div class="cir" id="cir_one"></div>
-                        <div class="cir" id="cir_two"></div>
-                        <div class="cir" id="cir_three"></div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Loader -->
-            <!-- Start Header -->
-            <header id="main-header" class="negop">
-                <!-- Start Top Section -->
-                <section class="top-sec">
-                    <div class="container">
-                        <nav>
-                            <ul class="social-media">
-                                <li>
-                                    <a href="#">
-                                        <i class="fab fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav-items">
-                                <li>
-                                    <a href="#">Help</a>
-                                </li>
-                                <li class="dropdown-menu1">
-                                    <a href="#">
-                                        DZD<i class="fas fa-angle-down"></i>
-                                    </a>
-                                    <ul class="dropdown-list">
-                                        <li>
-                                            <a href="#">USD</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">EUR</a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </li>
-                                <li class="dropdown-menu2">
-                                    <a href="#">
-                                        Français<i class="fa fa-angle-down"></i>
-                                    </a>
-                                    <ul class="dropdown-list">
-                                        <li>
-                                            <a href="#">Anglais</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Arabe</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </section>
-                <!-- End Top Section -->
-                <!-- Start Bottom Section -->
-                <section class="bottom-sec">
-                    <div class="container">
-                        <div class="wrapper">
-                            <div class="logo-container">
-                                <a href="#">
-                                    <img src="images/Logo-header.png" class="logo">
-                                </a>
-                            </div>
-                            <div class="search-bar">
-                                <form method="post" action="productlist.php">
-                                    <div class="search-bar-container">
-                                        <select class="custom-select" name="category_name">
-                                            <option value="">All types</option>
-                                            <option value="special">Special</option>
-                                            <option value="best">Only best</option>
-                                            <option value="recent">Latest</option>
-                                        </select>
-                                        <input type="search" class="form-control" id="navbar-search-input" placeholder="Search Here..." name="keyword" required="">
-                                        <div class="search-icon-container">
-                                            <button class="search-icon" type="submit" name="submit">
-                                                <i class="fa fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="user-details">
-                                <div class="user-details-container">
-                                    <a href="#" class="widget-header1">
-                                        <div class="icon">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            <span class="notify">0</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="widget-header1">
-                                        <div class="icon">
-                                            <i class="fa fa-heart"></i>
-                                        </div>
-                                    </a>
-                                    <div class="widget-header1 dropdown">
-                                        <div class="icon">
-                                            <i class="fa fa-user"></i>
-                                            <div class="user-text">
-                                                <small class="text-muted">Sign in | Sign Up</small>
-                                                <div>
-                                                    My Account<i class="fa fa-angle-down"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- End Bottom Section -->
-                <!-- Start Categories Links -->
-                <nav class="categories-list">
-                    <div class="container">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    <strong>Toutes Les Catégories</strong>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <strong>Machines</strong>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <strong>Electronique</strong>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <strong>Electroménagie</strong>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <strong>Services &Equipements</strong>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <strong>Santé</strong>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <strong>Toys &Hobbies</strong>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <strong>Home Textiles</strong>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
+        
+
+
+            <?php 
+        // inlude the header 
+
+        include 'includes/header.php';
+
+
+    ?>
+
+
             <!-- begin  div separable-->
             <section class="row-separabble  negop">
                 <div class="container">
-                    <h2 class="title">Les Categorie Des Produits </h2>
+                    <h2 class="title"><?php echo $category['name']; ?> </h2>
                     <nav class="row-cat">
                         <ol>
                             <li>
-                                <a href="#">Home / </a>
+                                <a href="index.php">Home / </a>
+                                <a href="#"><?php echo $category['name']; ?></a>
                             </li>
                             <li></li>
                             <li></li>
@@ -239,6 +111,8 @@
                                             <p>Categories</p>
                                             <i class="fa fa-chevron-down "></i>
                                         </div>
+
+
                                         <div class="content-tag ">
                                             <div class="container-content-tag ">
                                                 <form action="category.php" method="get">
@@ -262,6 +136,9 @@
                                                 </form>
                                             </div>
                                         </div>
+
+
+
                                     </article>
                                     <article>
                                         <div class="filtre-tag flex flexwrap">
@@ -327,49 +204,11 @@
                                     <div class="container-top-row">
                                        <div class="head-top-row flex">
                                             <h1> Digital Goods</h1>
-                                            <form class="select-form flex">
-                                                <div class="select-box flex">
-                                                <div class="options-container">
-                                                  <div class="option">
-                                                    <input
-                                                      type="radio"
-                                                      class="radio"
-                                                      id="pd"
-                                                      name="category"
-                                                    />
-                                                    <label for="pd">le plus demendée</label>
-                                                  </div>
-
-                                                  <div class="option">
-                                                    <input type="radio" class="radio" id="pc" name="category" />
-                                                    <label for="pc">prix croissant</label>
-                                                  </div>
-
-                                                  <div class="option">
-                                                    <input type="radio" class="radio" id="pdc" name="category" />
-                                                    <label for="pdc">pri decoissant</label>
-                                                  </div>
-                                                  <div class="option">
-                                                    <input type="radio" class="radio" id="nv" name="category" />
-                                                    <label for="nv">nouvelearrivage</label>
-                                                  </div>
-                                                  <div class="option">
-                                                    <input type="radio" class="radio" id="mieux" name="category" />
-                                                    <label for="mieux">mieux notée</label>
-                                                  </div>
-
-                                                  
-                                                </div>
-
-                                                <div class="option-selected">
-                                                  le plus demendée
-                                                </div>
-                                              </div>                                            
-                                           </form>
+                                            
                                        </div>
                                        <div class="bottom-top-row flex">
                                         <span class="items-founds " id="number-res-search">
-                                            20 items 
+                                            <?php echo $numberproduct ?> items 
                                         </span>
                                         <div class="change-view flex">
                                             
@@ -391,501 +230,103 @@
                                 </div>
                                 <article class="grid-view">
                                     <div class="wraapper flex flexwrap">
-                                        <div class="tab-col">
-                                            <div class="single-product">
-                                                <div class="product-img">
-                                                    <a href="product.php?product=mouse">
-                                                        <img src="images/items/Photo1.jpg">
-                                                        <img class="hover-default" src="images/items/Photo1.jpg">
-                                                    </a>
-                                                    <div class="button-head">
-                                                        <div class="product-action">
-                                                            <a href="#">
-                                                                <i class="ti-eye"></i>
-                                                                <span>Quick View</span>
-                                                            </a>
-                                                            <a rel="2" class="add_to_wishlist" href="#">
-                                                                <i class="ti-heart"></i>
-                                                                <span>Add To Wishlist</span>
-                                                            </a>
-                                                            <a href="#">
-                                                                <i class="ti-bar-chart-alt"></i>
-                                                                <span>Add To Compare</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-action-2">
-                                                            <a href="#" rel="2" class="add_to_c" title="Add To Cart">
-                                                                Add To Cart<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content">
-                                                    <h3>
-                                                        <a href="product.php?product=mouse">mouse</a>
-                                                    </h3>
-                                                    <div class="product-price-rating">
-                                                        <span title="Price">$400.00</span>
-                                                        <ul title="Rating">
-                                                            <li class="stars-active">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+
+                                         <?php 
+                    foreach($products as $row) {
+                      echo "<div class='tab-col'>
+                            <div class='single-product'>
+                                <div class='product-img'>
+                                    <a href='product.php?product=".$row['slug']."'>
+                                        <img src='images/items/".$row['photo']."'>
+                                        <img class='hover-default' src='images/items/".$row['photo']."'>
+                                    </a>
+                                    <div class='button-head'>
+                                        <div class='product-action'>
+                                            <a href='#'>
+                                                <i class='ti-eye'></i>
+                                                <span>Quick View</span>
+                                            </a>
+
+
+                                            <a   rel=".$row['id']." class='add_to_wishlist'  href='#'  >
+                                               <i class='ti-heart' ></i>
+                                                <span>Add To Wishlist</span>
+                                            </a>
+
+
+
+
+                                            <a href='#'>
+                                                <i class='ti-bar-chart-alt'></i>
+                                                <span>Add To Compare</span>
+                                            </a>
                                         </div>
-                                        <div class="tab-col">
-                                            <div class="single-product">
-                                                <div class="product-img">
-                                                    <a href="product.php?product=mouse">
-                                                        <img src="images/items/Photo1.jpg">
-                                                        <img class="hover-default" src="images/items/Photo1.jpg">
-                                                    </a>
-                                                    <div class="button-head">
-                                                        <div class="product-action">
-                                                            <a href="#">
-                                                                <i class="ti-eye"></i>
-                                                                <span>Quick View</span>
-                                                            </a>
-                                                            <a rel="2" class="add_to_wishlist" href="#">
-                                                                <i class="ti-heart"></i>
-                                                                <span>Add To Wishlist</span>
-                                                            </a>
-                                                            <a href="#">
-                                                                <i class="ti-bar-chart-alt"></i>
-                                                                <span>Add To Compare</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-action-2">
-                                                            <a href="#" rel="2" class="add_to_c" title="Add To Cart">
-                                                                Add To Cart<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content">
-                                                    <h3>
-                                                        <a href="product.php?product=mouse">mouse</a>
-                                                    </h3>
-                                                    <div class="product-price-rating">
-                                                        <span title="Price">$400.00</span>
-                                                        <ul title="Rating">
-                                                            <li class="stars-active">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-col">
-                                            <div class="single-product">
-                                                <div class="product-img">
-                                                    <a href="product.php?product=mouse">
-                                                        <img src="images/items/Photo1.jpg">
-                                                        <img class="hover-default" src="images/items/Photo1.jpg">
-                                                    </a>
-                                                    <div class="button-head">
-                                                        <div class="product-action">
-                                                            <a href="#">
-                                                                <i class="ti-eye"></i>
-                                                                <span>Quick View</span>
-                                                            </a>
-                                                            <a rel="2" class="add_to_wishlist" href="#">
-                                                                <i class="ti-heart"></i>
-                                                                <span>Add To Wishlist</span>
-                                                            </a>
-                                                            <a href="#">
-                                                                <i class="ti-bar-chart-alt"></i>
-                                                                <span>Add To Compare</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-action-2">
-                                                            <a href="#" rel="2" class="add_to_c" title="Add To Cart">
-                                                                Add To Cart<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content">
-                                                    <h3>
-                                                        <a href="product.php?product=mouse">mouse</a>
-                                                    </h3>
-                                                    <div class="product-price-rating">
-                                                        <span title="Price">$400.00</span>
-                                                        <ul title="Rating">
-                                                            <li class="stars-active">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-col">
-                                            <div class="single-product">
-                                                <div class="product-img">
-                                                    <a href="product.php?product=mouse">
-                                                        <img src="images/items/Photo1.jpg">
-                                                        <img class="hover-default" src="images/items/Photo1.jpg">
-                                                    </a>
-                                                    <div class="button-head">
-                                                        <div class="product-action">
-                                                            <a href="#">
-                                                                <i class="ti-eye"></i>
-                                                                <span>Quick View</span>
-                                                            </a>
-                                                            <a rel="2" class="add_to_wishlist" href="#">
-                                                                <i class="ti-heart"></i>
-                                                                <span>Add To Wishlist</span>
-                                                            </a>
-                                                            <a href="#">
-                                                                <i class="ti-bar-chart-alt"></i>
-                                                                <span>Add To Compare</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-action-2">
-                                                            <a href="#" rel="2" class="add_to_c" title="Add To Cart">
-                                                                Add To Cart<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content">
-                                                    <h3>
-                                                        <a href="product.php?product=mouse">mouse</a>
-                                                    </h3>
-                                                    <div class="product-price-rating">
-                                                        <span title="Price">$400.00</span>
-                                                        <ul title="Rating">
-                                                            <li class="stars-active">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-col">
-                                            <div class="single-product">
-                                                <div class="product-img">
-                                                    <a href="product.php?product=mouse">
-                                                        <img src="images/items/Photo1.jpg">
-                                                        <img class="hover-default" src="images/items/Photo1.jpg">
-                                                    </a>
-                                                    <div class="button-head">
-                                                        <div class="product-action">
-                                                            <a href="#">
-                                                                <i class="ti-eye"></i>
-                                                                <span>Quick View</span>
-                                                            </a>
-                                                            <a rel="2" class="add_to_wishlist" href="#">
-                                                                <i class="ti-heart"></i>
-                                                                <span>Add To Wishlist</span>
-                                                            </a>
-                                                            <a href="#">
-                                                                <i class="ti-bar-chart-alt"></i>
-                                                                <span>Add To Compare</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-action-2">
-                                                            <a href="#" rel="2" class="add_to_c" title="Add To Cart">
-                                                                Add To Cart<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content">
-                                                    <h3>
-                                                        <a href="product.php?product=mouse">mouse</a>
-                                                    </h3>
-                                                    <div class="product-price-rating">
-                                                        <span title="Price">$400.00</span>
-                                                        <ul title="Rating">
-                                                            <li class="stars-active">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-col">
-                                            <div class="single-product">
-                                                <div class="product-img">
-                                                    <a href="product.php?product=mouse">
-                                                        <img src="images/items/Photo1.jpg">
-                                                        <img class="hover-default" src="images/items/Photo1.jpg">
-                                                    </a>
-                                                    <div class="button-head">
-                                                        <div class="product-action">
-                                                            <a href="#">
-                                                                <i class="ti-eye"></i>
-                                                                <span>Quick View</span>
-                                                            </a>
-                                                            <a rel="2" class="add_to_wishlist" href="#">
-                                                                <i class="ti-heart"></i>
-                                                                <span>Add To Wishlist</span>
-                                                            </a>
-                                                            <a href="#">
-                                                                <i class="ti-bar-chart-alt"></i>
-                                                                <span>Add To Compare</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-action-2">
-                                                            <a href="#" rel="2" class="add_to_c" title="Add To Cart">
-                                                                Add To Cart<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content">
-                                                    <h3>
-                                                        <a href="product.php?product=mouse">mouse</a>
-                                                    </h3>
-                                                    <div class="product-price-rating">
-                                                        <span title="Price">$400.00</span>
-                                                        <ul title="Rating">
-                                                            <li class="stars-active">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-col">
-                                            <div class="single-product">
-                                                <div class="product-img">
-                                                    <a href="product.php?product=mouse">
-                                                        <img src="images/items/Photo1.jpg">
-                                                        <img class="hover-default" src="images/items/Photo1.jpg">
-                                                    </a>
-                                                    <div class="button-head">
-                                                        <div class="product-action">
-                                                            <a href="#">
-                                                                <i class="ti-eye"></i>
-                                                                <span>Quick View</span>
-                                                            </a>
-                                                            <a rel="2" class="add_to_wishlist" href="#">
-                                                                <i class="ti-heart"></i>
-                                                                <span>Add To Wishlist</span>
-                                                            </a>
-                                                            <a href="#">
-                                                                <i class="ti-bar-chart-alt"></i>
-                                                                <span>Add To Compare</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-action-2">
-                                                            <a href="#" rel="2" class="add_to_c" title="Add To Cart">
-                                                                Add To Cart<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content">
-                                                    <h3>
-                                                        <a href="product.php?product=mouse">mouse</a>
-                                                    </h3>
-                                                    <div class="product-price-rating">
-                                                        <span title="Price">$400.00</span>
-                                                        <ul title="Rating">
-                                                            <li class="stars-active">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-col">
-                                            <div class="single-product">
-                                                <div class="product-img">
-                                                    <a href="product.php?product=mouse">
-                                                        <img src="images/items/Photo1.jpg">
-                                                        <img class="hover-default" src="images/items/Photo1.jpg">
-                                                    </a>
-                                                    <div class="button-head">
-                                                        <div class="product-action">
-                                                            <a href="#">
-                                                                <i class="ti-eye"></i>
-                                                                <span>Quick View</span>
-                                                            </a>
-                                                            <a rel="2" class="add_to_wishlist" href="#">
-                                                                <i class="ti-heart"></i>
-                                                                <span>Add To Wishlist</span>
-                                                            </a>
-                                                            <a href="#">
-                                                                <i class="ti-bar-chart-alt"></i>
-                                                                <span>Add To Compare</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-action-2">
-                                                            <a href="#" rel="2" class="add_to_c" title="Add To Cart">
-                                                                Add To Cart<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content">
-                                                    <h3>
-                                                        <a href="product.php?product=mouse">mouse</a>
-                                                    </h3>
-                                                    <div class="product-price-rating">
-                                                        <span title="Price">$400.00</span>
-                                                        <ul title="Rating">
-                                                            <li class="stars-active">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-col">
-                                            <div class="single-product">
-                                                <div class="product-img">
-                                                    <a href="product.php?product=mouse">
-                                                        <img src="images/items/Photo1.jpg">
-                                                        <img class="hover-default" src="images/items/Photo1.jpg">
-                                                    </a>
-                                                    <div class="button-head">
-                                                        <div class="product-action">
-                                                            <a href="#">
-                                                                <i class="ti-eye"></i>
-                                                                <span>Quick View</span>
-                                                            </a>
-                                                            <a rel="2" class="add_to_wishlist" href="#">
-                                                                <i class="ti-heart"></i>
-                                                                <span>Add To Wishlist</span>
-                                                            </a>
-                                                            <a href="#">
-                                                                <i class="ti-bar-chart-alt"></i>
-                                                                <span>Add To Compare</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-action-2">
-                                                            <a href="#" rel="2" class="add_to_c" title="Add To Cart">
-                                                                Add To Cart<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content">
-                                                    <h3>
-                                                        <a href="product.php?product=mouse">mouse</a>
-                                                    </h3>
-                                                    <div class="product-price-rating">
-                                                        <span title="Price">$400.00</span>
-                                                        <ul title="Rating">
-                                                            <li class="stars-active">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+                                        <div class='product-action-2'>
+                                 
+
+                           
+            
+                       
+                        <a href='#' rel=".$row['id']." class='add_to_c' title='Add To Cart'>Add To Cart<i class='fa fa-shopping-cart'></i></a>
+           
+
+
+
+
+
+                            </div>
+
+
+
+
+
+
+
+
+
+                                    </div>
+                                </div>
+                                <div class='product-content'>
+                                    <h3>
+                                    <a href='product.php?product=".$row['slug']."'>".$row['name']."</a>
+                                                                    </h3>
+                                    <div class='product-price-rating'>
+                                        <span title='Price'>$".number_format($row['price'], 2)."</span>
+                                        <ul title='Rating'>
+                                            <li class='stars-active'>";
+
+                                            for ($i=1;$i<=$row['total_rating'];$i++){
+                                                echo "<i class='fa fa-star'></i>\n";
+                                            }
+                                                
+
+                                            echo "</li>
+                                            <li>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
+                                                <i class='fa fa-star'></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>" ;  }
+                        ?>
+
+
                                     </div>
                                 </article>
                                 <article class="list-view flex marginbottom">
@@ -1515,4 +956,5 @@ optionsList.forEach(o => {
     <script src="js/custom.js"></script>
     <script src="js/product.js"></script>
     <script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
+    <?php include 'includes/script.php'; ?>
     </body></html>
