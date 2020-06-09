@@ -11,6 +11,15 @@
 
     try {
 
+
+        if ($_SERVER['REQUEST_METHOD']=='POST'){
+            echo $_POST['min'];
+            echo $_POST['max'];
+
+        }
+
+
+
         $stmt = $db->prepare("SELECT * from category WHERE slug = :slug");
         $stmt->execute(['slug' => $slug]);//id category;
         if ($stmt->rowCount()==0) {
@@ -25,7 +34,7 @@
 
 
 
-        $stmt=$db->prepare("SELECT * from products where category_id=:catid  limit 8 ");
+        $stmt=$db->prepare("SELECT * from products where category_id=:catid  ");
         $stmt->execute(['catid'=>$category['id']]);
         $products= $stmt->fetchAll();
         $numberproduct=$stmt->rowCount();
@@ -144,68 +153,38 @@
                                     </article>
                                     <article>
                                         <div class="filtre-tag flex flexwrap">
-                                            <p>price</p>
+                                            <p>Filter By Price</p>
                                             <i class="fa fa-chevron-down "></i>
                                         </div>
                                         <div class="content-tag ">
                                             <div class="container-content-tag">
                                                 <input type="range" class="custom-range" name="range-price" style="border: 0">
                                             </div>
-                                            <form class="form-price flex">
+                                            <form class="form-price flex" action="category.php" method="post">
                                                 <div class="min flexdemi">
-                                                    <labe name="min">min
+                                                    <label name="min">min
     
-    </label><input type="text" class="input-price" name="min" placeholder="$0">
+      </label><input type="text" class="input-price" name="min" placeholder="$0">
     </div>
     <div class="max flexdemi">
         <label name="max">max</label>
         <input type="number" class="input-price" name="max" placeholder="$0">
     </div>
-    </form>
+    
     <a class="submit-price" href="#">
-        <button class="submit-price">Apply</button>
+        <button type="submit" class="submit-price">Apply</button>
     </a>
+</form>
     </div></article>
-    <article>
-        <div class="filtre-tag flex flexwrap">
-            <p>les categorie</p>
-            <i class="fa fa-chevron-down "></i>
-        </div>
-        <div class="content-tag">
-            <div class="container-content-tag flex flexwrap ">
-                <label class="label-size flexpart">
-                    <input type="checkbox" name="">
-                    <span>L</span>
-                </label>
-                <label class="label-size flexpart">
-                    <input type="checkbox" name="">
-                    <span>X</span>
-                </label>
-                <label class="label-size flexpart">
-                    <input type="checkbox" name="">
-                    <span>XL</span>
-                </label>
-                <label class="label-size flexpart">
-                    <input type="checkbox" name="">
-                    <span>XLL</span>
-                </label>
-            </div>
-        </div>
-    </article>
-    <article>
-        <div class="filtre-tag flex flexwrap">
-            <p>les categorie</p>
-            <i class="fa fa-chevron-down "></i>
-        </div>
-        <div class="content-tag"></div>
-    </article>
+  
+    
     </div></div></aside>
                         <aside class="product-view flextroisquart">
                             <div class="wrapper">
                                 <div class="top-row">
                                     <div class="container-top-row">
                                        <div class="head-top-row flex">
-                                            <h1> Digital Goods</h1>
+                                            <h1> <?php echo $category['name'] ?></h1>
                                             
                                        </div>
                                        <div class="bottom-top-row flex">
