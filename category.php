@@ -19,6 +19,10 @@
         }
         $category = $stmt->fetch();
 
+        $stmt = $db-> query("SELECT * FROM category");
+        $categories=$stmt->fetchAll();
+
+
 
 
         $stmt=$db->prepare("SELECT * from products where category_id=:catid  limit 8 ");
@@ -115,25 +119,23 @@
 
                                         <div class="content-tag ">
                                             <div class="container-content-tag ">
-                                                <form action="category.php" method="get">
-                                                <ul>
-                                                     <li class="navi-item">
-								            <a class="navi-link" data-toggle="tab" href="#Digital Goods" role="tab" aria-selected="false">Digital                                                     Goods</a>
-								        </li>
-                                        <li class="navi-item">
-                                            <a class="navi-link " data-toggle="tab" href="#Clothes" role="tab" ariaselected="false">Clothes</a>
-                                        </li>
-                                        <li class="navi-item">
-								            <a class="navi-link " data-toggle="tab" href="#Health and Care" role="tab" aria-selected="false">Health and                                             Care</a>
-								        </li>
-								        <li class="navi-item">
-								            <a class="navi-link " data-toggle="tab" href="#Home Interior" role="tab" aria-selected="false">Home                                                     Interior</a>
-								        </li>
-								        <li class="navi-item">
-								            <a class="navi-link " data-toggle="tab" href="#Toys and Games" role="tab" aria-selected="false">Toys and                                                     Games</a>
-								        </li>	
-                                                </ul>
-                                                </form>
+                                              
+                                        <ul>
+
+
+                                    <?php 
+                                    foreach ($categories as $row ){   
+                                      echo  
+                                        "<li class='navi-item'>
+                                            <a class='navi-link' data-toggle='tab' href='".'category.php?category='.$row['slug']."' role='tab' ariaselected='false'>".$row['name']."</a>
+                                        </li>";
+                                    }
+
+                                    ?>
+                                        	
+                                    </ul>
+
+                                                
                                             </div>
                                         </div>
 
