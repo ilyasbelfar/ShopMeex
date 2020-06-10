@@ -291,7 +291,7 @@
                                         <ul title='Rating'>
                                             <li class='stars-active'>";
 
-                                            for ($i=1;$i<=$row['total_rating'];$i++){
+                                            for ($i=1;$i<=$row['total_rating']+6;$i++){
                                                 echo "<i class='fa fa-star'></i>\n";
                                             }
                                                 
