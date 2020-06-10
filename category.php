@@ -12,11 +12,7 @@
     try {
 
 
-        if ($_SERVER['REQUEST_METHOD']=='POST'){
-            echo $_POST['min'];
-            echo $_POST['max'];
-
-        }
+       
 
 
 
@@ -32,12 +28,19 @@
         $categories=$stmt->fetchAll();
 
 
+         if ($_SERVER['REQUEST_METHOD']=='POST'){
+                $stmt=$db->prepare("SELECT * from products where category_id=:catid AND price <=:max AND price >=:min ");
+                $stmt->execute(['catid'=>$category['id'],'max'=>$_POST['max'],'min'=>$_POST['min']]);
+                $products= $stmt->fetchAll();
+                $numberproduct=$stmt->rowCount();
 
-
-        $stmt=$db->prepare("SELECT * from products where category_id=:catid  ");
-        $stmt->execute(['catid'=>$category['id']]);
-        $products= $stmt->fetchAll();
-        $numberproduct=$stmt->rowCount();
+        }
+        else {
+            $stmt=$db->prepare("SELECT * from products where category_id=:catid  ");
+            $stmt->execute(['catid'=>$category['id']]);
+            $products= $stmt->fetchAll();
+            $numberproduct=$stmt->rowCount();
+    }
 
         
     } catch (Exception $e) {
@@ -170,11 +173,12 @@
         <label name="max">max</label>
         <input type="number" class="input-price" name="max" placeholder="$0">
     </div>
-    
+
     <a class="submit-price" href="#">
         <button type="submit" class="submit-price">Apply</button>
     </a>
 </form>
+
     </div></article>
   
     
