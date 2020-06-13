@@ -1,47 +1,92 @@
 <?php
-
-    
-    
     include 'includes/session.php';
     if(!isset($_SESSION['id'])){
-        
-        
-         header("location: register.php");
+         header("location: customer/register.php");
          exit();
-        
     }
-    ob_start();
-    $subtotal = $subTotals = $discount = $discountPrice = 0;
+    $subtotal = $subTotals = $discount = 0;
     $messageSub = '';
     $messageCoupon = '';
     
     
-    $stmt = $db->prepare("SELECT *, cart.quantity AS cq , cart.id As cartid FROM cart LEFT JOIN products ON products.id=cart.product_id	 WHERE user_id=:user_id");
+    $stmt = $db->prepare("SELECT *, cart.quantity AS cq , cart.id As cartid FROM cart LEFT JOIN products ON products.id=cart.product_id WHERE user_id=:user_id");
     $stmt->execute(['user_id'=>$user['id']]);
     foreach($stmt as $row) {
         $subtotal += $row['price']*$row['cq'];
     }
-    
-    if (isset($_POST['Coupon']) && (!empty($_POST['Coupon']))) {
-        $stmt = $db->query("SELECT coupon_value FROM coupons WHERE coupon_code='" . $_POST["Coupon"] . "'");
-        $results = $stmt->fetch();
-        if ($results) {
-			$discountPrice = (int)$results["coupon_value"];
-			if(!empty($discountPrice)) {
-			    if($_SESSION['cart']['total'] > $discountPrice) {
-			        $messageCoupon = '<div class="message" role="alert">Coupon Applied.</div>';
-			        $discount = $discountPrice;
-			    }
-			    else if($_SESSION['cart']['total'] <= $discountPrice) {
-		            $messageCoupon = '<div class="errors" role="alert">Invalid Discount Coupon.</div>';
-		            $discount = 0;
-		        }
-		    }
+
+    if (isset($_SESSION['cart']['used_coupons'])) {
+        $usedCoupon = '';
+        for ($i=0; $i < count($_SESSION['cart']['used_coupons']); $i++) { 
+            $usedCoupon = $_SESSION['cart']['used_coupons'][$i];
+            $sql = $db->prepare('SELECT * FROM coupons LEFT JOIN (SELECT product_id AS prodIdent, user_id, quantity FROM cart) AS cart ON coupons.product_id = cart.prodIdent LEFT JOIN (SELECT id AS product_ident, price FROM products) AS products ON coupons.product_id = products.product_ident WHERE products.product_ident = cart.prodIdent AND user_id=:userID AND coupon_code=:couponCode');
+            if ($sql->execute(['userID'=>$_SESSION['id'], 'couponCode'=>$usedCoupon])) {
+                try {
+                    $results = $sql->fetchAll(PDO::FETCH_ASSOC);
+                    if ($results) {
+                        foreach($results as $key) {
+                            $discount += (($key['price'] * $key['quantity'])*$key['discount'])/100;
+                            $discount = number_format((float)$discount, 2, '.', '');
+                        }
+                        $_SESSION['cart']['total'] -= $discount;
+                    } else {
+                        $discount = 0;
+                    }
+                } catch (PDOException $e) {
+                    echo "Error: " . $e->getMessage();
+                }
+            }
         }
-        else {
-		    $messageCoupon = '<div class="errors" role="alert">Invalid Discount Coupon.</div>';
-		    $discount = 0;
-		}
+    } else {
+        $_SESSION['cart']['used_coupons'] = array();
+    }
+
+    if (isset($_POST['apply_coupon']) && !empty($_POST['Coupon'])) {
+        $sql_2 = $db->prepare("SELECT coupon_code, usage_limit, time_used FROM coupons WHERE coupon_code=?");
+        $sql_2->bindValue(1, $_POST['Coupon']);
+        $sql_2->execute();
+        if ($result=$sql_2->fetch(PDO::FETCH_ASSOC)) {
+            if ($result['usage_limit'] != $result['time_used']) {
+                $cpt = 0;
+                for ($i=0; $i < count($_SESSION['cart']['used_coupons']); $i++) { 
+                    if ($_SESSION['cart']['used_coupons'][$i] == $_POST['Coupon']) {
+                        $cpt += 1;
+                    } else {
+                        $cpt += 0;
+                    }
+                }
+                if ($cpt == 0) {
+                    $stmt = $db->prepare('SELECT * FROM coupons LEFT JOIN (SELECT product_id AS prodIdent, user_id, quantity FROM cart) AS cart ON coupons.product_id = cart.prodIdent LEFT JOIN (SELECT id AS product_ident, price FROM products) AS products ON coupons.product_id = products.product_ident WHERE products.product_ident = cart.prodIdent AND user_id=:userID AND coupon_code=:couponCode');
+                    if ($stmt->execute(['userID'=>$_SESSION['id'], 'couponCode'=>$_POST['Coupon']])) {
+                        try {
+                            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            if ($results) {
+                                foreach($results as $k) {
+                                    $discount += (($k['price'] * $k['quantity'])*$k['discount'])/100;
+                                    $discount = number_format((float)$discount, 2, '.', '');
+                                }
+                                $_SESSION['cart']['total'] -= $discount;
+                                array_push($_SESSION['cart']['used_coupons'], $_POST['Coupon']);
+                                $messageCoupon = '<div class="message" role="alert">Coupon has been applied!</div>';
+                                $sql_1 = $db->prepare("UPDATE coupons SET time_used = time_used + 1 WHERE coupon_code=?");
+                                $sql_1->bindValue(1, $_POST['Coupon']);
+                                $sql_1->execute();
+                            } else {
+                                $messageCoupon = '<div class="errors" role="alert">Either coupon code you\'ve entered is invalid or it is for another product!</div>';
+                            }
+                        } catch (PDOException $e) {
+                            echo "Error: " . $e->getMessage();
+                        }
+                    }
+                } else {
+                    $messageCoupon = '<div class="errors" role="alert">Oops! Coupon code you\'ve entered is already used before by your side!</div>';
+                }
+            } else {
+                $messageCoupon = '<div class="errors" role="alert">Oops! Coupon Usage Limit Has Been Reached!</div>';
+            }
+        } else {
+            $messageCoupon = '<div class="errors" role="alert">Either coupon code you\'ve entered is invalid or it is for another product!</div>';
+        }
     }
     
     if (isset($_POST['update_cart'])) {
@@ -56,13 +101,37 @@
                     $stmt->bindValue(1,$quantity, PDO::PARAM_INT);
                     $stmt->bindValue(2,$id, PDO::PARAM_INT);
 			        if($stmt->execute()) {
-                        $messageSub ='<div class="message" role="alert">Products quanities has been has been updated.</div>';
+                        $messageSub ='<div class="message" role="alert">Products quantities has been updated.</div>';
 			        } else {
 			            $messageSub = '<div class="errors" role="alert">Oops! Something Went Wrong, Please Try Again.</div>';
 			        }
                  }
+                 if (isset($_SESSION['cart']['used_coupons'])) {
+                    $usedCoupon = '';
+                    for ($i=0; $i < count($_SESSION['cart']['used_coupons']); $i++) { 
+                        $usedCoupon = $_SESSION['cart']['used_coupons'][$i];
+                        $sql = $db->prepare('SELECT * FROM coupons LEFT JOIN (SELECT product_id AS prodIdent, user_id, quantity FROM cart) AS cart ON coupons.product_id = cart.prodIdent LEFT JOIN (SELECT id AS product_ident, price FROM products) AS products ON coupons.product_id = products.product_ident WHERE products.product_ident = cart.prodIdent AND user_id=:userID AND coupon_code=:couponCode AND product_id =:identifier');
+                        if ($sql->execute(['userID'=>$_SESSION['id'], 'couponCode'=>$usedCoupon, 'identifier'=>$id])) {
+                            try {
+                                $results = $sql->fetchAll(PDO::FETCH_ASSOC);
+                                if ($results) {
+                                    foreach($results as $key) {
+                                        $discount += (($key['price'] * $key['quantity'])*$key['discount'])/100;
+                                        $discount = number_format((float)$discount, 2, '.', '');
+                                    }
+                                    $_SESSION['cart']['total'] -= $discount;
+                                }
+                            } catch (PDOException $e) {
+                                echo "Error: " . $e->getMessage();
+                            }
+                        }
+                    }
+                } else {
+                    $_SESSION['cart']['used_coupons'] = array();
+                }
              }
          }
+         echo "<meta http-equiv='refresh' content='0'>";
     }
     
 
@@ -79,6 +148,7 @@
         				echo "Delete Product Successfully.";
         			}
         		}
+                unset($_SESSION['cart']['used_coupons']);
     			echo "Delete Product Successfully.";
             }
             catch(PDOException $e){
@@ -92,10 +162,10 @@
     				echo "Delete Product Successfully.";
     			}
     		}
+            unset($_SESSION['cart']['used_coupons']);
 	    }
 	    header('Location: cart.php');
     }
-    ob_end_flush();
 ?>
 
 <!DOCTYPE html>
@@ -136,7 +206,7 @@
                         <div>Currently empty</div>
                     </div>
                     <p class="return-to-shop">
-                        <a class="button wc-backward" href="#">Return to shop</a>
+                        <a class="button wc-backward" href="product.php?product=large-dell-inspiron">Return to shop</a>
                     </p>
                 </div>
                 <form class="cart-form" method="POST">
@@ -159,7 +229,7 @@
 			                            $stmt = $db->prepare("SELECT *, cart.quantity AS cq , cart.id As cartid FROM cart LEFT JOIN products ON products.id=cart.product_id	 WHERE user_id=:user_id");
 			                            $stmt->execute(['user_id'=>$user['id']]);
 			                            foreach($stmt as $row) { ?>
-                                <tr >
+                                <tr>
                                     <td class="image" data-title="Product Picture"><img src="images/items/<?php echo $row['photo'];?>" alt="Product's Picture"></td>
                                     <td class="product-des" data-title="Description">
                                         <p class="product-name"><a href="product.php?product=<?php echo $row['slug'];?>"><?php echo $row['name'];?></a></p>
@@ -186,7 +256,7 @@
                                         class="delete_cart" rel="<?php echo $row['cartid'];  ?>"
                                         href="#"
 
-                                     id="remove-product"  ><i class="ti-trash remove-icon"></i></a>
+                                     id="remove-product"><i class="ti-trash remove-icon"></i></a>
                                     </td>
                                     
                                 </tr>
@@ -220,10 +290,10 @@
                             <div class="col-6">
                                 <div class="right">
                                     <ul>
-                                        <li>Cart Subtotal<span id="subtot">$<?php echo $subTotals; ?></span></li>
+                                        <li>Cart Subtotal<span id="subtot">$<?php echo number_format((float)$subTotals, 2, '.', ''); ?></span></li>
                                         <li>Shipping<span>Free</span></li>
                                         <li>Discount<span>$<?php echo $discount; ?></span></li>
-                                        <li class="last">You Pay<span>$<?php echo ($subTotals - $discount); ?></span></li>
+                                        <li class="last">You Pay<span>$<?php echo number_format((float)($subTotals - $discount), 2, '.', ''); ?></span></li>
                                     </ul>
                                     <?php $_SESSION['cart']['total'] = $subTotals - $discount;?>
                                     <div class="button5">
@@ -340,15 +410,7 @@
 
 
     <?php include 'includes/script.php'; ?>
-  <script >
-      $(document).ready(function(){
-        $('.delete_cart').click(function(e) { 
-            e.preventDefault();
-           $(this).closest("tr").hide();
-        
-   });
-}); // this to remove product statically from the page ! sohaib
-</script>  
+    
     
 
     
