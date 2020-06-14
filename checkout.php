@@ -248,6 +248,7 @@
                                     <div class="form-group">
                                         <label for="phone_num">Phone Number <span>*</span></label>
                                         <input id="phone_num" name="phone_num" type="tel" placeholder="" value="<?php echo $phoneNumber; ?>" required>
+                                        <p class="error"></p>
                                     </div>
                                 </div>
                                 <div class="col-401">

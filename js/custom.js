@@ -667,3 +667,33 @@ $('#mobile-drop').click(function(e) {
         $('#sellermenu-wrap.mobile-menu').css({'cssText': 'width: 70px !important'});
     }
 });
+
+$('input[name="phone_num"]').keyup(function(event) {
+    var flag_25 = true;
+    if(!$.isNumeric($(this).val())) {
+        $(this).css('border', '1px solid red');
+        $(this).next().text('This field must contain only numbers!');
+        $(this).closest('form').find('input[type="submit"]').css({
+            pointerEvents: 'none',
+            opacity: 0.5,
+            cursor: 'not-allowed',
+            userSelect: 'none'
+        });
+    } else {
+        $(this).css('border', 'none');
+        $(this).next().text('');
+        $(this).closest('form').find('p.error').each(function() {
+            if ($(this).text() != '') {
+                flag_25 = false;
+            }
+        });
+        if(flag_25) {
+            $(this).closest('form').find('input[type="submit"]').css({
+                pointerEvents: 'auto',
+                opacity: 1,
+                cursor: 'pointer',
+                userSelect: 'auto'
+            });
+        }
+    }
+});
