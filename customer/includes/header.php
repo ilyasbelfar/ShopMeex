@@ -168,10 +168,17 @@
                                                             echo '<small class="text-muted"><a href="login.php">Sign in </a> |<a href="register.php">Sign Up</a></small>';
                                                             echo '<div>My Account<i class="fa fa-angle-down"></i></div>';
                                                         }
-                                                        else{
-                                                            echo '<div><a href="dashboarduser.php">My Account</a><i class="fa fa-angle-down"></i></div>';
+                                                        
+                                                        else if ($_SESSION['type']==3){
+                                                            echo '<div><a href="buyer-dashboard.php?user='.$_SESSION["username"].'">My Account</a><i class="fa fa-angle-down"></i></div>';
                                                             echo '<small class="text-muted"><a                      href="logout.php">Logout</a></small>';
                                                         }
+                                                        
+                                                        else{
+                                                            echo '<div><a href="../seller-dashboard.php?user='.$_SESSION["username"].'">My Account</a><i class="fa fa-angle-down"></i></div>';
+                                                            echo '<small class="text-muted"><a                      href="logout.php">Logout</a></small>';
+                                                        }
+
                                                     ?>
                                         </div>
                                     </div>

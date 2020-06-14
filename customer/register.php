@@ -146,7 +146,7 @@
             $_SESSION["username"]=$username;
             
         //Redirect to user Dashborad
-            header('location:dashboarduser.php');
+            header('location:buyer-dashboard.php');
             
         }
     }
