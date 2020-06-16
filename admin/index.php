@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <?php 
-session_start();  
 
 
 include "./table.php"; 
@@ -413,10 +412,18 @@ try {
 
 
 $r = "SELECT id, name, email, password from admin";
+if($stmt = $conn->prepare($r)){
+$stmt->bindParam(":login", $param_login, PDO::PARAM_STR);
+            
+// Set parameters
 
+
+
+// Attempt to execute the prepared statement
 
 $stmt->execute();
 	
+	// Check if email exists, if yes then verify password
 	
 	if($stmt->rowCount() > 0){
   while($row = $stmt->fetch()){
