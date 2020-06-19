@@ -118,11 +118,11 @@ include "./table.php";
     						</a>
     					</li>
     					<li class="nav-item">
-    						<a class="sidebar-link" href="#">
+    						<a class="sidebar-link<?php echo ($page == '' || $page == 'index.php') ? 'active' : ''; ?>" href="costumer.php">
     							<span class="icon-holder">
     								<i class="c-deep-purple-500 ti-comment-alt"></i> 
     							</span>
-    							<span class="title">Chat</span>
+    							<span class="title">Costumers</span>
     						</a>
     					</li>
     					<li class="nav-item">
@@ -281,7 +281,7 @@ include "./table.php";
                                 <a href="#" class="dropdown-toggle " data-toggle="dropdown">
                                      <div class="peer "><img class="" src="images/avata/1.jpj" alt="">
                                         </div>
-                                   <div class="peer"><span class="">mohamed</span>
+                                   <div class="peer"><span class="">Admin</span>
                                   </div>
                                </a>
                                <!-- <ul class="dropdown-menu">
@@ -450,4 +450,5 @@ unset($pdo);
   </div>
 </div>
 </body>
+	
 </html>
