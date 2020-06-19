@@ -364,7 +364,9 @@ unset($stmt);
 unset($pdo);
 }
 ?> 
-	 </table>
+	
+		  
+		  </table>
       </div>
     </main>
   </div>
