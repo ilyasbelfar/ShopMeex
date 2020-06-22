@@ -52,10 +52,19 @@
                         $userr=$row["username"];
                         $password = $row["password"];
                         if($pass==$password){
+
+                            // Admin
+
                             if($row['type']== 1){
                             $_SESSION['admin'] = $row['id'];
+                            $_SESSION["loggedin"] = true;
                               header("location: ../admin/admin.php");
-                            } 
+                            }
+
+                            // Buyer
+
+                            else if ($row['type']== 3){
+                                
                             // Password is correct, so start a new session
                             if(!empty($_POST["remember"])) {
                                     $hour = time()+3600 ;   //3600=1hour
@@ -73,15 +82,49 @@
                             // Store data in session variables
                             
                             $_SESSION["loggedin"] = true;
+                            $_SESSION["type"] = 3;
                             $_SESSION["id"] = $id;
                             $_SESSION["email"] = $email;
                             $_SESSION["username"]= $userr;
-                            //$_SESSION["username"]=$userr;
+                            
                         
                             // Redirect user to welcome page
                             
-                            header("location: dashboarduser.php?user=$userr");
-                        } else
+                            header("location: buyer-dashboard.php?user=$userr");
+                        }
+
+                        // Seller or Both
+
+                        else{ 
+
+                        // Password is correct, so start a new session
+                            if(!empty($_POST["remember"])) {
+                                    $hour = time()+3600 ;   //3600=1hour
+
+                                    setcookie('email', $email, $hour);
+                                    setcookie('password', $_POST["password"], $hour);
+                            }
+                            else {
+                                setcookie("email","");
+                                setcookie("password","");   
+                            }
+                            
+                           
+                            
+                            // Store data in session variables
+                            
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["type"] = 2;
+                            $_SESSION["id"] = $id;
+                            $_SESSION["email"] = $email;
+                            $_SESSION["username"]= $userr;
+                            
+                        
+                            // Redirect user to welcome page
+                            
+                            header("location: ../seller-dashboard.php?user=$userr");}
+
+                         } else
                             // Display an error message if password is not valid
                             
                             $passErr = "The password you entered was not valid.";

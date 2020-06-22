@@ -60,7 +60,7 @@
                     <div class="bread-inner">
                         <ul class="bread-list">
                             <li><a href="../index.php">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="dashboarduser.php">My Account</a></li>
+                            <li class="active"><a href="buyer-dashboard.php">My Account</a></li>
                         </ul>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                         <p>From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.</p>
                         <div class="myaccount-links">
                             <div class="dashboard-link">
-                                <a href="dashboarduser.php">Dashboard</a>
+                                <a href="buyer-dashboard.php">Dashboard</a>
                             </div>
                             <div class="orders-link">
                                 <a href="my_orders.php">Orders</a>

@@ -1,16 +1,19 @@
 <?php
 
-    ob_start();
-
     include 'includes/session.php';
     
+    if (empty($_SESSION['cart']['total'])) {
+        header('Location: cart.php');
+        exit();
+    }
+
     $subTotal = 0;
+    $prodEditErrors = '';
     
     $fname = $lname = $email = $phoneNumber = $adr_1 = $adr_2 = $city = $zipCode = $state = $country = '';
-    
     if(isset($_SESSION['id']) && isset($_SESSION['cart'])) {
 		$stmt = $db->query("SELECT * FROM users WHERE id='" . $_SESSION['id'] . "'");
-        $results = $stmt->fetch();
+        $results = $stmt->fetch(PDO::FETCH_ASSOC);
         if($results) {
             $fname = $results['firstname'];
             $lname = $results['lastname'];
@@ -26,41 +29,144 @@
         }
     } else if(isset($_SESSION['id']) && !isset($_SESSION['cart'])) {
         header('Location: cart.php');
+        exit();
     }
     else {
-        header('Location: login.php');
+        header('Location: customer/login.php');
+        exit();
     }
     
     if(isset($_SESSION['id']) && isset($_SESSION['cart']) && isset($_POST['submitted'])) {
-        $stmt = $db->prepare("INSERT INTO placed_orders (order_name, order_email) VALUES (:username, :email)");
-        $stmt->bindParam(':username', $_SESSION['username'], PDO::PARAM_STR);
-        $stmt->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR);
-        $stmt->execute();
-        unset($stmt);
-        
-        $stmt1 = $db->query("SELECT product_id, quantity FROM cart WHERE user_id='" . $_SESSION['id'] . "'");
-        $Res1 = $stmt1->fetchAll();
-        $stmt2 = $db->query("SELECT order_id FROM placed_orders WHERE order_id=LAST_INSERT_ID()");
-        $Res2 = $stmt2->fetchAll();
-        if($Res1 && $Res2) {
-            foreach($Res1 as $row) {
-                // echo var_dump($Res2);
-                // echo "<br><br>";
-                $sql = $db->prepare("INSERT INTO orders_items (order_id, product_id, quantity) VALUES (:order_id, :prodid, :qty)");
-                $sql->bindValue(':order_id', $Res2[0]['order_id']);
-                $sql->bindValue(':prodid', $row['product_id']);
-                $sql->bindValue(':qty', $row['quantity']);
-                $sql->execute();
+
+        // Validate Email
+            $stmtt=$db->prepare('SELECT id, email, password from users where email=?');
+            $stmtt->bindValue(1, $_POST['email']);
+            $stmtt->execute();
+            $count = $stmtt->rowCount();
+
+            $cpt = 0;
+
+            if ($count > 0) {
+                foreach ($stmtt as $row)
+                {
+                    if ($row['id'] != $_SESSION['id'])
+                    {
+                        $cpt += 1;
+                    } else {
+                        $cpt += 0;
+                    }
+                }
+                if ($cpt != 0)
+                {
+                    $prodEditErrors .= "<div class='errors' role='alert'><strong>Email</strong>&nbsp;you have entered is already taken by another user!</div>";
+                }
+                else
+                {
+                    $prodEditErrors = "";
+                }
             }
-        }
-        unset($stmt);
-        unset($stmt1);
-        unset($stmt2);
-        
-        header('Location: place_order.php');
+
+            if (empty($prodEditErrors) && $cpt == 0) {
+                try
+                    {
+                        $_POST['fname'] = str_replace(' ', '',$_POST['fname']);
+                        $_POST['lname'] = str_replace(' ', '',$_POST['lname']);
+                        $_POST['phone_num'] = str_replace(' ', '',$_POST['phone_num']);
+
+                        // Update Profile Informations After Checkout...
+                        $sql = $db->prepare("UPDATE users SET firstname=?, lastname=?, email=?, contact_info=?, address=?, country=?, state=?, address2=?, city=?, postal=? WHERE id=?");
+                        $sql->bindValue(1, $_POST['fname']);
+                        $sql->bindValue(2, $_POST['lname']);
+                        $sql->bindValue(3, $_POST['email']);
+                        $sql->bindValue(4, $_POST['phone_num']);
+                        $sql->bindValue(5, $_POST['address-1']);
+                        $sql->bindValue(6, $_POST['country_name']);
+                        $sql->bindValue(7, $_POST['state-province']);
+                        $sql->bindValue(8, $_POST['address-2']);
+                        $sql->bindValue(9, $_POST['town']);
+                        $sql->bindValue(10, $_POST['zip-code']);
+                        $sql->bindValue(11, $_SESSION['id']);
+                        $sql->execute();
+                        unset($sql);
+
+                        if (isset($_POST['order_notes']) && !empty($_POST['order_notes'])) {
+                            $orderNotes = $_POST['order_notes'];
+                        } else {
+                            $orderNotes = '';
+                        }
+
+                        if (isset($_POST['pay_meth']) && !empty($_POST['pay_meth'])) {
+                            $payMethod = $_POST['pay_meth'];
+                            echo $payMethod;
+                        } else {
+                            $payMethod = '';
+                            echo $payMethod;
+                        }
+
+                        $stmt = $db->prepare("INSERT INTO placed_orders(order_name, order_email, order_status, coupon_used, order_notes, payment_method) VALUES (?, ?, ?, ?, ?, ?)");
+                        $stmt->bindValue(1, $_SESSION['username']);
+                        $stmt->bindValue(2, $_SESSION['email']);
+                        $stmt->bindValue(3, '1');
+                        if (count($_SESSION['cart']['used_coupons']) > 0) {
+                            $stmt->bindValue(4, '1');
+                        } else {
+                            $stmt->bindValue(4, '-1');
+                        }
+                        $stmt->bindValue(5, $orderNotes);
+                        $stmt->bindValue(6, $payMethod);
+                        $stmt->execute();
+                        
+                        $sql_1 = $db->prepare('SELECT order_id FROM placed_orders ORDER BY order_id DESC LIMIT 1');
+                        $sql_1->execute();
+                        $orderID = $sql_1->fetch(PDO::FETCH_ASSOC);
+
+                        $sql_2 = $db->prepare('SELECT * FROM cart LEFT JOIN placed_orders ON 1 WHERE user_id=? AND order_id=?');
+                        $sql_2->bindValue(1, $_SESSION['id']);
+                        $sql_2->bindValue(2, $orderID['order_id']);
+                        $sql_2->execute();
+
+                        foreach($sql_2 as $key) {
+                            $sql_3 = $db->prepare('INSERT INTO orders_items(order_id, product_id, quantity, usedcoupon_code) VALUES (?, ?, ?, ?)');
+                            $sql_3->bindValue(1, $key['order_id']);
+                            $sql_3->bindValue(2, $key['product_id']);
+                            $sql_3->bindValue(3, $key['quantity']);
+                            
+                            if (isset($_SESSION['cart']['used_coupons']) && count($_SESSION['cart']['used_coupons']) > 0) {
+                                $usedCoupon = '';
+                                for ($i=0; $i < count($_SESSION['cart']['used_coupons']); $i++) { 
+                                    $usedCoupon = $_SESSION['cart']['used_coupons'][$i];
+                                    $sql = $db->prepare('SELECT * FROM coupons LEFT JOIN (SELECT product_id AS prodIdent, user_id, quantity FROM cart) AS cart ON coupons.product_id = cart.prodIdent LEFT JOIN (SELECT id AS product_ident, price FROM products) AS products ON coupons.product_id = products.product_ident WHERE products.product_ident = cart.prodIdent AND user_id=:userID AND coupon_code=:couponCode AND product_id =:identifier');
+                                    if ($sql->execute(['userID'=>$_SESSION['id'], 'couponCode'=>$usedCoupon, 'identifier'=>$key['product_id']])) {
+                                        try {
+                                            $results = $sql->fetchAll(PDO::FETCH_ASSOC);
+                                            if ($results) {
+                                                $sql_3->bindValue(4, $usedCoupon);
+                                            } else {
+                                                $sql_3->bindValue(4, '-1');
+                                            }
+                                        } catch (PDOException $e) {
+                                            echo "Error: " . $e->getMessage();
+                                        }
+                                    }
+                                }
+                            } else {
+                                $sql_3->bindValue(4, '-1');
+                            }
+                            $sql_3->execute();
+                        }
+                        $_SESSION['totalAmount'] = $_SESSION['cart']['total'];
+                        $sql_4 = $db->prepare("DELETE FROM cart WHERE user_id=:ident");
+                        $sql_4->bindParam(':ident', $_SESSION['id'], PDO::PARAM_STR);
+                        $sql_4->execute();
+                        header('Location: place_order.php');
+                        exit();
+                    }
+                    catch(PDOException $e)
+                    {
+                        echo "Error: " . $e->getMessage();
+                    }
+            }
     }
-    
-    ob_end_flush();
 ?>
 
 
@@ -68,233 +174,8 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Checkout | ShopMeex Online Store</title>
-    <link rel="icon" href="images/favicon.png">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" type="text/css" href="css/all.css">
-    <link rel="stylesheet" type="text/css" href="css/brands.css">
-    <link rel="stylesheet" type="text/css" href="css/solid.css">
-    <link rel="stylesheet" type="text/css" href="css/fontawesome.css">
-    <link rel="stylesheet" type="text/css" href="css/themify-icons.css">
-    <link rel="stylesheet" type="text/css" href="css/nice-select.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/responsive.css">
-</head>
-
-<body>
-    <!-- Start Loader -->
-    <div class="loader_container">
-        <div class="loader__cart">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" class="cart-loader">
-                <g id="Layer_2" data-name="Layer 2">
-                    <path class="cls-1" d="M33.57,232.47S-3.5,131.75,49.65,116.37,142,108.67,135,142.94,97.91,253.45,33.57,232.47Z"></path>
-                    <line class="cls-2" x1="16.09" y1="145.32" x2="65.94" y2="145.32" data-svg-origin="16.09000015258789 145.32000732421875" transform="matrix(1,0,0,1,0,0)" style="opacity: 1;"></line>
-                    <line class="cls-2" x1="37.75" y1="177.7" x2="77.6" y2="177.7" data-svg-origin="37.75 177.6999969482422" transform="matrix(1,0,0,1,0,0)" style="opacity: 1;"></line>
-                    <line class="cls-2" x1="54.87" y1="208.79" x2="84.72" y2="208.79" data-svg-origin="54.869998931884766 208.7899932861328" transform="matrix(1,0,0,1,0,0)" style="opacity: 1;"></line>
-                    <polyline class="cls-3" points="40 65.9 77.65 65.9 122.32 206.88 221.77 206.88 270.56 107.9 121.71 107.9"></polyline>
-                    <circle class="cls-3" cx="139.46" cy="251.69" r="18.54"></circle>
-                    <circle class="cls-3" cx="207" cy="251.69" r="18.54"></circle>
-                </g>
-            </svg>
-            <div class="loader__circles">
-                <div class="cir" id="cir_one"></div>
-                <div class="cir" id="cir_two"></div>
-                <div class="cir" id="cir_three"></div>
-            </div>
-        </div>
-    </div>
-    <!-- End Loader -->
-
-    <!-- Start Header -->
-    <header id="main-header">
-        <!-- Start Top Section -->
-        <section class="top-sec">
-            <div class="container">
-                <nav>
-                    <ul class="social-media">
-                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                    </ul>
-                    <ul class="nav-items">
-                        <li><a href="#">Help</a></li>
-                        <li class="dropdown-menu1">
-                            <a href="#">DZD<i class="fas fa-angle-down"></i></a>
-                            <ul class="dropdown-list">
-                                <li><a href="#">USD</a></li>
-                                <li><a href="#">EUR</a></li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </li>
-                        <li class="dropdown-menu2">
-                            <a href="#">English</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </section>
-        <!-- End Top Section -->
-
-        <div class="sticky-container">
-            <!-- Start Bottom Section -->
-            <section class="bottom-sec">
-                <div class="container">
-                    <div class="wrapper">
-                        <div class="logo-container">
-                            <a href="#">
-                                <img src="images/Logo-header.png" class="logo">
-                            </a>
-                        </div>
-
-                        <div class="search-bar">
-                            <form method="post">
-                                <div class="search-bar-container">
-                                    <select class="custom-select" name="category_name">
-                                        <option value="all categories" data-display="All Categories">All Categories</option>
-                                        <option value="special">Special</option>
-                                        <option value="best">Best</option>
-                                        <option value="recent">Latest</option>
-                                    </select>
-                                    <input type="text" class="form-control" placeholder="Search Here...">
-                                    <div class="search-icon-container">
-                                        <button class="search-icon" type="submit">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="user-details">
-                            <div class="user-details-container">
-                                <span class="card-container">
-                                    <a href="cart.html" class="widget-header1" id="icone-carte">
-                                        <div class="icon">
-                                            <div class="cart-icon-container">
-                                                <svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 251.6" id="cart-icon">
-                                                    <g id="Grid_Layer">
-                                                        <g id="Artboard-3">
-                                                            <g id="Group-2" transform="translate(1 1)">
-                                                                <polyline id="Path-17" class="st2" points="65.7,13.6 95.6,13.6 142.6,133.9 286.2,122 306.2,42.1 108.8,42.1"></polyline>
-                                                                <circle id="Oval-7" class="st2" cx="251.5" cy="210.4" r="21.9"></circle>
-                                                                <circle id="Oval-7-Copy" class="st2" cx="164.1" cy="210.4" r="21.9"></circle>
-                                                                <polyline id="Path-18" class="st2" points="146,133.9 131.3,155.8 284.3,155.8"></polyline>
-                                                            </g>
-                                                        </g>
-                                                    </g>
-                                                    <g id="Layer_2">
-                                                        <line class="st2 st1" x1="15.7" y1="85.7" x2="76.6" y2="85.7" data-svg-origin="15.699999809265137 85.69999694824219" transform="matrix(0,0,0,1,15.699999809265137,0)" style="opacity: 0;"></line>
-                                                        <line class="st2 st1" x1="35.4" y1="123" x2="81.5" y2="123" data-svg-origin="35.400001525878906 123" transform="matrix(0,0,0,1,35.400001525878906,0)" style="opacity: 0;"></line>
-                                                        <line class="st2 st1" x1="57.6" y1="160.4" x2="85.2" y2="160.4" data-svg-origin="57.599998474121094 160.39999389648438" transform="matrix(0,0,0,1,57.599998474121094,0)" style="opacity: 0;"></line>
-                                                    </g>
-                                                </svg>
-                                            </div>
-                                            <span class="notify">0</span>
-                                        </div>
-                                    </a>
-                                    <div class="sub-menu">
-                                        <div class="shopping-cart-content">
-                                            <div class="no-item">
-                                                <p class="empty-msg">No products in the cart.</p>
-                                            </div>
-                                            <div class="mini-menu">
-                                                <div class="shopping-cart-widget">
-                                                    <ul class="products-list">
-                                                        <li class="product-item">
-                                                            <a href="#" class="remove-item-button">×</a>
-                                                            <a href="#" class="item-details">
-                                                                <img width="300" height="300" src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg 800w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-150x150.jpg 150w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-300x300.jpg 300w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-768x768.jpg 768w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-660x660.jpg 660w" sizes="(max-width: 300px) 100vw, 300px">Basic t-shirt
-                                                            </a>
-                                                            <div class="clearfix"></div>
-                                                            <span class="quantitys">1 × <span>$<span class="total-amount">7.99</span></span></span>
-                                                        </li>
-                                                        <li class="product-item">
-                                                            <a href="#" class="remove-item-button">×</a>
-                                                            <a href="#" class="item-details">
-                                                                <img width="300" height="300" src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg 800w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-150x150.jpg 150w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-300x300.jpg 300w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-768x768.jpg 768w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-660x660.jpg 660w" sizes="(max-width: 300px) 100vw, 300px">Basic t-shirt
-                                                            </a>
-                                                            <div class="clearfix"></div>
-                                                            <span class="quantitys">1 × <span>$<span class="total-amount">7.99</span></span></span>
-                                                        </li>
-                                                        <li class="product-item">
-                                                            <a href="#" class="remove-item-button">×</a>
-                                                            <a href="#" class="item-details">
-                                                                <img width="300" height="300" src="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1.jpg 800w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-150x150.jpg 150w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-300x300.jpg 300w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-768x768.jpg 768w, https://cdn.jevelin.shufflehound.com/wp-content/uploads/2016/01/Item_1-660x660.jpg 660w" sizes="(max-width: 300px) 100vw, 300px">Basic t-shirt
-                                                            </a>
-                                                            <div class="clearfix"></div>
-                                                            <span class="quantitys">1 × <span>$<span class="total-amount">7.99</span></span></span>
-                                                        </li>
-                                                    </ul>
-                                                    <p class="total">
-                                                        <strong>Subtotal:</strong>
-                                                        <span>$<span class="amount">16.98</span></span>
-                                                    </p>
-                                                    <p class="sub-buttons">
-                                                        <a href="cart.php" class="forward-cart">View cart</a>
-                                                        <a href="checkout.php" class="forward-checkout">Checkout</a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </span>
-                                <a href="#" class="widget-header1">
-                                    <div class="icon">
-                                        <i class="fa fa-heart"></i>
-                                    </div>
-                                </a>
-
-                                <div class="widget-header1 dropdown">
-                                    <div class="icon">
-                                        <i class="fa fa-user"></i>
-                                        <div class="user-text">
-                                            <small class="text-muted">Sign in | Sign Up</small>
-                                            <div>My Account<i class="fa fa-angle-down"></i></div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- End Bottom Section -->
-
-            <!-- Start Categories Links -->
-            <nav class="categories-list forhide">
-                <div class="container">
-                    <ul>
-                        <li><a href="#" class="active-home"><strong>All Categories</strong></a></li>
-                        <li><a href="#"><strong>Machines</strong></a></li>
-                        <li><a href="#"><strong>Electronics</strong></a></li>
-                        <li><a href="#"><strong>Services</strong></a></li>
-                        <li><a href="#"><strong>Health</strong></a></li>
-                        <li><a href="#"><strong>Home Textiles</strong></a></li>
-                    </ul>
-                </div>
-            </nav>
-            <nav class="categories-list mobile">
-                <div class="container">
-                    <a href="#" class="mobile-drop"><i class="fa fa-bars"></i></a>
-                    <ul class="category">
-                        <li><a href="#" class="active-home"><strong>All Categories</strong></a></li>
-                        <li><a href="#"><strong>Machines</strong></a></li>
-                        <li><a href="#"><strong>Electronics</strong></a></li>
-                        <li><a href="#"><strong>Services</strong></a></li>
-                        <li><a href="#"><strong>Health</strong></a></li>
-                        <li><a href="#"><strong>Home Textiles</strong></a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
-
+    <?php include'includes/header.php' ?>
     <!-- End Header -->
 
     <!-- Start Cart -->
@@ -322,11 +203,9 @@
                     <p style="font-size: 14px;">Please register in order to checkout more quickly</p>
                 </div>
                 <div class="notices">
-                    <div class="message" role="alert">
-                        <a href="http://learnphp2020.000webhostapp.com/cart.php" class="btn-forward">View Cart</a> “Dell Laptop 1500 Pavilion” has been added to your cart.
-                    </div>
+                    <?php echo $prodEditErrors; ?>
                 </div>
-                <div class="noticesGroup">
+<!--                 <div class="noticesGroup">
                     <ul class="list-errors" role="alert">
                         <li data-id="billing_error"><strong>Billing First name</strong> is a required field.</li>
                         <li data-id="billing_error"><strong>Billing Last name</strong> is a required field.</li>
@@ -337,41 +216,44 @@
                         <li data-id="billing_error"><strong>Billing ZIP</strong> is a required field.</li>
                         <li data-id="billing_error"><strong>Billing Phone</strong> is a required field.</li>
                     </ul>
-                </div>
+                </div> -->
                 <form method="POST" style="display:flex;flex-wrap:wrap">
                     <div class="col-40">
                         <div class="form-main">
                             <div class="form-title">
                                 <h3>Billing Details</h3>
+                                <p>Your profile will be updated with the entered informations after checkout.</p>
                             </div>
                             <div class="row">
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="fname">First Name<span>*</span></label>
-                                        <input id="fname" name="fname" type="text" placeholder="" value="<?php echo $fname; ?>">
+                                        <label for="fname">First Name <span>*</span></label>
+                                        <input id="fname" name="fname" type="text" placeholder="" value="<?php echo $fname; ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="lname">Last Name<span>*</span></label>
-                                        <input name="lname" type="text" placeholder="" id="lname" value="<?php echo $lname; ?>">
+                                        <label for="lname">Last Name <span>*</span></label>
+                                        <input name="lname" type="text" placeholder="" id="lname" value="<?php echo $lname; ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="mail">Email Address<span>*</span></label>
-                                        <input id="mail" name="email" type="email" placeholder="" value="<?php echo $email; ?>">
+                                        <label for="mail">Email Address <span>*</span></label>
+                                        <input id="mail" name="email" type="email" placeholder="" value="<?php echo $email; ?>" required>
+                                        <p class="error"></p>
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="phone">Phone Number<span>*</span></label>
-                                        <input id="phone" name="company_name" type="tel" placeholder="" value="<?php echo $phoneNumber; ?>">
+                                        <label for="phone_num">Phone Number <span>*</span></label>
+                                        <input id="phone_num" name="phone_num" type="tel" placeholder="" value="<?php echo $phoneNumber; ?>" required>
+                                        <p class="error"></p>
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="country">Country<span>*</span></label>
+                                        <label for="country">Country <span>*</span></label>
                                         <select name="country_name" id="country">
                                             <option value="AF">Afghanistan</option>
                                             <option value="AX">Åland Islands</option>
@@ -625,7 +507,7 @@
                                     <div class="form-group">
                                         <label for="state-province">State / Divition<span>*</span></label>
                                         <select name="state-province" id="state-province">
-                                            <option value="state" selected="selected">New Yourk</option>
+                                            <option value="state" selected="selected">New York</option>
                                             <option>Los Angeles</option>
                                             <option>Chicago</option>
                                             <option>Houston</option>
@@ -637,8 +519,8 @@
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="adr-1">Address Line 1<span>*</span></label>
-                                        <input id="adr-1" name="address-1" type="text" placeholder="House number and Street name" value="<?php echo $adr_1; ?>">
+                                        <label for="adr-1">Address Line 1 <span>*</span></label>
+                                        <input id="adr-1" name="address-1" type="text" placeholder="House number and Street name" value="<?php echo $adr_1; ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-401">
@@ -649,23 +531,32 @@
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="town">Town / City<span>*</span></label>
-                                        <input id="town" name="town" type="text" placeholder="" value="<?php echo $city; ?>">
+                                        <label for="town">Town / City <span>*</span></label>
+                                        <input id="town" name="town" type="text" placeholder="" value="<?php echo $city; ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-401">
                                     <div class="form-group">
-                                        <label for="zip-code">Postal Code<span>*</span></label>
-                                        <input id="zip-code" name="zip-code" type="text" placeholder="" value="<?php echo $zipCode; ?>">
+                                        <label for="zip-code">Postal Code <span>*</span></label>
+                                        <input id="zip-code" name="zip-code" type="text" placeholder="" value="<?php echo $zipCode; ?>" required>
                                     </div>
                                 </div>
-                                <div class="col-401 full">
+                                <?php
+                                    $hideInputs = '';
+                                    if (isset($_SESSION['id'])) {
+                                        $hideInputs = 'invisible';
+                                    } else {
+                                        $hideInputs = '';
+                                    }
+                                    
+                                ?>
+                                <div class="col-401 full <?php echo $hideInputs; ?>">
                                     <div class="form-group">
                                         <input id="cbox" type="checkbox">
                                         <label for="cbox" id="cbox-pass">Create an account?</label>
                                     </div>
                                 </div>
-                                <div class="col-401 inphidden">
+                                <div class="col-401 inphidden <?php echo $hideInputs; ?>">
                                     <div class="form-group">
                                         <label for="motpass">Create account password<span>*</span></label>
                                         <input id="motpass" name="motpass" type="password" placeholder="">
@@ -676,8 +567,8 @@
                                 </div>
                                 <div class="col-15">
                                     <div class="form-group message">
-                                        <label for="message">Order Notes (Optional)</label>
-                                        <textarea id="message" name="message" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                        <label for="order_notes">Order Notes (Optional)</label>
+                                        <textarea id="order_notes" name="order_notes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -694,7 +585,7 @@
                                         <li>Product<span>SubTotal</span></li>
                                         <?php if(isset($_SESSION['id'])) {
                             				try {
-                            					$stmt = $db->prepare("SELECT *, cart.quantity AS cq , cart.id As cartid FROM cart LEFT JOIN products ON products.id=cart.product_id	 WHERE user_id=:user_id");
+                            					$stmt = $db->prepare("SELECT *, cart.quantity AS cq , cart.id As cartid FROM cart LEFT JOIN products ON products.id=cart.product_id WHERE user_id=:user_id");
                             					$stmt->execute(['user_id'=>$user['id']]);
                             					foreach($stmt as $row) { ?>
                                                     <li class="cart_item">
@@ -707,9 +598,9 @@
                                     				echo "Error: " . $e->getMessage();
                                     		}
                                     	}?>
-                                    	<li>SubTotal<span>$<?php echo $subTotal; ?>.00</span></li>
-                                    	<li>Discount<span>$<?php echo ($subTotal > $_SESSION['cart']['total']) ? ($subTotal - $_SESSION['cart']['total']) : 0; ?>.00</span></li>
-                                        <li>Total<span>$<?php echo $_SESSION['cart']['total']; ?>.00</span></li>
+                                    	<li>SubTotal<span>$<?php echo number_format((float)$subTotal, 2, '.', ''); ?></span></li>
+                                    	<li>Discount<span>$<?php echo ($subTotal > $_SESSION['cart']['total']) ? number_format((float)($subTotal - $_SESSION['cart']['total']), 2, '.', '') : number_format((float)0, 2, '.', ''); ?></span></li>
+                                        <li>Total<span>$<?php echo number_format((float)$_SESSION['cart']['total'], 2, '.', ''); ?></span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -719,29 +610,15 @@
                                 <h2>Payments</h2>
                                 <div class="content">
                                     <div class="checkbox">
-                                        <label for="checkpay" class="float-left custom-control custom-checkbox">
-                                            <input id="checkpay" type="checkbox" class="custom-control-input">
-                                            <div class="custom-control-label"> Check Payments</div>
-                                        </label>
-                                        <label for="cashdel" class="float-left custom-control custom-checkbox">
-                                            <input id="cashdel" type="checkbox" class="custom-control-input">
+                                        <label for="cashdel" class="float-left custom-control custom-checkbox pay-meth">
+                                            <input id="cashdel" type="checkbox" class="custom-control-input" name="pay_meth" value="cash on delivery" checked required>
                                             <div class="custom-control-label"> Cash On Delivery</div>
-                                        </label>
-                                        <label for="paypal" class="float-left custom-control custom-checkbox">
-                                            <input id="paypal" type="checkbox" class="custom-control-input" checked="">
-                                            <div class="custom-control-label"> PayPal</div>
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <!--/ End Order Widget -->
                             <!-- Payment Method Widget -->
-                            <div class="single-widget payement">
-                                <div class="content">
-                                    <img src="images/payment-method.png" alt="#">
-                                </div>
-                            </div>
-                            <!--/ End Payment Method Widget -->
                             <!-- Button Widget -->
                             <div class="single-widget get-button">
                                 <div class="content">
@@ -855,6 +732,9 @@
     <script src="js/jquery.countdown.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
+
+    <?php include 'includes/script.php'; ?>
+
 </body>
 
 </html>

@@ -1,27 +1,38 @@
 <?php
 
-    ob_start();
-    
     include 'includes/session.php';
-    
-    if($_SESSION['cart']['total']!=NULL) {
-        $_SESSION['totalAmount'] = $_SESSION['cart']['total'];
+
+    if (isset($_SESSION['cart'])) {
+        unset($_SESSION['cart']);
+        unset($_SESSION['cart']['used_coupons']);
+        unset($_SESSION['cart']['total']);
+    } else {
+        header('Location: cart.php');
+        exit();
     }
-    
+
+    if (!isset($_SESSION['id'])) {
+        header('Location: customer/login.php');
+        exit();
+    }
+
+    $orderNum = $orderDate = '';
     $subTotal = 0;
-    $orderNum = $s = '';
-    
-    $stmt = $db->query("SELECT order_id, order_date FROM placed_orders WHERE order_email = '" .$_SESSION['email']."' ORDER BY order_id DESC LIMIT 1");
-    $results = $stmt->fetch();
-    if($results) {
-        $orderNum = $results['order_id'];
-        $s = $results['order_date'];
-        $date = strtotime($s);
-        $date = date('M d, Y', $date);
+
+    $stmt = $db->prepare("SELECT * FROM placed_orders WHERE order_email = ? ORDER BY order_id DESC LIMIT 1");
+    $stmt->bindValue(1, $_SESSION['email']);
+    try {
+        $stmt->execute();
+        $result=$stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            $orderNum = $result['order_id'];
+            $orderDate = date('M d, Y', strtotime($result['order_date']));
+        }
+        
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
     }
-    
-    
-    ob_end_flush();
+
 ?>
 
 
@@ -133,7 +144,7 @@
                         <div class="user-details">
                             <div class="user-details-container">
                                 <span class="card-container">
-                                    <a href="cart.html" class="widget-header1" id="icone-carte">
+                                    <a href="cart.php" class="widget-header1" id="icone-carte">
                                         <div class="icon">
                                             <div class="cart-icon-container">
                                                 <svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 251.6" id="cart-icon">
@@ -271,11 +282,11 @@
                     <p class="order_success">Thank you! Your order has been received.</p>
                     <ul class="order_overview">
                         <li class="order_num">
-                            Order number: <strong><?php echo $orderNum;?></strong>
+                            Order number: #<strong><?php echo $orderNum;?></strong>
                         </li>
 
                         <li class="order_date">
-                            Date: <strong><?php echo $date;?></strong>
+                            Date: <strong><?php echo $orderDate;?></strong>
                         </li>
 
 
@@ -296,15 +307,16 @@
                             <div class="content">
                                 <ul>
                                     <li>Product<span>Total</span></li>
-                                    <?php if(isset($_SESSION['id'])) {
+                                    <?php
+                                    if(isset($_SESSION['id'])) {
                         				try {
-                        					$stmt = $db->prepare("SELECT * FROM orders_items LEFT JOIN products ON products.id=orders_items.product_id LEFT JOIN (SELECT * FROM placed_orders ORDER BY order_id DESC LIMIT 1) placed_orders ON placed_orders.order_id=orders_items.order_id WHERE order_name=:username");
-                        					$stmt->execute(['username'=>$_SESSION['username']]);
-                        					foreach($stmt as $row) { ?>
+                        					$sql = $db->prepare("SELECT * FROM orders_items LEFT JOIN (SELECT id, name, price FROM products) AS products ON products.id=orders_items.product_id LEFT JOIN (SELECT * FROM placed_orders ORDER BY order_id DESC LIMIT 1) placed_orders ON placed_orders.order_id=orders_items.order_id WHERE order_name=:username");
+                        					$sql->execute(['username'=>$_SESSION['username']]);
+                        					foreach($sql as $row) { ?>
                         					    <li class="cart_item">
                                                     <?php echo ucwords($row['name']);?>&nbsp;
                                                     <strong>×&nbsp;<?php echo $row['quantity'];?></strong>
-                                                    <span>$<?php echo $row['price']*$row['quantity']?>.00</span>
+                                                    <span>$<?php echo number_format((float)($row['price']*$row['quantity']), 2, '.', ''); ?></span>
                                                 </li>
                                             <?php $subTotal += $row['price']*$row['quantity']; }
                                 		} catch(PDOException $e){
@@ -324,13 +336,7 @@
             </div>
         </div>
     </section>
-    <?php 
-        $stmt = $db->prepare("DELETE FROM cart WHERE user_id=:ident");
-        $stmt->bindParam(':ident', $_SESSION['id'], PDO::PARAM_STR);
-        $stmt->execute();
-        unset($stmt);
-        // unset($_SESSION['cart']);
-    ?>
+
 
     <!-- End Cart -->
 

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
+<?php session_start(); ?>
 <?php 
-
-
 include "./table.php"; 
 
 ?>
@@ -34,6 +33,9 @@ include "./table.php";
 	.body{
 		padding: 300px;
 	}
+    .abdo{
+        padding: 80px;
+    }
     </style>
 
    
@@ -118,11 +120,11 @@ include "./table.php";
     						</a>
     					</li>
     					<li class="nav-item">
-    						<a class="sidebar-link<?php echo ($page == '' || $page == 'index.php') ? 'active' : ''; ?>" href="costumer.php">
+    						<a class="sidebar-link" href="#">
     							<span class="icon-holder">
     								<i class="c-deep-purple-500 ti-comment-alt"></i> 
     							</span>
-    							<span class="title">Costumers</span>
+    							<span class="title">Chat</span>
     						</a>
     					</li>
     					<li class="nav-item">
@@ -300,138 +302,56 @@ include "./table.php";
                         </ul>
                     </div>
                 </div>
-                <main class="main-content">
-                <div class="main-content">
-                    <div class="row row1 ">
-    							<div class="row">
-    								<div class="row-content">
-                                        <div class="layers">
-    										<div class="layer">											
-                                                <h6 class="title">Total Visits</h6>
-    										</div>
-    										<div class="layer">
-    											<div class="peers ">
-    												<div class="peer">
-                                                        <canvas id="app-sale1" height="20" width="55"></canvas>
-    												</div>
-    												<div class="peer">
-    													<span class="info">+10%</span>
-    												</div>
-    											</div>
-    										</div>
-    									</div>
-    								</div>
-    								<div class="row-content">
-                                        <div class="layers">
-    										<div class="layer">											
-                                                <h6 class="title">Total Visits</h6>
-    										</div>
-    										<div class="layer">
-    											<div class="peers ">
-    												<div class="peer">
-                                                        <canvas id="app-sale2" height="20" width="55"></canvas>
-    												</div>
-    												<div class="peer">
-    													<span class="info">+10%</span>
-    												</div>
-    											</div>
-    										</div>
-    									</div>
-    								</div>
-                                    <div class="row-content">
-                                        <div class="layers">
-    										<div class="layer">											
-                                                <h6 class="title">Total Visits</h6>
-    										</div>
-    										<div class="layer">
-    											<div class="peers ">
-    												<div class="peer">
-                                                        <canvas id="app-sale3" height="20" width="55"></canvas>
-    												</div>
-    												<div class="peer">
-    													<span class="info">+10%</span>
-    												</div>
-    											</div>
-    										</div>
-    									</div>
-    								</div>
-                                    <div class="row-content">
-                                        <div class="layers">
-    										<div class="layer">											
-                                                <h6 class="title">Total Visits</h6>
-    										</div>
-    										<div class="layer">
-    											<div class="peers ">
-    												<div class="peer">
-                                                        <canvas id="app-sale4" height="20" width="55"></canvas>
-    												</div>
-    												<div class="peer">
-    													<span class="info">+10%</span>
-    												</div>
-    											</div>
-    										</div>
-    									</div>
-    								</div>
-                    </div>
-    					</div>               
-    							
-    						</div>
-    					</div>
-              <div class="row2 ">
-              <h2>Other Admins</h2>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
+               
+                        <div class="row">
+      
+          <div class="abdo">
+      		<h2>Customers</h2>
+      
+      
+      <table class="table table-striped table-sm" >
           <thead>
             <tr>
-              <th>#</th>
+              <th>id</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Password</th>
-              
+              <th>password</th>
+              <th>Mobile</th>
+              <th>Country</th>
+              <th>Website</th>
             </tr>
           </thead>
-         
-       
-
-<?php 
-
-
+          <?php 
 $servername = "localhost";
 $username = "root";
 $password = "";
-
 try {
   $conn = new PDO("mysql:host=$servername;dbname=shopmeextest", $username, $password);
   // set the PDO error mode to exception
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  
 } catch(PDOException $e) {
   echo "Connection failed: " . $e->getMessage();
 }
-
-
-
-$r = "SELECT id, name, email, password from admin";
+$r = "SELECT id, username, email, password, contact_info, Country, website from users";
 if($stmt = $conn->prepare($r)){
 $stmt->bindParam(":login", $param_login, PDO::PARAM_STR);
             
 // Set parameters
-
-
-
 // Attempt to execute the prepared statement
 
 $stmt->execute();
 	
 	// Check if email exists, if yes then verify password
-	
 	if($stmt->rowCount() > 0){
   while($row = $stmt->fetch()){
     echo"<tr>";
     echo"<td>" . $row['id'] ."</td>";
-    echo"<td>" . $row['name'] ."</td>";
+    echo"<td>" . $row['username'] ."</td>";
     echo"<td>" . $row['email'] ."</td>";
-    echo"<td>" . $row['password'] ."</td>"."<br>";
+    echo"<td>" . $row['password'] ."</td>";
+    echo"<td>" . $row['contact_info'] ."</td>";
+    echo"<td>" . $row['Country'] ."</td>";
+    echo"<td>" . $row['website'] ."</td>";
   }
   echo "</table>";
 }
@@ -444,11 +364,14 @@ unset($stmt);
 unset($pdo);
 }
 ?> 
-	 </table>
+	
+		  
+		  </table>
       </div>
     </main>
   </div>
 </div>
 </body>
-	
 </html>
+
+         

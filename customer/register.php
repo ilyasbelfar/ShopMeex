@@ -142,13 +142,25 @@
                             
             $_SESSION["loggedin"] = true;
             $_SESSION["id"] = $id['id'];
+            $_SESSION["type"] = $typeid;
             $_SESSION["email"] = $email;
             $_SESSION["username"]=$username;
             
-        //Redirect to user Dashborad
-            header('location:dashboarduser.php');
+        //Redirect to Dashborad
+            if($typeid==3){
+             header('location:buyer-dashboard.php');
+            }
+            else if ($typeid==1){
+                header('location:../admin');
+            }
+            else 
+            {
+                header('location:../seller-dashboard.php');
+            }
+
             
-        }
+        
+            }
     }
 ?>
 <!DOCTYPE html>
