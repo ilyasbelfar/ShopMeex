@@ -5,6 +5,7 @@
     
     <link rel="icon" href="images/favicon.png">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/souscat.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" type="text/css" href="css/all.css">
     <link rel="stylesheet" type="text/css" href="css/productonpromotion.css">
@@ -201,14 +202,50 @@
             <nav class="categories-list">
                 <div class="container">
                     <ul>
-                        <li><a href="#" class="active-home"><strong>Toutes Les Catégories</strong></a></li>
-                        <li><a href="#"><strong>Machines</strong></a></li>
-                        <li><a href="#"><strong>Electronique</strong></a></li>
-                        <li><a href="#"><strong>Electroménagie</strong></a></li>
-                        <li><a href="#"><strong>Services & Equipements</strong></a></li>
-                        <li><a href="#"><strong>Santé</strong></a></li>
-                        <li><a href="#"><strong>Toys & Hobbies</strong></a></li>
-                        <li><a href="#"><strong>Home Textiles</strong></a></li>
+                        <li><a href="#" class="active-home"><strong>Toutes Les Catégories</strong></a>
+                        </li>
+                        <li><a href="#"><strong>Machines</strong></a><ul class="hide cmohul">
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                            </ul></li>
+                        <li><a href="#"><strong>Electronique</strong></a><ul class="hide cmohul">
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                            </ul></li>
+                        <li><a href="#"><strong>Electroménagie</strong></a><ul class="hide cmohul">
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                            </ul></li>
+                        <li><a href="#"><strong>Services & Equipements</strong></a><ul class="hide cmohul">
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                            </ul></li>
+                        <li><a href="#"><strong>Santé</strong></a> <ul class="hide cmohul">
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                            </ul></li>
+                        <li><a href="#"><strong>Toys & Hobbies</strong></a><ul class="hide cmohul">
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                            </ul></li>
+                        <li><a href="#"><strong>Home Textiles</strong></a><ul class="hide cmohul">
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                            </ul></li>
                     </ul>
                 </div>
             </nav>
