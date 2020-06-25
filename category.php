@@ -71,6 +71,7 @@
         <link rel="icon" href="images/favicon.png">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/productstyle.css">
+        <link rel="stylesheet" type="text/css" href="css/souscat.css">
         <link rel="stylesheet" type="text/css" href="FontAwesome/css/all.css">
         <link rel="stylesheet" type="text/css" href="css/reapeatingstyle.css">
         <link rel="stylesheet" type="text/css" href="css/category.css">
@@ -132,19 +133,25 @@
                                         <div class="content-tag ">
                                             <div class="container-content-tag ">
                                               
-                                        <ul>
+                                        <ul id="catsou-pan">
 
 
                                     <?php 
-                                    foreach ($categories as $row ){   
+                                    <!--foreach ($categories as $row ){   
                                       echo  
-                                        "<li class='navi-item'>
+                                      "<li class='navi-item'>
                                             <a class='navi-link' data-toggle='tab' href='".'category.php?category='.$row['slug']."' role='tab' ariaselected='false'>".$row['name']."</a>
+<ul class=" hide cmohul">
+                                                            <li > blalala</li>
+                                                            <li > blalala</li>
+                                                            <li > blalala</li>
+                                                            <li > blalala</li>
+                                                </ul>
                                         </li>";
                                     }
 
-                                    ?>
-                                        	
+                                ?>
+                                     
                                     </ul>
 
                                                 
@@ -163,7 +170,7 @@
                                             <div class="container-content-tag">
                                                 <input type="range" class="custom-range" name="range-price" style="border: 0">
                                             </div>
-                                            <form class="form-price flex" action="category.php" method="post">
+                                            <form style="    flex-wrap: wrap;justify-content: center"class="form-price flex" action="category.php" method="post">
                                                 <div class="min flexdemi">
                                                     <label name="min">min
     
@@ -174,8 +181,8 @@
         <input type="number" class="input-price" name="max" placeholder="$0">
     </div>
 
-    <a class="submit-price" href="#">
-        <button type="submit" class="submit-price">Apply</button>
+    <a style="padding: 0 0 10px 0;" class="submit-price" href="#">
+        <button style="padding:0" type="submit" class="submit-price">Apply</button>
     </a>
 </form>
 
@@ -940,6 +947,28 @@ optionsList.forEach(o => {
     <script src="js/TweenMax.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/product.js"></script>
+        <script>
+           
+            xulnav = $(' #catsou-pan li');
+                xulnav.each(function(){
+                    $(this).hover(function() {
+                        $(this).children().each(function(e){
+                            if($(this).hasClass('cmohul')){
+                                $(this).addClass('showsouscat');                           
+                                $(this).removeClass('hide');                           
+                            }
+                        });
+                    },function() {
+                        $(this).children().each(function(e){
+                            if($(this).hasClass('cmohul')){
+                                $(this).addClass('hide');                           
+                                $(this).removeClass('showsouscat');                           
+                            }
+                        });
+                    }
+                    );
+                });
+        </script>
     <script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
     <?php include 'includes/script.php'; ?>
     </body></html>
