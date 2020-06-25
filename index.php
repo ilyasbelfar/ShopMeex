@@ -47,13 +47,48 @@
 						<div class="wrapper">
 							<aside class="side-cat">
 								<nav class="card">
-									<ul class="menu-category">
-										<li><a href="#">Best clothes</a></li>
-										<li><a href="#">Automobiles</a></li>
-										<li><a href="#">Home interior</a></li>
-										<li><a href="#">Electronics</a></li>
-										<li><a href="#">Technologies</a></li>
-										<li><a href="#">Digital goods</a></li>
+									<ul class="menu-category" id="catside">
+										<li><a href="#">Best clothes</a> 
+                                            <ul class=" hide cmohul">
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                            </ul>
+                                                    <li></li>
+										<li><a href="#">Automobiles</a>
+                                             <ul class="hide cmohul">
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                            </ul>
+                                        </li>
+										<li><a href="#">Home interior</a>
+                                         <ul class="hide cmohul">
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                            </ul></li>
+										<li><a href="#">Electronics</a> <ul class="hide cmohul">
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                            </ul></li>
+										<li><a href="#">Technologies</a> <ul class="hide cmohul">
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                            </ul></li>
+										<li><a href="#">Digital goods</a> <ul class="hide cmohul">
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                                        <li > blalala</li>
+                                            </ul></li>
 										<li class="has-submenu"><a href="#">More items</a></li>
 									</ul>
 								</nav>
@@ -144,6 +179,7 @@
 												echo 	
 												'<li class="nav-item">
 													<a class="nav-link " data-toggle="tab" href="#'.$row["name"].'" role="tab" aria-selected="false">'.$row["name"].'</a>
+            
 												</li>';}
 											   ?>
 											</ul>
@@ -820,7 +856,7 @@
 
 		<?php  include 'includes/footer.php'; 
                  ?>
-
+                
 			<script src="js/jquery-3.4.1.min.js"></script>
 			<script src="js/owl.carousel.min.js"></script>
 			<script src="js/TweenMax.min.js"></script>
@@ -828,6 +864,46 @@
 			<script src="js/jquery.countdown.min.js"></script>
 			<script src="js/custom.js"></script>
 			<script src="https://kit.fontawesome.com/5d49be4ed0.js" crossorigin="anonymous"></script>
+            <script>
+                xulnav = $('#main-header .categories-list .container ul > li');
+                xulnav.each(function(){
+                    $(this).hover(function() {
+                        $(this).children().each(function(e){
+                            if($(this).hasClass('cmohul')){
+                                $(this).addClass('showsouscat');                           
+                                $(this).removeClass('hide');                           
+                            }
+                        });
+                    },function() {
+                        $(this).children().each(function(e){
+                            if($(this).hasClass('cmohul')){
+                                $(this).addClass('hide');                          
+                                $(this).removeClass('showsouscat');                           
+                            }
+                        });
+                    }
+                    );
+                });
+                 xulnav = $('.section-main .side-cat .menu-category  li');
+                xulnav.each(function(){
+                    $(this).hover(function() {
+                        $(this).children().each(function(e){
+                            if($(this).hasClass('cmohul')){
+                                $(this).addClass('showsouscat');                           
+                                $(this).removeClass('hide');                           
+                            }
+                        });
+                    },function() {
+                        $(this).children().each(function(e){
+                            if($(this).hasClass('cmohul')){
+                                $(this).addClass('hide');                           
+                                $(this).removeClass('showsouscat');                           
+                            }
+                        });
+                    }
+                    );
+                });
+            </script>
 		</body>
          <?php include 'includes/script.php'; ?>
 </html>
