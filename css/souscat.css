@@ -1,0 +1,82 @@
+.hide{
+    display: none;
+}
+.showsouscat{
+    display: visible;
+}
+#main-header .sticky-container .categories-list .container ul li  ul.cmohul{
+    list-style-type: none;
+    width: 20%;
+    padding: 0;
+    position: absolute;
+    margin: 0;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
+    background-color: #fff;
+    z-index: 2;
+    transition: display .5s ease-in-out;
+}
+#main-header .sticky-container .categories-list .container ul li  ul.cmohul li{
+    display: block;
+    clear: both;
+    width: 100%;
+    min-height: 50px;
+    cursor: pointer;
+    font-size: 15px;
+    color: rgba(0,0,0,.87)
+}
+ ul.cmohul li:hover{
+    background-color:rgba(0,0,0,.1);
+}
+#main-header .sticky-container .categories-list .container ul li:hover ul.cmohul{
+    display: visible;
+}
+.section-main .side-cat .menu-category li ul.cmohul{
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+    position: absolute;
+    margin: 0;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
+    background-color: #fff;
+    z-index: 2;
+    transition: display .2s ease-in-out;
+  transition: all .5s ease-in-out;
+}
+.section-main .side-cat .menu-category li ul.cmohul li{
+display: block;
+    clear: both;
+    width: 100%;
+    min-height: 50px;
+    padding: 10px ;
+    cursor: pointer;
+    font-size: 15px;
+    color: rgba(0,0,0,.87)
+}
+#catsou-pan > li{
+    font-size: 20px;
+    padding: 10px;
+    box-shadow: 0 1px 2px 0 #ccc;
+}
+#catsou-pan > li > a{
+    font-size: 18px
+}
+#catsou-pan li ul.cmohul{
+    padding-left: 20px;
+    clear: both;
+    width: 100%;
+    min-height: 50px;
+    cursor: pointer;
+    font-size: 15px;
+    color: rgba(0,0,0,.87);
+    transition:display .7s ease-in-out;
+}
+#catsou-pan li ul.cmohul li{
+display: block;
+    clear: both;
+    width: 100%;
+    min-height: 50px;
+    padding: 10px ;
+    cursor: pointer;
+    font-size: 15px;
+    color: rgba(0,0,0,.87)
+}
